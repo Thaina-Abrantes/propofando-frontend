@@ -1,0 +1,34 @@
+:root {
+  --primary: #e31c79;
+  --backgroudDark: #1b1d1c;
+  --backgroudDarkContainer: #1e1f1e;
+  --backgroudLigth: #f6f6f6;
+  --alert: #ff8585;
+  --attention: #ffc866;
+  --ok: #58a33d;
+  --textDark: #212322;
+  --textGray: #505253;
+  --textLight: #5f7896;
+}
+
+@import url("./button.scss");
+@import url("./input.scss");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Open Sans", "Montserrat", sans-serif, "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
