@@ -1,4 +1,4 @@
-import LogoPropofando from '../../assets/propofando.svg';
+import LogoDark from '../../assets/logo-dark.svg';
 import style from './styles.module.scss';
 
 export function Login() {
@@ -6,14 +6,14 @@ export function Login() {
     <div className={style.container}>
 
       <div className={style.containerCard}>
-        <img src={LogoPropofando} alt="Logo Propofando" />
+        <img src={LogoDark} alt="Logo Propofando" />
 
         <form>
           <span>Faça seu Login</span>
           <input type="text" placeholder="email" />
           <input placeholder="senha" type="password" />
           <div>
-            <button>Entrar</button>
+            <button className="button">Entrar</button>
           </div>
         </form>
       </div>

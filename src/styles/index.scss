@@ -8,7 +8,11 @@
   --ok: #58a33d;
   --textDark: #212322;
   --textGray: #505253;
-  --textLight: #5f7896;
+  --textLight: #fffefe;
+  --btnPrimaryDark: #a40d56;
+  --btnDarkHover: #a40d56cc;
+  --btnDarkClick: #8e144f;
+  --btnDarkDisable: #999999;
 }
 
 @import url("./button.scss");

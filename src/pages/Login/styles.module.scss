@@ -7,7 +7,7 @@
   justify-content: center;
   flex-direction: column;
 
-  background: #1b1d1c;
+  background: var(--backgroudDark);
 }
 
 .containerCard {
@@ -31,7 +31,7 @@
     font-style: normal;
     font-weight: 600;
     font-size: 24px;
-    color: #fffefe;
+    color: var(--textLight);
 
     opacity: 0.7;
   }
@@ -44,27 +44,16 @@
   input {
     width: 354px;
     height: 60px;
-    color: #999999;
+    color: var(--textLight);
   }
   input:hover {
-    background: rgba(202, 202, 202, 0.07);
+    background: #cacaca12;
     border: 1.5px solid #cfd1dc;
   }
 
   div {
-    width: 90%;
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  button {
-    color: #fffefe;
-    background: #a40d56;
-
-    display: flex;
-    justify-content: center;
-  }
-  button:hover {
-    background: rgba(164, 13, 86, 0.8);
   }
 }

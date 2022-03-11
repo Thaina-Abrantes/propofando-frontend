@@ -1,5 +1,7 @@
-button {
+// button refer to button dark primary
+.button {
   all: unset;
+  box-sizing: border-box;
   text-align: center;
   border-radius: 5px;
   padding: 14px 50px;
@@ -9,5 +11,79 @@ button {
   font-weight: 600;
   font-size: 16px;
 
+  background-color: var(--btnPrimaryDark);
+  color: var(--textLight);
   cursor: pointer;
+}
+
+.button:hover {
+  background: var(--btnDarkHover);
+}
+
+.button:disabled,
+.button[disabled] {
+  border: 1px solid var(--btnDarkDisable);
+  background-color: var(--btnDarkDisable);
+  color: var(--textLight);
+  cursor: not-allowed;
+}
+
+.button-dark-secondary {
+  all: unset;
+  box-sizing: border-box;
+  text-align: center;
+  border-radius: 5px;
+  padding: 14px 50px;
+
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+
+  border: 1px solid #e3e2e2;
+  color: #e3e2e2;
+  background: #1e1f1e;
+  cursor: pointer;
+}
+.button-dark-secondary:hover {
+  color: #f3f3f399;
+  background: #1e1f1e;
+  border: 1px solid rgba(243, 243, 243, 0.6);
+}
+
+.button-dark-secondary:disabled,
+.button-dark-secondary[disabled] {
+  border: 1px solid #444444;
+  background: #1e1f1e;
+  color: #444444;
+  cursor: not-allowed;
+}
+
+.button-ligth-secondary {
+  all: unset;
+  box-sizing: border-box;
+  text-align: center;
+  border-radius: 5px;
+  padding: 14px 50px;
+
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+
+  background-color: var(--backgroudLigth);
+  color: var(--btnPrimaryDark);
+  cursor: pointer;
+  border: 1px solid var(--btnPrimaryDark);
+}
+
+.button-ligth-secondary:hover {
+  border: 1px solid rgba(164, 13, 86, 0.6);
+  color: rgba(164, 13, 86, 0.6);
+}
+.button-ligth-secondary:disabled,
+.button-ligth-secondary[disabled] {
+  border: 1px solid var(--btnDarkDisable);
+  color: var(--btnDarkDisable);
+  cursor: not-allowed;
 }
