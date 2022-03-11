@@ -1,4 +1,4 @@
-// button refer to button dark primary
+// button refer to button primary dark/ligth
 .button {
   all: unset;
   box-sizing: border-box;
@@ -11,19 +11,22 @@
   font-weight: 600;
   font-size: 16px;
 
-  background-color: var(--btnPrimaryDark);
+  background-color: var(--btnPrimary);
   color: var(--textLight);
   cursor: pointer;
 }
 
 .button:hover {
-  background: var(--btnDarkHover);
+  background: var(--btnPrimaryOpacity);
+}
+.button:active {
+  background-color: var(--btnActive);
 }
 
 .button:disabled,
 .button[disabled] {
-  border: 1px solid var(--btnDarkDisable);
-  background-color: var(--btnDarkDisable);
+  border: 1px solid var(--btnDisable);
+  background-color: var(--btnDisable);
   color: var(--textLight);
   cursor: not-allowed;
 }
@@ -40,22 +43,26 @@
   font-weight: 600;
   font-size: 16px;
 
-  border: 1px solid #e3e2e2;
-  color: #e3e2e2;
-  background: #1e1f1e;
+  border: 1px solid var(--btnSecondaryColor);
+  color: var(--btnSecondaryColor);
+  background: var(--backgroudDarkContainer);
   cursor: pointer;
 }
 .button-dark-secondary:hover {
-  color: #f3f3f399;
+  color: var(--btnSecondaryHover);
   background: #1e1f1e;
-  border: 1px solid rgba(243, 243, 243, 0.6);
+  border: 1px solid var(--btnSecondaryHover);
+}
+.button-dark-secondary:active {
+  border: 1px solid var(--borderColor);
+  background-color: var(--backgroudDarkContainer);
 }
 
 .button-dark-secondary:disabled,
 .button-dark-secondary[disabled] {
-  border: 1px solid #444444;
-  background: #1e1f1e;
-  color: #444444;
+  border: 1px solid var(--btnSecondaryDisable);
+  background: var(--backgroudDarkContainer);
+  color: var(--btnSecondaryDisable);
   cursor: not-allowed;
 }
 
@@ -72,18 +79,26 @@
   font-size: 16px;
 
   background-color: var(--backgroudLigth);
-  color: var(--btnPrimaryDark);
+  color: var(--btnPrimary);
   cursor: pointer;
-  border: 1px solid var(--btnPrimaryDark);
+  border: 1px solid var(--btnPrimary);
 }
 
 .button-ligth-secondary:hover {
-  border: 1px solid rgba(164, 13, 86, 0.6);
-  color: rgba(164, 13, 86, 0.6);
+  border: 1px solid var(--btnLightHover);
+  color: var(--btnLightHover);
 }
+
+.button-ligth-secondary:active {
+  border: 1px solid var(--btnActive);
+  color: var(--btnActive);
+  background-color: var(--textLight);
+}
+
 .button-ligth-secondary:disabled,
 .button-ligth-secondary[disabled] {
-  border: 1px solid var(--btnDarkDisable);
-  color: var(--btnDarkDisable);
+  border: 1px solid var(--btnDisable);
+  color: var(--btnDisable);
+  background-color: var(--textLight);
   cursor: not-allowed;
 }

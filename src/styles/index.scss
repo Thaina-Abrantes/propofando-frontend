@@ -9,10 +9,15 @@
   --textDark: #212322;
   --textGray: #505253;
   --textLight: #fffefe;
-  --btnPrimaryDark: #a40d56;
-  --btnDarkHover: #a40d56cc;
-  --btnDarkClick: #8e144f;
-  --btnDarkDisable: #999999;
+  --btnPrimary: #a40d56;
+  --btnPrimaryOpacity: #a40d56cc;
+  --btnActive: #8e144f;
+  --btnDisable: #999999;
+  --btnSecondaryColor: #e3e2e2;
+  --btnSecondaryHover: #f3f3f399;
+  --btnSecondaryDisable: #444444;
+  --btnLightHover: #a40d5699;
+  --borderColor: #ededed;
 }
 
 @import url("./button.scss");
