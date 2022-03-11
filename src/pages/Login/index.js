@@ -10,8 +10,8 @@ export function Login() {
 
         <form>
           <span>Faça seu Login</span>
-          <input type="text" placeholder="email" />
-          <input placeholder="senha" type="password" />
+          <input className="input" type="text" placeholder="email" />
+          <input className="input" placeholder="senha" type="password" />
           <div>
             <button className="button">Entrar</button>
           </div>
