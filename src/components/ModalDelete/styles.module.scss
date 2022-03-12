@@ -1,0 +1,30 @@
+.container {
+  width: 592px;
+  height: 208px;
+  position: relative;
+  background: var(--backgroudLigth);
+  img {
+    position: absolute;
+    right: 10px;
+    padding: 15px;
+    right: 10px;
+    cursor: pointer;
+  }
+  div {
+    display: flex;
+    flex-direction: column;
+    margin: 25px;
+    gap: 15px;
+  }
+  h2 {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 33px;
+  }
+  button {
+    width: 157px;
+    height: 48px;
+  }
+}
