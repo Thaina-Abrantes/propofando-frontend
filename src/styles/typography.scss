@@ -9,5 +9,12 @@ textarea {
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
-  color: var(--textDark);
+  color: var(--black300);
+}
+
+span,
+h1,
+h2,
+h3 {
+  font-family: "Open Sans";
 }

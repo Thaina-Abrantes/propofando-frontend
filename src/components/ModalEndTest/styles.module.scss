@@ -2,7 +2,7 @@
   width: 592px;
   height: 208px;
   position: relative;
-  background: var(--backgroudDarkContainer);
+  background: var(--black200);
   img {
     position: absolute;
     right: 10px;
@@ -22,10 +22,10 @@
     font-weight: 600;
     font-size: 24px;
     line-height: 33px;
-    color: var(--textLight);
+    color: var(--white);
   }
   p {
-    color: var(--textLight);
+    color: var(--white);
     margin-bottom: 20px;
   }
   button {

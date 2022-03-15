@@ -11,23 +11,23 @@
   font-weight: 600;
   font-size: 16px;
 
-  background-color: var(--btnPrimary);
-  color: var(--textLight);
+  background-color: var(--pink200);
+  color: var(--white);
   cursor: pointer;
 }
 
 .button:hover {
-  background: var(--btnPrimaryOpacity);
+  background: var(--pink300);
 }
 .button:active {
-  background-color: var(--btnActive);
+  background-color: var(--pink500);
 }
 
 .button:disabled,
 .button[disabled] {
-  border: 1px solid var(--btnDisable);
-  background-color: var(--btnDisable);
-  color: var(--textLight);
+  border: 1px solid var(--gray);
+  background-color: var(--gray);
+  color: var(--white);
   cursor: not-allowed;
 }
 
@@ -45,26 +45,27 @@
   font-weight: 600;
   font-size: 16px;
 
-  border: 1px solid var(--btnSecondaryColor);
-  color: var(--btnSecondaryColor);
-  background: var(--backgroudDarkContainer);
+  border: 1px solid var(--gray600);
+  color: var(--gray600);
+  background: var(--black200);
   cursor: pointer;
 }
 .button-dark-secondary:hover {
-  color: var(--btnSecondaryHover);
-  background: #1e1f1e;
-  border: 1px solid var(--btnSecondaryHover);
+  color: var(--white300);
+  background: var(--black200);
+  border: 1px solid var(--white300);
 }
 .button-dark-secondary:active {
-  border: 1px solid var(--borderColor);
-  background-color: var(--backgroudDarkContainer);
+  border: 1px solid var(--gray500);
+  background-color: var(--black200);
+  color: var(--gray500);
 }
 
 .button-dark-secondary:disabled,
 .button-dark-secondary[disabled] {
-  border: 1px solid var(--btnSecondaryDisable);
-  background: var(--backgroudDarkContainer);
-  color: var(--btnSecondaryDisable);
+  border: 1px solid var(--gray400);
+  background: var(--black200);
+  color: var(--gray400);
   cursor: not-allowed;
 }
 /*BUTTON LIGTH SECONDARY*/
@@ -80,27 +81,27 @@
   font-weight: 600;
   font-size: 16px;
 
-  background-color: var(--backgroudLigth);
-  color: var(--btnPrimary);
+  background-color: var(--white);
+  color: var(--pink200);
   cursor: pointer;
-  border: 1px solid var(--btnPrimary);
+  border: 1px solid var(--pink200);
 }
 
 .button-ligth-secondary:hover {
-  border: 1px solid var(--btnLightHover);
-  color: var(--btnLightHover);
+  border: 1px solid var(--pink300);
+  color: var(--pink300);
 }
 
 .button-ligth-secondary:active {
-  border: 1px solid var(--btnActive);
-  color: var(--btnActive);
-  background-color: var(--textLight);
+  border: 1px solid var(--pink500);
+  color: var(--pink500);
+  background-color: var(--white);
 }
 
 .button-ligth-secondary:disabled,
 .button-ligth-secondary[disabled] {
-  border: 1px solid var(--btnDisable);
-  color: var(--btnDisable);
-  background-color: var(--textLight);
+  border: 1px solid var(--gray);
+  color: var(--gray);
+  background-color: var(--white);
   cursor: not-allowed;
 }

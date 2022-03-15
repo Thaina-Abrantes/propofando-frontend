@@ -4,7 +4,7 @@
   width: 836px;
   height: 360px;
 
-  border: 1.5px solid #cfd1dc;
+  border: 1.5px solid var(--gray700);
   box-sizing: border-box;
   border-radius: 5px 5px 0px 0px;
   gap: 8px;
@@ -22,7 +22,7 @@
   }
 
   span {
-    color: #8f8f8f;
+    color: var(--gray800);
     position: absolute;
     top: 370px;
     left: 750px;

@@ -9,8 +9,12 @@ function TextArea() {
   }
   const textSize = 1620 - (textArea.split('').length);
 
+  function handleSubmit(event) {
+    event.preventDefault();
+  }
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <div className={style.container}>
         <textarea
           className={style.scroll}
