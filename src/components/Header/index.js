@@ -1,10 +1,16 @@
 import style from './styles.module.scss';
-import LogoDark from '../../assets/logo-dark.svg';
+import Logo from '../../assets/logo-light.svg';
+import User from '../../assets/accoutn-circle.svg';
 
 function Header() {
   return (
     <header className={style.container}>
-      <img src={LogoDark} alt="logo" />
+      <img src={Logo} alt="logo" />
+      <div className={style.userContainer}>
+        <span>Usuário</span>
+        <img src={User} alt="usuário" />
+      </div>
+
     </header>
   );
 }
