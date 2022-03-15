@@ -11,6 +11,7 @@
   --yellow: #ffc866;
   --yellow200: #ffc8660d;
   --red200: #ff85850d;
+  --red300: #ff577d;
   --green: #58a33d;
   --green200: #58a33d0d;
   --gray: #999999;
@@ -49,4 +50,20 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+// containerInput é a div que envolve um input onde talvez seja necessário exibir um erro
+.containerInput {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  span {
+    width: 90%;
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    color: var(--red300);
+    text-align: right;
+  }
 }
