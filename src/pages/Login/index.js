@@ -1,12 +1,24 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { loginSchema } from 'validations/loginValidation';
+import { useStores } from '../../stores';
 import LogoDark from '../../assets/logo-dark.svg';
 import style from './styles.module.scss';
 
 const defaultValues = { email: '', senha: '' };
 
 export function Login() {
+  const {
+    userStore: {
+      token,
+    },
+  } = useStores();
+
+  function login() {
+    if (token) {
+      navigate('/main');
+    }
+  }
   const navigate = useNavigate();
   const [form, setForm] = useState(defaultValues);
   const [erroEmail, setErroEmail] = useState('');
@@ -25,6 +37,7 @@ export function Login() {
     } catch (err) {
       if (err.params.path === 'email') {
         setErroEmail(err.message);
+        return;
       }
       if (err.params.path === 'password') {
         setErroPassword(err.message);
@@ -68,11 +81,10 @@ export function Login() {
           </div>
           <div>
             <button
-              // onClick={() => navigate('/main')}
+              onClick={login}
               className="button"
             >
               Entrar
-
             </button>
           </div>
         </form>
