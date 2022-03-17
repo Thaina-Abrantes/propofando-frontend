@@ -1,0 +1,56 @@
+.container {
+  width: 828px;
+  height: 415px;
+  background: var(--white200);
+  position: relative;
+
+  h2 {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 33px;
+    margin: 20px 28px;
+  }
+  img {
+    padding: 15px;
+    position: absolute;
+    cursor: pointer;
+    right: 10px;
+  }
+  input {
+    width: 350px;
+    height: 60px;
+  }
+}
+.wrapInputs {
+  display: flex;
+  gap: 58px;
+  margin: 0 26px;
+}
+
+.containerInputs {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+    margin-bottom: 12px;
+  }
+}
+
+.wrapInputBtn {
+  display: flex;
+  flex-direction: column;
+  gap: 58px;
+  margin: 24px 26px;
+
+  button {
+    width: 237px;
+    height: 48px;
+  }
+}

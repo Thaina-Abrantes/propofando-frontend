@@ -1,0 +1,34 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 836px;
+  height: 360px;
+
+  border: 1.5px solid var(--gray700);
+  box-sizing: border-box;
+  border-radius: 5px 5px 0px 0px;
+  gap: 8px;
+  position: relative;
+  textarea {
+    border: none;
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+    resize: none;
+  }
+  textarea:focus,
+  input:focus {
+    outline: none;
+  }
+
+  span {
+    color: var(--gray800);
+    position: absolute;
+    top: 370px;
+    left: 750px;
+  }
+}
+
+.scroll::-webkit-scrollbar {
+  display: none;
+}
