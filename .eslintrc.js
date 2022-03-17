@@ -45,5 +45,6 @@ module.exports = {
     'no-unsafe-optional-chaining': 'off',
     'no-nested-ternary': 'off',
     'no-use-before-define': 'off',
+    'linebreak-style': 'off',
   },
 };

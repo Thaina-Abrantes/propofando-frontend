@@ -1,0 +1,35 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--red200);
+  border: 1px solid var(--salmon);
+  box-sizing: border-box;
+  border-radius: 6px;
+  width: 1144px;
+  height: 70px;
+
+  padding: 10px;
+}
+
+.alertMessage {
+  display: flex;
+  align-items: center;
+  margin-left: 15px;
+  padding: 20px;
+  width: 70%;
+  gap: 25px;
+  span {
+    margin-left: 5px;
+  }
+}
+
+.close {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 11.67px;
+  height: 11.67px;
+  margin-right: 25px;
+  cursor: pointer;
+}

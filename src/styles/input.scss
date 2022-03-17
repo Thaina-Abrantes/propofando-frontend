@@ -1,0 +1,47 @@
+.input {
+  all: unset;
+  background: var(--gray900);
+  color: var(--white);
+  border: 1.5px solid var(--textDarkHover);
+  box-sizing: border-box;
+  border-radius: 5px;
+  padding: 18px;
+}
+.input:hover {
+  background: var(--gray900);
+  border: 1.5px solid var(--gray700);
+}
+
+.input-light {
+  all: unset;
+  background: var(--white400);
+  border: 1.5px solid var(--white400);
+  color: var(--black300);
+  box-sizing: border-box;
+  border-radius: 5px;
+  padding: 18px;
+}
+.input-light:hover {
+  color: var(--black300);
+  border: 1.5px solid var(--black300);
+}
+
+.error-dark {
+  all: unset;
+  background: var(--gray900);
+  color: var(--white);
+  border: 1.5px solid var(--red300);
+  box-sizing: border-box;
+  border-radius: 5px;
+  padding: 18px;
+}
+
+.error-ligth {
+  all: unset;
+  background: var(--white400);
+  color: var(--black300);
+  border: 1.5px solid var(--red300);
+  box-sizing: border-box;
+  border-radius: 5px;
+  padding: 18px;
+}
