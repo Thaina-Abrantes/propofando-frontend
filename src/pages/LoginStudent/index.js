@@ -1,8 +1,13 @@
+import { useState } from 'react';
 import style from './styles.module.scss';
 import logoDark from '../../assets/logo-dark.svg';
 import vr from '../../assets/Foto_VR.png';
+import openEye from '../../assets/visibility-icon.svg';
+import closedEye from '../../assets/visibility-off-icon.svg';
 
 export function LoginStudent() {
+  const [open, setOpen] = useState(false);
+
   return (
     <div className={style.container}>
       <div className={style['container-left']}>
@@ -24,10 +29,17 @@ export function LoginStudent() {
             <div>
               <input className="input" placeholder="E-mail" />
             </div>
-            <div>
-              <input className="input" placeholder="Senha" />
+            <div className={style['password-input']}>
+              <button
+                type="button"
+                onClick={() => setOpen(!open)}
+              >
+                <img src={open === false ? closedEye : openEye} alt="Visibiidade" />
+
+              </button>
+              <input className="input" placeholder="Senha" type={open === false ? 'password' : 'text'} />
             </div>
-            <div>
+            <div className={style.btn}>
               <button className="button">Entrar</button>
             </div>
           </form>
