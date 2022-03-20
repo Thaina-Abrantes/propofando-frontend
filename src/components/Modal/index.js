@@ -1,7 +1,15 @@
+import { useStores } from 'stores';
 import clear from '../../assets/clear-icon.svg';
 import style from './styles.module.scss';
 
-function Modal({ title, button, setOpenModalEdit }) {
+function Modal({ title, button }) {
+  const {
+    modalStore: {
+      openModalEdit,
+      setOpenModalEdit,
+    },
+  } = useStores();
+
   return (
     <div className={style['background-modal']}>
       <div className={style.container}>
