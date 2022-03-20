@@ -1,22 +1,22 @@
 .search {
   display: flex;
-  width: 90%;
   height: 78px;
   border-bottom: 1px solid var(--black400);
   padding: 12px 40px;
 
-  input {
-    width: 298px;
-    height: 48px;
-    margin-right: 50px;
-  }
   div {
     cursor: pointer;
     display: flex;
     gap: 15px;
-    width: 250px;
+    min-width: 250px;
     justify-content: center;
     align-items: center;
+  }
+
+  input {
+    width: 298px;
+    height: 48px;
+    position: relative;
   }
   h2 {
     font-style: normal;
@@ -24,6 +24,7 @@
     font-size: 24px;
     width: 100%;
     height: 33px;
+    margin-right: 56px;
   }
   button {
     width: 244px;

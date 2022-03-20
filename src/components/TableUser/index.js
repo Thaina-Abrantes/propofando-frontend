@@ -26,8 +26,29 @@ function TableUser() {
             <span>86%</span>
           </div>
           <div className={style['fourth-line-item']}>
-            <img src={editIcon} alt="editar" />
-            <img src={deleteIcon} alt="deletar" />
+            <button>
+              <img src={editIcon} alt="editar" />
+            </button>
+            <button><img src={deleteIcon} alt="deletar" /></button>
+          </div>
+        </div>
+
+        <div className={style['table-line']}>
+          <div className={style['first-line-item']}>
+            <img src={userIcon} alt="Icone de usuário" />
+            <span>Murilo Almeida Fernandes</span>
+          </div>
+          <div className={style['second-line-item']}>
+            <span>mu_almeidafrnds@myemail.com</span>
+          </div>
+          <div className={style['third-line-item']}>
+            <span>77%</span>
+          </div>
+          <div className={style['fourth-line-item']}>
+            <button>
+              <img src={editIcon} alt="editar" />
+            </button>
+            <button><img src={deleteIcon} alt="deletar" /></button>
           </div>
         </div>
 
