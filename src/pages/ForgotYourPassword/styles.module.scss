@@ -42,15 +42,18 @@
   background-color: var(--black200);
 
   padding: 53px 49px 55px;
+  width: 452px;
+  height: 422px;
 }
 
 .container-imgs{
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
 
   gap: 113px;
   margin-bottom: 62px;
+  width: 452px;
 }
 
 .arrow-img {
