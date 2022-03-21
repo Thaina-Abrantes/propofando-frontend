@@ -12,6 +12,7 @@ const Main = React.lazy(async () => import('../pages/Main').then((m) => ({ defau
 const Page404 = React.lazy(async () => import('../pages/Page404').then((m) => ({ default: m.Page404 })));
 const ForgotYourPassword = React.lazy(async () => import('../pages/ForgotYourPassword').then((m) => ({ default: m.ForgotYourPassword })));
 const RedefinePassword = React.lazy(async () => import('../pages/RedefinePassword').then((m) => ({ default: m.RedefinePassword })));
+const PasswordResetSuccessfully = React.lazy(async () => import('../pages/PasswordResetSuccessfully').then((m) => ({ default: m.PasswordResetSuccessfully })));
 
 function ProtectedRoutes({ redirectTo }) {
   const { userStore: { token } } = useStores();
@@ -29,7 +30,10 @@ export function MyRoutes() {
       </Route>
 
       <Route path="/recovery" element={<ForgotYourPassword />} />
+
       <Route path="/redefine" element={<RedefinePassword />} />
+
+      <Route path="/redefined" element={<PasswordResetSuccessfully />} />
 
       <Route path="*" element={<Page404 />} />
     </Routes>
