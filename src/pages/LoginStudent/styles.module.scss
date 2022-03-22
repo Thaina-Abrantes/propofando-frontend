@@ -62,6 +62,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 4px;
 
   button {
     width: 140px;
@@ -100,5 +101,16 @@
     color: var(--white600);
   }
   margin-top: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+}
+.error-message {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--red300);
+  text-align: right;
 }

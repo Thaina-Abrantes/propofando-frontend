@@ -88,6 +88,7 @@ export function LoginStudent() {
               />
               <a href="#">Esqueceu a senha? </a>
             </div>
+            {erroPassword && <span className={style['error-message']}>{erroPassword}</span>}
 
             <div className={style.btn}>
               <button className="button">Entrar</button>
