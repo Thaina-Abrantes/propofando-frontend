@@ -48,32 +48,30 @@ export function ForgotYourPassword() {
         </a>
         <img src={logo} alt="Logo" />
       </div>
-      <div className={style['container-card']}>
-        <form onSubmit={handleSubmit}>
-          <h1>Esqueceu sua senha?</h1>
-          <p>
-            Digite o endereço de e-mail associado à sua
-            <br />
-            conta e enviaremos um link para redefinir sua
-            <br />
-            senha.
-          </p>
-          <div className={style['input-error']}>
-            <input
-              className={erroEmail ? 'error-dark' : 'input'}
-              name="email"
-              value={email}
-              type="text"
-              placeholder="Email"
-              onChange={(e) => { handleChange(e.target.value); }}
-            />
-            {erroEmail && <span className="error-message">{erroEmail}</span>}
-          </div>
-          <button className="button">
-            Enviar
-          </button>
-        </form>
-      </div>
+      <form className={style['container-card']} onSubmit={handleSubmit}>
+        <h1>Esqueceu sua senha?</h1>
+        <p>
+          Digite o endereço de e-mail associado à sua
+          <br />
+          conta e enviaremos um link para redefinir sua
+          <br />
+          senha.
+        </p>
+        <div className={style['input-error']}>
+          <input
+            className={erroEmail ? 'error-dark' : 'input'}
+            name="email"
+            value={email}
+            type="text"
+            placeholder="Email"
+            onChange={(e) => { handleChange(e.target.value); }}
+          />
+          {erroEmail && <span className="error-message">{erroEmail}</span>}
+        </div>
+        <button className="button">
+          Enviar
+        </button>
+      </form>
     </div>
   );
 }
