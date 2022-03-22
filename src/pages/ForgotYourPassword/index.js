@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable max-len */
 import { useState } from 'react';
-import { redefineSchema } from 'validations/redefineValidation';
+import { emailSchema } from 'validations/redefineValidation';
 import { useNavigate } from 'react-router-dom';
 import style from './styles.module.scss';
 import logo from '../../assets/logo-dark.svg';
@@ -17,7 +17,7 @@ export function ForgotYourPassword() {
     e.preventDefault();
 
     try {
-      redefineSchema.validateSync({
+      emailSchema.validateSync({
         email: e.target[0].value,
       });
     } catch (err) {
