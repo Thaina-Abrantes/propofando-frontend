@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useStores } from 'stores';
 import style from './styles.module.scss';
 import UserIcon from '../../assets/identity-icon.svg';
 import listIcon from '../../assets/bullet-list-icon.svg';
@@ -9,6 +10,12 @@ import logOut from '../../assets/login-icon.svg';
 function AdminPanel() {
   const [showUser, setShowUSer] = useState(false);
   const [showQuestion, setShowQuestion] = useState(false);
+  const {
+    modalStore: {
+      openModalEdit,
+      setOpenModalEdit,
+    },
+  } = useStores();
 
   return (
     <section className={style.container}>
@@ -28,7 +35,12 @@ function AdminPanel() {
       </div>
       {showUser && (
         <div className={style.links}>
-          <a>Cadastrar usuário</a>
+          <a
+            onClick={() => setOpenModalEdit(true)}
+          >
+            Cadastrar usuário
+
+          </a>
         </div>
       )}
 
