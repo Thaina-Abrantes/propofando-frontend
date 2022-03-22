@@ -48,7 +48,7 @@ function TableUser() {
             <span>Murilo Almeida Fernandes</span>
           </div>
           <div className={style['second-line-item']}>
-            <span>mu_almeidafrnds@myemail.com</span>
+            <span>mu_almeidafrnds@mysemail.com</span>
           </div>
           <div className={style['third-line-item']}>
             <span>77%</span>

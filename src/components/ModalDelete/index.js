@@ -4,7 +4,9 @@ import clear from '../../assets/clear-icon.svg';
 function ModalDelete({ title }) {
   return (
     <div className={style.container}>
-      <img src={clear} alt="Close" />
+      <button>
+        <img src={clear} alt="Close" />
+      </button>
       <div>
         <h2>
           Excluir
