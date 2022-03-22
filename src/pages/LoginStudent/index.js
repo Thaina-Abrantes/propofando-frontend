@@ -1,14 +1,46 @@
 import { useState } from 'react';
+import { loginSchema } from 'validations/loginValidation';
 import style from './styles.module.scss';
 import logoDark from '../../assets/logo-dark.svg';
 import vr from '../../assets/Foto_VR.png';
 import openEye from '../../assets/visibility-icon.svg';
 import closedEye from '../../assets/visibility-off-icon.svg';
 
+const defaultValuesForm = { email: '', password: '' };
+
 export function LoginStudent() {
   const [open, setOpen] = useState(false);
+  const [form, setForm] = useState(defaultValuesForm);
+  const [erroEmail, setErroEmail] = useState('');
+  const [erroPassword, setErroPassword] = useState('');
+
+  async function handleSubmit(event) {
+    setErroEmail('');
+    setErroPassword('');
+    event.preventDefault();
+
+    try {
+      await loginSchema.validateSync({
+        email: event.target[0].value,
+        password: event.target[1].value,
+      });
+    } catch (error) {
+      if (error.params.path === 'email') {
+        setErroEmail(error.message);
+        return;
+      }
+      if (error.params.path === 'password') {
+        setErroPassword(error.message);
+      }
+    }
+  }
+
+  function handleChange(event) {
+    setForm({ ...form, [event.target.name]: event.target.value });
+  }
 
   return (
+
     <div className={style.container}>
       <div className={style['container-left']}>
         <h1>
@@ -24,27 +56,44 @@ export function LoginStudent() {
       <div className={style['container-right']}>
         <div className={style['container-card']}>
           <img src={logoDark} alt="Logo Propofando" />
-          <form>
+          <form onSubmit={handleSubmit}>
             <h2>Faça seu login</h2>
-            <div>
-              <input className="input" placeholder="E-mail" />
+
+            <div className="containerInput">
+              <input
+                className={erroEmail ? 'error-dark' : 'input'}
+                placeholder="E-mail"
+                name="email"
+                value={form.email}
+                onChange={(event) => handleChange(event)}
+              />
+              {erroEmail && <span>{erroEmail}</span>}
             </div>
+
             <div className={style['password-input']}>
               <button
                 type="button"
                 onClick={() => setOpen(!open)}
               >
                 <img src={open === false ? closedEye : openEye} alt="Visibiidade" />
-
               </button>
-              <input className="input" placeholder="Senha" type={open === false ? 'password' : 'text'} />
+
+              <input
+                className={erroPassword ? 'error-dark' : 'input'}
+                placeholder="Senha"
+                name="password"
+                value={form.password}
+                type={open === false ? 'password' : 'text'}
+                onChange={(event) => handleChange(event)}
+              />
+              <a href="#">Esqueceu a senha? </a>
             </div>
+
             <div className={style.btn}>
               <button className="button">Entrar</button>
             </div>
           </form>
         </div>
-
       </div>
     </div>
   );
