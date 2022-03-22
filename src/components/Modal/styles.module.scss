@@ -64,10 +64,14 @@
   }
 }
 
-.btn-img {
-  position: absolute;
-  all: unset;
-  padding: 15px;
-  left: 0;
+.btn-close {
+  position: relative;
+  button {
+    all: unset;
+    padding: 15px;
+    position: absolute;
+    right: 0;
+  }
+
   cursor: pointer;
 }

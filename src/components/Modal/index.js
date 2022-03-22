@@ -13,12 +13,13 @@ function Modal({ title, button }) {
   return (
     <div className={style['background-modal']}>
       <div className={style.container}>
-        <button
-          className={style['btn-img']}
-          onClick={() => setOpenModalEdit(false)}
-        >
-          <img src={clear} alt="close" />
-        </button>
+        <div className={style['btn-close']}>
+          <button
+            onClick={() => setOpenModalEdit(false)}
+          >
+            <img src={clear} alt="close" />
+          </button>
+        </div>
         <h2>{title}</h2>
 
         <form>
