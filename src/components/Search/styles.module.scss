@@ -16,7 +16,7 @@
   input {
     width: 298px;
     height: 48px;
-    position: relative;
+    padding-left: 35px;
   }
   h2 {
     font-style: normal;
@@ -29,5 +29,15 @@
   button {
     width: 244px;
     height: 48px;
+  }
+}
+
+.search-container {
+  position: relative;
+
+  img {
+    position: absolute;
+
+    left: 10px;
   }
 }

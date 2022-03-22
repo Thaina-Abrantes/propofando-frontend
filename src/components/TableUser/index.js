@@ -42,7 +42,7 @@ function TableUser() {
           </div>
         </div>
 
-        {/* <div className={style['table-line']}>
+        <div className={style['table-line']}>
           <div className={style['first-line-item']}>
             <img src={userIcon} alt="Icone de usuário" />
             <span>Murilo Almeida Fernandes</span>
@@ -61,7 +61,7 @@ function TableUser() {
             </button>
             <button><img src={deleteIcon} alt="deletar" /></button>
           </div>
-        </div> */}
+        </div>
 
       </div>
     </div>
