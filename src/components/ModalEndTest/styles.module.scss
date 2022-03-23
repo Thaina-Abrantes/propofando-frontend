@@ -1,19 +1,27 @@
+.background-modal {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: auto;
+  background: #3d3d3d4b;
+}
+
 .container {
   width: 592px;
   height: 208px;
-  position: relative;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
   background: var(--black200);
-  img {
-    position: absolute;
-    right: 10px;
-    padding: 15px;
-    right: 10px;
-    cursor: pointer;
-  }
+
   div {
     display: flex;
     flex-direction: column;
-    margin: 25px;
+    padding: 5px 25px 15px 25px;
     gap: 15px;
   }
   h2 {
@@ -26,10 +34,24 @@
   }
   p {
     color: var(--white);
-    margin-bottom: 20px;
+    margin-bottom: 15px;
   }
   button {
     width: 157px;
     height: 48px;
   }
+}
+
+.btn-close {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  button {
+    all: unset;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+  }
+
+  cursor: pointer;
 }
