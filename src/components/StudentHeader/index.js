@@ -2,7 +2,7 @@ import style from './styles.module.scss';
 import logo from '../../assets/logo-dark.svg';
 import userImg from '../../assets/accoutn-circle.svg';
 
-export default function HeaderAluno() {
+export default function StudentHeader() {
   return (
     <header className={style['logo-container']}>
       <img src={logo} alt="Logo" />
