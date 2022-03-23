@@ -1,22 +1,19 @@
 import style from './styles.module.scss';
 import clear from '../../assets/clear-icon.svg';
 
-function ModalDelete({ title }) {
+function ModalDeleteCategory() {
   return (
     <div className={style.background}>
       <div className={style.container}>
-        <button><img src={clear} alt="Close" /></button>
+        <div className={style['btn-close']}>
+          <button><img src={clear} alt="Close" /></button>
+        </div>
         <div>
           <h2>
-            Excluir
-            {' '}
-            {title}
+            Excluir categoria
           </h2>
           <p>
-            Tem certeza que deseja excluir esse
-            {' '}
-            {title}
-            ? Essa ação não poderá ser desfeita.
+            Tem certeza que deseja excluir essa categoria? Essa ação não poderá ser desfeita.
           </p>
           <button className="button">Excluir</button>
         </div>
@@ -25,4 +22,4 @@ function ModalDelete({ title }) {
   );
 }
 
-export default ModalDelete;
+export default ModalDeleteCategory;
