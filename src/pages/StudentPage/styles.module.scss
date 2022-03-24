@@ -1,1 +1,13 @@
+.container-page {
+  button {
+    width: 250px;
+    height: 48px;
+  }
+}
 
+.container-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 33px;
+  width: 533px;
+}
