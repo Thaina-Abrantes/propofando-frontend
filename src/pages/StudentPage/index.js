@@ -1,3 +1,4 @@
+import TableTop3 from 'components/TableTop3';
 import style from './styles.module.scss';
 
 export function StudentPage() {
@@ -17,6 +18,26 @@ export function StudentPage() {
           <h3>Questões respondidas</h3>
           <h1>20%</h1>
         </div>
+      </div>
+      <div className={style['container-tabletop3']}>
+        <TableTop3
+          label="Categorias que mais acertou"
+          category1="Categoria A"
+          category2="Categoria F"
+          category3="Categoria G"
+          amount1="65 questões"
+          amount2="57 questões"
+          amount3="44 questões"
+        />
+        <TableTop3
+          label="Categorias que mais errou"
+          category1="Categoria B"
+          category2="Categoria D"
+          category3="Categoria C"
+          amount1="30 questões"
+          amount2="24 questões"
+          amount3="19 questões"
+        />
       </div>
     </div>
   );
