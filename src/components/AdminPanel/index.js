@@ -12,8 +12,8 @@ function AdminPanel() {
   const [showQuestion, setShowQuestion] = useState(false);
   const {
     modalStore: {
-      openModalEdit,
-      setOpenModalEdit,
+      openModalRegisterUser,
+      setOpenModalRegisterUser,
     },
   } = useStores();
 
@@ -36,7 +36,7 @@ function AdminPanel() {
       {showUser && (
         <div className={style.links}>
           <a
-            onClick={() => setOpenModalEdit(true)}
+            onClick={() => setOpenModalRegisterUser(true)}
           >
             Cadastrar usuário
 

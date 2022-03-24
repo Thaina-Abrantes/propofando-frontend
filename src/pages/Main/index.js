@@ -1,9 +1,10 @@
 import AdminPanel from 'components/AdminPanel';
 import Header from 'components/Header';
-import Modal from 'components/Modal';
+import ModalEdit from 'components/ModalEdit';
 import { useStores } from 'stores';
 import { Outlet } from 'react-router-dom';
 import ModalDeleteUser from 'components/ModalDeleteUser';
+import ModalRegisterUser from 'components/ModalRegisterUser';
 import style from './styles.module.scss';
 
 export function Main() {
@@ -11,6 +12,7 @@ export function Main() {
     modalStore: {
       openModalEdit,
       openModalDelete,
+      openModalRegisterUser,
     },
   } = useStores();
   return (
@@ -22,8 +24,9 @@ export function Main() {
           <Outlet />
         </div>
       </div>
-      {openModalEdit && <Modal title="Editar dados" button="Salvar alterações" />}
+      {openModalEdit && <ModalEdit />}
       {openModalDelete && <ModalDeleteUser />}
+      {openModalRegisterUser && <ModalRegisterUser />}
     </div>
   );
 }

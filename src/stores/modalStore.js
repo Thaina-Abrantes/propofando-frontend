@@ -3,6 +3,7 @@ import { useState } from 'react';
 export function useModal() {
   const [openModalEdit, setOpenModalEdit] = useState(false);
   const [openModalDelete, setOpenModalDelete] = useState(false);
+  const [openModalRegisterUser, setOpenModalRegisterUser] = useState(false);
 
   return (
     {
@@ -10,6 +11,8 @@ export function useModal() {
       setOpenModalEdit,
       openModalDelete,
       setOpenModalDelete,
+      openModalRegisterUser,
+      setOpenModalRegisterUser,
     }
   );
 }

@@ -8,6 +8,8 @@ function Search() {
     modalStore: {
       openModalEdit,
       setOpenModalEdit,
+      openModalRegisterUser,
+      setOpenModalRegisterUser,
     },
   } = useStores();
   return (
@@ -20,7 +22,7 @@ function Search() {
         <img src={searchIcon} alt="Lupa" />
         <input className="input-light" placeholder="Pesquisar usuário" />
         <button
-          onClick={() => setOpenModalEdit(true)}
+          onClick={() => setOpenModalRegisterUser(true)}
           className="button"
         >
           Cadastrar usuário

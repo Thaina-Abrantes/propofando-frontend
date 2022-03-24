@@ -2,7 +2,7 @@ import { useStores } from 'stores';
 import clear from '../../assets/clear-icon.svg';
 import style from './styles.module.scss';
 
-function Modal({ title, button }) {
+function ModalEdit() {
   const {
     modalStore: {
       openModalEdit,
@@ -20,7 +20,7 @@ function Modal({ title, button }) {
             <img src={clear} alt="close" />
           </button>
         </div>
-        <h2>{title}</h2>
+        <h2>Editar dados</h2>
 
         <form>
           <div className={style.wrapInputs}>
@@ -38,7 +38,7 @@ function Modal({ title, button }) {
               <label>Senha</label>
               <input className="input-light" placeholder="Senha" type="password" />
             </div>
-            <button className="button">{button}</button>
+            <button className="button">Salvar alterações</button>
           </div>
         </form>
       </div>
@@ -46,4 +46,4 @@ function Modal({ title, button }) {
   );
 }
 
-export default Modal;
+export default ModalEdit;
