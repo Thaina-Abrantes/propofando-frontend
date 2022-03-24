@@ -1,0 +1,67 @@
+.container {
+  background: var(--black200);
+  color: var(--gray1100);
+  border-right: 1px solid var(--black400);
+  border-radius: 5px 0px 0px 5px;
+
+  width: 325px;
+  height: calc(100vh - 100px);
+  padding: 40px;
+  position: relative;
+
+  div {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    text-align: left;
+  }
+
+  span {
+    font-style: normal;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  h2 {
+    font-style: normal;
+    font-weight: 400;
+    margin-bottom: 21px;
+  }
+}
+
+.performance {
+  margin-bottom: 26px;
+}
+
+.simulated {
+  margin-bottom: 10px;
+}
+
+.click {
+  display: flex;
+  cursor: pointer;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+
+  a {
+    width: 100%;
+    text-align: left;
+    margin-left: 60px;
+
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+
+    cursor: pointer;
+  }
+}
+
+.logout {
+  position: absolute;
+  bottom: 10px;
+}
