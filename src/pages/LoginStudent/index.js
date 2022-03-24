@@ -14,15 +14,15 @@ export function LoginStudent() {
   const [erroEmail, setErroEmail] = useState('');
   const [erroPassword, setErroPassword] = useState('');
 
-  async function handleSubmit(event) {
+  function handleSubmit(event) {
     setErroEmail('');
     setErroPassword('');
     event.preventDefault();
 
     try {
-      await loginSchema.validateSync({
-        email: event.target[0].value,
-        password: event.target[1].value,
+      loginSchema.validateSync({
+        email: form.email,
+        password: form.password,
       });
     } catch (error) {
       if (error.params.path === 'email') {
@@ -36,6 +36,8 @@ export function LoginStudent() {
   }
 
   function handleChange(event) {
+    setErroEmail('');
+    setErroPassword('');
     setForm({ ...form, [event.target.name]: event.target.value });
   }
 
