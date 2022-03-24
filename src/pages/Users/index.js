@@ -4,7 +4,7 @@ import userIcon from '../../assets/identity-icon.svg';
 import editIcon from '../../assets/edit-icon.svg';
 import deleteIcon from '../../assets/delete-icon.svg';
 
-function TableUser() {
+export function Users() {
   const {
     modalStore: {
       openModalEdit,
@@ -67,5 +67,3 @@ function TableUser() {
     </div>
   );
 }
-
-export default TableUser;

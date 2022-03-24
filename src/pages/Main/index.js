@@ -2,8 +2,8 @@ import AdminPanel from 'components/AdminPanel';
 import Header from 'components/Header';
 import Modal from 'components/Modal';
 import Search from 'components/Search';
-import TableUser from 'components/TableUser';
 import { useStores } from 'stores';
+import { Outlet } from 'react-router-dom';
 import style from './styles.module.scss';
 
 export function Main() {
@@ -19,7 +19,7 @@ export function Main() {
         <AdminPanel />
         <div className={style['div-center']}>
           <Search />
-          <TableUser />
+          <Outlet />
         </div>
       </div>
       {openModalEdit && <Modal title="Editar dados" button="Salvar alterações" />}
