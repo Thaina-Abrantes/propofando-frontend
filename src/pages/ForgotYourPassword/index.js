@@ -18,7 +18,7 @@ export function ForgotYourPassword() {
 
     try {
       emailSchema.validateSync({
-        email: e.target[0].value,
+        email,
       });
     } catch (err) {
       if (err.params.path === 'email') {

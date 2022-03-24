@@ -8,19 +8,21 @@ import icon from '../../assets/confirmation-icon.svg';
 
 export function RedefinePassword() {
   const navigate = useNavigate();
+  const [form, setForm] = useState({ newPassword: '', confirmPassword: '' });
+
   const [resetSuccessfully, setResetSuccessfully] = useState(false);
-  const [confirmPassword, setConfirmPassword] = useState('');
   const [erroConfirmPassword, setErroConfirmPassword] = useState('');
-  const [newPassword, setNewPassword] = useState('');
   const [erroNewPassword, setErroNewPassword] = useState('');
 
   async function handleSubmit(e) {
+    setErroNewPassword('');
+    setErroConfirmPassword('');
     e.preventDefault();
 
     try {
       newPasswordSchema.validateSync({
-        password: e.target[0].value,
-        passwordConfirmation: e.target[1].value,
+        password: form.newPassword,
+        passwordConfirmation: form.confirmPassword,
       });
     } catch (err) {
       if (err.params.path === 'password') {
@@ -32,12 +34,10 @@ export function RedefinePassword() {
     }
   }
 
-  function handleChangeInput1(value) {
-    setNewPassword(value);
-  }
-
-  function handleChangeInput2(value) {
-    setConfirmPassword(value);
+  function handleChangeFormValue(e) {
+    setErroNewPassword('');
+    setErroConfirmPassword('');
+    setForm({ ...form, [e.target.name]: e.target.value });
   }
 
   function loginBack() {
@@ -64,18 +64,20 @@ export function RedefinePassword() {
           </p>
           <input
             className={erroNewPassword ? 'error-dark' : 'input'}
-            name="password"
-            type="text"
+            name="newPassword"
+            type="password"
             placeholder="Nova senha"
-            onChange={(e) => { handleChangeInput1(e.target.value); }}
+            value={form.newPassword}
+            onChange={handleChangeFormValue}
           />
           {erroNewPassword && <span className="error-message ">{erroNewPassword}</span>}
           <input
             className={erroConfirmPassword ? 'error-dark' : 'input'}
-            name="password"
-            type="text"
+            name="confirmPassword"
+            type="password"
             placeholder="Confirmar senha"
-            onChange={(e) => { handleChangeInput2(e.target.value); }}
+            value={form.confirmPassword}
+            onChange={handleChangeFormValue}
           />
           {erroConfirmPassword && <span className="error-message ">{erroConfirmPassword}</span>}
           <button className="button">
