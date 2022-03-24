@@ -1,15 +1,16 @@
 import AdminPanel from 'components/AdminPanel';
 import Header from 'components/Header';
 import Modal from 'components/Modal';
-import Search from 'components/Search';
 import { useStores } from 'stores';
 import { Outlet } from 'react-router-dom';
+import ModalDeleteUser from 'components/ModalDeleteUser';
 import style from './styles.module.scss';
 
 export function Main() {
   const {
     modalStore: {
       openModalEdit,
+      openModalDelete,
     },
   } = useStores();
   return (
@@ -18,11 +19,11 @@ export function Main() {
       <div className={style['div-wrapper']}>
         <AdminPanel />
         <div className={style['div-center']}>
-          <Search />
           <Outlet />
         </div>
       </div>
       {openModalEdit && <Modal title="Editar dados" button="Salvar alterações" />}
+      {openModalDelete && <ModalDeleteUser />}
     </div>
   );
 }

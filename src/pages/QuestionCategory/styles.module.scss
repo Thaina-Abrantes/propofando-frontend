@@ -18,40 +18,35 @@
 }
 
 .name-title {
-  width: 35%;
-
-  padding-left: 20px;
+  width: 40%;
+  padding-left: 40px;
 }
-
-.email-title {
-  width: 35%;
-  text-align: left;
-  // margin-left: 60px;
+.category-title {
+  width: 40%;
 }
-
-.hit-title {
-  width: 15%;
-  // margin-left: 90px;
-}
-
 .manage-title {
   width: 10%;
-  // display: flex;
-  // justify-content: flex-end;
-  // margin-right: 15px;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 10px;
 }
 
 .table-body {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+
+  span {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+  }
 }
 
 .table-line {
   display: flex;
   width: 100%;
   height: 64px;
-  // justify-content: center;
   align-items: center;
   background-color: var(--white400);
   padding: 14px 18px;
@@ -60,42 +55,24 @@
 
 .first-line-item {
   display: flex;
-  width: 35%;
-  // justify-content: center;
+  width: 40%;
   align-items: center;
-  text-align: left;
-  gap: 8px;
-  // span {
-  //   min-width: 200px;
-  // }
-  flex-grow: 1;
+  gap: 10px;
 }
-
 .second-line-item {
-  text-align: left;
-  width: 35%;
-
-  flex-grow: 1;
+  width: 40%;
+  padding-left: 50px;
 }
 
 .third-line-item {
-  width: 15%;
-  text-align: center;
-}
-
-.fourth-line-item {
   display: flex;
   width: 10%;
-  margin-left: 55px;
+  flex-grow: 1;
   justify-content: flex-end;
-  padding: 5px;
   gap: 20px;
 
   button {
     all: unset;
-  }
-
-  img {
     cursor: pointer;
   }
 }
