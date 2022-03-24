@@ -1,10 +1,9 @@
 import AdminPanel from 'components/AdminPanel';
 import Header from 'components/Header';
 import Modal from 'components/Modal';
-import { useStores } from 'stores';
 import Search from 'components/Search';
 import TableUser from 'components/TableUser';
-
+import { useStores } from 'stores';
 import style from './styles.module.scss';
 
 export function Main() {

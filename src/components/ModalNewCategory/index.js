@@ -3,17 +3,23 @@ import clear from '../../assets/clear-icon.svg';
 
 function ModalNewCategory() {
   return (
-    <div className={style.container}>
-      <img src={clear} alt="Close" />
-      <div>
-        <h2>Nova categoria</h2>
+    <div className={style.background}>
+      <div className={style.container}>
+        <div className={style['btn-close']}>
+          <button>
+            <img src={clear} alt="Close" />
+          </button>
+        </div>
+        <div>
+          <h2>Nova categoria</h2>
 
-        <label>
-          Título
-        </label>
-        <input className="input-light" />
+          <label>
+            Título
+          </label>
+          <input className="input-light" placeholder="Categoria" />
 
-        <button className="button">Adicionar categoria</button>
+          <button className="button">Adicionar categoria</button>
+        </div>
       </div>
     </div>
   );
