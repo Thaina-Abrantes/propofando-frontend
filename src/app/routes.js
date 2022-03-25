@@ -27,6 +27,7 @@ export function MyRoutes() {
       <Route element={<ProtectedRoutes redirectTo="/" />}>
         <Route path="/main" element={<Main />}>
           <Route path="" element={<Users />} />
+          <Route path="page2" element={<QuestionCategory />} />
         </Route>
       </Route>
 

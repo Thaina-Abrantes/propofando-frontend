@@ -4,6 +4,7 @@ export function useModal() {
   const [openModalEdit, setOpenModalEdit] = useState(false);
   const [openModalDelete, setOpenModalDelete] = useState(false);
   const [openModalRegisterUser, setOpenModalRegisterUser] = useState(false);
+  const [openModalNewCategory, setOpenModalNewCategory] = useState(false);
 
   return (
     {
@@ -13,6 +14,8 @@ export function useModal() {
       setOpenModalDelete,
       openModalRegisterUser,
       setOpenModalRegisterUser,
+      openModalNewCategory,
+      setOpenModalNewCategory,
     }
   );
 }

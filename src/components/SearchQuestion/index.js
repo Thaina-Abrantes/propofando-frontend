@@ -6,8 +6,8 @@ import searchIcon from '../../assets/search-icon.svg';
 function SearchQuestion() {
   const {
     modalStore: {
-      openModalEdit,
-      setOpenModalEdit,
+      openModalNewCategory,
+      setOpenModalNewCategory,
     },
   } = useStores();
   return (
@@ -20,7 +20,7 @@ function SearchQuestion() {
         <img src={searchIcon} alt="Lupa" />
         <input className="input-light" placeholder="Pesquisar" />
         <button
-          onClick={() => setOpenModalEdit(true)}
+          onClick={() => setOpenModalNewCategory(true)}
           className="button"
         >
           Criar categoria

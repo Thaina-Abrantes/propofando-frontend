@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useStores } from 'stores';
+import { NavLink } from 'react-router-dom';
 import style from './styles.module.scss';
 import UserIcon from '../../assets/identity-icon.svg';
 import listIcon from '../../assets/bullet-list-icon.svg';
@@ -26,7 +27,7 @@ function AdminPanel() {
           onClick={() => setShowUSer(!showUser)}
           className={style.click}
         >
-          <span>Usuários</span>
+          <NavLink className="active" to="/main">Usuários</NavLink>
           <img
             src={showUser ? arrowUp : arrowDown}
             alt="Flecha para baixo"
@@ -50,7 +51,7 @@ function AdminPanel() {
           onClick={() => setShowQuestion(!showQuestion)}
           className={style.click}
         >
-          <span>Categorias e questões</span>
+          <NavLink to="/main/page2">Categorias e questões</NavLink>
           <img
             src={showQuestion ? arrowUp : arrowDown}
             alt="Flecha para baixo"
