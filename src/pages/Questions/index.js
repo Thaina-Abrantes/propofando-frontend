@@ -1,30 +1,26 @@
-import SearchCategory from 'components/SearchCategory';
+import SearchQuestion from 'components/SearchQuestion';
 import style from './styles.module.scss';
-import topicIcon from '../../assets/topic-icon.svg';
+import pasteIcon from '../../assets/content-paste-icon.svg';
 import editIcon from '../../assets/edit-icon.svg';
 import deleteIcon from '../../assets/delete-icon.svg';
 
-export function QuestionCategory() {
+export function Questions() {
   return (
     <main>
-      <SearchCategory />
-      <div className={style['table']}>
+      <SearchQuestion />
+
+      <div className={style.table}>
         <div className={style['table-header']}>
           <div className={style['name-title']}><span>Nome</span></div>
-          <div className={style['category-title']}><span>Quantidade</span></div>
           <div className={style['manage-title']}><span>Gerenciar</span></div>
         </div>
         <div className={style['table-body']}>
           <div className={style['table-line']}>
             <div className={style['first-line-item']}>
-              <img src={topicIcon} alt="Categoria" />
-              <span>Categoria A</span>
+              <img src={pasteIcon} alt="pasta" />
+              <span>VUNESP - EsFCEx - Oficial Médico </span>
             </div>
             <div className={style['second-line-item']}>
-              <span>30</span>
-            </div>
-
-            <div className={style['third-line-item']}>
               <button>
                 <img src={editIcon} alt="editar" />
               </button>
@@ -33,14 +29,10 @@ export function QuestionCategory() {
           </div>
           <div className={style['table-line']}>
             <div className={style['first-line-item']}>
-              <img src={topicIcon} alt="Categoria" />
-              <span>Categoria B</span>
+              <img src={pasteIcon} alt="pasta" />
+              <span>FUNDATEC - GHC - Médico </span>
             </div>
             <div className={style['second-line-item']}>
-              <span>40</span>
-            </div>
-
-            <div className={style['third-line-item']}>
               <button>
                 <img src={editIcon} alt="editar" />
               </button>

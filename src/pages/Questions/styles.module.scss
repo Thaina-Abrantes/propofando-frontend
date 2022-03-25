@@ -4,7 +4,6 @@
   gap: 18px;
   padding: 32px 40px;
 }
-
 .table-header {
   display: flex;
   align-items: center;
@@ -18,12 +17,10 @@
 }
 
 .name-title {
-  width: 40%;
+  width: 90%;
   padding-left: 40px;
 }
-.category-title {
-  width: 40%;
-}
+
 .manage-title {
   width: 10%;
   display: flex;
@@ -56,16 +53,12 @@
 
 .first-line-item {
   display: flex;
-  width: 40%;
+  width: 90%;
   align-items: center;
   gap: 10px;
 }
-.second-line-item {
-  width: 40%;
-  padding-left: 50px;
-}
 
-.third-line-item {
+.second-line-item {
   display: flex;
   width: 10%;
   flex-grow: 1;

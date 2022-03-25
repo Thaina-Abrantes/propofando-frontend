@@ -12,6 +12,7 @@ const Main = React.lazy(async () => import('../pages/Main').then((m) => ({ defau
 const Page404 = React.lazy(async () => import('../pages/Page404').then((m) => ({ default: m.Page404 })));
 const Users = React.lazy(async () => import('../pages/Users').then((m) => ({ default: m.Users })));
 const QuestionCategory = React.lazy(async () => import('../pages/QuestionCategory').then((m) => ({ default: m.QuestionCategory })));
+const Questions = React.lazy(async () => import('../pages/Questions').then((m) => ({ default: m.Questions })));
 
 function ProtectedRoutes({ redirectTo }) {
   const { userStore: { token } } = useStores();
@@ -28,6 +29,7 @@ export function MyRoutes() {
         <Route path="/main" element={<Main />}>
           <Route path="" element={<Users />} />
           <Route path="page2" element={<QuestionCategory />} />
+          <Route path="page3" element={<Questions />} />
         </Route>
       </Route>
 

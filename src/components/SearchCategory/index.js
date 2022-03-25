@@ -3,7 +3,7 @@ import style from './styles.module.scss';
 import arrowBack from '../../assets/arrow-back-icon.svg';
 import searchIcon from '../../assets/search-icon.svg';
 
-function SearchQuestion() {
+function SearchCategory() {
   const {
     modalStore: {
       openModalNewCategory,
@@ -14,15 +14,16 @@ function SearchQuestion() {
     <div className={style.search}>
       <div>
         <img src={arrowBack} alt="Voltar" />
-        <h2>Questões</h2>
+        <h2>Categorias e questões</h2>
       </div>
       <div className={style['search-container']}>
         <img src={searchIcon} alt="Lupa" />
-        <input className="input-light" placeholder="Pesquisar questão" />
+        <input className="input-light" placeholder="Pesquisar" />
         <button
+          onClick={() => setOpenModalNewCategory(true)}
           className="button"
         >
-          Criar questão
+          Criar categoria
 
         </button>
       </div>
@@ -30,4 +31,4 @@ function SearchQuestion() {
   );
 }
 
-export default SearchQuestion;
+export default SearchCategory;
