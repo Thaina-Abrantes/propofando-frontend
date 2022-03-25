@@ -57,6 +57,40 @@
   bottom: 10px;
 }
 
-a.active {
+.active {
   text-decoration: none;
+  color: var(--black);
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 22px;
+}
+.inactive {
+  text-decoration: none;
+  color: var(--black);
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+.activeLink {
+  text-decoration: none;
+  color: var(--black);
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+}
+.inactiveLink {
+  text-decoration: none;
+  color: var(--black);
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
 }

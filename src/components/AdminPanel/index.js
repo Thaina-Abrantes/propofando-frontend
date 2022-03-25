@@ -15,6 +15,8 @@ function AdminPanel() {
     modalStore: {
       openModalRegisterUser,
       setOpenModalRegisterUser,
+      openModalNewCategory,
+      setOpenModalNewCategory,
     },
   } = useStores();
 
@@ -27,7 +29,7 @@ function AdminPanel() {
           onClick={() => setShowUSer(!showUser)}
           className={style.click}
         >
-          <NavLink className="active" to="/main">Usuários</NavLink>
+          <NavLink className={({ isActive }) => (isActive ? style.active : style.inactive)} to="/main">Usuários</NavLink>
           <img
             src={showUser ? arrowUp : arrowDown}
             alt="Flecha para baixo"
@@ -36,12 +38,13 @@ function AdminPanel() {
       </div>
       {showUser && (
         <div className={style.links}>
-          <a
+          <NavLink
+            className={({ isActive }) => (isActive ? style.activeLink : style.inactiveLink)}
+            to="/main"
             onClick={() => setOpenModalRegisterUser(true)}
           >
             Cadastrar usuário
-
-          </a>
+          </NavLink>
         </div>
       )}
 
@@ -51,7 +54,7 @@ function AdminPanel() {
           onClick={() => setShowQuestion(!showQuestion)}
           className={style.click}
         >
-          <NavLink to="/main/page2">Categorias e questões</NavLink>
+          <NavLink className={({ isActive }) => (isActive ? style.active : style.inactive)} to="/main/page2">Categorias e questões</NavLink>
           <img
             src={showQuestion ? arrowUp : arrowDown}
             alt="Flecha para baixo"
@@ -61,13 +64,20 @@ function AdminPanel() {
       {showQuestion && (
         <div className={style.links}>
           <a> Criar questão</a>
-          <a> Criar categoria</a>
+          <NavLink
+            className={({ isActive }) => (isActive ? style.activeLink : style.inactiveLink)}
+            to="/main/page2"
+            onClick={() => setOpenModalNewCategory(true)}
+          >
+            {' '}
+            Criar categoria
+          </NavLink>
         </div>
       )}
 
       <div className={style.logout}>
         <img src={logOut} alt="sair" />
-        <span>Sair da conta</span>
+        <NavLink className={({ isActive }) => (isActive ? style.active : style.inactive)} to="/">Sair da conta</NavLink>
       </div>
     </section>
   );
