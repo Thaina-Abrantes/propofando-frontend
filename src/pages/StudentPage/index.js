@@ -1,5 +1,7 @@
 import TableTop3 from 'components/TableTop3';
+import TableCategories from 'components/TableCategories';
 import style from './styles.module.scss';
+import lamp from '../../assets/lamp-icon.svg';
 
 export function StudentPage() {
   return (
@@ -39,6 +41,13 @@ export function StudentPage() {
           amount3="19 questões"
         />
       </div>
+      <div className={style['info']}>
+        <img src={lamp} alt="Lampada" />
+        <p>
+          Você sabia? Com base nos resultados dos simulados, sua média de acertos geral é de 77%.
+        </p>
+      </div>
+      <TableCategories />
     </div>
   );
 }
