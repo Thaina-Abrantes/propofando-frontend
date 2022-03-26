@@ -4,13 +4,12 @@ import userImg from '../../assets/accoutn-circle.svg';
 
 export default function StudentHeader() {
   return (
-    <header className={style['logo-container']}>
+    <header className={style['header-container']}>
       <img src={logo} alt="Logo" />
       <div className={style['user-container']}>
         <span>Usuário</span>
         <img src={userImg} alt="Usuário" />
       </div>
-
     </header>
   );
 }
