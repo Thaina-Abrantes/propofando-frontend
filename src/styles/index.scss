@@ -8,6 +8,9 @@
   --black: #1b1d1c;
   --black200: #1e1f1e;
   --black300: #212322;
+  --black400: #2123221a;
+  --black500: #2123224d;
+  --black600: #5f6368;
   --yellow: #ffc866;
   --yellow200: #ffc8660d;
   --red200: #ff85850d;
@@ -23,6 +26,9 @@
   --gray700: #cfd1dc;
   --gray800: #8f8f8f;
   --gray900: #cacaca12;
+  --gray1000: #c4c4c4;
+  --gray1100: #d8d8d8;
+  --gray1200: #2d2d2d;
   --white: #fffefe;
   --white200: #f6f6f6;
   --white300: #f3f3f399;
@@ -49,6 +55,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+#root {
+  min-height: 100vh;
+  width: 100vw;
+}
+
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
@@ -59,6 +71,7 @@ code {
   display: flex;
   flex-direction: column;
   gap: 4px;
+
   span {
     width: 90%;
     font-family: "Open Sans";

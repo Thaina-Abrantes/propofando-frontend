@@ -1,0 +1,44 @@
+.search {
+  display: flex;
+  height: 78px;
+  border-bottom: 1px solid var(--black400);
+  padding: 12px 10px 12px 40px;
+  margin-left: 20px;
+
+  div {
+    cursor: pointer;
+    display: flex;
+    gap: 15px;
+    min-width: 250px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  input {
+    width: 298px;
+    height: 48px;
+    padding-left: 35px;
+  }
+  h2 {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    min-width: 100%;
+    height: 33px;
+    margin-right: 56px;
+  }
+  button {
+    width: 244px;
+    height: 48px;
+  }
+}
+
+.search-container {
+  position: relative;
+
+  img {
+    position: absolute;
+
+    left: 10px;
+  }
+}

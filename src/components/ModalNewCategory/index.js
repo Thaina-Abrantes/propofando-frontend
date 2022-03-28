@@ -1,12 +1,21 @@
+import { useStores } from 'stores';
 import style from './styles.module.scss';
 import clear from '../../assets/clear-icon.svg';
 
 function ModalNewCategory() {
+  const {
+    modalStore: {
+      openModalNewCategory,
+      setOpenModalNewCategory,
+    },
+  } = useStores();
   return (
     <div className={style.background}>
       <div className={style.container}>
         <div className={style['btn-close']}>
-          <button>
+          <button
+            onClick={() => setOpenModalNewCategory(false)}
+          >
             <img src={clear} alt="Close" />
           </button>
         </div>

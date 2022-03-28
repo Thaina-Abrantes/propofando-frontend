@@ -1,15 +1,17 @@
 .container-main {
-  min-height: 100vh;
+  height: 100vh;
   width: 100vw;
-  background-color: var(--white300);
 
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: space-between;
+
+  background-color: var(--black);
 }
 
 .div-wrapper {
+  background-color: var(--black);
   display: flex;
   width: 100%;
 }
@@ -18,8 +20,7 @@
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  gap: 32px;
 
-  min-height: calc(100% - 80px - 78px);
+  min-height: calc(100% - 95px - 31px);
   width: calc(100vw - 325px);
 }
