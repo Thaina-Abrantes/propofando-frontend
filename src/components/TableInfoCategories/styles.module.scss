@@ -42,7 +42,7 @@
   height: 270px;
   width: 916px;
   overflow-y: scroll;
-  
+
   span {
     color: var(--white);
     font-style: normal;
@@ -79,3 +79,18 @@
   left: 709px;
 }
 
+.container-no-data {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 916px;
+  min-height: 75px;
+
+  p {
+    color: var(--white500);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+    margin-top: 120px;
+  }
+}

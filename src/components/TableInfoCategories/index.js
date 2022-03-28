@@ -1,6 +1,9 @@
+import { useState } from 'react';
 import style from './styles.module.scss';
 
 export default function TableInfoCategories() {
+  const [noData, setNoData] = useState(true);
+
   const performanceData = [
     { category: 'A', answered: '70/100', average: '65%' },
     { category: 'B', answered: '35/100', average: '35%' },
@@ -17,15 +20,19 @@ export default function TableInfoCategories() {
         <div className={style['title-colum3']}>Média de acertos</div>
       </div>
       <div className={style['table-body']}>
-        {
-          performanceData.map((data) => (
+        {noData
+          ? (
+            <div className={style['container-no-data']}>
+              <p>Ainda não há dados de desempenho disponíveis</p>
+            </div>
+          )
+          : performanceData.map((data) => (
             <div className={style['line']}>
               <span className={style['colum-data1']}>{data.category}</span>
               <span className={style['colum-data2']}>{data.answered}</span>
               <span className={style['colum-data3']}>{data.average}</span>
             </div>
-          ))
-        }
+          ))}
       </div>
     </div>
   );

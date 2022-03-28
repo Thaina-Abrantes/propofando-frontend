@@ -1,9 +1,12 @@
 import TableTop3 from 'components/TableTop3';
 import TableInfoCategories from 'components/TableInfoCategories';
+import { useState } from 'react';
 import style from './styles.module.scss';
 import lamp from '../../assets/lamp-icon.svg';
 
 export function StudentPage() {
+  const [noData, setNoData] = useState(true);
+
   return (
     <div className={style['container-page']}>
       <div className={style['container-buttons']}>
@@ -14,11 +17,11 @@ export function StudentPage() {
       <div className={style['container-cards']}>
         <div className={style['card']}>
           <h3>Simulados feitos</h3>
-          <h1>5</h1>
+          <h1>{noData ? 0 : 5}</h1>
         </div>
         <div className={style['card']}>
           <h3>Questões respondidas</h3>
-          <h1>20%</h1>
+          <h1>{noData ? 0 : '20%'}</h1>
         </div>
       </div>
       <div className={style['container-tabletop3']}>
@@ -41,12 +44,16 @@ export function StudentPage() {
           amount3="19 questões"
         />
       </div>
-      <div className={style['info']}>
-        <img src={lamp} alt="Lampada" />
-        <p>
-          Você sabia? Com base nos resultados dos simulados, sua média de acertos geral é de 77%.
-        </p>
-      </div>
+      {!noData
+         && (
+         <div className={style['info']}>
+           <img src={lamp} alt="Lampada" />
+           <p>
+             Você sabia? Com base nos resultados dos simulados,
+             sua média de acertos geral é de 77%.
+           </p>
+         </div>
+         )}
       <TableInfoCategories />
     </div>
   );
