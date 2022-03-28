@@ -63,7 +63,14 @@ function AdminPanel() {
       </div>
       {showQuestion && (
         <div className={style.links}>
-          <a> Criar questão</a>
+          <NavLink
+            to="/main/page4"
+            className={({ isActive }) => (isActive ? style.activeLink : style.inactiveLink)}
+          >
+            {' '}
+            Criar questão
+
+          </NavLink>
           <NavLink
             className={({ isActive }) => (isActive ? style.activeLink : style.inactiveLink)}
             to="/main/page2"

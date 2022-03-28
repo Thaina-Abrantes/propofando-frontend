@@ -1,9 +1,11 @@
 import { useStores } from 'stores';
+import { useNavigate } from 'react-router-dom';
 import style from './styles.module.scss';
 import arrowBack from '../../assets/arrow-back-icon.svg';
 import searchIcon from '../../assets/search-icon.svg';
 
 function SearchQuestion() {
+  const navigate = useNavigate();
   const {
     modalStore: {
       openModalNewCategory,
@@ -21,6 +23,7 @@ function SearchQuestion() {
         <input className="input-light" placeholder="Pesquisar questão" />
         <button
           className="button"
+          onClick={() => navigate('/main/page4')}
         >
           Criar questão
 
