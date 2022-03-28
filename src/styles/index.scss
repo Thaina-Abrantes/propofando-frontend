@@ -31,7 +31,8 @@
   --white200: #f6f6f6;
   --white300: #f3f3f399;
   --white400: #fcfcfc;
-  --white500: rgba(255, 254, 254, 0.705);
+  --white500: #fffefeb3;
+  --white600: #d6d6d6b3;
 }
 
 @import url("./button.scss");
@@ -62,6 +63,7 @@ code {
   display: flex;
   flex-direction: column;
   gap: 4px;
+
   span {
     width: 90%;
     font-family: "Open Sans";
