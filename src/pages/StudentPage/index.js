@@ -1,5 +1,5 @@
 import TableTop3 from 'components/TableTop3';
-import TableCategories from 'components/TableCategories';
+import TableInfoCategories from 'components/TableInfoCategories';
 import style from './styles.module.scss';
 import lamp from '../../assets/lamp-icon.svg';
 
@@ -47,7 +47,7 @@ export function StudentPage() {
           Você sabia? Com base nos resultados dos simulados, sua média de acertos geral é de 77%.
         </p>
       </div>
-      <TableCategories />
+      <TableInfoCategories />
     </div>
   );
 }
