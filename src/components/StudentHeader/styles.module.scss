@@ -1,0 +1,37 @@
+.header-container {
+  min-height: 100px;
+  width: 100vw;
+
+  border: 1px solid var(--black400);
+  background-color: var(--black);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 40px;
+
+  img {
+    height: 64px;
+  }
+}
+
+.user-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+
+  span {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--gray1000);
+  }
+  img {
+    width: 20px;
+    height: 20px;
+  }
+}
