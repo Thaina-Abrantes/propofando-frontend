@@ -29,12 +29,14 @@
   --gray1000: #c4c4c4;
   --gray1100: #d8d8d8;
   --gray1200: #2d2d2d;
+  --gray1300: rgba(153, 153, 153, 0.705);
   --white: #fffefe;
   --white200: #f6f6f6;
   --white300: #f3f3f399;
   --white400: #fcfcfc;
   --white500: #fffefeb3;
   --white600: #d6d6d6b3;
+  --white700: rgba(255, 254, 254, 0.705);
 }
 
 @import url("./button.scss");
