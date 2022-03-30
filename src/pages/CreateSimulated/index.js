@@ -50,7 +50,7 @@ export function CreateSimulated() {
             <option value="category3">Categoria C</option>
           </select>
         </div>
-        <button className="button">Criar simulado</button>
+        <button className="button" onClick={() => navigate('/simulated')}>Criar simulado</button>
       </form>
     </div>
   );
