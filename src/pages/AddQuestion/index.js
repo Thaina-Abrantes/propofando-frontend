@@ -10,6 +10,10 @@ const defaultValuesForm = {
   title: '',
   description: '',
   explanation: '',
+  opitionA: '',
+  opitionB: '',
+  opitionC: '',
+  opitionD: '',
 };
 
 export function AddQuestion() {
@@ -119,7 +123,58 @@ export function AddQuestion() {
               </span>
             </div>
           </div>
-
+          <h3>Alternativas</h3>
+          <div className={style.option}>
+            <button>A)</button>
+            <textarea
+              name="opitionA"
+              value={form.opitionA}
+              onChange={(e) => handleChange(e.target)}
+            />
+            <span className={style['counter-span']}>
+              {form.opitionA === '' ? 1620 : caracterTextArea(form.opitionA)}
+              /1620
+            </span>
+          </div>
+          <div className={style.option}>
+            <button>B)</button>
+            <textarea
+              name="opitionB"
+              value={form.opitionB}
+              onChange={(e) => handleChange(e.target)}
+            />
+            <span className={style['counter-span']}>
+              {form.opitionB === '' ? 1620 : caracterTextArea(form.opitionB)}
+              /1620
+            </span>
+          </div>
+          <div className={style.option}>
+            <button>C)</button>
+            <textarea
+              name="opitionC"
+              value={form.opitionC}
+              onChange={(e) => handleChange(e.target)}
+            />
+            <span className={style['counter-span']}>
+              {form.opitionC === '' ? 1620 : caracterTextArea(form.opitionC)}
+              /1620
+            </span>
+          </div>
+          <div className={style.option}>
+            <button>D)</button>
+            <textarea
+              name="opitionD"
+              value={form.opitionD}
+              onChange={(e) => handleChange(e.target)}
+            />
+            <span className={style['counter-span']}>
+              {form.opitionD === '' ? 1620 : caracterTextArea(form.opitionD)}
+              /1620
+            </span>
+          </div>
+          <div className={style['btn-add-question']}>
+            <button className="button" disabled>Adicionar questão</button>
+          </div>
         </form>
       </div>
 
