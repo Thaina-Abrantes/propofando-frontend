@@ -11,6 +11,7 @@
   --black400: #2123221a;
   --black500: #2123224d;
   --black600: #5f6368;
+  --black700: rgba(0, 0, 0, 0.205);
   --yellow: #ffc866;
   --yellow200: #ffc8660d;
   --red200: #ff85850d;
@@ -37,6 +38,7 @@
   --white500: #fffefeb3;
   --white600: #d6d6d6b3;
   --white700: rgba(255, 254, 254, 0.705);
+  --textDarkHover: rgba(252, 252, 252, 0.3);
 }
 
 @import url("./button.scss");
