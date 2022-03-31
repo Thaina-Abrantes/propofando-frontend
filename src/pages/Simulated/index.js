@@ -19,6 +19,7 @@ export function Simulated() {
             <h1 className={style['question-title']}>
               1- CRS - PMMG - PM MG - Medicina - Área: Anestesiologia - 2021
             </h1>
+
             <p className={style['question-statment']}>
               Um paciente de 40 anos, hígido, está sendo submetido a uma laparotomia
               para fechamento de ostomia, sob anestesia geral balanceada.
@@ -27,23 +28,25 @@ export function Simulated() {
               que passou do padrão A para o B (ver figuras abaixo).
               Diante disso, deve o anesteologista:
             </p>
+
             <img src={graphic} alt="Gráfico" />
+
             <div className={style['question-alternatives']}>
-              <div className={style['alternative']}>
-                <input type="radio" id="a" />
-                <span>A) Repicar o curare.</span>
+              <div className={style['container-alternative']}>
+                <input type="radio" id="alternativeA" name="alternative" value="a" />
+                <label htmlFor="alternativeA">A) Repicar o curare.</label>
               </div>
-              <div className={style.alternative}>
-                <input type="radio" id="b" />
-                <span>B) Verificar a pressão do balonete.</span>
+              <div className={style['container-alternative']}>
+                <input type="radio" id="alternativeB" name="alternative" value="b" />
+                <label htmlFor="alternativeB">B) Verificar a pressão do balonete.</label>
               </div>
-              <div className={style.alternative}>
-                <input type="radio" id="c" />
-                <span>C) Verificar a conexão da linha de capnografia.</span>
+              <div className={style['container-alternative']}>
+                <input type="radio" id="alternativeC" name="alternative" value="c" />
+                <label htmlFor="alternativeC">C) Verificar a conexão da linha de capnografia.</label>
               </div>
-              <div className={style.alternative}>
-                <input type="radio" id="d" />
-                <span>D) Trocar a cal sodada.</span>
+              <div className={style['container-alternative']}>
+                <input type="radio" id="alternativeD" name="alternative" value="d" />
+                <label htmlFor="alternativeD">D) Trocar a cal sodada.</label>
               </div>
             </div>
           </div>
