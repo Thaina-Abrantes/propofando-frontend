@@ -18,7 +18,6 @@ export function CreateSimulated() {
       </div>
       <div className={style['container']}>
         <form>
-
           <div className={style['border']}>
             <div className={style['container-row']}>
               <div className={style['container-personalize']}>
