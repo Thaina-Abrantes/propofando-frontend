@@ -7,7 +7,7 @@ export function CreateSimulated() {
   const navigate = useNavigate();
 
   return (
-    <main className={['container-main']}>
+    <main className={style['container-main']}>
       <StudentHeader />
 
       <div className={style['container-title']}>
@@ -16,25 +16,25 @@ export function CreateSimulated() {
         </div>
         <h1>Criar simulado</h1>
       </div>
-      <div className={style['container']}>
+      <div className={style.container}>
         <form>
-          <div className={style['border']}>
+          <div className={style.border}>
             <div className={style['container-custom']}>
               <h1>Personalizar</h1>
               <div className={style['content-custom']}>
                 <div className={style['container-input']}>
-                  <div className={style['row']}>
+                  <div className={style.row}>
                     <label>Nome do Simulado</label>
                     <span>(Opcional)</span>
                   </div>
                   <input className="input" placeholder="Input text" />
                 </div>
                 <div className={style['container-input']}>
-                  <div className={style['row']}>
+                  <div className={style.row}>
                     <label>Insira a Quantidade de Questões</label>
                     <span>(Opcional)</span>
                   </div>
-                  <select className={style['select']}>
+                  <select className={style.select}>
                     <option value="amount1">5 questões</option>
                     <option value="amount2" selected>10 questões</option>
                     <option value="amount3">15 questões</option>
