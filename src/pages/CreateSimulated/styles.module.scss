@@ -74,21 +74,11 @@
 
 }
 
-.container-row {
+.container-custom {
   border-radius: 5px;
   background-color: var(--black200);
   min-width: 1000px;
 
-  display: flex;
-  align-items: flex-end;
-
-  padding: 24px 42px;
-  height: 206px;
-  margin-top: 26px;
-  gap: 76px;
-}
-
-.container-personalize {
   display: flex;
   flex-direction: column;
 
@@ -101,6 +91,18 @@
 
     margin-bottom: 15px;
   }
+
+  padding: 24px 42px;
+  height: 206px;
+  margin-top: 26px;
+}
+
+.content-custom {
+  display: flex;
+}
+
+.container-input:first-child {
+  margin-right: 76px;
 }
 
 .container-filter {
