@@ -1,9 +1,11 @@
-.container-page {
+.container-main {
   width: 100vw;
   height: 100vh;
   background-color: var(--black200);
 }
-.container-form {
+.container{
+  display: flex;
+  flex-direction: column;
   background-color: var(--black200);
 }
 
