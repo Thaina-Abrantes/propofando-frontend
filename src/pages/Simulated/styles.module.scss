@@ -40,13 +40,15 @@
 .container-question {
   border-radius: 5px;
   background-color: var(--black200);
-  min-width: 1000px;
+  color: var(--white700);
+
+  width: 100%;
+  min-height: 630px;
   padding: 41px 33px 65px 33px;
+  margin-bottom: 26px;
 
   display: flex;
   flex-direction: column;
-
-  color: var(--white700);
 
   position: relative;
 
@@ -97,10 +99,13 @@
   }
 }
 
+.alternatives {
+  margin-top: 44px;
+}
+
 .questionImg {
   max-width: 650px;
   margin-top: 52px;
-  margin-bottom: 44px;
   align-self: center;
 }
 
@@ -130,4 +135,10 @@
 
 .container-alternative {
   margin-bottom: 14px;
+}
+
+.buttons {
+  display: flex;
+  margin-bottom: 68px;
+  gap: 32px;
 }
