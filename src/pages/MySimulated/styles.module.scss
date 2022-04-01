@@ -2,8 +2,9 @@
   display: flex;
   flex-direction: column;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   background-color: var(--black);
+  
 }
 
 .back{
@@ -26,6 +27,7 @@
   width: 355px;
   height: 60px;
   padding-left: 90px;
+  margin-bottom: 50px;
   label{
     display: flex;
     flex-direction: column;
@@ -46,5 +48,56 @@
     padding: 16px 18px;
     cursor: pointer;
     margin-top: 12px;
+  }
+}
+
+.table-body{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding-left: 90px;
+  gap: 14px;
+}
+
+.table-line{
+  display: flex;
+  align-items: center;
+  width: 90%;
+  background-color: var(--black200);
+  padding: 18px 23px;
+}
+
+.first-item{
+  display: flex;
+  align-items: center;
+  width: 30%;
+  gap: 14px;
+  span{
+    color: var(--white);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+  }
+}
+.second-item{
+  display: flex;
+  width: 30%;
+  span{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+    color: var(--white);
+  }
+}
+.third-item{
+  display: flex;
+  width: 40%;
+  justify-content: flex-end;
+  button{
+    width: 260px;
+    height: 48px;
   }
 }
