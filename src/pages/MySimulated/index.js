@@ -33,18 +33,6 @@ export function MySimulated() {
             <button className="button">Consultar respostas</button>
           </div>
         </div>
-        <div className={style['table-line']}>
-          <div className={style['first-item']}>
-            <img src={factCheck} alt="listar" />
-            <span>03/03/2022</span>
-          </div>
-          <div className={style['second-item']}>
-            <span>Simulado 2</span>
-          </div>
-          <div className={style['third-item']}>
-            <button className="button">Consultar respostas</button>
-          </div>
-        </div>
 
       </div>
     </main>
