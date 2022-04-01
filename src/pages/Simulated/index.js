@@ -2,6 +2,7 @@ import StudentHeader from 'components/StudentHeader';
 import style from './styles.module.scss';
 import arrow from '../../assets/arrow-back-icon.svg';
 import graphic from '../../assets/question.svg';
+import report from '../../assets/error-icon.svg';
 
 export function Simulated() {
   return (
@@ -29,7 +30,7 @@ export function Simulated() {
               Diante disso, deve o anesteologista:
             </p>
 
-            <img src={graphic} alt="Gráfico" />
+            <img className={style.questionImg} src={graphic} alt="Gráfico" />
 
             <div className={style['question-alternatives']}>
               <div className={style['container-alternative']}>
@@ -48,6 +49,11 @@ export function Simulated() {
                 <input type="radio" id="alternativeD" name="alternative" value="d" />
                 <label htmlFor="alternativeD">D) Trocar a cal sodada.</label>
               </div>
+            </div>
+
+            <div className={style.reportProblem}>
+              <img src={report} alt="Ícone de erro" />
+              <span>Reportar problema</span>
             </div>
           </div>
 
