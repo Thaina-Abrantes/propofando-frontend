@@ -1,6 +1,7 @@
 import StudentHeader from 'components/StudentHeader';
 import style from './styles.module.scss';
 import seta from '../../assets/arrow-back-icon.svg';
+import arrow from '../../assets/arrow.svg';
 import factCheck from '../../assets/fact-check-icon.svg';
 
 export function MySimulated() {
@@ -16,8 +17,11 @@ export function MySimulated() {
           Filtrar por
           <select>
             <option value="0">Todos</option>
+            <option value="1">Simulado 1</option>
+            <option value="2">Simulado 2</option>
           </select>
         </label>
+        <img src={arrow} alt="seta" />
       </div>
 
       <div className={style['table-body']}>
@@ -33,7 +37,6 @@ export function MySimulated() {
             <button className="button">Consultar respostas</button>
           </div>
         </div>
-
       </div>
     </main>
   );
