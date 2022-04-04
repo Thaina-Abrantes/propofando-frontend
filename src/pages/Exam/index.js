@@ -33,7 +33,7 @@ const questions = [
   },
 ];
 
-export function Simulated() {
+export function Exam() {
   const [page, setPage] = useState(0);
 
   return (
