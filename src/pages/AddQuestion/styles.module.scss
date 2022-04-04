@@ -210,10 +210,32 @@
   input:focus {
     outline: none;
   }
-  button {
-    all: unset;
-    cursor: pointer;
+ 
+  input{
+    margin-right: 12px;
+  };
+
+  input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+
+    border: 2px solid var(--black);
+    transition: 0.2s all linear;
+    margin-right: 5px;
+
+  
   }
+
+  input:checked {
+    border: 4px solid var(--black);
+  }
+
+
 }
 .btn-add-question {
   button {

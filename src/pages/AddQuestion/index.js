@@ -19,7 +19,14 @@ const defaultValuesForm = {
 export function AddQuestion() {
   const navigate = useNavigate();
   const [form, setForm] = useState(defaultValuesForm);
+  const [selectedRadio, setSelectedRadio] = useState('');
   const titleSize = 200 - (form.title.split('').length);
+
+  const isRadioSelected = (value) => selectedRadio === value;
+
+  const handleRadioClick = (e) => {
+    setSelectedRadio(e.target.value);
+  };
 
   function caracterTextArea(type) {
     const textSize = 1620 - type.split('').length;
@@ -125,7 +132,17 @@ export function AddQuestion() {
           </div>
           <h3>Alternativas</h3>
           <div className={style.option}>
-            <button>A)</button>
+            <div>
+              <input
+                type="radio"
+                name="alternative"
+                value="alternativeA"
+                checked={isRadioSelected('alternativeA')}
+                onChange={handleRadioClick}
+              />
+              <span>A)</span>
+            </div>
+
             <textarea
               name="opitionA"
               value={form.opitionA}
@@ -137,7 +154,16 @@ export function AddQuestion() {
             </span>
           </div>
           <div className={style.option}>
-            <button>B)</button>
+            <div>
+              <input
+                type="radio"
+                name="alternative"
+                value="alternativeB"
+                checked={isRadioSelected('alternativeB')}
+                onChange={handleRadioClick}
+              />
+              <span>B)</span>
+            </div>
             <textarea
               name="opitionB"
               value={form.opitionB}
@@ -149,7 +175,16 @@ export function AddQuestion() {
             </span>
           </div>
           <div className={style.option}>
-            <button>C)</button>
+            <div>
+              <input
+                type="radio"
+                name="alternative"
+                value="alternativeC"
+                checked={isRadioSelected('alternativeC')}
+                onChange={handleRadioClick}
+              />
+              <span>C)</span>
+            </div>
             <textarea
               name="opitionC"
               value={form.opitionC}
@@ -161,7 +196,16 @@ export function AddQuestion() {
             </span>
           </div>
           <div className={style.option}>
-            <button>D)</button>
+            <div>
+              <input
+                type="radio"
+                name="alternative"
+                value="alternativeD"
+                checked={isRadioSelected('alternativeD')}
+                onChange={handleRadioClick}
+              />
+              <span>D)</span>
+            </div>
             <textarea
               name="opitionD"
               value={form.opitionD}
