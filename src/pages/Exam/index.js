@@ -2,6 +2,7 @@ import StudentHeader from 'components/StudentHeader';
 import { useState } from 'react';
 import { useStores } from 'stores';
 import ModalEndTest from 'components/ModalEndTest';
+import { useNavigate } from 'react-router-dom';
 import style from './styles.module.scss';
 import arrow from '../../assets/arrow-back-icon.svg';
 import graphic from '../../assets/question.svg';
@@ -36,6 +37,8 @@ const questions = [
 ];
 
 export function Exam() {
+  const navigate = useNavigate();
+
   const [page, setPage] = useState(0);
   const {
     modalStore: {
@@ -109,8 +112,10 @@ export function Exam() {
             </div>
 
             <div className={style.reportProblem}>
-              <img src={report} alt="Ícone de erro" />
-              <span>Reportar problema</span>
+              <button onClick={() => navigate('/report')}>
+                <img src={report} alt="Ícone de erro" />
+                <span>Reportar problema</span>
+              </button>
             </div>
           </div>
 
