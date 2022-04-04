@@ -103,6 +103,10 @@
   margin-top: 44px;
 }
 
+.container-alternative {
+  margin-bottom: 14px;
+}
+
 .questionImg {
   max-width: 650px;
   margin-top: 52px;
@@ -114,9 +118,9 @@
   position: absolute;
   right: 30px;
   bottom: 15px;
-  
+
   cursor: pointer;
-  
+
   button {
     all: unset;
     display: flex;
@@ -138,8 +142,17 @@
   }
 }
 
-.container-alternative {
-  margin-bottom: 14px;
+.progress {
+  position: absolute;
+  bottom: -40px;
+  right: 0;
+  span {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+    color: var(--white900);
+  }
 }
 
 .buttons {
