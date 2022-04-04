@@ -1,5 +1,7 @@
 import StudentHeader from 'components/StudentHeader';
 import { useState } from 'react';
+import { useStores } from 'stores';
+import ModalEndTest from 'components/ModalEndTest';
 import style from './styles.module.scss';
 import arrow from '../../assets/arrow-back-icon.svg';
 import graphic from '../../assets/question.svg';
@@ -35,10 +37,21 @@ const questions = [
 
 export function Exam() {
   const [page, setPage] = useState(0);
+  const {
+    modalStore: {
+      openModalEndTest,
+      setOpenModalEndTest,
+    },
+  } = useStores();
 
   return (
     <main className={style['container-main']}>
       <StudentHeader />
+
+      {
+        openModalEndTest
+        && <ModalEndTest />
+      }
 
       <div className={style['container-title']}>
         <img src={arrow} alt="Seta" />
@@ -106,7 +119,7 @@ export function Exam() {
             <button className={page === 0 || questions.length - 1 ? 'displayNone' : 'button'}>Anterior</button>
             <button className={page === questions.length - 1 ? 'button-dark-secondary' : 'displayNone'}>Anterior</button>
             <button className={page !== questions.length - 1 ? 'button-dark-secondary' : 'displayNone'}>Pausar simulado</button>
-            <button className={page === questions.length - 1 ? 'button' : 'displayNone'}>Finalizar simulado</button>
+            <button className={page === questions.length - 1 ? 'button' : 'displayNone'} onClick={() => setOpenModalEndTest(true)}>Finalizar simulado</button>
           </div>
         </form>
       </div>
