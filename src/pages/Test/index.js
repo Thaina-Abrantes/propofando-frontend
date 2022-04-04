@@ -74,7 +74,7 @@ export function Test() {
       </div>
 
       <div className={style.container}>
-        <form>
+        <div>
           <div className={style['container-question']}>
             <h1 className={style['question-title']}>
               {questions[page].title}
@@ -158,13 +158,13 @@ export function Test() {
           }
 
           <div className={style.buttons}>
-            <button className={page < questions.length ? 'button' : 'displayNone'} onClick={() => setPage(page + 1)}>Próxima</button>
+            <button className={page < questions.length - 1 ? 'button' : 'displayNone'} onClick={() => setPage(page + 1)}>Próxima</button>
             <button className={page === 0 || questions.length ? 'displayNone' : 'button'}>Anterior</button>
             <button className={page === questions.length ? 'button-dark-secondary' : 'displayNone'}>Anterior</button>
             <button className={page !== questions.length ? 'button-dark-secondary' : 'displayNone'}>Pausar simulado</button>
             <button className={page === questions.length ? 'button' : 'displayNone'} onClick={() => setOpenModalEndTest(true)}>Finalizar simulado</button>
           </div>
-        </form>
+        </div>
       </div>
     </main>
   );
