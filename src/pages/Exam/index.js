@@ -1,6 +1,7 @@
 import StudentHeader from 'components/StudentHeader';
 import { useState } from 'react';
 import { useStores } from 'stores';
+import { useNavigate } from 'react-router-dom';
 import ModalEndTest from 'components/ModalEndTest';
 import style from './styles.module.scss';
 import arrow from '../../assets/arrow-back-icon.svg';
@@ -27,16 +28,25 @@ const questions = [
     optionD: 'A anestesia residual',
   },
   {
-    title: 'Mussum Ipsum, cacilds vidis litro abertis.',
-    statment: 'Delegadis gente finis, bibendum egestas augue arcu ut est.Todo mundo vê os porris que eu tomo, mas ninguém vê os tombis que eu levo!Detraxit consequat et quo num tendi nada.Vehicula non. Ut sed ex eros. Vivamus sit amet nibh non tellus tristique interdum.',
-    optionA: 'Paisis, filhis, espiritis santis.',
-    optionB: 'Tá deprimidis, eu conheço uma cachacis que pode alegrar sua vidis.',
-    optionC: 'Copo furadis é disculpa de bebadis, arcu quam euismod magna.',
-    optionD: 'Mais vale um bebadis conhecidiss, que um alcoolatra anonimis.',
+    title: 'Lorem Ipsum',
+    statment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas non auctor sapien, sit amet feugiat erat. Quisque in suscipit velit, a feugiat purus. Curabitur molestie felis dolor, sit amet congue est imperdiet in. Quisque quis aliquam orci, quis gravida tellus. Nunc eleifend tellus eget massa pellentesque commodo. Curabitur vestibulum purus erat, et sagittis lorem condimentum nec. Duis eleifend congue dui, eu ultricies erat. Cras nec ex nec orci molestie ultrices. Proin interdum ac nulla efficitur vestibulum. Nulla aliquam accumsan velit. Curabitur interdum pulvinar bibendum. Nulla vitae tempus metus.',
+    optionA: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+    optionB: 'Nam ac augue pellentesque, bibendum urna convallis, ornare leo.',
+    optionC: 'Vivamus a augue vitae risus cursus ornare ut eu tellus.',
+    optionD: 'Donec placerat mi eu maximus eleifend.',
+  },
+  {
+    title: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+    statment: 'Nunc a consequat nibh. Praesent malesuada sodales egestas. Curabitur blandit tincidunt mi. Nunc elementum velit et nunc scelerisque, in tincidunt tortor elementum. Duis vel pretium tellus, sed aliquam sapien. Donec vitae lectus porttitor, vehicula magna dapibus, feugiat ligula. Ut efficitur sagittis finibus. Donec eu justo lacinia, efficitur diam nec, elementum justo. Nullam quis finibus risus.',
+    optionA: 'Curabitur a nisl luctus, egestas risus ullamcorper, pharetra risus.',
+    optionB: 'NFusce porttitor ex in faucibus tempor.',
+    optionC: 'Sed placerat mi vitae nunc posuere, malesuada consequat mi auctor.',
+    optionD: 'Nam sit amet neque gravida lacus sollicitudin tempor.',
   },
 ];
 
 export function Exam() {
+  const navigate = useNavigate();
   const [openReportProblem, setOpenReportProblem] = useState(false);
 
   const [page, setPage] = useState(0);
@@ -57,7 +67,9 @@ export function Exam() {
       }
 
       <div className={style['container-title']}>
-        <img src={arrow} alt="Seta" />
+        <button onClick={() => navigate('/createExam')}>
+          <img src={arrow} alt="Seta" />
+        </button>
         <h1>Simulado</h1>
       </div>
 
@@ -134,14 +146,14 @@ export function Exam() {
           {
             openReportProblem
             && (
-            <div className={style['container-report']}>
-              <div className={style.imgClose}>
-                <img src={close} alt="Fechar" />
+              <div className={style['container-report']}>
+                <div className={style.imgClose}>
+                  <img src={close} alt="Fechar" />
+                </div>
+                <h1>Reportar problema</h1>
+                <textarea placeholder="Conte-nos qual problema encontrou na questão. Sua contribuição é muito importante para nós." />
+                <button className="button">Reportar</button>
               </div>
-              <h1>Reportar problema</h1>
-              <textarea placeholder="Conte-nos qual problema encontrou na questão. Sua contribuição é muito importante para nós." />
-              <button className="button">Reportar</button>
-            </div>
             )
           }
 
