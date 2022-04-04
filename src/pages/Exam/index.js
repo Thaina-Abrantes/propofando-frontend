@@ -2,11 +2,11 @@ import StudentHeader from 'components/StudentHeader';
 import { useState } from 'react';
 import { useStores } from 'stores';
 import ModalEndTest from 'components/ModalEndTest';
-import { useNavigate } from 'react-router-dom';
 import style from './styles.module.scss';
 import arrow from '../../assets/arrow-back-icon.svg';
 import graphic from '../../assets/question.svg';
-import report from '../../assets/error-icon.svg';
+import reportIcon from '../../assets/error-icon.svg';
+import close from '../../assets/clear-icon.svg';
 
 const questions = [
   {
@@ -37,7 +37,7 @@ const questions = [
 ];
 
 export function Exam() {
-  const navigate = useNavigate();
+  const [openReportProblem, setOpenReportProblem] = useState(false);
 
   const [page, setPage] = useState(0);
   const {
@@ -112,11 +112,12 @@ export function Exam() {
             </div>
 
             <div className={style.reportProblem}>
-              <button onClick={() => navigate('/report')}>
-                <img src={report} alt="Ícone de erro" />
+              <button onClick={() => setOpenReportProblem(true)}>
+                <img src={reportIcon} alt="Ícone de erro" />
                 <span>Reportar problema</span>
               </button>
             </div>
+
             <div className={style.progress}>
               <span>
                 Respondidas
@@ -129,6 +130,20 @@ export function Exam() {
               </span>
             </div>
           </div>
+
+          {
+            openReportProblem
+            && (
+            <div className={style['container-report']}>
+              <div className={style.imgClose}>
+                <img src={close} alt="Fechar" />
+              </div>
+              <h1>Reportar problema</h1>
+              <textarea placeholder="Conte-nos qual problema encontrou na questão. Sua contribuição é muito importante para nós." />
+              <button className="button">Reportar</button>
+            </div>
+            )
+          }
 
           <div className={style.buttons}>
             <button className={page < questions.length ? 'button' : 'displayNone'} onClick={() => setPage(page + 1)}>Próxima</button>
