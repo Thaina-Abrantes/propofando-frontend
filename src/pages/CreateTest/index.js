@@ -1,10 +1,14 @@
 import StudentHeader from 'components/StudentHeader';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import style from './styles.module.scss';
 import arrow from '../../assets/arrow-back-icon.svg';
+import arrowDown from '../../assets/arrow-down.svg';
+import arrowUp from '../../assets/arrow-up.svg';
 
 export function CreateTest() {
   const navigate = useNavigate();
+  const [openSelect, setOpenSelect] = useState(false);
 
   return (
     <main className={style['container-main']}>
@@ -34,11 +38,15 @@ export function CreateTest() {
                     <label>Insira a Quantidade de Questões</label>
                     <span>(Opcional)</span>
                   </div>
-                  <select className={style.select}>
-                    <option value="amount1">5 questões</option>
-                    <option value="amount2" selected>10 questões</option>
-                    <option value="amount3">15 questões</option>
-                  </select>
+                  <div className={style.select} onClick={() => setOpenSelect(true)}>
+                    <select>
+                      <option value="" selected disabled>Selecionar</option>
+                      <option value="amount1">5 questões</option>
+                      <option value="amount2">10 questões</option>
+                      <option value="amount3">15 questões</option>
+                    </select>
+                    <img src={openSelect ? arrowUp : arrowDown} alt="Seta" />
+                  </div>
                 </div>
               </div>
             </div>
@@ -47,11 +55,15 @@ export function CreateTest() {
           <div className={style['container-filter']}>
             <h1>Filtros</h1>
             <label>Filtrar por categoria</label>
-            <select name="select" className={style['select']}>
-              <option value="category1">Categoria A</option>
-              <option value="category2" selected>Categoria B</option>
-              <option value="category3">Categoria C</option>
-            </select>
+            <div className={style.select} onClick={() => setOpenSelect(true)}>
+              <select name="select">
+                <option value="" selected disabled>Selecionar</option>
+                <option value="category1">Categoria A</option>
+                <option value="category2">Categoria B</option>
+                <option value="category3">Categoria C</option>
+              </select>
+              <img src={openSelect ? arrowUp : arrowDown} alt="Seta" />
+            </div>
           </div>
 
           <button className="button" onClick={() => navigate('/test')}>Criar simulado</button>

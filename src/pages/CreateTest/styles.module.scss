@@ -136,14 +136,27 @@
 }
 
 .select {
-  all: unset;
-  background: var(--gray900);
-  color: var(--white);
-  border: 1.5px solid var(--textDarkHover);
-  box-sizing: border-box;
-  border-radius: 5px;
-  padding: 18px;
+  display: flex;
+  position: relative;
   cursor: pointer;
+  background: var(--gray900);
+  border-radius: 5px;
+  border: 1.5px solid var(--textDarkHover);
+  width: 354px;
+  height: 60px;
+
+  select {
+    all: unset;
+    color: var(--white);
+    padding: 18px;
+  }
+
+  img {
+    position: absolute;
+    top: 26px;
+    right: 26px;
+    pointer-events:none;
+  }
 }
 
 .container form {
