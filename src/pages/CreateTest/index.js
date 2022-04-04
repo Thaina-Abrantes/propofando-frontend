@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import style from './styles.module.scss';
 import arrow from '../../assets/arrow-back-icon.svg';
 
-export function CreateSimulated() {
+export function CreateTest() {
   const navigate = useNavigate();
 
   return (
@@ -54,7 +54,7 @@ export function CreateSimulated() {
             </select>
           </div>
 
-          <button className="button" onClick={() => navigate('/simulated')}>Criar simulado</button>
+          <button className="button" onClick={() => navigate('/test')}>Criar simulado</button>
         </form>
       </div>
     </main>
