@@ -45,7 +45,7 @@ const questions = [
   },
 ];
 
-export function Exam() {
+export function Test() {
   const navigate = useNavigate();
   const [openReportProblem, setOpenReportProblem] = useState(false);
 
@@ -67,7 +67,7 @@ export function Exam() {
       }
 
       <div className={style['container-title']}>
-        <button onClick={() => navigate('/createExam')}>
+        <button onClick={() => navigate('/createtest')}>
           <img src={arrow} alt="Seta" />
         </button>
         <h1>Simulado</h1>
