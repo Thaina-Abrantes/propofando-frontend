@@ -40,16 +40,13 @@ export function MyRoutes() {
           <Route path="page3" element={<Questions />} />
           <Route path="page4" element={<AddQuestion />} />
         </Route>
-      </Route>
-
-      <Route element={<ProtectedRoutes redirectTo="/" />}>
         <Route path="/studentmain" element={<StudentMain />}>
           <Route path="" element={<StudentPage />} />
         </Route>
         <Route path="/simulated" element={<Simulated />} />
       </Route>
-      <Route path="/recovery" element={<ForgotYourPassword />} />
 
+      <Route path="/recovery" element={<ForgotYourPassword />} />
       <Route path="/redefine/:token" element={<RedefinePassword />} />
 
       <Route path="*" element={<Page404 />} />
