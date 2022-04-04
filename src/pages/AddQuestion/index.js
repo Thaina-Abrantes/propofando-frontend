@@ -10,10 +10,10 @@ const defaultValuesForm = {
   title: '',
   description: '',
   explanation: '',
-  opitionA: '',
-  opitionB: '',
-  opitionC: '',
-  opitionD: '',
+  optionA: '',
+  optionB: '',
+  optionC: '',
+  optionD: '',
 };
 
 export function AddQuestion() {
@@ -144,12 +144,12 @@ export function AddQuestion() {
             </div>
 
             <textarea
-              name="opitionA"
-              value={form.opitionA}
+              name="optionA"
+              value={form.optionA}
               onChange={(e) => handleChange(e.target)}
             />
             <span className={style['counter-span']}>
-              {form.opitionA === '' ? 1620 : caracterTextArea(form.opitionA)}
+              {form.optionA === '' ? 1620 : caracterTextArea(form.optionA)}
               /1620
             </span>
           </div>
@@ -165,12 +165,12 @@ export function AddQuestion() {
               <span>B)</span>
             </div>
             <textarea
-              name="opitionB"
-              value={form.opitionB}
+              name="optionB"
+              value={form.optionB}
               onChange={(e) => handleChange(e.target)}
             />
             <span className={style['counter-span']}>
-              {form.opitionB === '' ? 1620 : caracterTextArea(form.opitionB)}
+              {form.optionB === '' ? 1620 : caracterTextArea(form.optionB)}
               /1620
             </span>
           </div>
@@ -186,12 +186,12 @@ export function AddQuestion() {
               <span>C)</span>
             </div>
             <textarea
-              name="opitionC"
-              value={form.opitionC}
+              name="optionC"
+              value={form.optionC}
               onChange={(e) => handleChange(e.target)}
             />
             <span className={style['counter-span']}>
-              {form.opitionC === '' ? 1620 : caracterTextArea(form.opitionC)}
+              {form.optionC === '' ? 1620 : caracterTextArea(form.optionC)}
               /1620
             </span>
           </div>
@@ -207,12 +207,12 @@ export function AddQuestion() {
               <span>D)</span>
             </div>
             <textarea
-              name="opitionD"
-              value={form.opitionD}
+              name="optionD"
+              value={form.optionD}
               onChange={(e) => handleChange(e.target)}
             />
             <span className={style['counter-span']}>
-              {form.opitionD === '' ? 1620 : caracterTextArea(form.opitionD)}
+              {form.optionD === '' ? 1620 : caracterTextArea(form.optionD)}
               /1620
             </span>
           </div>
