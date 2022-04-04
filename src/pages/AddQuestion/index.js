@@ -10,7 +10,7 @@ export function AddQuestion() {
       <div className={style['page-header']}>
         <div className={style['header-back']}>
           <button
-            onClick={() => navigate('/main/page2')}
+            onClick={() => navigate('/main/questioncategory')}
           >
             <img src={arrowBack} alt="Voltar" />
 

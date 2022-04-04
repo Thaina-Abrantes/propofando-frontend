@@ -35,9 +35,9 @@ export function MyRoutes() {
       <Route element={<ProtectedRoutes redirectTo="/" />}>
         <Route path="/main" element={<Main />}>
           <Route path="" element={<Users />} />
-          <Route path="page2" element={<QuestionCategory />} />
-          <Route path="page3" element={<Questions />} />
-          <Route path="page4" element={<AddQuestion />} />
+          <Route path="questioncategory" element={<QuestionCategory />} />
+          <Route path="listquestion" element={<Questions />} />
+          <Route path="addquestion" element={<AddQuestion />} />
         </Route>
       </Route>
 
