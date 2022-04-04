@@ -1,42 +1,63 @@
-import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import style from './styles.module.scss';
-import arrowBack from '../../assets/arrow-back-icon.svg';
-import arrowUp from '../../assets/arrow-up.svg';
-import arrowDown from '../../assets/arrow-down.svg';
+import { useNavigate } from 'react-router-dom';
 import clip from '../../assets/annex-icon.svg';
+import arrowBack from '../../assets/arrow-back-icon.svg';
+import arrowDown from '../../assets/arrow-down.svg';
+import style from './styles.module.scss';
 
 const defaultValuesForm = {
   title: '',
   description: '',
   explanation: '',
-  optionA: {
-    description: '',
-    correct: false,
-  },
-  optionB: {
-    description: '',
-    correct: false,
-  },
-  optionC: {
-    description: '',
-    correct: false,
-  },
-  optionD: {
-    description: '',
-    correct: false,
-  },
 };
+
+const defaultAlternatives = [
+  {
+    title: 'optionA',
+    description: '',
+    correct: false,
+  },
+  {
+    title: 'optionB',
+    description: '',
+    correct: false,
+  },
+  {
+    title: 'optionC',
+    description: '',
+    correct: false,
+  },
+  {
+    title: 'optionD',
+    description: '',
+    correct: false,
+  },
+];
 
 export function AddQuestion() {
   const navigate = useNavigate();
   const [form, setForm] = useState(defaultValuesForm);
+  const [alternatives, setAlternatives] = useState(defaultAlternatives);
   const [selectedRadio, setSelectedRadio] = useState('');
   const titleSize = 200 - (form.title.split('').length);
 
   const isRadioSelected = (value) => selectedRadio === value;
 
   const handleRadioClick = (e) => {
+    const { value } = e.target;
+
+    const localAlternatives = [...alternatives];
+
+    for (const alternative of localAlternatives) {
+      alternative.correct = false;
+    }
+
+    const currentAlternative = localAlternatives.find((item) => item.title === value);
+
+    currentAlternative.correct = true;
+
+    setAlternatives([...localAlternatives]);
+
     setSelectedRadio(e.target.value);
   };
 
@@ -48,6 +69,19 @@ export function AddQuestion() {
   function handleChange(target) {
     setForm({ ...form, [target.name]: target.value });
   }
+
+  function handleChangeAlternatives({ target }) {
+    if (['optionA', 'optionB', 'optionC', 'optionD'].includes(target.name)) {
+      const localAlternatives = [...alternatives];
+
+      const currentAlternative = localAlternatives.find((item) => item.title === target.name);
+
+      currentAlternative.description = target.value;
+
+      setAlternatives(localAlternatives);
+    }
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
   }
@@ -148,8 +182,8 @@ export function AddQuestion() {
               <input
                 type="radio"
                 name="alternative"
-                value="alternativeA"
-                checked={isRadioSelected('alternativeA')}
+                value="optionA"
+                checked={isRadioSelected('optionA')}
                 onChange={handleRadioClick}
               />
               <span>A)</span>
@@ -157,11 +191,11 @@ export function AddQuestion() {
 
             <textarea
               name="optionA"
-              value={form.optionA.description}
-              onChange={(e) => handleChange(e.target)}
+              value={alternatives[0].description}
+              onChange={handleChangeAlternatives}
             />
             <span className={style['counter-span']}>
-              {form.optionA.description === '' ? 1620 : caracterTextArea(form.optionA.description)}
+              {alternatives[0].description === '' ? 1620 : caracterTextArea(alternatives[0].description)}
               /1620
             </span>
           </div>
@@ -170,19 +204,19 @@ export function AddQuestion() {
               <input
                 type="radio"
                 name="alternative"
-                value="alternativeB"
-                checked={isRadioSelected('alternativeB')}
+                value="optionB"
+                checked={isRadioSelected('optionB')}
                 onChange={handleRadioClick}
               />
               <span>B)</span>
             </div>
             <textarea
               name="optionB"
-              value={form.optionB.description}
-              onChange={(e) => handleChange(e.target)}
+              value={alternatives[1].description}
+              onChange={handleChangeAlternatives}
             />
             <span className={style['counter-span']}>
-              {form.optionB.description === '' ? 1620 : caracterTextArea(form.optionB.description)}
+              {alternatives[1].description === '' ? 1620 : caracterTextArea(alternatives[1].description)}
               /1620
             </span>
           </div>
@@ -191,19 +225,19 @@ export function AddQuestion() {
               <input
                 type="radio"
                 name="alternative"
-                value="alternativeC"
-                checked={isRadioSelected('alternativeC')}
+                value="optionC"
+                checked={isRadioSelected('optionC')}
                 onChange={handleRadioClick}
               />
               <span>C)</span>
             </div>
             <textarea
               name="optionC"
-              value={form.optionC.description}
-              onChange={(e) => handleChange(e.target)}
+              value={alternatives[2].description}
+              onChange={handleChangeAlternatives}
             />
             <span className={style['counter-span']}>
-              {form.optionC.description === '' ? 1620 : caracterTextArea(form.optionC.description)}
+              {alternatives[2].description === '' ? 1620 : caracterTextArea(alternatives[2].description)}
               /1620
             </span>
           </div>
@@ -212,19 +246,19 @@ export function AddQuestion() {
               <input
                 type="radio"
                 name="alternative"
-                value="alternativeD"
-                checked={isRadioSelected('alternativeD')}
+                value="optionD"
+                checked={isRadioSelected('optionD')}
                 onChange={handleRadioClick}
               />
               <span>D)</span>
             </div>
             <textarea
               name="optionD"
-              value={form.optionD.description}
-              onChange={(e) => handleChange(e.target)}
+              value={alternatives[3].description}
+              onChange={handleChangeAlternatives}
             />
             <span className={style['counter-span']}>
-              {form.optionD.description === '' ? 1620 : caracterTextArea(form.optionD.description)}
+              {alternatives[3].description === '' ? 1620 : caracterTextArea(alternatives[3].description)}
               /1620
             </span>
           </div>
