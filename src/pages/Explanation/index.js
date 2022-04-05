@@ -5,6 +5,8 @@ import style from './styles.module.scss';
 import arrow from '../../assets/arrow-back-icon.svg';
 import reportIcon from '../../assets/error-icon.svg';
 import close from '../../assets/clear-icon.svg';
+import error from '../../assets/alert-error-close.svg';
+import success from '../../assets/success-icon.svg';
 
 const test = [
   {
@@ -14,6 +16,8 @@ const test = [
     optionB: 'Verificar a pressão do balonete.',
     optionC: 'Verificar a conexão da linha de capnografia.',
     optionD: 'Trocar a cal sodada.',
+    correct: 'optionD',
+    selected: 'optionB',
   },
   {
     title: '2- TÍTULO SUPERIOR EM ANESTESIOLOGIA (TSA)  - 1995',
@@ -22,6 +26,8 @@ const test = [
     optionB: 'O estiramento do plexo braquial.',
     optionC: 'A compressão por posicionamento inadequado no epicôndilo medial.',
     optionD: 'A anestesia residual',
+    correct: 'optionA',
+    selected: 'optionA',
   },
   {
     title: 'Lorem Ipsum',
@@ -30,6 +36,8 @@ const test = [
     optionB: 'Nam ac augue pellentesque, bibendum urna convallis, ornare leo.',
     optionC: 'Vivamus a augue vitae risus cursus ornare ut eu tellus.',
     optionD: 'Donec placerat mi eu maximus eleifend.',
+    correct: 'optionC',
+    selected: 'optionD',
   },
 ];
 
@@ -64,37 +72,73 @@ export function Explanation() {
               : <div />
           }
           <div className={style['alternatives']}>
-            <div className={style['container-alternative']}>
-              <input type="radio" id="optionA" name="alternative" value="a" />
-              <label htmlFor="optionA">
+            <div className={test[page].correct === 'optionA' ? style.background : style.alternative}>
+              {
+                test[page].correct === 'optionA'
+                  ? <img src={success} alt="Certo" />
+                  : <img src={error} alt="Erro" />
+              }
+              {
+                test[page].selected === 'optionA'
+                  ? <div className={style.inputCorrect} />
+                  : <div className={style.inputError} />
+              }
+              <span className={test[page].correct !== 'optionA' && style.errorSpan}>
                 A)
                 {' '}
                 {test[page].optionA}
-              </label>
+              </span>
             </div>
-            <div className={style['container-alternative']}>
-              <input type="radio" id="optionB" name="alternative" value="b" />
-              <label htmlFor="optionB">
+            <div className={test[page].correct === 'optionB' ? style.background : style.alternative}>
+              {
+                test[page].correct === 'optionB'
+                  ? <img src={success} alt="Certo" />
+                  : <img src={error} alt="Erro" />
+              }
+              {
+                test[page].selected === 'optionB'
+                  ? <div className={style.inputCorrect} />
+                  : <div className={style.inputError} />
+              }
+              <span className={test[page].correct !== 'optionB' && style.errorSpan}>
                 B)
                 {' '}
                 {test[page].optionB}
-              </label>
+              </span>
             </div>
-            <div className={style['container-alternative']}>
-              <input type="radio" id="optionC" name="alternative" value="c" />
-              <label htmlFor="optionC">
+            <div className={test[page].correct === 'optionC' ? style.background : style.alternative}>
+              {
+                test[page].correct === 'optionC'
+                  ? <img src={success} alt="Certo" />
+                  : <img src={error} alt="Erro" />
+              }
+              {
+                test[page].selected === 'optionC'
+                  ? <div className={style.inputCorrect} />
+                  : <div className={style.inputError} />
+              }
+              <span className={test[page].correct !== 'optionC' && style.errorSpan}>
                 C)
                 {' '}
                 {test[page].optionC}
-              </label>
+              </span>
             </div>
-            <div className={style['container-alternative']}>
-              <input type="radio" id="optionD" name="alternative" value="d" />
-              <label htmlFor="optionD">
+            <div className={test[page].correct === 'optionD' ? style.background : style.alternative}>
+              {
+                test[page].correct === 'optionD'
+                  ? <img src={success} alt="Certo" />
+                  : <img src={error} alt="Erro" />
+              }
+              {
+                test[page].selected === 'optionD'
+                  ? <div className={style.inputCorrect} />
+                  : <div className={style.inputError} />
+              }
+              <span className={test[page].correct !== 'optionD' && style.errorSpan}>
                 D)
                 {' '}
                 {test[page].optionD}
-              </label>
+              </span>
             </div>
           </div>
 
