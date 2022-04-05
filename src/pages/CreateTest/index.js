@@ -15,7 +15,7 @@ export function CreateTest() {
       <StudentHeader />
 
       <div className={style['container-title']}>
-        <div className={style['img-back']} onClick={() => navigate('/studentmain')}>
+        <div className={style['img-back']} onClick={() => navigate('/student/main')}>
           <img src={arrow} alt="Seta voltar" />
         </div>
         <h1>Criar simulado</h1>
