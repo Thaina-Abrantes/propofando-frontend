@@ -1,0 +1,169 @@
+.container-main {
+  width: 100vw;
+  min-height: 100vh;
+  background-color: var(--black);
+}
+
+.container-title {
+  background-color: var(--black);
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 37px;
+  padding-left: 53px;
+  padding-top: 32px;
+
+  h1 {
+    color: var(--white);
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 33px;
+  }
+
+  img {
+    width: 25px;
+    height: 25px;
+  }
+}
+
+.container {
+  width: 100%;
+  min-height: calc(100vh - 100px - 65px);
+  background-color: var(--black);
+  display: flex;
+  flex-direction: column;
+  padding: 0 145px;
+
+  label {
+    color: var(--white700);
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+    margin-bottom: 13px;
+  }
+
+  span {
+    color: var(--gray1300);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  button {
+    width: 226px;
+    height: 48px;
+    margin-top: 16px;
+    margin-bottom: 50px;
+  }
+}
+
+
+.img-back {
+  cursor: pointer;
+}
+
+.border {
+  border-top: 1px solid var(--black700);
+  background-color: var(--black);
+  height: 206px;
+  margin-top: 22px;
+  box-sizing: content-box;
+
+}
+
+.container-custom {
+  border-radius: 5px;
+  background-color: var(--black200);
+  min-width: 1000px;
+
+  display: flex;
+  flex-direction: column;
+
+  h1 {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 33px;
+    color: var(--white700);
+
+    margin-bottom: 15px;
+  }
+
+  padding: 24px 42px;
+  height: 206px;
+  margin-top: 26px;
+}
+
+.content-custom {
+  display: flex;
+}
+
+.container-input:first-child {
+  margin-right: 76px;
+}
+
+.container-filter {
+  display: flex;
+  flex-direction: column;
+  min-width: 1000px;
+
+  background-color: var(--black200);
+  border-radius: 5px;
+
+  padding: 24px 42px;
+  height: 206px;
+
+  margin-top: 58px;
+
+  h1 {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 33px;
+    color: var(--white700);
+
+    margin-bottom: 15px;
+  }
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
+}
+
+.select {
+  display: flex;
+  position: relative;
+  cursor: pointer;
+  background: var(--gray900);
+  border-radius: 5px;
+  border: 1.5px solid var(--textDarkHover);
+  width: 354px;
+  height: 60px;
+
+  select {
+    all: unset;
+    color: var(--white);
+    padding: 18px;
+  }
+
+  img {
+    position: absolute;
+    top: 26px;
+    right: 26px;
+    pointer-events:none;
+  }
+}
+
+.container form {
+
+  input,
+  select {
+    width: 354px;
+    height: 60px;
+  }
+}
