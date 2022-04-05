@@ -54,7 +54,7 @@ function AdminPanel() {
           onClick={() => setShowQuestion(!showQuestion)}
           className={style.click}
         >
-          <NavLink className={({ isActive }) => (isActive ? style.active : style.inactive)} to="/main/page2">Categorias e questões</NavLink>
+          <NavLink className={({ isActive }) => (isActive ? style.active : style.inactive)} to="/main/question-category">Categorias e questões</NavLink>
           <img
             src={showQuestion ? arrowUp : arrowDown}
             alt="Flecha para baixo"
@@ -64,7 +64,7 @@ function AdminPanel() {
       {showQuestion && (
         <div className={style.links}>
           <NavLink
-            to="/main/page4"
+            to="/main/add-question"
             className={({ isActive }) => (isActive ? style.activeLink : style.inactiveLink)}
           >
             {' '}
@@ -73,7 +73,7 @@ function AdminPanel() {
           </NavLink>
           <NavLink
             className={({ isActive }) => (isActive ? style.activeLink : style.inactiveLink)}
-            to="/main/page2"
+            to="/main/question-category"
             onClick={() => setOpenModalNewCategory(true)}
           >
             {' '}
