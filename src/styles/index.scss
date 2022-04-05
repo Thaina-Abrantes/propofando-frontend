@@ -11,6 +11,7 @@
   --black400: #2123221a;
   --black500: #2123224d;
   --black600: #5f6368;
+  --black700: rgba(0, 0, 0, 0.205);
   --yellow: #ffc866;
   --yellow200: #ffc8660d;
   --red200: #ff85850d;
@@ -29,8 +30,9 @@
   --gray1000: #c4c4c4;
   --gray1100: #d8d8d8;
   --gray1200: #2d2d2d;
-  --gray1300: #2b2b2b;
+  --gray1300: rgba(153, 153, 153, 0.705);
   --gray1400: #252525;
+  --gray1800: #2b2b2b;
   --white: #fffefe;
   --white200: #f6f6f6;
   --white300: #f3f3f399;
@@ -40,6 +42,7 @@
   --white700: rgba(255, 254, 254, 0.705);
   --white800: #eeeeee;
   --white900: rgba(255, 254, 254, 0.548);
+  --textDarkHover: rgba(252, 252, 252, 0.3);
 }
 
 @import url("./button.scss");
