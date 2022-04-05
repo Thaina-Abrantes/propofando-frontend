@@ -23,7 +23,7 @@ function SearchQuestion() {
         <input className="input-light" placeholder="Pesquisar questão" />
         <button
           className="button"
-          onClick={() => navigate('/main/addquestion')}
+          onClick={() => navigate('/main/add-question')}
         >
           Criar questão
 

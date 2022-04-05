@@ -35,14 +35,14 @@ export function MyRoutes() {
       <Route element={<ProtectedRoutes redirectTo="/" />}>
         <Route path="/main" element={<Main />}>
           <Route path="" element={<Users />} />
-          <Route path="questioncategory" element={<QuestionCategory />} />
-          <Route path="listquestion" element={<Questions />} />
-          <Route path="addquestion" element={<AddQuestion />} />
+          <Route path="question-category" element={<QuestionCategory />} />
+          <Route path="list-question" element={<Questions />} />
+          <Route path="add-question" element={<AddQuestion />} />
         </Route>
       </Route>
 
       <Route element={<ProtectedRoutes redirectTo="/" />}>
-        <Route path="/studentmain" element={<StudentMain />}>
+        <Route path="/student/main" element={<StudentMain />}>
           <Route path="" element={<StudentPage />} />
         </Route>
       </Route>
