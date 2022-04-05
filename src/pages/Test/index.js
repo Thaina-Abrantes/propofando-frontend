@@ -147,22 +147,22 @@ export function Test() {
             openReportProblem
             && (
               <div className={style['container-report']}>
-                <div className={style.imgClose}>
+                <div className={style.imgClose} onClick={() => setOpenReportProblem(false)}>
                   <img src={close} alt="Fechar" />
                 </div>
                 <h1>Reportar problema</h1>
                 <textarea placeholder="Conte-nos qual problema encontrou na questão. Sua contribuição é muito importante para nós." />
-                <button className="button">Reportar</button>
+                <button className="button" onClick={() => setOpenReportProblem(false)}>Reportar</button>
               </div>
             )
           }
 
           <div className={style.buttons}>
             <button className={page < questions.length - 1 ? 'button' : 'displayNone'} onClick={() => setPage(page + 1)}>Próxima</button>
-            <button className={page === 0 || questions.length ? 'displayNone' : 'button'}>Anterior</button>
-            <button className={page === questions.length ? 'button-dark-secondary' : 'displayNone'}>Anterior</button>
-            <button className={page !== questions.length ? 'button-dark-secondary' : 'displayNone'}>Pausar simulado</button>
-            <button className={page === questions.length ? 'button' : 'displayNone'} onClick={() => setOpenModalEndTest(true)}>Finalizar simulado</button>
+            <button className={page === 0 || page === questions.length - 1 ? 'displayNone' : 'button'} onClick={() => setPage(page - 1)}>Anterior</button>
+            <button className={page === questions.length - 1 ? 'button-dark-secondary' : 'displayNone'} onClick={() => setPage(page - 1)}>Anterior</button>
+            <button className={page !== questions.length - 1 ? 'button-dark-secondary' : 'displayNone'}>Pausar simulado</button>
+            <button className={page === questions.length - 1 ? 'button' : 'displayNone'} onClick={() => setOpenModalEndTest(true)}>Finalizar simulado</button>
           </div>
         </div>
       </div>
