@@ -46,5 +46,7 @@ module.exports = {
     'no-nested-ternary': 'off',
     'no-use-before-define': 'off',
     'linebreak-style': 'off',
+    'no-param-reassign': ['error', { props: false }],
+    'no-restricted-syntax': 'off',
   },
 };

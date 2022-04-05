@@ -20,12 +20,16 @@ const ForgotYourPassword = React.lazy(async () => import('../pages/ForgotYourPas
 const RedefinePassword = React.lazy(async () => import('../pages/RedefinePassword').then((m) => ({ default: m.RedefinePassword })));
 const LoginStudent = React.lazy(async () => import('../pages/LoginStudent').then((m) => ({ default: m.LoginStudent })));
 const Explanation = React.lazy(async () => import('../pages/Explanation').then((m) => ({ default: m.Explanation })));
+const Test = React.lazy(async () => import('../pages/Test').then((m) => ({ default: m.Test })));
+const MySimulated = React.lazy(async () => import('../pages/MySimulated').then((m) => ({ default: m.MySimulated })));
+const CreateTest = React.lazy(async () => import('../pages/CreateTest').then((m) => ({ default: m.CreateTest })));
 
 function ProtectedRoutes({ redirectTo }) {
   const { userStore: { token } } = useStores();
 
   return token ? <Outlet /> : <Navigate to={redirectTo} />;
 }
+
 export function MyRoutes() {
   return (
     <Routes>
@@ -36,13 +40,19 @@ export function MyRoutes() {
       <Route element={<ProtectedRoutes redirectTo="/" />}>
         <Route path="/main" element={<Main />}>
           <Route path="" element={<Users />} />
-          <Route path="page2" element={<QuestionCategory />} />
-          <Route path="page3" element={<Questions />} />
-          <Route path="page4" element={<AddQuestion />} />
+          <Route path="question-category" element={<QuestionCategory />} />
+          <Route path="list-question" element={<Questions />} />
+          <Route path="add-question" element={<AddQuestion />} />
         </Route>
-        <Route path="/studentmain" element={<StudentMain />}>
+      </Route>
+
+      <Route element={<ProtectedRoutes redirectTo="/" />}>
+        <Route path="/student/main" element={<StudentMain />}>
           <Route path="" element={<StudentPage />} />
         </Route>
+        <Route path="/test" element={<Test />} />
+        <Route path="mysimulated" element={<MySimulated />} />
+        <Route path="createtest" element={<CreateTest />} />
         <Route path="/explanation" element={<Explanation />} />
       </Route>
 
