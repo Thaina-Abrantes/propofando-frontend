@@ -1,17 +1,19 @@
 import TableTop3 from 'components/TableTop3';
 import TableInfoCategories from 'components/TableInfoCategories';
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import style from './styles.module.scss';
 import lamp from '../../assets/lamp-icon.svg';
 
 export function StudentPage() {
+  const navigate = useNavigate();
   const [noData, setNoData] = useState(true);
 
   return (
     <div className={style['container-page']}>
       <div className={style['container-buttons']}>
-        <button className="button">Criar um simulado</button>
-        <button className="button">Meus simulados</button>
+        <button className="button" onClick={() => navigate('/createsimulated')}>Criar um simulado</button>
+        <button className="button" onClick={() => navigate('/mysimulated')}>Meus simulados</button>
       </div>
       <h2>Desempenho</h2>
       <div className={style['container-cards']}>

@@ -33,8 +33,8 @@ export default function StudentPanel() {
       </div>
       {showSimulated && (
         <div className={style.links}>
-          <a>Criar simulado personalizado</a>
-          <a>Meus simulados</a>
+          <a onClick={() => navigate('/createsimulated')}>Criar simulado personalizado</a>
+          <a onClick={() => navigate('/mysimulated')}>Meus simulados</a>
         </div>
       )}
       <div
