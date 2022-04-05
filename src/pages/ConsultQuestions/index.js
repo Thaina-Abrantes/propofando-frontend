@@ -7,6 +7,8 @@ import reportIcon from '../../assets/error-icon.svg';
 import close from '../../assets/clear-icon.svg';
 import error from '../../assets/alert-error-close.svg';
 import success from '../../assets/success-icon.svg';
+import analytics from '../../assets/analytics-icon.svg';
+import school from '../../assets/school-icon.svg';
 
 const test = [
   {
@@ -41,7 +43,7 @@ const test = [
   },
 ];
 
-export function Explanation() {
+export function ConsultQuestions() {
   const navigate = useNavigate();
   const [openReportProblem, setOpenReportProblem] = useState(false);
   const [page, setPage] = useState(0);
@@ -142,6 +144,18 @@ export function Explanation() {
             </div>
           </div>
 
+          <div className={style.reportProblem}>
+            <button onClick={() => setOpenReportProblem(true)}>
+              <img src={reportIcon} alt="Ícone de erro" />
+              <span>Reportar problema</span>
+            </button>
+          </div>
+          <div className={style.reportProblem}>
+            <button onClick={() => setOpenReportProblem(true)}>
+              <img src={reportIcon} alt="Ícone de erro" />
+              <span>Reportar problema</span>
+            </button>
+          </div>
           <div className={style.reportProblem}>
             <button onClick={() => setOpenReportProblem(true)}>
               <img src={reportIcon} alt="Ícone de erro" />
