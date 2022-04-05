@@ -19,6 +19,7 @@ const StudentPage = React.lazy(async () => import('../pages/StudentPage').then((
 const ForgotYourPassword = React.lazy(async () => import('../pages/ForgotYourPassword').then((m) => ({ default: m.ForgotYourPassword })));
 const RedefinePassword = React.lazy(async () => import('../pages/RedefinePassword').then((m) => ({ default: m.RedefinePassword })));
 const LoginStudent = React.lazy(async () => import('../pages/LoginStudent').then((m) => ({ default: m.LoginStudent })));
+const Explanation = React.lazy(async () => import('../pages/Explanation').then((m) => ({ default: m.Explanation })));
 
 function ProtectedRoutes({ redirectTo }) {
   const { userStore: { token } } = useStores();
@@ -39,15 +40,13 @@ export function MyRoutes() {
           <Route path="page3" element={<Questions />} />
           <Route path="page4" element={<AddQuestion />} />
         </Route>
-      </Route>
-
-      <Route element={<ProtectedRoutes redirectTo="/" />}>
         <Route path="/studentmain" element={<StudentMain />}>
           <Route path="" element={<StudentPage />} />
         </Route>
+        <Route path="/explanation" element={<Explanation />} />
       </Route>
-      <Route path="/recovery" element={<ForgotYourPassword />} />
 
+      <Route path="/recovery" element={<ForgotYourPassword />} />
       <Route path="/redefine/:token" element={<RedefinePassword />} />
 
       <Route path="*" element={<Page404 />} />
