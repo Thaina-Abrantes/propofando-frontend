@@ -71,15 +71,13 @@ export function AddQuestion() {
   }
 
   function handleChangeAlternatives({ target }) {
-    if (['optionA', 'optionB', 'optionC', 'optionD'].includes(target.name)) {
-      const localAlternatives = [...alternatives];
+    const localAlternatives = [...alternatives];
 
-      const currentAlternative = localAlternatives.find((item) => item.title === target.name);
+    const currentAlternative = localAlternatives.find((item) => item.title === target.name);
 
-      currentAlternative.description = target.value;
+    currentAlternative.description = target.value;
 
-      setAlternatives(localAlternatives);
-    }
+    setAlternatives(localAlternatives);
   }
 
   function handleSubmit(e) {
