@@ -19,6 +19,7 @@ const StudentPage = React.lazy(async () => import('../pages/StudentPage').then((
 const ForgotYourPassword = React.lazy(async () => import('../pages/ForgotYourPassword').then((m) => ({ default: m.ForgotYourPassword })));
 const RedefinePassword = React.lazy(async () => import('../pages/RedefinePassword').then((m) => ({ default: m.RedefinePassword })));
 const LoginStudent = React.lazy(async () => import('../pages/LoginStudent').then((m) => ({ default: m.LoginStudent })));
+const MySimulated = React.lazy(async () => import('../pages/MySimulated').then((m) => ({ default: m.MySimulated })));
 const CreateTest = React.lazy(async () => import('../pages/CreateTest').then((m) => ({ default: m.CreateTest })));
 
 function ProtectedRoutes({ redirectTo }) {
@@ -46,6 +47,7 @@ export function MyRoutes() {
         <Route path="/studentmain" element={<StudentMain />}>
           <Route path="" element={<StudentPage />} />
         </Route>
+        <Route path="mysimulated" element={<MySimulated />} />
         <Route path="createtest" element={<CreateTest />} />
       </Route>
       <Route path="/recovery" element={<ForgotYourPassword />} />
