@@ -30,9 +30,9 @@ export function Login() {
     event.preventDefault();
 
     try {
-      await loginSchema.validateSync({
-        email: event.target[0].value,
-        password: event.target[1].value,
+      loginSchema.validateSync({
+        email: form.email,
+        password: form.senha,
       });
     } catch (err) {
       if (err.params.path === 'email') {
@@ -46,6 +46,8 @@ export function Login() {
   }
 
   function handleChange(target) {
+    setErroEmail('');
+    setErroPassword('');
     setForm({ ...form, [target.name]: target.value });
   }
 
