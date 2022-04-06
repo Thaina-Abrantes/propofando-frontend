@@ -2,6 +2,7 @@ import StudentHeader from 'components/StudentHeader';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Explanation from 'components/Explanation';
+import QuestionStatistics from 'components/QuestionStatistics';
 import style from './styles.module.scss';
 import arrow from '../../assets/arrow-back-icon.svg';
 import reportIcon from '../../assets/error-icon.svg';
@@ -183,6 +184,12 @@ export function ConsultQuestions() {
         </div>
 
         {openExplanation && (<Explanation setOpenExplanation={setOpenExplanation} />)}
+
+        {
+          openQuestionStatistics
+          && (<QuestionStatistics setOpenQuestionStatistics={setOpenQuestionStatistics} />)
+        }
+
         {
           openReportProblem
           && (
