@@ -1,7 +1,10 @@
+import { useStores } from 'stores';
 import close from '../../assets/clear-icon.svg';
 import style from './styles.module.scss';
 
-export default function QuestionStatistics({ setOpenQuestionStatistics }) {
+export default function QuestionStatistics() {
+  const { utilsStore: { setOpenQuestionStatistics } } = useStores();
+
   return (
     <div className={style['container-statistics']}>
       <div className={style.imgClose} onClick={() => setOpenQuestionStatistics(false)}>

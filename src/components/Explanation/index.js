@@ -1,10 +1,13 @@
+import { useStores } from 'stores';
 import midia from '../../assets/foto-video.svg';
 import close from '../../assets/clear-icon.svg';
 import square from '../../assets/square.svg';
 import play from '../../assets/play.svg';
 import style from './styles.module.scss';
 
-export default function Explanation({ setOpenExplanation }) {
+export default function Explanation() {
+  const { utilsStore: { setOpenExplanation } } = useStores();
+
   return (
     <div className={style['container-explanation']}>
       <div className={style.imgClose} onClick={() => setOpenExplanation(false)}>

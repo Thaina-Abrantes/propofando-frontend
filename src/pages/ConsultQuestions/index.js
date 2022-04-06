@@ -1,12 +1,13 @@
 import StudentHeader from 'components/StudentHeader';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useStores } from 'stores';
 import Explanation from 'components/Explanation';
 import QuestionStatistics from 'components/QuestionStatistics';
+import ReportProblem from 'components/ReportProblem';
 import style from './styles.module.scss';
 import arrow from '../../assets/arrow-back-icon.svg';
 import reportIcon from '../../assets/error-icon.svg';
-import close from '../../assets/clear-icon.svg';
 import error from '../../assets/alert-error-close.svg';
 import success from '../../assets/success-icon.svg';
 import analytics from '../../assets/analytics-icon.svg';
@@ -47,10 +48,18 @@ const test = [
 
 export function ConsultQuestions() {
   const navigate = useNavigate();
-  const [openReportProblem, setOpenReportProblem] = useState(false);
-  const [openExplanation, setOpenExplanation] = useState(false);
-  const [openQuestionStatistics, setOpenQuestionStatistics] = useState(false);
   const [page, setPage] = useState(0);
+
+  const {
+    utilsStore: {
+      openReportProblem,
+      setOpenReportProblem,
+      openExplanation,
+      setOpenExplanation,
+      openQuestionStatistics,
+      setOpenQuestionStatistics,
+    },
+  } = useStores();
 
   return (
     <main className={style['container-main']}>
@@ -183,26 +192,9 @@ export function ConsultQuestions() {
           </div>
         </div>
 
-        {openExplanation && (<Explanation setOpenExplanation={setOpenExplanation} />)}
-
-        {
-          openQuestionStatistics
-          && (<QuestionStatistics setOpenQuestionStatistics={setOpenQuestionStatistics} />)
-        }
-
-        {
-          openReportProblem
-          && (
-            <div className={style['container-report']}>
-              <div className={style.imgClose} onClick={() => setOpenReportProblem(false)}>
-                <img src={close} alt="Fechar" />
-              </div>
-              <h1>Reportar problema</h1>
-              <textarea placeholder="Conte-nos qual problema encontrou na questão. Sua contribuição é muito importante para nós." />
-              <button className="button" onClick={() => setOpenReportProblem(false)}>Reportar</button>
-            </div>
-          )
-        }
+        {openExplanation && (<Explanation />)}
+        {openQuestionStatistics && (<QuestionStatistics />)}
+        {openReportProblem && (<ReportProblem />)}
 
         <div className={style.buttons}>
           <button className={page === test.length - 1 ? 'displayNone' : 'button'} onClick={() => setPage(page + 1)}>Próxima</button>
