@@ -138,13 +138,16 @@
   
 }
 
-
-.reportProblem {
+.container-links {
+  display: flex;
   align-self: flex-end;
   position: absolute;
   right: 30px;
   bottom: 15px;
+  gap: 26px;
+}
 
+.links {
   cursor: pointer;
 
   button {
@@ -154,8 +157,8 @@
   }
 
   img {
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
     margin-right: 10px;
   }
 

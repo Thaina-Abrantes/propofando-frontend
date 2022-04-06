@@ -46,6 +46,8 @@ const test = [
 export function ConsultQuestions() {
   const navigate = useNavigate();
   const [openReportProblem, setOpenReportProblem] = useState(false);
+  const [openExplanation, setOpenExplanation] = useState(false);
+  const [openQuestionStatistics, setOpenQuestionStatistics] = useState(false);
   const [page, setPage] = useState(0);
 
   return (
@@ -143,24 +145,27 @@ export function ConsultQuestions() {
               </span>
             </div>
           </div>
+          <div className={style['container-links']}>
+            <div className={style.links}>
+              <button onClick={() => setOpenExplanation(true)}>
+                <img src={school} alt="Ícone de erro" />
+                <span>Consultar explicação</span>
+              </button>
+            </div>
 
-          <div className={style.reportProblem}>
-            <button onClick={() => setOpenReportProblem(true)}>
-              <img src={reportIcon} alt="Ícone de erro" />
-              <span>Reportar problema</span>
-            </button>
-          </div>
-          <div className={style.reportProblem}>
-            <button onClick={() => setOpenReportProblem(true)}>
-              <img src={reportIcon} alt="Ícone de erro" />
-              <span>Reportar problema</span>
-            </button>
-          </div>
-          <div className={style.reportProblem}>
-            <button onClick={() => setOpenReportProblem(true)}>
-              <img src={reportIcon} alt="Ícone de erro" />
-              <span>Reportar problema</span>
-            </button>
+            <div className={style.links}>
+              <button onClick={() => setOpenQuestionStatistics(true)}>
+                <img src={analytics} alt="Ícone de erro" />
+                <span>Estatísticas da questão</span>
+              </button>
+            </div>
+
+            <div className={style.links}>
+              <button onClick={() => setOpenReportProblem(true)}>
+                <img src={reportIcon} alt="Ícone de erro" />
+                <span>Reportar problema</span>
+              </button>
+            </div>
           </div>
 
           <div className={style.progress}>
