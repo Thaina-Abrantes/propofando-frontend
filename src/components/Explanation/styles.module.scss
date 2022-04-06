@@ -1,0 +1,58 @@
+.container-explanation {
+  background-color: var(--gray1800);
+
+  width: 100%;
+  padding: 38px 60px 60px 30px;
+
+  display: flex;
+  flex-direction: column;
+
+  position: relative;
+
+  h1 {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 33px;
+    color: var(--white700);
+    margin-bottom: 40px;
+  }
+  p, span {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 138.19%;
+    color: var(--white700);
+  }
+
+  p {
+    margin-bottom: 30px;
+  }
+}
+
+.close {
+  cursor: pointer;
+  position: absolute;
+  top: 13px;
+  right: 13px;
+}
+
+.midia {
+  display: flex;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 63px;
+  position: relative;
+  cursor: pointer;
+}
+
+.square {
+  z-index: 1;
+  position: absolute;
+}
+
+.play {
+  z-index: 2;
+  position: absolute;
+}

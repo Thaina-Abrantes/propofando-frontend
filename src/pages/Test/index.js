@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useStores } from 'stores';
 import { useNavigate } from 'react-router-dom';
 import ModalEndTest from 'components/ModalEndTest';
+import ReportProblem from 'components/ReportProblem';
 import style from './styles.module.scss';
 import arrow from '../../assets/arrow-back-icon.svg';
 import graphic from '../../assets/question.svg';
@@ -47,13 +48,19 @@ const questions = [
 
 export function Test() {
   const navigate = useNavigate();
-  const [openReportProblem, setOpenReportProblem] = useState(false);
-
   const [page, setPage] = useState(0);
+
   const {
     modalStore: {
       openModalEndTest,
       setOpenModalEndTest,
+    },
+  } = useStores();
+
+  const {
+    utilsStore: {
+      openReportProblem,
+      setOpenReportProblem,
     },
   } = useStores();
 
@@ -143,19 +150,7 @@ export function Test() {
             </div>
           </div>
 
-          {
-            openReportProblem
-            && (
-              <div className={style['container-report']}>
-                <div className={style.imgClose} onClick={() => setOpenReportProblem(false)}>
-                  <img src={close} alt="Fechar" />
-                </div>
-                <h1>Reportar problema</h1>
-                <textarea placeholder="Conte-nos qual problema encontrou na questão. Sua contribuição é muito importante para nós." />
-                <button className="button" onClick={() => setOpenReportProblem(false)}>Reportar</button>
-              </div>
-            )
-          }
+          {openReportProblem && (<ReportProblem />)}
 
           <div className={style.buttons}>
             <button className={page < questions.length - 1 ? 'button' : 'displayNone'} onClick={() => setPage(page + 1)}>Próxima</button>

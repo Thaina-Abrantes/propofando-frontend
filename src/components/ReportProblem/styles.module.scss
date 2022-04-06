@@ -1,0 +1,46 @@
+.container-report {
+  background-color: var(--gray1800);
+
+  width: 100%;
+  padding: 38px 24px 36px 30px;
+
+  display: flex;
+  flex-direction: column;
+
+  position: relative;
+
+  img {
+    cursor: pointer;
+    position: absolute;
+    top: 13px;
+    right: 13px;
+  }
+
+  h1 {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 33px;
+    color: var(--white700);
+    margin-bottom: 23px;
+  }
+
+  textArea {
+    all: unset;
+
+    background-color: var(--gray1400);
+    border: 1.5px solid var(--black200);
+    border-radius: 5px;
+
+    height: 182px;
+    padding: 17px 20px;
+
+    color: var(--white700);
+  }
+
+  button {
+    width: 209px;
+    height: 48px;
+    margin-top: 28px;
+  }
+}

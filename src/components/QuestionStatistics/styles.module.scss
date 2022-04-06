@@ -1,0 +1,83 @@
+.container-statistics {
+  background-color: var(--gray1800);
+  color: var(--white);
+
+  width: 100%;
+  padding: 38px 60px 60px 30px;
+
+  display: flex;
+  flex-direction: column;
+
+  position: relative;
+
+  img {
+    cursor: pointer;
+    position: absolute;
+    top: 13px;
+    right: 13px;
+  }
+
+  h1 {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 78px;
+    line-height: 106px;
+    margin-bottom: 22px;
+    margin-left: 25px;
+  }
+
+  h2 {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 160.59%;
+    margin-bottom: 31px;
+  }
+
+  h3 {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  span {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+  }
+}
+
+.cards {
+  display: flex;
+}
+
+.card {
+  width: 280px;
+  height: 160px;
+  background-color: var(--gray1400);
+  border-radius: 5px;
+  margin-left: 24px;
+}
+
+.header {
+  width: 280px;
+  height: 45px;
+  padding: 12px 25px;
+  background-color: var(--black800);
+  border-radius: 5px 5px 0px 0px;
+}
+
+.row {
+  display: flex;
+  margin-left: 25px;
+  margin-right: 19px;
+  justify-content: space-between;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
