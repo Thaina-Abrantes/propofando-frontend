@@ -1,5 +1,6 @@
 import SearchCategory from 'components/SearchCategory';
 import { useNavigate } from 'react-router-dom';
+import { useStores } from 'stores';
 import style from './styles.module.scss';
 import topicIcon from '../../assets/topic-icon.svg';
 import editIcon from '../../assets/edit-icon.svg';
@@ -7,6 +8,14 @@ import deleteIcon from '../../assets/delete-icon.svg';
 
 export function QuestionCategory() {
   const navigate = useNavigate();
+
+  const {
+    modalStore: {
+      openModalDeleteCategory,
+      setOpenModalDeleteCategory,
+    },
+  } = useStores();
+
   return (
     <main>
       <SearchCategory />
@@ -30,7 +39,7 @@ export function QuestionCategory() {
               <button>
                 <img src={editIcon} alt="editar" />
               </button>
-              <button><img src={deleteIcon} alt="deletar" /></button>
+              <button onClick={() => setOpenModalDeleteCategory(true)}><img src={deleteIcon} alt="deletar" /></button>
             </div>
           </div>
           <div className={style['table-line']}>
@@ -46,7 +55,7 @@ export function QuestionCategory() {
               <button>
                 <img src={editIcon} alt="editar" />
               </button>
-              <button><img src={deleteIcon} alt="deletar" /></button>
+              <button onClick={() => setOpenModalDeleteCategory(true)}><img src={deleteIcon} alt="deletar" /></button>
             </div>
           </div>
         </div>
