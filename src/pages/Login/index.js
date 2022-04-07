@@ -34,6 +34,7 @@ export function Login() {
         email: form.email,
         password: form.senha,
       });
+      login();
     } catch (err) {
       if (err.params.path === 'email') {
         setErroEmail(err.message);
@@ -83,7 +84,7 @@ export function Login() {
           </div>
           <div>
             <button
-              onClick={login}
+              onClick={() => handleSubmit()}
               className="button"
 
             >

@@ -8,7 +8,6 @@ import style from './styles.module.scss';
 import arrow from '../../assets/arrow-back-icon.svg';
 import graphic from '../../assets/question.svg';
 import reportIcon from '../../assets/error-icon.svg';
-import close from '../../assets/clear-icon.svg';
 
 const questions = [
   {
@@ -36,14 +35,6 @@ const questions = [
     optionC: 'Vivamus a augue vitae risus cursus ornare ut eu tellus.',
     optionD: 'Donec placerat mi eu maximus eleifend.',
   },
-  {
-    title: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-    statment: 'Nunc a consequat nibh. Praesent malesuada sodales egestas. Curabitur blandit tincidunt mi. Nunc elementum velit et nunc scelerisque, in tincidunt tortor elementum. Duis vel pretium tellus, sed aliquam sapien. Donec vitae lectus porttitor, vehicula magna dapibus, feugiat ligula. Ut efficitur sagittis finibus. Donec eu justo lacinia, efficitur diam nec, elementum justo. Nullam quis finibus risus.',
-    optionA: 'Curabitur a nisl luctus, egestas risus ullamcorper, pharetra risus.',
-    optionB: 'NFusce porttitor ex in faucibus tempor.',
-    optionC: 'Sed placerat mi vitae nunc posuere, malesuada consequat mi auctor.',
-    optionD: 'Nam sit amet neque gravida lacus sollicitudin tempor.',
-  },
 ];
 
 export function Test() {
@@ -66,12 +57,12 @@ export function Test() {
 
   return (
     <main className={style['container-main']}>
-      <StudentHeader />
-
       {
         openModalEndTest
         && <ModalEndTest />
       }
+
+      <StudentHeader />
 
       <div className={style['container-title']}>
         <button onClick={() => navigate('/createtest')}>
@@ -141,7 +132,7 @@ export function Test() {
               <span>
                 Respondidas
                 {' '}
-                {page}
+                {page + 1}
                 {' '}
                 de
                 {' '}
@@ -153,9 +144,9 @@ export function Test() {
           {openReportProblem && (<ReportProblem />)}
 
           <div className={style.buttons}>
-            <button className={page < questions.length - 1 ? 'button' : 'displayNone'} onClick={() => setPage(page + 1)}>Próxima</button>
             <button className={page === 0 || page === questions.length - 1 ? 'displayNone' : 'button'} onClick={() => setPage(page - 1)}>Anterior</button>
             <button className={page === questions.length - 1 ? 'button-dark-secondary' : 'displayNone'} onClick={() => setPage(page - 1)}>Anterior</button>
+            <button className={page < questions.length - 1 ? 'button' : 'displayNone'} onClick={() => setPage(page + 1)}>Próxima</button>
             <button className={page !== questions.length - 1 ? 'button-dark-secondary' : 'displayNone'}>Pausar simulado</button>
             <button className={page === questions.length - 1 ? 'button' : 'displayNone'} onClick={() => setOpenModalEndTest(true)}>Finalizar simulado</button>
           </div>

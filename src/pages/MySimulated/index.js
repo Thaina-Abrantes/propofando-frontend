@@ -1,14 +1,17 @@
 import StudentHeader from 'components/StudentHeader';
+import { useNavigate } from 'react-router-dom';
 import style from './styles.module.scss';
 import seta from '../../assets/arrow-back-icon.svg';
 import arrow from '../../assets/arrow.svg';
 import factCheck from '../../assets/fact-check-icon.svg';
 
 export function MySimulated() {
+  const navigate = useNavigate();
+
   return (
     <main className={style['container-main']}>
       <StudentHeader />
-      <div className={style.back}>
+      <div className={style.back} onClick={() => navigate('/student/main')}>
         <img src={seta} alt="Seta" />
         <h1>Meus simulados</h1>
       </div>
@@ -34,7 +37,7 @@ export function MySimulated() {
             <span>Simulado 1</span>
           </div>
           <div className={style['third-item']}>
-            <button className="button">Consultar respostas</button>
+            <button className="button" onClick={() => navigate('/consult-questions')}>Consultar respostas</button>
           </div>
         </div>
       </div>

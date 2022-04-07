@@ -12,8 +12,8 @@ export function StudentPage() {
   return (
     <div className={style['container-page']}>
       <div className={style['container-buttons']}>
-        <button className="button" onClick={() => navigate('/createsimulated')}>Criar um simulado</button>
-        <button className="button" onClick={() => navigate('/mysimulated')}>Meus simulados</button>
+        <button className="button" onClick={() => navigate('/create-test')}>Criar um simulado</button>
+        <button className="button" onClick={() => navigate('/my-tests')}>Meus simulados</button>
       </div>
       <h2>Desempenho</h2>
       <div className={style['container-cards']}>
