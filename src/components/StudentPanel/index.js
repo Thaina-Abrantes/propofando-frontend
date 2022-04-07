@@ -33,13 +33,13 @@ export default function StudentPanel() {
       </div>
       {showSimulated && (
         <div className={style.links}>
-          <a onClick={() => navigate('/createsimulated')}>Criar simulado personalizado</a>
-          <a onClick={() => navigate('/mysimulated')}>Meus simulados</a>
+          <a onClick={() => navigate('/create-test')}>Criar simulado personalizado</a>
+          <a onClick={() => navigate('/my-tests')}>Meus simulados</a>
         </div>
       )}
       <div
         className={style.logout}
-        onClick={() => navigate('/')}
+        onClick={() => navigate('/login')}
       >
         <img src={logout} alt="Sair" />
         <span>Sair da conta</span>

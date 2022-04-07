@@ -30,12 +30,6 @@ export function ForgotYourPassword() {
     setEmail(value);
   }
 
-  function loginBack() {
-    return (
-      navigate('/')
-    );
-  }
-
   const body = {
     email,
   };
@@ -43,7 +37,7 @@ export function ForgotYourPassword() {
   return (
     <div className={style['container-main']}>
       <div className={style['container-imgs']}>
-        <a className={style['arrow-img']} onClick={loginBack}>
+        <a className={style['arrow-img']} onClick={() => navigate('/login')}>
           <img src={arrow} alt="Seta voltar" />
         </a>
         <img src={logo} alt="Logo" />
@@ -68,7 +62,7 @@ export function ForgotYourPassword() {
           />
           {erroEmail && <span className="error-message">{erroEmail}</span>}
         </div>
-        <button className="button">
+        <button className="button" onClick={() => navigate('/redefine/:token')}>
           Enviar
         </button>
       </form>

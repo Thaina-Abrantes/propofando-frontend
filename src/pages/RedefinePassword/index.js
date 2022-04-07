@@ -24,6 +24,7 @@ export function RedefinePassword() {
         password: form.newPassword,
         passwordConfirmation: form.confirmPassword,
       });
+      setResetSuccessfully(true);
     } catch (err) {
       if (err.params.path === 'password') {
         setErroNewPassword(err.message);
@@ -40,16 +41,10 @@ export function RedefinePassword() {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
 
-  function loginBack() {
-    return (
-      navigate('/')
-    );
-  }
-
   return (
     <div className={style['container-main']}>
       <div className={style['container-imgs']}>
-        <a className={style['arrow-img']} onClick={loginBack}>
+        <a className={style['arrow-img']} onClick={() => navigate('/login')}>
           <img src={arrow} alt="Seta voltar" />
         </a>
         <img src={logo} alt="Logo" />
@@ -80,7 +75,7 @@ export function RedefinePassword() {
             onChange={handleChangeFormValue}
           />
           {erroConfirmPassword && <span className="error-message ">{erroConfirmPassword}</span>}
-          <button className="button">
+          <button className="button" onClick={() => handleSubmit()}>
             Confirmar
           </button>
         </form>
@@ -94,7 +89,7 @@ export function RedefinePassword() {
             <br />
             login na plataforma.
           </p>
-          <button className="button" onClick={loginBack}>
+          <button className="button" onClick={() => navigate('/login')}>
             Voltar para login
           </button>
         </div>
