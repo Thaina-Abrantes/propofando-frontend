@@ -11,29 +11,14 @@ function ModalNewCategory() {
       openModalNewCategory,
       setOpenModalNewCategory,
     },
+    categoryStore: {
+      handleRegisterCategory,
+    },
   } = useStores();
 
   function handleSubmit(e) {
     e.preventDefault();
-  }
-  async function handleRegisterCategory() {
-    const body = {
-      name: category,
-    };
-    if (!category);
-
-    try {
-      fetch('https://localhost:3333/category', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          // Authorization: `Bearer ${auth.token}`,
-        },
-        body: JSON.stringify(body),
-      });
-    } catch (error) {
-      return error.message;
-    }
+    handleRegisterCategory(category);
   }
 
   return (
@@ -61,8 +46,8 @@ function ModalNewCategory() {
           />
 
           <button
-            onClick={() => handleRegisterCategory()}
             className="button"
+
           >
             Adicionar categoria
 
