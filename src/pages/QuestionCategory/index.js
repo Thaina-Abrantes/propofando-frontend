@@ -1,10 +1,12 @@
 import SearchCategory from 'components/SearchCategory';
+import { useNavigate } from 'react-router-dom';
 import style from './styles.module.scss';
 import topicIcon from '../../assets/topic-icon.svg';
 import editIcon from '../../assets/edit-icon.svg';
 import deleteIcon from '../../assets/delete-icon.svg';
 
 export function QuestionCategory() {
+  const navigate = useNavigate();
   return (
     <main>
       <SearchCategory />
@@ -16,7 +18,7 @@ export function QuestionCategory() {
         </div>
         <div className={style['table-body']}>
           <div className={style['table-line']}>
-            <div className={style['first-line-item']}>
+            <div className={style['first-line-item']} onClick={() => navigate('/main/list-question')}>
               <img src={topicIcon} alt="Categoria" />
               <span>Categoria A</span>
             </div>
@@ -32,7 +34,7 @@ export function QuestionCategory() {
             </div>
           </div>
           <div className={style['table-line']}>
-            <div className={style['first-line-item']}>
+            <div className={style['first-line-item']} onClick={() => navigate('/main/list-question')}>
               <img src={topicIcon} alt="Categoria" />
               <span>Categoria B</span>
             </div>
