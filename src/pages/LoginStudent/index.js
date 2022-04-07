@@ -26,6 +26,7 @@ export function LoginStudent() {
         email: form.email,
         password: form.password,
       });
+      navigate('/student/main');
     } catch (error) {
       if (error.params.path === 'email') {
         setErroEmail(error.message);
@@ -95,7 +96,7 @@ export function LoginStudent() {
             {erroPassword && <span className={style['error-message']}>{erroPassword}</span>}
 
             <div className={style.btn}>
-              <button className="button" onClick={() => navigate('/student/main')}>Entrar</button>
+              <button className="button" onClick={() => handleSubmit()}>Entrar</button>
             </div>
           </form>
         </div>

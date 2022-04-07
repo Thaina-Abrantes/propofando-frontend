@@ -24,6 +24,7 @@ export function RedefinePassword() {
         password: form.newPassword,
         passwordConfirmation: form.confirmPassword,
       });
+      setResetSuccessfully(true);
     } catch (err) {
       if (err.params.path === 'password') {
         setErroNewPassword(err.message);
@@ -74,7 +75,7 @@ export function RedefinePassword() {
             onChange={handleChangeFormValue}
           />
           {erroConfirmPassword && <span className="error-message ">{erroConfirmPassword}</span>}
-          <button className="button" onClick={() => setResetSuccessfully(true)}>
+          <button className="button" onClick={() => handleSubmit()}>
             Confirmar
           </button>
         </form>
