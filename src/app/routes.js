@@ -51,8 +51,8 @@ export function MyRoutes() {
           <Route path="" element={<StudentPage />} />
         </Route>
         <Route path="/test" element={<Test />} />
-        <Route path="mysimulated" element={<MySimulated />} />
-        <Route path="createtest" element={<CreateTest />} />
+        <Route path="my-tests" element={<MySimulated />} />
+        <Route path="create-test" element={<CreateTest />} />
         <Route path="/consult-questions" element={<ConsultQuestions />} />
       </Route>
 

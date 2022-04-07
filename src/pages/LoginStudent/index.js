@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { loginSchema } from 'validations/loginValidation';
+import { useNavigate } from 'react-router-dom';
 import style from './styles.module.scss';
 import logoDark from '../../assets/logo-dark.svg';
 import vr from '../../assets/Foto_VR.png';
@@ -9,6 +10,7 @@ import closedEye from '../../assets/visibility-off-icon.svg';
 const defaultValuesForm = { email: '', password: '' };
 
 export function LoginStudent() {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [form, setForm] = useState(defaultValuesForm);
   const [erroEmail, setErroEmail] = useState('');
@@ -88,12 +90,12 @@ export function LoginStudent() {
                 type={open === false ? 'password' : 'text'}
                 onChange={(event) => handleChange(event)}
               />
-              <a href="#">Esqueceu a senha? </a>
+              <a href="/recovery">Esqueceu a senha? </a>
             </div>
             {erroPassword && <span className={style['error-message']}>{erroPassword}</span>}
 
             <div className={style.btn}>
-              <button className="button">Entrar</button>
+              <button className="button" onClick={() => navigate('/student/main')}>Entrar</button>
             </div>
           </form>
         </div>

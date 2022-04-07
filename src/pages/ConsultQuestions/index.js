@@ -66,7 +66,7 @@ export function ConsultQuestions() {
       <StudentHeader />
 
       <div className={style['container-title']}>
-        <button onClick={() => navigate('/mysimulated')}>
+        <button onClick={() => navigate('/my-tests')}>
           <img src={arrow} alt="Seta" />
         </button>
         <h1>Simulado</h1>
