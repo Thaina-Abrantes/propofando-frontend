@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import { loginSchema } from 'validations/loginValidation';
 import { useNavigate } from 'react-router-dom';
+import { useStores } from 'stores';
+import { useForm } from 'react-hook-form';
+import api from '../../services/api';
 import style from './styles.module.scss';
 import logoDark from '../../assets/logo-dark.svg';
 import vr from '../../assets/Foto_VR.png';
@@ -10,23 +13,60 @@ import closedEye from '../../assets/visibility-off-icon.svg';
 const defaultValuesForm = { email: '', password: '' };
 
 export function LoginStudent() {
+  const {
+    userStore: {
+      userData, setUserData, setToken, token,
+    },
+  } = useStores();
+
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [form, setForm] = useState(defaultValuesForm);
   const [erroEmail, setErroEmail] = useState('');
   const [erroPassword, setErroPassword] = useState('');
 
-  function handleSubmit(event) {
+  const { handleSubmit } = useForm();
+
+  async function onSubmit() {
     setErroEmail('');
     setErroPassword('');
-    event.preventDefault();
+
+    const { email, password } = form;
+
+    try {
+      const body = { email, password };
+      const result = await api.post('/login', body);
+
+      console.log(result);
+      if (result.status > 201) {
+        throw `${result.request.response}`;
+      }
+
+      const { data: { token: tokenGenerated, user } } = result;
+
+      setUserData(user);
+      setToken(tokenGenerated);
+
+      let redirectTo;
+
+      if (user.userType === 'super admin') {
+        redirectTo = '/main';
+      } else if (user.userType === 'student') {
+        redirectTo = '/student/main';
+      }
+
+      navigate(redirectTo);
+    } catch (error) {
+      const { request } = error;
+
+      return 'Erro';
+    }
 
     try {
       loginSchema.validateSync({
         email: form.email,
         password: form.password,
       });
-      navigate('/student/main');
     } catch (error) {
       if (error.params.path === 'email') {
         setErroEmail(error.message);
@@ -61,7 +101,7 @@ export function LoginStudent() {
       <div className={style['container-right']}>
         <div className={style['container-card']}>
           <img src={logoDark} alt="Logo Propofando" />
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <h2>Faça seu login</h2>
 
             <div className="containerInput">
@@ -96,7 +136,7 @@ export function LoginStudent() {
             {erroPassword && <span className={style['error-message']}>{erroPassword}</span>}
 
             <div className={style.btn}>
-              <button className="button" onClick={() => handleSubmit()}>Entrar</button>
+              <button className="button" onClick={handleSubmit(onSubmit)}>Entrar</button>
             </div>
           </form>
         </div>
