@@ -1,7 +1,13 @@
+import { useStores } from 'stores';
 import style from './styles.module.scss';
 import clear from '../../assets/clear-icon.svg';
 
 function ModalDeleteCategory() {
+  const {
+    categoryStore: {
+      handleDeleteCategory,
+    },
+  } = useStores();
   return (
     <div className={style.background}>
       <div className={style.container}>
