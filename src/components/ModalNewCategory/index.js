@@ -19,6 +19,7 @@ function ModalNewCategory() {
   function handleSubmit(e) {
     e.preventDefault();
     handleRegisterCategory(category);
+    setOpenModalNewCategory(false);
   }
 
   return (
