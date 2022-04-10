@@ -34,6 +34,21 @@ export function LoginStudent() {
     const { email, password } = form;
 
     try {
+      loginSchema.validateSync({
+        email,
+        password,
+      });
+    } catch (error) {
+      if (error.params.path === 'email') {
+        setErroEmail(error.message);
+        return;
+      }
+      if (error.params.path === 'password') {
+        setErroPassword(error.message);
+      }
+    }
+
+    try {
       const body = { email, password };
       const result = await api.post('/login', body);
 
@@ -60,21 +75,6 @@ export function LoginStudent() {
       const { request } = error;
 
       return 'Erro';
-    }
-
-    try {
-      loginSchema.validateSync({
-        email: form.email,
-        password: form.password,
-      });
-    } catch (error) {
-      if (error.params.path === 'email') {
-        setErroEmail(error.message);
-        return;
-      }
-      if (error.params.path === 'password') {
-        setErroPassword(error.message);
-      }
     }
   }
 
