@@ -3,6 +3,9 @@ import { loginSchema } from 'validations/loginValidation';
 import { useNavigate } from 'react-router-dom';
 import { useStores } from 'stores';
 import { useForm } from 'react-hook-form';
+import { redirectLoggedUsers } from 'utils/redirects';
+import notify from 'utils/notify';
+import AlertError from 'components/AlertError';
 import api from '../../services/api';
 import style from './styles.module.scss';
 import logoDark from '../../assets/logo-dark.svg';
@@ -52,29 +55,20 @@ export function Login() {
       const body = { email, password };
       const result = await api.post('/login', body);
 
-      console.log(result);
-      if (result.status > 201) {
-        throw `${result.request.response}`;
-      }
-
       const { data: { token: tokenGenerated, user } } = result;
 
       setUserData(user);
       setToken(tokenGenerated);
 
-      let redirectTo;
-
-      if (user.userType === 'super admin') {
-        redirectTo = '/main';
-      } else if (user.userType === 'student') {
-        redirectTo = '/student/main';
-      }
+      const redirectTo = redirectLoggedUsers(user.userType);
 
       navigate(redirectTo);
     } catch (error) {
-      const { request } = error;
+      const { request: { response: messageError } } = error;
+      console.log(error, 'teste erro');
+      console.log(messageError, 'message');
 
-      return 'Erro';
+      notify(<AlertError message={messageError} />);
     }
   }
 
