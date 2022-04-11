@@ -6,6 +6,7 @@ import { Outlet } from 'react-router-dom';
 import ModalDeleteUser from 'components/ModalDeleteUser';
 import ModalRegisterUser from 'components/ModalRegisterUser';
 import ModalNewCategory from 'components/ModalNewCategory';
+import ModalDeleteCategory from 'components/ModalDeleteCategory';
 import style from './styles.module.scss';
 
 export function Main() {
@@ -15,6 +16,7 @@ export function Main() {
       openModalDelete,
       openModalRegisterUser,
       openModalNewCategory,
+      openModalDeleteCategory,
     },
   } = useStores();
   return (
@@ -30,6 +32,7 @@ export function Main() {
       {openModalDelete && <ModalDeleteUser />}
       {openModalRegisterUser && <ModalRegisterUser />}
       {openModalNewCategory && <ModalNewCategory />}
+      {openModalDeleteCategory && <ModalDeleteCategory />}
     </div>
   );
 }

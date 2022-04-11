@@ -7,12 +7,22 @@ function ModalDeleteCategory() {
     categoryStore: {
       handleDeleteCategory,
     },
+    modalStore: {
+      openModalDeleteCategory,
+      setOpenModalDeleteCategory,
+    },
   } = useStores();
+
   return (
     <div className={style.background}>
       <div className={style.container}>
         <div className={style['btn-close']}>
-          <button><img src={clear} alt="Close" /></button>
+          <button
+            onClick={() => setOpenModalDeleteCategory(false)}
+          >
+            <img src={clear} alt="Close" />
+
+          </button>
         </div>
         <div>
           <h2>
@@ -21,7 +31,13 @@ function ModalDeleteCategory() {
           <p>
             Tem certeza que deseja excluir essa categoria? Essa ação não poderá ser desfeita.
           </p>
-          <button className="button">Excluir</button>
+          <button
+            onClick={() => handleDeleteCategory(openModalDeleteCategory)}
+            className="button"
+          >
+            Excluir
+
+          </button>
         </div>
       </div>
     </div>

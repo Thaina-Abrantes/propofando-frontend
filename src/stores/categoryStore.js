@@ -30,7 +30,7 @@ export function useCategory() {
 
   async function handleDeleteCategory(id) {
     try {
-      await api.delete(`/category/${id}`, {
+      await api.delete(`/categories/${id}`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
@@ -42,6 +42,7 @@ export function useCategory() {
       return error.message;
     }
   }
+
   return {
     handleRegisterCategory,
     handleDeleteCategory,

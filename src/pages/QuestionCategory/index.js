@@ -1,5 +1,6 @@
 import SearchCategory from 'components/SearchCategory';
 import { useState, useEffect } from 'react';
+import { useStores } from 'stores';
 import style from './styles.module.scss';
 import topicIcon from '../../assets/topic-icon.svg';
 import editIcon from '../../assets/edit-icon.svg';
@@ -10,6 +11,15 @@ export function QuestionCategory() {
   const [dataCategory, setDataCategory] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPage] = useState(1);
+  const {
+    categoryStore: {
+      handleDeleteCategory,
+    },
+    modalStore: {
+      openModalDeleteCategory,
+      setOpenModalDeleteCategory,
+    },
+  } = useStores();
 
   const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFkNmVlNjMzLTU5OWItNDY5MC04ZWU5LWRkNjJkNGQyY2FmNiIsImVtYWlsIjoibWFudUBlbWFpbC5jb20iLCJ1c2VyVHlwZSI6InN1cGVyIGFkbWluIiwiaWF0IjoxNjQ5Njc1NjE0LCJleHAiOjE2NDk3NjIwMTR9.Q0MeNBPHEVoh7GywaINivnF3JXH_56LGqhBpnvIn6wE';
 
@@ -19,7 +29,7 @@ export function QuestionCategory() {
 
   async function handleListCategory() {
     try {
-      const response = await api.get('/categories/paginated', {
+      const response = await api.get(`/categories/paginated?page=${currentPage}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -57,7 +67,7 @@ export function QuestionCategory() {
                 <button>
                   <img src={editIcon} alt="editar" />
                 </button>
-                <button><img src={deleteIcon} alt="deletar" /></button>
+                <button onClick={() => setOpenModalDeleteCategory(item.id)}><img src={deleteIcon} alt="deletar" /></button>
               </div>
             </div>
           ))}
