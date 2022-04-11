@@ -20,8 +20,6 @@ export function useCategory() {
       if (!data.ok) {
         throw new Error(data);
       }
-
-      // TODO Chamar a função de listar
     } catch (error) {
       return error.message;
       // TODO @criar state para controlar as mensagens de erro quem vem do back
@@ -36,8 +34,6 @@ export function useCategory() {
           Authorization: `Bearer ${token}`,
         },
       });
-
-      // TODO Chamar a função de listar
     } catch (error) {
       return error.message;
     }

@@ -12,12 +12,10 @@ export function QuestionCategory() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPage] = useState(1);
   const {
-    categoryStore: {
-      handleDeleteCategory,
-    },
     modalStore: {
       openModalDeleteCategory,
       setOpenModalDeleteCategory,
+      openModalNewCategory,
     },
   } = useStores();
 
@@ -25,7 +23,7 @@ export function QuestionCategory() {
 
   useEffect(() => {
     handleListCategory();
-  }, []);
+  }, [currentPage, openModalDeleteCategory, openModalNewCategory]);
 
   async function handleListCategory() {
     try {
