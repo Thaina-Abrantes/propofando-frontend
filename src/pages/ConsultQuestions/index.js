@@ -195,8 +195,8 @@ export function ConsultQuestions() {
         {openReportProblem && (<ReportProblem />)}
 
         <div className={style.buttons}>
-          <button className={page === test.length - 1 ? 'displayNone' : 'button'} onClick={() => setPage(page + 1)}>Próxima</button>
           <button className={page === 0 ? 'displayNone' : 'button'} onClick={() => setPage(page - 1)}>Anterior</button>
+          <button className={page === test.length - 1 ? 'displayNone' : 'button'} onClick={() => setPage(page + 1)}>Próxima</button>
         </div>
       </div>
     </main>
