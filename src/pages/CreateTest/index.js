@@ -1,4 +1,3 @@
-import StudentHeader from 'components/StudentHeader';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import style from './styles.module.scss';
@@ -11,9 +10,7 @@ export function CreateTest() {
   const [openSelect, setOpenSelect] = useState(false);
 
   return (
-    <main className={style['container-main']}>
-      <StudentHeader />
-
+    <main className={style['container-create']}>
       <div className={style['container-title']}>
         <div className={style['img-back']} onClick={() => navigate('/student/main')}>
           <img src={arrow} alt="Seta voltar" />

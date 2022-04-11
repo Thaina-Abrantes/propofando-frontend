@@ -62,11 +62,9 @@ export function ConsultQuestions() {
   } = useStores();
 
   return (
-    <main className={style['container-main']}>
-      <StudentHeader />
-
+    <main className={style['container-consult']}>
       <div className={style['container-title']}>
-        <button onClick={() => navigate('/my-tests')}>
+        <button onClick={() => navigate('/student/main/my-tests')}>
           <img src={arrow} alt="Seta" />
         </button>
         <h1>Simulado</h1>
