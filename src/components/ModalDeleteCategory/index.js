@@ -13,6 +13,10 @@ function ModalDeleteCategory() {
     },
   } = useStores();
 
+  function handleDeleteCategoryCloseModal() {
+    handleDeleteCategory(openModalDeleteCategory);
+    setOpenModalDeleteCategory(false);
+  }
   return (
     <div className={style.background}>
       <div className={style.container}>
@@ -32,7 +36,7 @@ function ModalDeleteCategory() {
             Tem certeza que deseja excluir essa categoria? Essa ação não poderá ser desfeita.
           </p>
           <button
-            onClick={() => handleDeleteCategory(openModalDeleteCategory)}
+            onClick={handleDeleteCategoryCloseModal}
             className="button"
           >
             Excluir

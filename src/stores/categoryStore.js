@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import api from '../services/api';
 
 export function useCategory() {
   const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFkNmVlNjMzLTU5OWItNDY5MC04ZWU5LWRkNjJkNGQyY2FmNiIsImVtYWlsIjoibWFudUBlbWFpbC5jb20iLCJ1c2VyVHlwZSI6InN1cGVyIGFkbWluIiwiaWF0IjoxNjQ5Njc1NjE0LCJleHAiOjE2NDk3NjIwMTR9.Q0MeNBPHEVoh7GywaINivnF3JXH_56LGqhBpnvIn6wE';
+  const [errorCategory, setErrorCategory] = useState('');
   // TODO @importar o token correto
   // TODO @criar a função de listar aqui
 
@@ -16,13 +18,14 @@ export function useCategory() {
           Authorization: `Bearer ${token}`,
         },
       });
-      const data = await response.json();
-      if (!data.ok) {
-        throw new Error(data);
-      }
+      const { data } = response;
+
+      return data;
     } catch (error) {
-      return error.message;
-      // TODO @criar state para controlar as mensagens de erro quem vem do back
+      if (error.response.data.message) {
+        return setErrorCategory(error.response.data.message);
+      }
+      return setErrorCategory(error.response.data);
     }
   }
 
@@ -35,12 +38,14 @@ export function useCategory() {
         },
       });
     } catch (error) {
-      return error.message;
+      setErrorCategory(error.response.data);
     }
   }
 
   return {
     handleRegisterCategory,
     handleDeleteCategory,
+    errorCategory,
+    setErrorCategory,
   };
 }

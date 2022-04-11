@@ -37,7 +37,7 @@ export function QuestionCategory() {
       setDataCategory(data.categories);
       setTotalPage(data.totalPages);
     } catch (error) {
-      return error.message;
+      return error;
     }
   }
   return (

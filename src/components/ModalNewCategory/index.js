@@ -5,7 +5,6 @@ import clear from '../../assets/clear-icon.svg';
 
 function ModalNewCategory() {
   const [category, setCategory] = useState('');
-  const [errorCategory, setErrorCategory] = useState(false);
 
   const {
     modalStore: {
@@ -14,18 +13,20 @@ function ModalNewCategory() {
     },
     categoryStore: {
       handleRegisterCategory,
+      errorCategory,
+      setErrorCategory,
     },
   } = useStores();
 
   function handleSubmit(e) {
     setErrorCategory(false);
     e.preventDefault();
-    if (!category) {
-      setErrorCategory(true);
-      return;
-    }
     handleRegisterCategory(category);
-    setOpenModalNewCategory(false);
+    if (errorCategory) {
+      setOpenModalNewCategory(true);
+    } else {
+      setOpenModalNewCategory(false);
+    }
   }
 
   return (
@@ -52,15 +53,13 @@ function ModalNewCategory() {
               value={category}
               onChange={(e) => setCategory(e.target.value)}
             />
-            {errorCategory && <span className={style['span-error']}>Categoria é obrigatória.</span> }
+            {errorCategory && <span className={style['span-error']}>{errorCategory}</span> }
           </div>
 
           <button
             className="button"
-
           >
             Adicionar categoria
-
           </button>
         </form>
       </div>
