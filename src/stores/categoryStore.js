@@ -1,7 +1,7 @@
 import api from '../services/api';
 
 export function useCategory() {
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFkNmVlNjMzLTU5OWItNDY5MC04ZWU5LWRkNjJkNGQyY2FmNiIsImVtYWlsIjoibWFudUBlbWFpbC5jb20iLCJ1c2VyVHlwZSI6InN1cGVyIGFkbWluIiwiaWF0IjoxNjQ5NDQ2NDA1LCJleHAiOjE2NDk1MzI4MDV9._0UP_a4eUDeD4JPTIonoyWxPCUQl3oHZ0miAo89FBpI';
+  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFkNmVlNjMzLTU5OWItNDY5MC04ZWU5LWRkNjJkNGQyY2FmNiIsImVtYWlsIjoibWFudUBlbWFpbC5jb20iLCJ1c2VyVHlwZSI6InN1cGVyIGFkbWluIiwiaWF0IjoxNjQ5Njc1NjE0LCJleHAiOjE2NDk3NjIwMTR9.Q0MeNBPHEVoh7GywaINivnF3JXH_56LGqhBpnvIn6wE';
   // TODO @importar o token correto
   // TODO @criar a função de listar aqui
 
@@ -9,8 +9,6 @@ export function useCategory() {
     const body = {
       name: category,
     };
-
-    if (!category);
 
     try {
       const response = await api.post('/categories', body, {

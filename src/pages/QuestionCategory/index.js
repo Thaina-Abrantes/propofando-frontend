@@ -8,7 +8,10 @@ import api from '../../services/api';
 
 export function QuestionCategory() {
   const [dataCategory, setDataCategory] = useState([]);
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFkNmVlNjMzLTU5OWItNDY5MC04ZWU5LWRkNjJkNGQyY2FmNiIsImVtYWlsIjoibWFudUBlbWFpbC5jb20iLCJ1c2VyVHlwZSI6InN1cGVyIGFkbWluIiwiaWF0IjoxNjQ5NDQ2NDA1LCJleHAiOjE2NDk1MzI4MDV9._0UP_a4eUDeD4JPTIonoyWxPCUQl3oHZ0miAo89FBpI';
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPage] = useState(1);
+
+  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFkNmVlNjMzLTU5OWItNDY5MC04ZWU5LWRkNjJkNGQyY2FmNiIsImVtYWlsIjoibWFudUBlbWFpbC5jb20iLCJ1c2VyVHlwZSI6InN1cGVyIGFkbWluIiwiaWF0IjoxNjQ5Njc1NjE0LCJleHAiOjE2NDk3NjIwMTR9.Q0MeNBPHEVoh7GywaINivnF3JXH_56LGqhBpnvIn6wE';
 
   useEffect(() => {
     handleListCategory();
@@ -24,6 +27,7 @@ export function QuestionCategory() {
       const { data } = response;
 
       setDataCategory(data.categories);
+      setTotalPage(data.totalPages);
     } catch (error) {
       return error.message;
     }
@@ -57,7 +61,12 @@ export function QuestionCategory() {
               </div>
             </div>
           ))}
-
+        </div>
+      </div>
+      <div className={style.paginator}>
+        {currentPage}
+        <div>
+          <span>Próximo</span>
         </div>
       </div>
     </main>
