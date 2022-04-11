@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
-/* eslint-disable max-len */
 import { useState } from 'react';
 import { emailSchema } from 'validations/redefineValidation';
 import { useNavigate } from 'react-router-dom';
@@ -7,7 +5,7 @@ import style from './styles.module.scss';
 import logo from '../../assets/logo-dark.svg';
 import arrow from '../../assets/arrow-back-icon-white.svg';
 
-export function ForgotYourPassword() {
+export function RecoveryPassword() {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [erroEmail, setErroEmail] = useState('');
