@@ -16,7 +16,7 @@ export default function StudentPanel() {
       <h2>Dashboard</h2>
       <div className={style['performance']}>
         <img src={analytics} alt="Ícone de desempenho" />
-        <span>Desempenho</span>
+        <span onClick={() => navigate('/student/main')}>Desempenho</span>
       </div>
       <div className={style['simulated']}>
         <img src={paste} alt="Pasta" />
@@ -33,8 +33,8 @@ export default function StudentPanel() {
       </div>
       {showSimulated && (
         <div className={style.links}>
-          <a onClick={() => navigate('/create-test')}>Criar simulado personalizado</a>
-          <a onClick={() => navigate('/my-tests')}>Meus simulados</a>
+          <a onClick={() => navigate('/student/main/create-test')}>Criar simulado personalizado</a>
+          <a onClick={() => navigate('/student/main/my-tests')}>Meus simulados</a>
         </div>
       )}
       <div
