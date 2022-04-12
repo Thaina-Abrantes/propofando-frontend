@@ -16,8 +16,18 @@ export function QuestionCategory() {
       openModalDeleteCategory,
       setOpenModalDeleteCategory,
       openModalNewCategory,
+      setOpenModalNewCategory,
+    },
+    categoryStore: {
+      categoryInEditing,
+      setCategoryInEditing,
     },
   } = useStores();
+
+  function handleOpenEdit(item) {
+    setCategoryInEditing(item);
+    setOpenModalNewCategory(true);
+  }
 
   const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFkNmVlNjMzLTU5OWItNDY5MC04ZWU5LWRkNjJkNGQyY2FmNiIsImVtYWlsIjoibWFudUBlbWFpbC5jb20iLCJ1c2VyVHlwZSI6InN1cGVyIGFkbWluIiwiaWF0IjoxNjQ5NzY1Nzk5LCJleHAiOjE2NDk4NTIxOTl9.hMyr4s_LjrEWGf9djgcnrn2waWLpDz0HXA_BiOMTHBY';
 
@@ -40,6 +50,7 @@ export function QuestionCategory() {
       return error;
     }
   }
+
   return (
     <main>
       <SearchCategory />
@@ -62,7 +73,9 @@ export function QuestionCategory() {
               </div>
 
               <div className={style['third-line-item']}>
-                <button>
+                <button
+                  onClick={() => handleOpenEdit(item)}
+                >
                   <img src={editIcon} alt="editar" />
                 </button>
                 <button onClick={() => setOpenModalDeleteCategory(item.id)}><img src={deleteIcon} alt="deletar" /></button>
