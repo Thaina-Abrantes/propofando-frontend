@@ -32,11 +32,18 @@ function ModalNewCategory() {
   async function handleSubmit(e) {
     e.preventDefault();
 
+    if (categoryInEditing.name === category) {
+      setCategory('');
+      setOpenModalNewCategory(false);
+      return;
+    }
+
     if (categoryInEditing && categoryInEditing.name !== category) {
       const response = await handleEditCategory(category);
       if (response.status === 200) { handleCloseModal(); }
       return;
     }
+
     const response = await handleRegisterCategory(category);
 
     if (response.status > 204) {
@@ -81,7 +88,7 @@ function ModalNewCategory() {
               value={category}
               onChange={(e) => handleChange(e)}
             />
-            {errorCategory && <span className={style['span-error']}>{errorCategory}</span> }
+            {errorCategory && <span className={style['span-error']}>{errorCategory}</span>}
           </div>
 
           <button
