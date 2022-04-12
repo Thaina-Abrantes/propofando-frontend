@@ -13,16 +13,18 @@ export function MyTests() {
         <img src={seta} alt="Seta" />
         <h1>Meus simulados</h1>
       </div>
-      <div className={style['container-filter']}>
-        <label>
-          Filtrar por
-          <select>
-            <option value="0">Todos</option>
-            <option value="1">Simulado 1</option>
-            <option value="2">Simulado 2</option>
-          </select>
-        </label>
-        <img src={arrow} alt="seta" />
+      <div className={style.border}>
+        <div className={style['container-filter']}>
+          <label>
+            Filtrar por
+            <select>
+              <option value="0">Todos</option>
+              <option value="1">Simulado 1</option>
+              <option value="2">Simulado 2</option>
+            </select>
+          </label>
+          <img src={arrow} alt="seta" />
+        </div>
       </div>
 
       <div className={style['table-body']}>
