@@ -1,5 +1,5 @@
 import { useStores } from 'stores';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import style from './styles.module.scss';
 import clear from '../../assets/clear-icon.svg';
 
@@ -18,15 +18,23 @@ function ModalNewCategory() {
     },
   } = useStores();
 
-  function handleSubmit(e) {
-    setErrorCategory(false);
+  async function handleSubmit(e) {
     e.preventDefault();
-    handleRegisterCategory(category);
-    if (errorCategory) {
-      setOpenModalNewCategory(true);
-    } else {
-      setOpenModalNewCategory(false);
+    const response = await handleRegisterCategory(category);
+    if (response.status > 204) {
+      return;
     }
+
+    setOpenModalNewCategory(false);
+  }
+
+  function handleCloseModal() {
+    setErrorCategory('');
+    setOpenModalNewCategory(false);
+  }
+  function handleChange(e) {
+    setCategory(e.target.value);
+    setErrorCategory('');
   }
 
   return (
@@ -34,7 +42,7 @@ function ModalNewCategory() {
       <div className={style.container}>
         <div className={style['btn-close']}>
           <button
-            onClick={() => setOpenModalNewCategory(false)}
+            onClick={handleCloseModal}
           >
             <img src={clear} alt="Close" />
           </button>
@@ -51,7 +59,7 @@ function ModalNewCategory() {
               placeholder="Categoria"
               name="category"
               value={category}
-              onChange={(e) => setCategory(e.target.value)}
+              onChange={handleChange}
             />
             {errorCategory && <span className={style['span-error']}>{errorCategory}</span> }
           </div>

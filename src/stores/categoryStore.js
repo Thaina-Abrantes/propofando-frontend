@@ -2,7 +2,7 @@ import { useState } from 'react';
 import api from '../services/api';
 
 export function useCategory() {
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFkNmVlNjMzLTU5OWItNDY5MC04ZWU5LWRkNjJkNGQyY2FmNiIsImVtYWlsIjoibWFudUBlbWFpbC5jb20iLCJ1c2VyVHlwZSI6InN1cGVyIGFkbWluIiwiaWF0IjoxNjQ5Njc1NjE0LCJleHAiOjE2NDk3NjIwMTR9.Q0MeNBPHEVoh7GywaINivnF3JXH_56LGqhBpnvIn6wE';
+  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFkNmVlNjMzLTU5OWItNDY5MC04ZWU5LWRkNjJkNGQyY2FmNiIsImVtYWlsIjoibWFudUBlbWFpbC5jb20iLCJ1c2VyVHlwZSI6InN1cGVyIGFkbWluIiwiaWF0IjoxNjQ5NzY1Nzk5LCJleHAiOjE2NDk4NTIxOTl9.hMyr4s_LjrEWGf9djgcnrn2waWLpDz0HXA_BiOMTHBY';
   const [errorCategory, setErrorCategory] = useState('');
   // TODO @importar o token correto
   // TODO @criar a função de listar aqui
@@ -18,14 +18,12 @@ export function useCategory() {
           Authorization: `Bearer ${token}`,
         },
       });
-      const { data } = response;
 
-      return data;
+      return response;
     } catch (error) {
-      if (error.response.data.message) {
-        return setErrorCategory(error.response.data.message);
-      }
-      return setErrorCategory(error.response.data);
+      const currentError = error.response.data.message || error.response.data;
+      setErrorCategory(currentError);
+      return error.response;
     }
   }
 
@@ -38,7 +36,9 @@ export function useCategory() {
         },
       });
     } catch (error) {
-      setErrorCategory(error.response.data);
+      const currentError = error.response.data.message || error.response.data;
+      setErrorCategory(currentError);
+      return error.response;
     }
   }
 
