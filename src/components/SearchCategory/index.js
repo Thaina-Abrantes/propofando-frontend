@@ -9,7 +9,15 @@ function SearchCategory() {
       openModalNewCategory,
       setOpenModalNewCategory,
     },
+    categoryStore: {
+      setErrorCategory,
+    },
   } = useStores();
+
+  function handleOpenModal() {
+    setErrorCategory('');
+    setOpenModalNewCategory(true);
+  }
   return (
     <div className={style.search}>
       <div>
@@ -20,11 +28,10 @@ function SearchCategory() {
         <img src={searchIcon} alt="Lupa" />
         <input className="input-light" placeholder="Pesquisar" />
         <button
-          onClick={() => setOpenModalNewCategory(true)}
+          onClick={handleOpenModal}
           className="button"
         >
           Criar categoria
-
         </button>
       </div>
     </div>
