@@ -2,10 +2,8 @@ import { useStores } from 'stores';
 import { useEffect, useState } from 'react';
 import style from './styles.module.scss';
 import clear from '../../assets/clear-icon.svg';
-import api from '../../services/api';
 
 function ModalNewCategory() {
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFkNmVlNjMzLTU5OWItNDY5MC04ZWU5LWRkNjJkNGQyY2FmNiIsImVtYWlsIjoibWFudUBlbWFpbC5jb20iLCJ1c2VyVHlwZSI6InN1cGVyIGFkbWluIiwiaWF0IjoxNjQ5NzY1Nzk5LCJleHAiOjE2NDk4NTIxOTl9.hMyr4s_LjrEWGf9djgcnrn2waWLpDz0HXA_BiOMTHBY';
   const [category, setCategory] = useState('');
 
   const {

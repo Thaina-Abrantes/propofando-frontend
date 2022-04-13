@@ -2,9 +2,11 @@ import { useState } from 'react';
 import api from '../services/api';
 
 export function useCategory() {
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFkNmVlNjMzLTU5OWItNDY5MC04ZWU5LWRkNjJkNGQyY2FmNiIsImVtYWlsIjoibWFudUBlbWFpbC5jb20iLCJ1c2VyVHlwZSI6InN1cGVyIGFkbWluIiwiaWF0IjoxNjQ5NzY1Nzk5LCJleHAiOjE2NDk4NTIxOTl9.hMyr4s_LjrEWGf9djgcnrn2waWLpDz0HXA_BiOMTHBY';
+  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFkNmVlNjMzLTU5OWItNDY5MC04ZWU5LWRkNjJkNGQyY2FmNiIsImVtYWlsIjoibWFudUBlbWFpbC5jb20iLCJ1c2VyVHlwZSI6InN1cGVyIGFkbWluIiwiaWF0IjoxNjQ5ODU2MTI3LCJleHAiOjE2NDk5NDI1Mjd9.LXKQ7eJNaHpx1QMnqKV_Hi1zQcNFAfAv6nKsZnH1SGw';
   const [errorCategory, setErrorCategory] = useState('');
   const [categoryInEditing, setCategoryInEditing] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPage] = useState(1);
   // TODO @importar o token correto
   // TODO @criar a função de listar aqui
 
@@ -68,6 +70,10 @@ export function useCategory() {
     categoryInEditing,
     setCategoryInEditing,
     handleEditCategory,
+    currentPage,
+    setCurrentPage,
+    totalPages,
+    setTotalPage,
 
   };
 }

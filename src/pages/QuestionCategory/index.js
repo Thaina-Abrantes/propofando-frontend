@@ -1,6 +1,7 @@
 import SearchCategory from 'components/SearchCategory';
 import { useState, useEffect } from 'react';
 import { useStores } from 'stores';
+import Paginator from 'components/Paginator';
 import style from './styles.module.scss';
 import topicIcon from '../../assets/topic-icon.svg';
 import editIcon from '../../assets/edit-icon.svg';
@@ -9,8 +10,6 @@ import api from '../../services/api';
 
 export function QuestionCategory() {
   const [dataCategory, setDataCategory] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPage] = useState(1);
   const {
     modalStore: {
       openModalDeleteCategory,
@@ -19,31 +18,24 @@ export function QuestionCategory() {
       setOpenModalNewCategory,
     },
     categoryStore: {
-      categoryInEditing,
       setCategoryInEditing,
+      currentPage,
+      totalPages,
+      setTotalPage,
     },
-  } = useStores();
 
+  } = useStores();
+  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFkNmVlNjMzLTU5OWItNDY5MC04ZWU5LWRkNjJkNGQyY2FmNiIsImVtYWlsIjoibWFudUBlbWFpbC5jb20iLCJ1c2VyVHlwZSI6InN1cGVyIGFkbWluIiwiaWF0IjoxNjQ5ODU2MTI3LCJleHAiOjE2NDk5NDI1Mjd9.LXKQ7eJNaHpx1QMnqKV_Hi1zQcNFAfAv6nKsZnH1SGw';
   function handleOpenEdit(item) {
     setCategoryInEditing(item);
     setOpenModalNewCategory(true);
   }
 
   const pages = [];
+
   for (let page = 1; page <= totalPages; page += 1) {
     pages.push(page);
   }
-  function handleClickNext() {
-    if (currentPage !== totalPages) {
-      setCurrentPage(currentPage + 1);
-    }
-  }
-
-  function handleClickPage(num) {
-    setCurrentPage(num);
-  }
-
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFkNmVlNjMzLTU5OWItNDY5MC04ZWU5LWRkNjJkNGQyY2FmNiIsImVtYWlsIjoibWFudUBlbWFpbC5jb20iLCJ1c2VyVHlwZSI6InN1cGVyIGFkbWluIiwiaWF0IjoxNjQ5NzY1Nzk5LCJleHAiOjE2NDk4NTIxOTl9.hMyr4s_LjrEWGf9djgcnrn2waWLpDz0HXA_BiOMTHBY';
 
   useEffect(() => {
     handleListCategory();
@@ -98,24 +90,7 @@ export function QuestionCategory() {
           ))}
         </div>
       </div>
-      <div className={style.paginator}>
-        {pages.map((pg) => (
-          <button
-            key={pg}
-            className={currentPage === pg ? style['page-btn'] : style['page-btn-disable']}
-            onClick={() => handleClickPage(pg)}
-          >
-            {pg}
-          </button>
-        ))}
-
-        {/* {totalPages} */}
-        <div
-          onClick={handleClickNext}
-        >
-          <span>Próximo</span>
-        </div>
-      </div>
+      <Paginator />
     </main>
   );
 }
