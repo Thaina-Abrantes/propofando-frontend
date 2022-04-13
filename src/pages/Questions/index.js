@@ -40,18 +40,27 @@ export function Questions() {
           <div className={style['manage-title']}><span>Gerenciar</span></div>
         </div>
         <div className={style['table-body']}>
-          <div className={style['table-line']}>
-            <div className={style['first-line-item']}>
-              <img src={pasteIcon} alt="pasta" />
-              <span>VUNESP - EsFCEx - Oficial Médico </span>
-            </div>
-            <div className={style['second-line-item']}>
-              <button>
-                <img src={editIcon} alt="editar" />
-              </button>
-              <button><img src={deleteIcon} alt="deletar" /></button>
-            </div>
-          </div>
+          {allQuestions.filter((item) => item.title.toLocaleLowerCase()
+            .replace(/[áàãäâ]/, 'a')
+            .replace(/[éèëê]/, 'e')
+            .replace(/[íìïî]/, 'i')
+            .replace(/[óòõöô]/, 'o')
+            .replace(/[úùüû]/, 'u')
+            .includes(serchQuestion.toLocaleLowerCase()))
+            .map((item) => (
+              <div className={style['table-line']} key={item.id}>
+                <div className={style['first-line-item']}>
+                  <img src={pasteIcon} alt="pasta" />
+                  <span>{item.title}</span>
+                </div>
+                <div className={style['second-line-item']}>
+                  <button>
+                    <img src={editIcon} alt="editar" />
+                  </button>
+                  <button><img src={deleteIcon} alt="deletar" /></button>
+                </div>
+              </div>
+            ))}
         </div>
       </div>
     </main>
