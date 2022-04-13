@@ -2,6 +2,7 @@ import SearchCategory from 'components/SearchCategory';
 import { useState, useEffect } from 'react';
 import { useStores } from 'stores';
 import Paginator from 'components/Paginator';
+import { useNavigate } from 'react-router-dom';
 import style from './styles.module.scss';
 import topicIcon from '../../assets/topic-icon.svg';
 import editIcon from '../../assets/edit-icon.svg';
@@ -10,6 +11,8 @@ import api from '../../services/api';
 
 export function QuestionCategory() {
   const [dataCategory, setDataCategory] = useState([]);
+  const navigate = useNavigate();
+
   const {
     modalStore: {
       openModalDeleteCategory,
@@ -70,7 +73,10 @@ export function QuestionCategory() {
         <div className={style['table-body']}>
           {dataCategory.map((item) => (
             <div key={item.id} className={style['table-line']}>
-              <div className={style['first-line-item']}>
+              <div
+                className={style['first-line-item']}
+                onClick={() => navigate('/main/list-question')}
+              >
                 <img src={topicIcon} alt="Categoria" />
                 <span>{item.name}</span>
               </div>

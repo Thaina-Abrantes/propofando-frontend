@@ -1,13 +1,21 @@
 import { useStores } from 'stores';
+import { useNavigate } from 'react-router-dom';
 import style from './styles.module.scss';
 import clear from '../../assets/clear-icon.svg';
 
 function ModalEndTest() {
+  const navigate = useNavigate();
+
   const {
     modalStore: {
       setOpenModalEndTest,
     },
   } = useStores();
+
+  function closeTest() {
+    setOpenModalEndTest(false);
+    navigate('/consult-questions');
+  }
 
   return (
     <div className={style['background-modal']}>
@@ -24,7 +32,7 @@ function ModalEndTest() {
           <p>
             Tem certeza que deseja finalizar o simulado?
           </p>
-          <button className="button" onClick={() => setOpenModalEndTest(false)}>Finalizar</button>
+          <button className="button" onClick={closeTest}>Finalizar</button>
         </div>
       </div>
     </div>
