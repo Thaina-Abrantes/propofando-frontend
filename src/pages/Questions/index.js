@@ -7,6 +7,7 @@ import deleteIcon from '../../assets/delete-icon.svg';
 import api from '../../services/api';
 
 export function Questions() {
+  const [serchQuestion, setSearchQuestion] = useState('');
   const [allQuestions, setAllQuestions] = useState([]);
 
   const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUzMTNmNTdhLTJiMzQtNDU0Yi04ZTJlLTEyOGQ2NDllNGJkOSIsImVtYWlsIjoibWFudUBlbWFpbC5jb20iLCJ1c2VyVHlwZSI6InN1cGVyIGFkbWluIiwiaWF0IjoxNjQ5ODUzMTUwLCJleHAiOjE2NDk5Mzk1NTB9.GsJlgvXfrvf1dirj4Hkm6jvhte-Pvqg8h8cPGlIRUOw';
@@ -24,7 +25,6 @@ export function Questions() {
       });
       const { data } = response;
       setAllQuestions(data.questions);
-      console.log(allQuestions);
     } catch (error) {
       console.log(error);
     }
@@ -32,7 +32,7 @@ export function Questions() {
 
   return (
     <main>
-      <SearchQuestion />
+      <SearchQuestion setSearchQuestion={setSearchQuestion} />
 
       <div className={style.table}>
         <div className={style['table-header']}>
