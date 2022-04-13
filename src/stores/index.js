@@ -3,6 +3,7 @@ import { useCounter } from './counterStore';
 import { useModal } from './modalStore';
 import { useUser } from './userStore';
 import { useUtils } from './utilsStore';
+import { useStudentAdmin } from './studentAdminStore';
 
 const storesCtx = createContext(null);
 
@@ -16,9 +17,15 @@ export function StoresProvider({ children }) {
   const modalStore = useModal();
   const utilsStore = useUtils();
 
+  const stundetAdminStore = useStudentAdmin();
+
   return (
     <storesCtx.Provider value={{
-      userStore, counterStore, modalStore, utilsStore,
+      userStore,
+      counterStore,
+      modalStore,
+      utilsStore,
+      stundetAdminStore,
     }}
     >
       {children}
