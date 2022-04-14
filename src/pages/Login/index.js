@@ -18,7 +18,7 @@ export function Login() {
     userStore: {
       setUserData, setToken,
     },
-    utilsStore: { alert, setAlert },
+    utilsStore: { setAlert },
   } = useStores();
 
   const navigate = useNavigate();
@@ -40,21 +40,16 @@ export function Login() {
         email,
         password,
       });
-    } catch (error) {
-      if (error.params.path === 'email') {
-        setErroEmail(error.message);
-        return;
-      }
-      if (error.params.path === 'password') {
-        setErroPassword(error.message);
-      }
-    }
 
-    try {
       const body = { email, password };
       const result = await api.post('/login', body);
 
-      const { data: { token: tokenGenerated, user } } = result;
+      const { data } = result;
+      const { token: tokenGenerated, user } = data;
+
+      if (result.status > 204) {
+        setAlert({ open: true, type: 'error', message: data?.message || data });
+      }
 
       setUserData(user);
       setToken(tokenGenerated);
@@ -63,8 +58,14 @@ export function Login() {
 
       navigate(redirectTo);
     } catch (error) {
-      const { data } = error.response;
-      setAlert({ open: true, type: 'error', message: data.message });
+      if (error.params.path === 'email') {
+        setErroEmail(error.message);
+        return;
+      }
+
+      if (error.params.path === 'password') {
+        setErroPassword(error.message);
+      }
     }
   }
 
