@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { useStores } from 'stores';
 import { useForm } from 'react-hook-form';
 import { redirectLoggedUsers } from 'utils/redirects';
-import CustomAlert from 'components/CustomAlert';
 import api from '../../services/api';
 import style from './styles.module.scss';
 import logoDark from '../../assets/logo-dark.svg';
@@ -66,9 +65,9 @@ export function Login() {
 
       navigate(redirectTo);
     } catch (error) {
-      const { request: { response: messageError } } = error;
-      console.log(error, 'teste erro');
-      setAlert({ open: true, type: 'error', message: messageError });
+      const { request: { response: data } } = error;
+
+      setAlert({ open: true, type: 'error', message: data });
     }
   }
 
@@ -94,7 +93,6 @@ export function Login() {
       </div>
       <div className={style['container-right']}>
         <div className={style['container-card']}>
-          <CustomAlert open typeAlert="error" message="Teste" />
           <img src={logoDark} alt="Logo Propofando" />
           <form onSubmit={handleSubmit(onSubmit)}>
             <h2>Faça seu login</h2>
