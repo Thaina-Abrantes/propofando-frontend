@@ -25,9 +25,24 @@ export function useStudentAdmin() {
       return error.response;
     }
   }
+
+  async function handleDeleteUser(id) {
+    try {
+      await api.delete(`/users/${id}`, {
+        header: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+    } catch (error) {
+      const currentError = error.response.data.message || error.response.data;
+      setErrorUser(currentError);
+      return error.response;
+    }
+  }
   return {
     handleRegisterUser,
     errorUser,
     setErrorUser,
+    handleDeleteUser,
   };
 }

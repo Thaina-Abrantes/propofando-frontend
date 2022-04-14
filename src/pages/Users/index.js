@@ -16,7 +16,6 @@ export function Users() {
       openModalDelete,
       setOpenModalDelete,
       openModalRegisterUser,
-      setOpenModalRegisterUser,
     },
     userStore: {
       token,
@@ -25,7 +24,7 @@ export function Users() {
 
   useEffect(() => {
     handleListUsers();
-  }, [openModalRegisterUser]);
+  }, [openModalRegisterUser, openModalDelete, openModalEdit]);
 
   async function handleListUsers() {
     try {
@@ -71,10 +70,9 @@ export function Users() {
                   <img src={editIcon} alt="editar" />
                 </button>
                 <button
-                  onClick={() => setOpenModalDelete(true)}
+                  onClick={() => setOpenModalDelete(item.id)}
                 >
                   <img src={deleteIcon} alt="deletar" />
-
                 </button>
               </div>
             </div>
