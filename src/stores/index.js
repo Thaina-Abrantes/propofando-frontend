@@ -19,7 +19,7 @@ export function StoresProvider({ children }) {
   const categoryStore = useCategory();
   const utilsStore = useUtils();
 
-  const stundetAdminStore = useStudentAdmin();
+  const studentAdminStore = useStudentAdmin();
 
   return (
     <storesCtx.Provider value={{
@@ -27,7 +27,7 @@ export function StoresProvider({ children }) {
       counterStore,
       modalStore,
       utilsStore,
-      stundetAdminStore,
+      studentAdminStore,
       categoryStore,
     }}
     >
