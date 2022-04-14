@@ -1,0 +1,18 @@
+.container-alert {
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  width: calc(80vw);    
+}
+
+.success {
+  border: 1px solid green;
+}
+
+.error {
+  border: 1px solid red;
+}
+
+.warning {
+  border: 1px solid orange;
+}

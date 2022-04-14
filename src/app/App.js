@@ -2,6 +2,7 @@ import CustomAlert from 'components/CustomAlert';
 import { Suspense, useState } from 'react';
 import { useStores } from 'stores';
 import { MyRoutes } from './routes';
+import styles from './styles.module.scss';
 
 function App() {
   const { utilsStore: { alert, setAlert } } = useStores();
@@ -9,8 +10,10 @@ function App() {
 
   return (
     <Suspense fallback={null}>
-      <CustomAlert open={open} type={type} message={message} />
-      <MyRoutes />
+      <div className={styles['container-app']}>
+        <CustomAlert open={open} type={type} message={message} />
+        <MyRoutes />
+      </div>
     </Suspense>
   );
 }

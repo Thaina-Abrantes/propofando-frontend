@@ -1,6 +1,7 @@
 import { createContext, useContext } from 'react';
 import { useCounter } from './counterStore';
 import { useModal } from './modalStore';
+import { useLoading } from './useLoading';
 import { useUser } from './userStore';
 import { useUtils } from './utilsStore';
 
@@ -15,10 +16,15 @@ export function StoresProvider({ children }) {
   const counterStore = useCounter();
   const modalStore = useModal();
   const utilsStore = useUtils();
+  const loadingStore = useLoading();
 
   return (
     <storesCtx.Provider value={{
-      userStore, counterStore, modalStore, utilsStore,
+      userStore,
+      counterStore,
+      modalStore,
+      utilsStore,
+      loadingStore,
     }}
     >
       {children}

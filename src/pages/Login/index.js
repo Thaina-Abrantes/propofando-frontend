@@ -33,8 +33,6 @@ export function Login() {
     setErroEmail('');
     setErroPassword('');
 
-    console.log(alert, 'alert');
-
     const { email, password } = form;
 
     try {
@@ -65,9 +63,8 @@ export function Login() {
 
       navigate(redirectTo);
     } catch (error) {
-      const { request: { response: data } } = error;
-
-      setAlert({ open: true, type: 'error', message: data });
+      const { data } = error.response;
+      setAlert({ open: true, type: 'error', message: data.message });
     }
   }
 

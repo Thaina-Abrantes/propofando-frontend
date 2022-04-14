@@ -1,16 +1,21 @@
 import Alert from '@mui/material/Alert';
+import styles from './styles.module.scss';
 
-export default function CustomAlert({ message, type }) {
+export default function CustomAlert({ open, message, type }) {
   return (
-    <Alert
-      variant="outlined"
-      severity={type}
-      sx={{
-        width: 500,
-      }}
-    >
-      {message}
-    </Alert>
+    <>
+      {' '}
+      {open
 
+        && (
+          <Alert
+            variant="standard"
+            severity={type}
+            className={`${styles['container-alert']} ${styles[type || 'error']}`}
+          >
+            {message}
+          </Alert>
+        )}
+    </>
   );
 }
