@@ -7,13 +7,9 @@ export function useStudentAdmin() {
   const { token } = useUser();
 
   async function handleRegisterUser(user) {
-    const index = user.email.indexOf('@');
-    const currentPassword = user.email.slice(0, index);
-
     const body = {
       name: user.name,
       email: user.email,
-      password: currentPassword,
     };
 
     try {

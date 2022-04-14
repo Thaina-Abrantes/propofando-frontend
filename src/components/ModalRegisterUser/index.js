@@ -14,16 +14,22 @@ function ModalRegisterUser() {
     },
     studentAdminStore: {
       handleRegisterUser,
+      errorUser,
+      setErrorUser,
     },
   } = useStores();
 
   function handleChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
+    setErrorUser('');
   }
   async function handleSubmit(event) {
     event.preventDefault();
-    handleRegisterUser(form);
-
+    const response = await handleRegisterUser(form);
+    if (response.status > 201) {
+      return;
+    }
+    setErrorUser('');
     setOpenModalRegisterUser(false);
   }
 
@@ -60,6 +66,8 @@ function ModalRegisterUser() {
                 value={form.email}
                 onChange={(e) => handleChange(e)}
               />
+              {errorUser && <span className={style['span-error']}>{errorUser}</span>}
+
             </div>
           </div>
           <div className={style.wrapInputBtn}>

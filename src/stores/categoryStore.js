@@ -8,8 +8,6 @@ export function useCategory() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPage] = useState(1);
   const { token } = useUser();
-  // TODO @importar o token correto
-  // TODO @criar a função de listar aqui
 
   async function handleRegisterCategory(category) {
     const body = {

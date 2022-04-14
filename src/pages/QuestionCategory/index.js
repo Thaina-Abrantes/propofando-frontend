@@ -37,12 +37,6 @@ export function QuestionCategory() {
     setOpenModalNewCategory(true);
   }
 
-  const pages = [];
-
-  for (let page = 1; page <= totalPages; page += 1) {
-    pages.push(page);
-  }
-
   useEffect(() => {
     handleListCategory();
   }, [currentPage, openModalDeleteCategory, openModalNewCategory]);

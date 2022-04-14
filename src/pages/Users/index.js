@@ -16,6 +16,7 @@ export function Users() {
       openModalDelete,
       setOpenModalDelete,
       openModalRegisterUser,
+      setOpenModalRegisterUser,
     },
     userStore: {
       token,
