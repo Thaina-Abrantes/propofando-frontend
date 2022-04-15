@@ -14,6 +14,9 @@ export function QuestionCategory() {
   const navigate = useNavigate();
 
   const {
+    userStore: {
+      token,
+    },
     modalStore: {
       openModalDeleteCategory,
       setOpenModalDeleteCategory,
@@ -28,7 +31,6 @@ export function QuestionCategory() {
     },
 
   } = useStores();
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFkNmVlNjMzLTU5OWItNDY5MC04ZWU5LWRkNjJkNGQyY2FmNiIsImVtYWlsIjoibWFudUBlbWFpbC5jb20iLCJ1c2VyVHlwZSI6InN1cGVyIGFkbWluIiwiaWF0IjoxNjQ5ODU2MTI3LCJleHAiOjE2NDk5NDI1Mjd9.LXKQ7eJNaHpx1QMnqKV_Hi1zQcNFAfAv6nKsZnH1SGw';
   function handleOpenEdit(item) {
     setCategoryInEditing(item);
     setOpenModalNewCategory(true);

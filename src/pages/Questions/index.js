@@ -1,5 +1,6 @@
 import SearchQuestion from 'components/SearchQuestion';
 import { useEffect, useState } from 'react';
+import { useStores } from 'stores';
 import style from './styles.module.scss';
 import pasteIcon from '../../assets/content-paste-icon.svg';
 import editIcon from '../../assets/edit-icon.svg';
@@ -7,10 +8,10 @@ import deleteIcon from '../../assets/delete-icon.svg';
 import api from '../../services/api';
 
 export function Questions() {
+  const { userStore: { token } } = useStores();
+
   const [serchQuestion, setSearchQuestion] = useState('');
   const [allQuestions, setAllQuestions] = useState([]);
-
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUzMTNmNTdhLTJiMzQtNDU0Yi04ZTJlLTEyOGQ2NDllNGJkOSIsImVtYWlsIjoibWFudUBlbWFpbC5jb20iLCJ1c2VyVHlwZSI6InN1cGVyIGFkbWluIiwiaWF0IjoxNjQ5ODUzMTUwLCJleHAiOjE2NDk5Mzk1NTB9.GsJlgvXfrvf1dirj4Hkm6jvhte-Pvqg8h8cPGlIRUOw';
 
   useEffect(() => {
     handleFilterQuestion();
