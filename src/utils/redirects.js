@@ -3,5 +3,5 @@ export function redirectLoggedUsers(userType) {
     return '/main';
   }
 
-  return '/student/main';
+  return `/${userType}/main`;
 }

@@ -58,12 +58,12 @@ export function Login() {
 
       navigate(redirectTo);
     } catch (error) {
-      if (error.params.path === 'email') {
+      if (error?.params?.path === 'email') {
         setErroEmail(error.message);
         return;
       }
 
-      if (error.params.path === 'password') {
+      if (error?.params?.path === 'password') {
         setErroPassword(error.message);
       }
     }
