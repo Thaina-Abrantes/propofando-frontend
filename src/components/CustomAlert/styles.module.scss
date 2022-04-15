@@ -2,17 +2,27 @@
   position: absolute;
   top: 0;
   z-index: 1;
-  width: calc(80vw);    
+  width: calc(80vw);  
 }
 
 .success {
-  border: 1px solid green;
+  border: 1px solid var(--green);
+  path {
+    fill: var(--green);
+  }
 }
 
 .error {
-  border: 1px solid red;
+  border: 1px solid var(--salmon);
+  path {
+    fill: var(--salmon);
+  }
 }
 
 .warning {
-  border: 1px solid orange;
+  border: 1px solid var(--yellow);
+  path {
+    fill: var(--yellow);
+  }
 }
+
