@@ -1,5 +1,5 @@
 import SearchQuestion from 'components/SearchQuestion';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { useStores } from 'stores';
 import style from './styles.module.scss';
 import pasteIcon from '../../assets/content-paste-icon.svg';
@@ -10,7 +10,6 @@ import api from '../../services/api';
 export function Questions() {
   const [serchQuestion, setSearchQuestion] = useState('');
   const [allQuestions, setAllQuestions] = useState([]);
-  const componentMounted = useRef(true);
 
   const {
     modalStore: {
@@ -19,11 +18,11 @@ export function Questions() {
     },
   } = useStores();
 
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUzMTNmNTdhLTJiMzQtNDU0Yi04ZTJlLTEyOGQ2NDllNGJkOSIsImVtYWlsIjoibWFudUBlbWFpbC5jb20iLCJ1c2VyVHlwZSI6InN1cGVyIGFkbWluIiwiaWF0IjoxNjQ5OTM4NDgyLCJleHAiOjE2NTAwMjQ4ODJ9.u1xnXv7jnezzXa1EuIztgdZXE5SB9j4By4mNraJ3lFY';
+  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUzMTNmNTdhLTJiMzQtNDU0Yi04ZTJlLTEyOGQ2NDllNGJkOSIsImVtYWlsIjoibWFudUBlbWFpbC5jb20iLCJ1c2VyVHlwZSI6InN1cGVyIGFkbWluIiwiaWF0IjoxNjUwMDMzMDA2LCJleHAiOjE2NTAxMTk0MDZ9.NyUcFAkPXwOap0tXHfiQ3oXQkBNetaaI5lBiMXHKalA';
 
   useEffect(() => {
     handleFilterQuestion();
-  }, []);
+  }, [allQuestions, openModalDeleteQuestion]);
 
   async function handleFilterQuestion() {
     try {
@@ -32,13 +31,8 @@ export function Questions() {
           Authorization: `Bearer ${token}`,
         },
       });
-      if (componentMounted.current) {
-        const { data } = response;
-        setAllQuestions(data.questions);
-      }
-      return () => {
-        componentMounted.current = false;
-      };
+      const { data } = response;
+      setAllQuestions(data.questions);
     } catch (error) {
       console.log(error);
     }
