@@ -20,12 +20,21 @@ export function Users() {
     userStore: {
       token,
     },
+    studentAdminStore: {
+      setUserInEditing,
+      userInEditing,
+
+    },
   } = useStores();
 
   useEffect(() => {
     handleListUsers();
-  }, [openModalRegisterUser, openModalDelete, openModalEdit]);
+  }, [openModalRegisterUser, openModalDelete, openModalEdit, userInEditing]);
 
+  function handleOpenEditUser(item) {
+    setUserInEditing(item);
+    setOpenModalEdit(true);
+  }
   async function handleListUsers() {
     try {
       const response = await api.get('/users', {
@@ -65,7 +74,7 @@ export function Users() {
               </div>
               <div className={style['fourth-line-item']}>
                 <button
-                  onClick={() => setOpenModalEdit(true)}
+                  onClick={() => handleOpenEditUser(item)}
                 >
                   <img src={editIcon} alt="editar" />
                 </button>
