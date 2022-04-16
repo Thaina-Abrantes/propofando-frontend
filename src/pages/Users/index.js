@@ -1,6 +1,7 @@
 import { useStores } from 'stores';
 import Search from 'components/Search';
 import { useEffect, useState } from 'react';
+import PaginatorUsers from 'components/PaginatorUsers';
 import style from './styles.module.scss';
 import userIcon from '../../assets/identity-icon.svg';
 import editIcon from '../../assets/edit-icon.svg';
@@ -8,7 +9,6 @@ import deleteIcon from '../../assets/delete-icon.svg';
 import api from '../../services/api';
 
 export function Users() {
-  const [dataUsers, setDataUsers] = useState([]);
   const {
     modalStore: {
       openModalEdit,
@@ -23,7 +23,8 @@ export function Users() {
     studentAdminStore: {
       setUserInEditing,
       userInEditing,
-
+      dataUsers,
+      setDataUsers,
     },
   } = useStores();
 
@@ -86,7 +87,7 @@ export function Users() {
               </div>
             </div>
           ))}
-
+          <PaginatorUsers itemsPerPage={6} />
         </div>
       </div>
     </main>

@@ -6,6 +6,7 @@ export function useStudentAdmin() {
   const [errorUser, setErrorUser] = useState('');
   const [userInEditing, setUserInEditing] = useState(false);
   const { token } = useUser();
+  const [dataUsers, setDataUsers] = useState([]);
 
   async function handleRegisterUser(user) {
     const body = {
@@ -69,5 +70,8 @@ export function useStudentAdmin() {
     handleEditUser,
     userInEditing,
     setUserInEditing,
+    dataUsers,
+    setDataUsers,
+
   };
 }
