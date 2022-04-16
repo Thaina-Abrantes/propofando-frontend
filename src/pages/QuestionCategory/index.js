@@ -26,12 +26,21 @@ export function QuestionCategory() {
       totalPages,
       setTotalPage,
     },
+    questionStore: {
+      setIdCategory,
+    },
 
   } = useStores();
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFkNmVlNjMzLTU5OWItNDY5MC04ZWU5LWRkNjJkNGQyY2FmNiIsImVtYWlsIjoibWFudUBlbWFpbC5jb20iLCJ1c2VyVHlwZSI6InN1cGVyIGFkbWluIiwiaWF0IjoxNjQ5ODU2MTI3LCJleHAiOjE2NDk5NDI1Mjd9.LXKQ7eJNaHpx1QMnqKV_Hi1zQcNFAfAv6nKsZnH1SGw';
+  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUzMTNmNTdhLTJiMzQtNDU0Yi04ZTJlLTEyOGQ2NDllNGJkOSIsImVtYWlsIjoibWFudUBlbWFpbC5jb20iLCJ1c2VyVHlwZSI6InN1cGVyIGFkbWluIiwiaWF0IjoxNjUwMTIxMzk0LCJleHAiOjE2NTAyMDc3OTR9.MPVtoFOswhG680UMD37chTCsnr5bJVRjZeZmGXur9tw';
+
   function handleOpenEdit(item) {
     setCategoryInEditing(item);
     setOpenModalNewCategory(true);
+  }
+
+  function handleOpenQuestions(item) {
+    setIdCategory(item);
+    navigate('/main/list-question');
   }
 
   const pages = [];
@@ -42,7 +51,7 @@ export function QuestionCategory() {
 
   useEffect(() => {
     handleListCategory();
-  }, [currentPage, openModalDeleteCategory, openModalNewCategory]);
+  }, [currentPage, openModalDeleteCategory, openModalNewCategory, dataCategory]);
 
   async function handleListCategory() {
     try {
@@ -75,7 +84,7 @@ export function QuestionCategory() {
             <div key={item.id} className={style['table-line']}>
               <div
                 className={style['first-line-item']}
-                onClick={() => navigate('/main/list-question')}
+                onClick={() => handleOpenQuestions(item.id)}
               >
                 <img src={topicIcon} alt="Categoria" />
                 <span>{item.name}</span>
