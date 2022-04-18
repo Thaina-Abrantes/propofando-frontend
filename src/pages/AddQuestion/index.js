@@ -121,7 +121,7 @@ export function AddQuestion() {
                 /200
               </span>
             </div>
-            <div className={style['input-select']}>
+            <div className="input-select-ligth">
               <label>
                 Categoria
                 <select>
