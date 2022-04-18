@@ -1,7 +1,6 @@
 import SearchCategory from 'components/SearchCategory';
 import { useState, useEffect } from 'react';
 import { useStores } from 'stores';
-import { useEffect, useState } from 'react';
 import Paginator from 'components/Paginator';
 import { useNavigate } from 'react-router-dom';
 import style from './styles.module.scss';
@@ -30,12 +29,20 @@ export function QuestionCategory() {
       totalPages,
       setTotalPage,
     },
+    questionStore: {
+      setIdCategory,
+    },
 
   } = useStores();
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFkNmVlNjMzLTU5OWItNDY5MC04ZWU5LWRkNjJkNGQyY2FmNiIsImVtYWlsIjoibWFudUBlbWFpbC5jb20iLCJ1c2VyVHlwZSI6InN1cGVyIGFkbWluIiwiaWF0IjoxNjQ5ODU2MTI3LCJleHAiOjE2NDk5NDI1Mjd9.LXKQ7eJNaHpx1QMnqKV_Hi1zQcNFAfAv6nKsZnH1SGw';
+
   function handleOpenEdit(item) {
     setCategoryInEditing(item);
     setOpenModalNewCategory(true);
+  }
+
+  function handleOpenQuestions(item) {
+    setIdCategory(item);
+    navigate('/main/list-question');
   }
 
   const pages = [];
@@ -46,7 +53,7 @@ export function QuestionCategory() {
 
   useEffect(() => {
     handleListCategory();
-  }, [currentPage, openModalDeleteCategory, openModalNewCategory]);
+  }, [currentPage, openModalDeleteCategory, openModalNewCategory, dataCategory]);
 
   async function handleListCategory() {
     try {
@@ -78,7 +85,7 @@ export function QuestionCategory() {
             .includes(serchItem.toLocaleLowerCase()))
             .map((item) => (
               <div className={style['table-line']} key={item.id}>
-                <div className={style['first-line-item']} onClick={() => navigate('/main/list-question')}>
+                <div className={style['first-line-item']} onClick={() => handleOpenQuestions(item.id)}>
                   <img src={topicIcon} alt="Categoria" />
                   <span>{item.name}</span>
                 </div>
