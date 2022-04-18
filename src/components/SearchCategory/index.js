@@ -9,12 +9,19 @@ function SearchCategory({ setSearchItem }) {
       openModalNewCategory,
       setOpenModalNewCategory,
     },
+    categoryStore: {
+      setErrorCategory,
+    },
   } = useStores();
 
   function handleChange(e) {
     setSearchItem(e.target.value);
   }
 
+  function handleOpenModal() {
+    setErrorCategory('');
+    setOpenModalNewCategory(true);
+  }
   return (
     <div className={style.search}>
       <div>
@@ -29,11 +36,10 @@ function SearchCategory({ setSearchItem }) {
           onChange={handleChange}
         />
         <button
-          onClick={() => setOpenModalNewCategory(true)}
+          onClick={handleOpenModal}
           className="button"
         >
           Criar categoria
-
         </button>
       </div>
     </div>
