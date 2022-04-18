@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import clip from '../../assets/annex-icon.svg';
 import arrowBack from '../../assets/arrow-back-icon.svg';
-import arrowDown from '../../assets/arrow-down.svg';
+import arrowDown from '../../assets/arrow.svg';
 import style from './styles.module.scss';
 
 const defaultValuesForm = {
@@ -121,11 +121,12 @@ export function AddQuestion() {
                 /200
               </span>
             </div>
-            <div className={style['input-select']}>
+            <div className="input-select-ligth">
               <label>
                 Categoria
                 <select>
                   <option value="0">Select</option>
+                  <option value="id da categoria">Nome da Categoria</option>
                 </select>
               </label>
               <img src={arrowDown} alt="seta" />
