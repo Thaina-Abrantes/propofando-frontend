@@ -3,7 +3,7 @@ import style from './styles.module.scss';
 import arrowBack from '../../assets/arrow-back-icon.svg';
 import searchIcon from '../../assets/search-icon.svg';
 
-function SearchCategory() {
+function SearchCategory({ setSearchItem }) {
   const {
     modalStore: {
       openModalNewCategory,
@@ -13,6 +13,10 @@ function SearchCategory() {
       setErrorCategory,
     },
   } = useStores();
+
+  function handleChange(e) {
+    setSearchItem(e.target.value);
+  }
 
   function handleOpenModal() {
     setErrorCategory('');
@@ -26,7 +30,11 @@ function SearchCategory() {
       </div>
       <div className={style['search-container']}>
         <img src={searchIcon} alt="Lupa" />
-        <input className="input-light" placeholder="Pesquisar" />
+        <input
+          className="input-light"
+          placeholder="Pesquisar"
+          onChange={handleChange}
+        />
         <button
           onClick={handleOpenModal}
           className="button"
