@@ -5,6 +5,7 @@ import { useModal } from './modalStore';
 import { useLoading } from './useLoading';
 import { useUser } from './userStore';
 import { useUtils } from './utilsStore';
+import { useQuestion } from './questionStore';
 
 const storesCtx = createContext(null);
 
@@ -18,6 +19,7 @@ export function StoresProvider({ children }) {
   const modalStore = useModal();
   const categoryStore = useCategory();
   const utilsStore = useUtils();
+  const questionStore = useQuestion();
   const loadingStore = useLoading();
 
   return (
@@ -27,6 +29,7 @@ export function StoresProvider({ children }) {
       modalStore,
       utilsStore,
       categoryStore,
+      questionStore,
       loadingStore,
     }}
     >

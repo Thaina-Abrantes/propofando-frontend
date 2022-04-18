@@ -10,9 +10,6 @@ import deleteIcon from '../../assets/delete-icon.svg';
 import api from '../../services/api';
 
 export function QuestionCategory() {
-  const [dataCategory, setDataCategory] = useState([]);
-  const navigate = useNavigate();
-
   const {
     userStore: {
       token,
@@ -29,11 +26,24 @@ export function QuestionCategory() {
       totalPages,
       setTotalPage,
     },
+    questionStore: {
+      setIdCategory,
+    },
 
   } = useStores();
+
+  const [dataCategory, setDataCategory] = useState([]);
+  const navigate = useNavigate();
+  const [serchItem, setSearchItem] = useState('');
+
   function handleOpenEdit(item) {
     setCategoryInEditing(item);
     setOpenModalNewCategory(true);
+  }
+
+  function handleOpenQuestions(item) {
+    setIdCategory(item);
+    navigate('/main/list-question');
   }
 
   const pages = [];
@@ -57,6 +67,7 @@ export function QuestionCategory() {
 
       setDataCategory(data.categories);
       setTotalPage(data.totalPages);
+      return;
     } catch (error) {
       return error;
     }
@@ -64,38 +75,36 @@ export function QuestionCategory() {
 
   return (
     <main>
-      <SearchCategory />
+      <SearchCategory setSearchTerm={setSearchItem} />
       <div className={style['table']}>
         <div className={style['table-header']}>
           <div className={style['name-title']}><span>Nome</span></div>
           <div className={style['category-title']}><span>Quantidade</span></div>
           <div className={style['manage-title']}><span>Gerenciar</span></div>
         </div>
-
         <div className={style['table-body']}>
-          {dataCategory.map((item) => (
-            <div key={item.id} className={style['table-line']}>
-              <div
-                className={style['first-line-item']}
-                onClick={() => navigate('/main/list-question')}
-              >
-                <img src={topicIcon} alt="Categoria" />
-                <span>{item.name}</span>
-              </div>
-              <div className={style['second-line-item']}>
-                <span>{item.totalQuestions}</span>
-              </div>
+          {dataCategory.filter((item) => item.name.toLocaleLowerCase()
+            .includes(serchItem.toLocaleLowerCase()))
+            .map((item) => (
+              <div className={style['table-line']} key={item.id}>
+                <div className={style['first-line-item']} onClick={() => handleOpenQuestions(item.id)}>
+                  <img src={topicIcon} alt="Categoria" />
+                  <span>{item.name}</span>
+                </div>
+                <div className={style['second-line-item']}>
+                  <span>{item.totalQuestions}</span>
+                </div>
 
-              <div className={style['third-line-item']}>
-                <button
-                  onClick={() => handleOpenEdit(item)}
-                >
-                  <img src={editIcon} alt="editar" />
-                </button>
-                <button onClick={() => setOpenModalDeleteCategory(item.id)}><img src={deleteIcon} alt="deletar" /></button>
+                <div className={style['third-line-item']}>
+                  <button
+                    onClick={() => handleOpenEdit(item)}
+                  >
+                    <img src={editIcon} alt="editar" />
+                  </button>
+                  <button onClick={() => setOpenModalDeleteCategory(item.id)}><img src={deleteIcon} alt="deletar" /></button>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
       </div>
       <Paginator />
