@@ -23,6 +23,7 @@ export function QuestionCategory() {
     categoryStore: {
       setCategoryInEditing,
       currentPage,
+      setCurrentPage,
       totalPages,
       setTotalPage,
     },
@@ -44,12 +45,6 @@ export function QuestionCategory() {
   function handleOpenQuestions(item) {
     setIdCategory(item);
     navigate('/main/list-question');
-  }
-
-  const pages = [];
-
-  for (let page = 1; page <= totalPages; page += 1) {
-    pages.push(page);
   }
 
   useEffect(() => {
@@ -107,7 +102,7 @@ export function QuestionCategory() {
             ))}
         </div>
       </div>
-      <Paginator />
+      <Paginator setCurrentPage={setCurrentPage} totalPages={totalPages} />
     </main>
   );
 }

@@ -1,16 +1,7 @@
 import ReactPaginate from 'react-paginate';
-import { useStores } from 'stores';
 import styles from './styles.module.scss';
 
-export default function Paginator() {
-  const {
-    categoryStore: {
-      setCurrentPage,
-      totalPages,
-    },
-
-  } = useStores();
-
+export default function Paginator({ setCurrentPage, totalPages }) {
   const handlePageClick = (event) => {
     setCurrentPage(event.selected + 1);
   };
