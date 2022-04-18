@@ -1,7 +1,6 @@
 import SearchCategory from 'components/SearchCategory';
 import { useState, useEffect } from 'react';
 import { useStores } from 'stores';
-import { useEffect, useState } from 'react';
 import Paginator from 'components/Paginator';
 import { useNavigate } from 'react-router-dom';
 import style from './styles.module.scss';
@@ -35,7 +34,6 @@ export function QuestionCategory() {
     },
 
   } = useStores();
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUzMTNmNTdhLTJiMzQtNDU0Yi04ZTJlLTEyOGQ2NDllNGJkOSIsImVtYWlsIjoibWFudUBlbWFpbC5jb20iLCJ1c2VyVHlwZSI6InN1cGVyIGFkbWluIiwiaWF0IjoxNjUwMTIxMzk0LCJleHAiOjE2NTAyMDc3OTR9.MPVtoFOswhG680UMD37chTCsnr5bJVRjZeZmGXur9tw';
 
   function handleOpenEdit(item) {
     setCategoryInEditing(item);
