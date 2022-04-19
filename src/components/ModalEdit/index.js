@@ -34,6 +34,7 @@ function ModalEdit() {
       setForm(formValues);
     }
   }, [userInEditing, openModalEdit]);
+
   async function handleSubmit(e) {
     e.preventDefault();
     const response = await handleEditUser(form);

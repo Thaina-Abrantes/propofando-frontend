@@ -31,7 +31,7 @@ export function useStudentAdmin() {
   async function handleDeleteUser(id) {
     try {
       await api.delete(`/users/${id}`, {
-        header: {
+        headers: {
           Authorization: `Bearer ${token}`,
         },
       });
