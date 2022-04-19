@@ -25,12 +25,14 @@ export function Users() {
       userInEditing,
       dataUsers,
       setDataUsers,
+      setTotalPage,
+      currentPage,
     },
   } = useStores();
 
   useEffect(() => {
     handleListUsers();
-  }, [openModalRegisterUser, openModalDelete, openModalEdit, userInEditing]);
+  }, [currentPage, openModalRegisterUser, openModalDelete, openModalEdit, userInEditing]);
 
   function handleOpenEditUser(item) {
     setUserInEditing(item);
@@ -38,13 +40,14 @@ export function Users() {
   }
   async function handleListUsers() {
     try {
-      const response = await api.get('/users', {
+      const response = await api.get(`/users/paginated?page=${currentPage}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
       const { data } = response;
-      setDataUsers(data);
+      setDataUsers(data.users);
+      setTotalPage(data.totalPages);
     } catch (error) {
       return error;
     }
@@ -87,7 +90,7 @@ export function Users() {
               </div>
             </div>
           ))}
-          <PaginatorUsers itemsPerPage={6} />
+          <PaginatorUsers />
         </div>
       </div>
     </main>

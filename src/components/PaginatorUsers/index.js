@@ -1,27 +1,18 @@
 import ReactPaginate from 'react-paginate';
 import { useStores } from 'stores';
-import { useState, useEffect } from 'react';
 import styles from './styles.module.scss';
 
-export default function PaginatorUsers({ itemsPerPage }) {
+export default function PaginatorUsers() {
   const {
     studentAdminStore: {
-      dataUsers,
+      setCurrentPage,
+      totalPages,
     },
-  } = useStores();
-  const [currentItems, setCurrentItems] = useState(1);
-  const [pageCount, setPageCount] = useState(0);
-  const [itemOffset, setItemOffset] = useState(0);
 
-  useEffect(() => {
-    const endOffset = itemOffset + itemsPerPage;
-    setCurrentItems(dataUsers.slice(itemOffset, endOffset));
-    setPageCount(Math.ceil(dataUsers.length / itemsPerPage));
-  }, [itemOffset, itemsPerPage]);
+  } = useStores();
 
   const handlePageClick = (event) => {
-    const newOffset = (((event.selected * itemsPerPage)) % dataUsers.length) + 1;
-    setItemOffset(newOffset);
+    setCurrentPage(event.selected + 1);
   };
 
   return (
@@ -32,7 +23,7 @@ export default function PaginatorUsers({ itemsPerPage }) {
         onPageChange={handlePageClick}
         previousLabel
         pageRangeDisplayed={2}
-        pageCount={pageCount}
+        pageCount={totalPages}
         renderOnZeroPageCount={null}
         marginPagesDisplayed={1}
         containerClassName={styles['container-class-name']}

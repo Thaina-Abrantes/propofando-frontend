@@ -7,6 +7,8 @@ export function useStudentAdmin() {
   const [userInEditing, setUserInEditing] = useState(false);
   const { token } = useUser();
   const [dataUsers, setDataUsers] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPage] = useState(1);
 
   async function handleRegisterUser(user) {
     const body = {
@@ -72,6 +74,10 @@ export function useStudentAdmin() {
     setUserInEditing,
     dataUsers,
     setDataUsers,
+    currentPage,
+    setCurrentPage,
+    totalPages,
+    setTotalPage,
 
   };
 }

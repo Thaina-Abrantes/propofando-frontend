@@ -23,7 +23,6 @@ export function QuestionCategory() {
     categoryStore: {
       setCategoryInEditing,
       currentPage,
-      totalPages,
       setTotalPage,
     },
     userStore: {
