@@ -1,15 +1,17 @@
 import SearchQuestion from 'components/SearchQuestion';
 import { useEffect, useState } from 'react';
 import { useStores } from 'stores';
+import Paginator from 'components/Paginator';
 import style from './styles.module.scss';
 import pasteIcon from '../../assets/content-paste-icon.svg';
 import editIcon from '../../assets/edit-icon.svg';
 import deleteIcon from '../../assets/delete-icon.svg';
 
 export function Questions() {
-  const [serchQuestion, setSearchQuestion] = useState('');
-
   const {
+    userStore: {
+      token,
+    },
     modalStore: {
       openModalDeleteQuestion,
       setOpenModalDeleteQuestion,
@@ -17,14 +19,17 @@ export function Questions() {
     questionStore: {
       handleListQuestions,
       listQuestions,
+      currentPage,
+      setCurrentPage,
+      totalPages,
     },
   } = useStores();
 
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUzMTNmNTdhLTJiMzQtNDU0Yi04ZTJlLTEyOGQ2NDllNGJkOSIsImVtYWlsIjoibWFudUBlbWFpbC5jb20iLCJ1c2VyVHlwZSI6InN1cGVyIGFkbWluIiwiaWF0IjoxNjUwMTIxMzk0LCJleHAiOjE2NTAyMDc3OTR9.MPVtoFOswhG680UMD37chTCsnr5bJVRjZeZmGXur9tw';
+  const [serchQuestion, setSearchQuestion] = useState('');
 
-  useEffect(() => {
-    handleListQuestions();
-  }, [listQuestions, openModalDeleteQuestion]);
+  useEffect(async () => {
+    await handleListQuestions(token);
+  }, [currentPage, totalPages, openModalDeleteQuestion]);
 
   return (
     <main>
@@ -36,7 +41,7 @@ export function Questions() {
           <div className={style['manage-title']}><span>Gerenciar</span></div>
         </div>
         <div className={style['table-body']}>
-          {listQuestions.filter((item) => item.title.toLocaleLowerCase()
+          {listQuestions && listQuestions.filter((item) => item.title.toLocaleLowerCase()
             .replace(/[áàãäâ]/, 'a')
             .replace(/[éèëê]/, 'e')
             .replace(/[íìïî]/, 'i')
@@ -58,6 +63,7 @@ export function Questions() {
               </div>
             ))}
         </div>
+        <Paginator setCurrentPage={setCurrentPage} totalPages={totalPages} />
       </div>
     </main>
   );

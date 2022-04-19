@@ -10,13 +10,10 @@ import deleteIcon from '../../assets/delete-icon.svg';
 import api from '../../services/api';
 
 export function QuestionCategory() {
-  const [dataCategory, setDataCategory] = useState([]);
-  const navigate = useNavigate();
-  const [serchItem, setSearchItem] = useState('');
-
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUzMTNmNTdhLTJiMzQtNDU0Yi04ZTJlLTEyOGQ2NDllNGJkOSIsImVtYWlsIjoibWFudUBlbWFpbC5jb20iLCJ1c2VyVHlwZSI6InN1cGVyIGFkbWluIiwiaWF0IjoxNjQ5NzkyOTkzLCJleHAiOjE2NDk4NzkzOTN9.vaAeQmJW0MvrqlOs47l6rqogh-jraZUR9qior1pS15E';
-
   const {
+    userStore: {
+      token,
+    },
     modalStore: {
       openModalDeleteCategory,
       setOpenModalDeleteCategory,
@@ -26,6 +23,7 @@ export function QuestionCategory() {
     categoryStore: {
       setCategoryInEditing,
       currentPage,
+      setCurrentPage,
       totalPages,
       setTotalPage,
     },
@@ -34,6 +32,10 @@ export function QuestionCategory() {
     },
 
   } = useStores();
+
+  const [dataCategory, setDataCategory] = useState([]);
+  const navigate = useNavigate();
+  const [serchItem, setSearchItem] = useState('');
 
   function handleOpenEdit(item) {
     setCategoryInEditing(item);
@@ -45,15 +47,9 @@ export function QuestionCategory() {
     navigate('/main/list-question');
   }
 
-  const pages = [];
-
-  for (let page = 1; page <= totalPages; page += 1) {
-    pages.push(page);
-  }
-
   useEffect(() => {
     handleListCategory();
-  }, [currentPage, openModalDeleteCategory, openModalNewCategory, dataCategory]);
+  }, [currentPage, openModalDeleteCategory, openModalNewCategory]);
 
   async function handleListCategory() {
     try {
@@ -66,6 +62,7 @@ export function QuestionCategory() {
 
       setDataCategory(data.categories);
       setTotalPage(data.totalPages);
+      return;
     } catch (error) {
       return error;
     }
@@ -105,7 +102,7 @@ export function QuestionCategory() {
             ))}
         </div>
       </div>
-      <Paginator />
+      <Paginator setCurrentPage={setCurrentPage} totalPages={totalPages} />
     </main>
   );
 }

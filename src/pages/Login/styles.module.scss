@@ -1,54 +1,116 @@
 .container {
-  height: 100vh;
+  display: flex;
   width: 100vw;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-
-  background: var(--black);
+  height: 100vh;
+  background-image: url("../../assets/background.png");
+  background-size: cover;
+  background-color: var(--black);
 }
-
-.containerCard {
+.container-left {
+  position: relative;
+  width: 50%;
+  h1 {
+    width: 567px;
+    height: 100px;
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 48px;
+    color: var(--white);
+    margin: 50px 0 0 70px;
+  }
+  img {
+    position: absolute;
+    width: 100%;
+    height: 80%;
+    left: 0;
+    bottom: 0;
+  }
+}
+.container-right {
+  width: 50%;
+  height: 100vh;
   display: flex;
-  width: 493px;
-  height: 518px;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-
-  background: var(--black200);
-  border-radius: 5px;
-
-  img {
-    width: 242px;
-    height: 85px;
+}
+.container-card {
+  display: flex;
+  flex-direction: column;
+  input {
+    width: 469px;
+    height: 65px;
   }
+
   h2 {
-    margin: 42px 0 12px;
-    font-family: "Open Sans";
     font-style: normal;
     font-weight: 600;
     font-size: 24px;
-    color: var(--white);
-
-    opacity: 0.7;
+    color: var(--white500);
+    margin-top: 65px;
+    margin-bottom: 20px;
   }
-  form {
+
+  img {
+    margin: auto;
+    width: 242px;
+    height: 86px;
+  }
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 4px;
+
+  button {
+    width: 140px;
+  }
+}
+
+.password-input {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  button {
+    all: unset;
+    cursor: pointer;
+  }
+
+  img {
+    position: absolute;
+    right: 25px;
+    bottom: 35px;
+    width: 32px;
+    height: 25px;
+  }
+  input::-ms-reveal,
+  input::-ms-clear {
+    display: none;
+  }
+  a {
     display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
+    width: 100%;
+    justify-content: flex-end;
 
-  input {
-    width: 354px;
-    height: 60px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    text-decoration: none;
+    color: var(--white600);
   }
-
-  div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+.error-message {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--red300);
+  text-align: right;
 }

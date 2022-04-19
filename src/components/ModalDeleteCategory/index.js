@@ -13,8 +13,8 @@ function ModalDeleteCategory() {
     },
   } = useStores();
 
-  function handleDeleteCategoryCloseModal() {
-    handleDeleteCategory(openModalDeleteCategory);
+  async function handleDeleteCategoryCloseModal() {
+    await handleDeleteCategory(openModalDeleteCategory);
     setOpenModalDeleteCategory(false);
   }
   return (
@@ -36,7 +36,7 @@ function ModalDeleteCategory() {
             Tem certeza que deseja excluir essa categoria? Essa ação não poderá ser desfeita.
           </p>
           <button
-            onClick={handleDeleteCategoryCloseModal}
+            onClick={() => handleDeleteCategoryCloseModal()}
             className="button"
           >
             Excluir
