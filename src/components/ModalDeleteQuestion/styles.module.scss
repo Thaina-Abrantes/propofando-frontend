@@ -8,23 +8,23 @@
   overflow: auto;
   background: #3d3d3d4b;
 }
+
 .container {
   width: 592px;
-  height: 275px;
+  height: 208px;
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 0;
   right: 0;
+  left: 0;
   margin: auto;
   background: var(--white200);
 
-  form {
+  div {
     display: flex;
     flex-direction: column;
-    padding: 5px 25px 15px 25px;
+    padding: 10px 20px;
     gap: 15px;
-    margin-top: 15px;
   }
   h2 {
     font-family: "Open Sans";
@@ -33,29 +33,21 @@
     font-size: 24px;
     line-height: 33px;
   }
-  input {
-    width: 354px;
-  }
 
   button {
-    width: 255px;
+    width: 157px;
     height: 48px;
   }
 }
+
 .btn-close {
   position: relative;
-  margin: 0;
-  padding: 0;
   button {
     all: unset;
+    padding: 15px;
     position: absolute;
-    right: 15px;
-    top: 15px;
+    right: 0;
+    top: 0;
   }
-
   cursor: pointer;
-}
-
-.span-error{
-  display: flex;
 }

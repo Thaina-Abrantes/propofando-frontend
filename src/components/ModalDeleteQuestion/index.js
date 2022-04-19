@@ -2,27 +2,28 @@ import { useStores } from 'stores';
 import style from './styles.module.scss';
 import clear from '../../assets/clear-icon.svg';
 
-function ModalDeleteCategory() {
+function ModalDeleteQuestion() {
   const {
-    categoryStore: {
-      handleDeleteCategory,
+    questionStore: {
+      handleDeleteQuestion,
     },
     modalStore: {
-      openModalDeleteCategory,
-      setOpenModalDeleteCategory,
+      openModalDeleteQuestion,
+      setOpenModalDeleteQuestion,
     },
   } = useStores();
 
-  async function handleDeleteCategoryCloseModal() {
-    await handleDeleteCategory(openModalDeleteCategory);
-    setOpenModalDeleteCategory(false);
+  function handleCloseModalDeleteQuestion() {
+    handleDeleteQuestion(openModalDeleteQuestion);
+    setOpenModalDeleteQuestion(false);
   }
+
   return (
     <div className={style.background}>
       <div className={style.container}>
         <div className={style['btn-close']}>
           <button
-            onClick={() => setOpenModalDeleteCategory(false)}
+            onClick={() => setOpenModalDeleteQuestion(false)}
           >
             <img src={clear} alt="Close" />
 
@@ -30,13 +31,13 @@ function ModalDeleteCategory() {
         </div>
         <div>
           <h2>
-            Excluir categoria
+            Excluir questão
           </h2>
           <p>
-            Tem certeza que deseja excluir essa categoria? Essa ação não poderá ser desfeita.
+            Tem certeza que deseja excluir essa questão? Essa ação não poderá ser desfeita.
           </p>
           <button
-            onClick={() => handleDeleteCategoryCloseModal()}
+            onClick={handleCloseModalDeleteQuestion}
             className="button"
           >
             Excluir
@@ -48,4 +49,4 @@ function ModalDeleteCategory() {
   );
 }
 
-export default ModalDeleteCategory;
+export default ModalDeleteQuestion;

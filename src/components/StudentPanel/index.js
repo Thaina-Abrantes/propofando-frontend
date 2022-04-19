@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useStores } from 'stores';
 import analytics from '../../assets/analytics-icon.svg';
 import paste from '../../assets/content-paste-icon.svg';
 import arrowDown from '../../assets/arrow-down.svg';
@@ -8,8 +9,17 @@ import logout from '../../assets/logout-icon.svg';
 import style from './styles.module.scss';
 
 export default function StudentPanel() {
+  const {
+    userStore: { handleClearUserData },
+  } = useStores();
+
   const navigate = useNavigate();
   const [showSimulated, setShowSimulated] = useState(false);
+
+  function handleLogout() {
+    handleClearUserData();
+    navigate('/login');
+  }
 
   return (
     <section className={style.container}>
@@ -39,7 +49,7 @@ export default function StudentPanel() {
       )}
       <div
         className={style.logout}
-        onClick={() => navigate('/login')}
+        onClick={handleLogout}
       >
         <img src={logout} alt="Sair" />
         <span>Sair da conta</span>
