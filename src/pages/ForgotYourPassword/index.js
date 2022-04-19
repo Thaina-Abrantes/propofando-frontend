@@ -3,36 +3,55 @@
 import { useState } from 'react';
 import { emailSchema } from 'validations/redefineValidation';
 import { useNavigate } from 'react-router-dom';
+import { useStores } from 'stores';
+import { useForm } from 'react-hook-form';
+import api from '../../services/api';
 import style from './styles.module.scss';
 import logo from '../../assets/logo-dark.svg';
 import arrow from '../../assets/arrow-back-icon-white.svg';
 
 export function ForgotYourPassword() {
+  const { utilsStore: { setAlert } } = useStores();
+
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [erroEmail, setErroEmail] = useState('');
 
-  async function handleSubmit(e) {
+  const { handleSubmit } = useForm();
+
+  async function onSubmit(e) {
     setErroEmail('');
-    e.preventDefault();
 
     try {
       emailSchema.validateSync({
         email,
       });
+
+      const body = { email };
+      const result = await api.post('/users/recovery-password', body);
+
+      const { data } = result;
+
+      if (result.status > 204) {
+        setAlert({ open: true, type: 'error', message: data?.message || data });
+        return;
+      }
+
+      setAlert({ open: true, type: 'success', message: data?.message || data });
     } catch (err) {
-      if (err.params.path === 'email') {
+      if (err?.params?.path === 'email') {
         setErroEmail(err.message);
       }
+
+      const { request: { response } } = err;
+
+      setAlert({ open: true, type: 'error', message: response?.message || response });
     }
   }
+
   function handleChange(value) {
     setEmail(value);
   }
-
-  const body = {
-    email,
-  };
 
   return (
     <div className={style['container-main']}>
@@ -42,7 +61,7 @@ export function ForgotYourPassword() {
         </a>
         <img src={logo} alt="Logo" />
       </div>
-      <form className={style['container-card']} onSubmit={handleSubmit}>
+      <form className={style['container-card']} onSubmit={handleSubmit(onSubmit)}>
         <h1>Esqueceu sua senha?</h1>
         <p>
           Digite o endereço de e-mail associado à sua
@@ -62,7 +81,7 @@ export function ForgotYourPassword() {
           />
           {erroEmail && <span className="error-message">{erroEmail}</span>}
         </div>
-        <button className="button" onClick={() => navigate('/redefine/:token')}>
+        <button className="button" onClick={handleSubmit(onSubmit)}>
           Enviar
         </button>
       </form>
