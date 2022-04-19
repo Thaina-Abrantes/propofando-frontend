@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useStores } from 'stores';
 import { useNavigate } from 'react-router-dom';
 import clip from '../../assets/annex-icon.svg';
 import arrowBack from '../../assets/arrow-back-icon.svg';
@@ -6,30 +7,27 @@ import arrowDown from '../../assets/arrow-down.svg';
 import style from './styles.module.scss';
 
 const defaultValuesForm = {
-  title: '',
-  description: '',
-  explanation: '',
+  title: 'Título Teste',
+  description: 'testando',
+  explanation: 'Testando',
+  categoryId: '72fc3e04-6114-45fa-9725-524c04c92404',
 };
 
 const defaultAlternatives = [
   {
-    title: 'optionA',
-    description: '',
+    description: 'teste',
+    correct: true,
+  },
+  {
+    description: 'teste',
     correct: false,
   },
   {
-    title: 'optionB',
-    description: '',
+    description: 'teste',
     correct: false,
   },
   {
-    title: 'optionC',
-    description: '',
-    correct: false,
-  },
-  {
-    title: 'optionD',
-    description: '',
+    description: 'teste',
     correct: false,
   },
 ];
@@ -40,6 +38,15 @@ export function AddQuestion() {
   const [alternatives, setAlternatives] = useState(defaultAlternatives);
   const [selectedRadio, setSelectedRadio] = useState('');
   const titleSize = 200 - (form.title.split('').length);
+
+  const {
+    questionStore: {
+      handleRegisterQuestion,
+      setErrorQuestion,
+    },
+  } = useStores();
+
+  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUzMTNmNTdhLTJiMzQtNDU0Yi04ZTJlLTEyOGQ2NDllNGJkOSIsImVtYWlsIjoibWFudUBlbWFpbC5jb20iLCJ1c2VyVHlwZSI6InN1cGVyIGFkbWluIiwiaWF0IjoxNjUwMzg4MDMwLCJleHAiOjE2NTA0NzQ0MzB9.r6UNhQLgZLTaPTOT7ztERqcTISUKxpPswxaXpMCiheo';
 
   const isRadioSelected = (value) => selectedRadio === value;
 
@@ -80,8 +87,13 @@ export function AddQuestion() {
     setAlternatives(localAlternatives);
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
+    const response = await handleRegisterQuestion({ form, alternatives });
+    if (response.status > 201) {
+      return;
+    }
+    setErrorQuestion('');
   }
 
   return (
@@ -125,7 +137,13 @@ export function AddQuestion() {
               <label>
                 Categoria
                 <select>
-                  <option value="0">Select</option>
+                  <option
+                    value={form.categoryId}
+                    onChange={(e) => handleChange(e.target)}
+                  >
+                    Select
+
+                  </option>
                 </select>
               </label>
               <img src={arrowDown} alt="seta" />
