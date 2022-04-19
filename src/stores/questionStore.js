@@ -2,7 +2,7 @@ import { useState } from 'react';
 import api from '../services/api';
 
 export function useQuestion() {
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUzMTNmNTdhLTJiMzQtNDU0Yi04ZTJlLTEyOGQ2NDllNGJkOSIsImVtYWlsIjoibWFudUBlbWFpbC5jb20iLCJ1c2VyVHlwZSI6InN1cGVyIGFkbWluIiwiaWF0IjoxNjUwMTIxMzk0LCJleHAiOjE2NTAyMDc3OTR9.MPVtoFOswhG680UMD37chTCsnr5bJVRjZeZmGXur9tw';
+  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUzMTNmNTdhLTJiMzQtNDU0Yi04ZTJlLTEyOGQ2NDllNGJkOSIsImVtYWlsIjoibWFudUBlbWFpbC5jb20iLCJ1c2VyVHlwZSI6InN1cGVyIGFkbWluIiwiaWF0IjoxNjUwMzg4MDMwLCJleHAiOjE2NTA0NzQ0MzB9.r6UNhQLgZLTaPTOT7ztERqcTISUKxpPswxaXpMCiheo';
 
   const [errorQuestion, setErrorQuestion] = useState('');
   const [listQuestions, setListQuestions] = useState([]);
@@ -42,9 +42,35 @@ export function useQuestion() {
     }
   }
 
+  async function handleRegisterQuestion({ form, alternatives }) {
+    const body = {
+      title: form.title,
+      description: form.description,
+      categoryId: form.categoryId,
+      image: form.image,
+      explanationVideo: form.explanationVideo,
+      explanationText: form.explanation,
+      alternatives,
+    };
+    console.log(body);
+    try {
+      const response = await api.post('/questions', body, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response;
+    } catch (error) {
+      const currentError = error.response.data.message || error.response.data;
+      setErrorQuestion(currentError);
+      return error.response;
+    }
+  }
+
   return {
     handleListQuestions,
     handleDeleteQuestion,
+    handleRegisterQuestion,
     errorQuestion,
     setErrorQuestion,
     listQuestions,
