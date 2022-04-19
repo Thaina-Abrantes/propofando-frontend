@@ -1,6 +1,7 @@
 import SearchQuestion from 'components/SearchQuestion';
 import { useEffect, useState } from 'react';
 import { useStores } from 'stores';
+import Paginator from 'components/Paginator';
 import style from './styles.module.scss';
 import pasteIcon from '../../assets/content-paste-icon.svg';
 import editIcon from '../../assets/edit-icon.svg';
@@ -8,6 +9,9 @@ import deleteIcon from '../../assets/delete-icon.svg';
 
 export function Questions() {
   const {
+    userStore: {
+      token,
+    },
     modalStore: {
       openModalDeleteQuestion,
       setOpenModalDeleteQuestion,
@@ -15,14 +19,17 @@ export function Questions() {
     questionStore: {
       handleListQuestions,
       listQuestions,
+      currentPage,
+      setCurrentPage,
+      totalPages,
     },
   } = useStores();
 
   const [serchQuestion, setSearchQuestion] = useState('');
 
-  useEffect(() => {
-    handleListQuestions();
-  }, [openModalDeleteQuestion]);
+  useEffect(async () => {
+    await handleListQuestions(token);
+  }, [currentPage, totalPages, openModalDeleteQuestion]);
 
   return (
     <main>
@@ -34,7 +41,7 @@ export function Questions() {
           <div className={style['manage-title']}><span>Gerenciar</span></div>
         </div>
         <div className={style['table-body']}>
-          {listQuestions.filter((item) => item.title.toLocaleLowerCase()
+          {listQuestions && listQuestions.filter((item) => item.title.toLocaleLowerCase()
             .replace(/[áàãäâ]/, 'a')
             .replace(/[éèëê]/, 'e')
             .replace(/[íìïî]/, 'i')
@@ -56,6 +63,7 @@ export function Questions() {
               </div>
             ))}
         </div>
+        <Paginator setCurrentPage={setCurrentPage} totalPages={totalPages} />
       </div>
     </main>
   );

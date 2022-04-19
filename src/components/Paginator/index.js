@@ -14,7 +14,7 @@ export default function Paginator({ setCurrentPage, totalPages }) {
         onPageChange={handlePageClick}
         previousLabel
         pageRangeDisplayed={2}
-        pageCount={totalPages}
+        pageCount={totalPages || 1}
         renderOnZeroPageCount={null}
         marginPagesDisplayed={1}
         containerClassName={styles['container-class-name']}

@@ -3,15 +3,15 @@ import api from '../services/api';
 import { useUser } from './userStore';
 
 export function useQuestion() {
-  const { token } = useUser();
-
   const [errorQuestion, setErrorQuestion] = useState('');
   const [listQuestions, setListQuestions] = useState([]);
   const [idCategory, setIdCategory] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
-  async function handleListQuestions() {
+  async function handleListQuestions(token) {
     try {
-      const response = await api.get(`/questions?category=${idCategory}`, {
+      const response = await api.get(`/questions?page=${currentPage}&&category=${idCategory}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -19,6 +19,7 @@ export function useQuestion() {
       const { data } = response;
 
       setListQuestions(data.questions);
+      setTotalPages(data.totalPages);
     } catch (error) {
       const currentError = error.response.data.message || error.response.data;
       setErrorQuestion(currentError);
@@ -26,9 +27,11 @@ export function useQuestion() {
     }
   }
 
+  const { token } = useUser();
+
   async function handleDeleteQuestion(id) {
     try {
-      const result = await api.delete(`/questions/${id}`, {
+      await api.delete(`/questions/${id}`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
@@ -50,5 +53,8 @@ export function useQuestion() {
     setListQuestions,
     idCategory,
     setIdCategory,
+    currentPage,
+    setCurrentPage,
+    totalPages,
   };
 }
