@@ -24,13 +24,22 @@ function ModalEdit() {
   function handleChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
+  let formValues = {};
   useEffect(() => {
     if (openModalEdit && userInEditing) {
-      const formValues = {
-        name: userInEditing.name,
-        email: userInEditing.email,
-        password: userInEditing.password,
-      };
+      if (form.password) {
+        formValues = {
+          name: userInEditing.name,
+          email: userInEditing.email,
+          password: form.password,
+        };
+      } else {
+        formValues = {
+          name: userInEditing.name,
+          email: userInEditing.email,
+        };
+      }
+
       setForm(formValues);
     }
   }, [userInEditing, openModalEdit]);
@@ -88,7 +97,7 @@ function ModalEdit() {
                 placeholder="Senha"
                 type="password"
                 name="password"
-                value={form.password}
+                value={form.password || ''}
                 onChange={(e) => handleChange(e)}
               />
             </div>
