@@ -7,6 +7,7 @@ export function useCategory() {
   const [categoryInEditing, setCategoryInEditing] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPage] = useState(1);
+  const [dataCategory, setDataCategory] = useState([]);
   // TODO @importar o token correto
   // TODO @criar a função de listar aqui
 
@@ -74,6 +75,7 @@ export function useCategory() {
     setCurrentPage,
     totalPages,
     setTotalPage,
-
+    dataCategory,
+    setDataCategory,
   };
 }

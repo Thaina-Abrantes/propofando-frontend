@@ -10,11 +10,10 @@ import deleteIcon from '../../assets/delete-icon.svg';
 import api from '../../services/api';
 
 export function QuestionCategory() {
-  const [dataCategory, setDataCategory] = useState([]);
   const navigate = useNavigate();
   const [serchItem, setSearchItem] = useState('');
 
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUzMTNmNTdhLTJiMzQtNDU0Yi04ZTJlLTEyOGQ2NDllNGJkOSIsImVtYWlsIjoibWFudUBlbWFpbC5jb20iLCJ1c2VyVHlwZSI6InN1cGVyIGFkbWluIiwiaWF0IjoxNjQ5NzkyOTkzLCJleHAiOjE2NDk4NzkzOTN9.vaAeQmJW0MvrqlOs47l6rqogh-jraZUR9qior1pS15E';
+  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUzMTNmNTdhLTJiMzQtNDU0Yi04ZTJlLTEyOGQ2NDllNGJkOSIsImVtYWlsIjoibWFudUBlbWFpbC5jb20iLCJ1c2VyVHlwZSI6InN1cGVyIGFkbWluIiwiaWF0IjoxNjUwMzg4MDMwLCJleHAiOjE2NTA0NzQ0MzB9.r6UNhQLgZLTaPTOT7ztERqcTISUKxpPswxaXpMCiheo';
 
   const {
     modalStore: {
@@ -28,6 +27,8 @@ export function QuestionCategory() {
       currentPage,
       totalPages,
       setTotalPage,
+      dataCategory,
+      setDataCategory,
     },
     questionStore: {
       setIdCategory,
