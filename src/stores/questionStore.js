@@ -42,17 +42,16 @@ export function useQuestion() {
     }
   }
 
-  async function handleRegisterQuestion({ form, alternatives }) {
+  async function handleRegisterQuestion({ form, alternatives, categoryId }) {
     const body = {
       title: form.title,
       description: form.description,
-      categoryId: form.categoryId,
+      categoryId,
       image: form.image,
       explanationVideo: form.explanationVideo,
       explanationText: form.explanation,
       alternatives,
     };
-    console.log(body);
     try {
       const response = await api.post('/questions', body, {
         headers: {

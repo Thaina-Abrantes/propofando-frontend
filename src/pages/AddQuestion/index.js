@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useStores } from 'stores';
 import { useNavigate } from 'react-router-dom';
 import clip from '../../assets/annex-icon.svg';
@@ -7,10 +7,9 @@ import arrowDown from '../../assets/arrow-down.svg';
 import style from './styles.module.scss';
 
 const defaultValuesForm = {
-  title: 'Título Teste',
-  description: 'testando',
-  explanation: 'Testando',
-  categoryId: '72fc3e04-6114-45fa-9725-524c04c92404',
+  title: '',
+  description: '',
+  explanation: '',
 };
 
 const defaultAlternatives = [
@@ -37,12 +36,16 @@ export function AddQuestion() {
   const [form, setForm] = useState(defaultValuesForm);
   const [alternatives, setAlternatives] = useState(defaultAlternatives);
   const [selectedRadio, setSelectedRadio] = useState('');
+  const [categoryId, setCategoryId] = useState('');
   const titleSize = 200 - (form.title.split('').length);
 
   const {
     questionStore: {
       handleRegisterQuestion,
       setErrorQuestion,
+    },
+    categoryStore: {
+      dataCategory,
     },
   } = useStores();
 
@@ -87,9 +90,13 @@ export function AddQuestion() {
     setAlternatives(localAlternatives);
   }
 
+  function handleCategoryId(e) {
+    setCategoryId(e.target.value);
+  }
+
   async function handleSubmit(e) {
     e.preventDefault();
-    const response = await handleRegisterQuestion({ form, alternatives });
+    const response = await handleRegisterQuestion({ form, alternatives, categoryId });
     if (response.status > 201) {
       return;
     }
@@ -136,14 +143,18 @@ export function AddQuestion() {
             <div className={style['input-select']}>
               <label>
                 Categoria
-                <select>
-                  <option
-                    value={form.categoryId}
-                    onChange={(e) => handleChange(e.target)}
-                  >
+                <select onChange={(e) => handleCategoryId(e)}>
+                  <option>
                     Select
-
                   </option>
+                  {dataCategory.map((data) => (
+                    <option
+                      key={data.id}
+                      value={data.id}
+                    >
+                      {data.name}
+                    </option>
+                  ))}
                 </select>
               </label>
               <img src={arrowDown} alt="seta" />
