@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
-/* eslint-disable max-len */
 import { useState } from 'react';
 import { emailSchema } from 'validations/redefineValidation';
 import { useNavigate } from 'react-router-dom';
