@@ -17,7 +17,6 @@ function ModalEdit() {
       userInEditing,
       setUserInEditing,
       errorUser,
-      setErrorUser,
     },
   } = useStores();
 
@@ -87,6 +86,7 @@ function ModalEdit() {
                 value={form.email}
                 onChange={(e) => handleChange(e)}
               />
+              {errorUser && <span>{errorUser}</span>}
             </div>
           </div>
           <div className={style.wrapInputBtn}>

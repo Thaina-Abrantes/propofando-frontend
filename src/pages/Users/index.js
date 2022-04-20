@@ -27,6 +27,7 @@ export function Users() {
       setDataUsers,
       setTotalPage,
       currentPage,
+      setErrorUser,
     },
   } = useStores();
 
@@ -37,6 +38,7 @@ export function Users() {
   function handleOpenEditUser(item) {
     setUserInEditing(item);
     setOpenModalEdit(true);
+    setErrorUser('');
   }
   async function handleListUsers() {
     try {
