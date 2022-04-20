@@ -18,6 +18,9 @@ function AdminPanel() {
       openModalNewCategory,
       setOpenModalNewCategory,
     },
+    questionStore: {
+      setQuestionInEditing,
+    },
   } = useStores();
 
   return (
@@ -66,6 +69,7 @@ function AdminPanel() {
           <NavLink
             to="/main/add-question"
             className={({ isActive }) => (isActive ? style.activeLink : style.inactiveLink)}
+            onClick={() => setQuestionInEditing(false)}
           >
             {' '}
             Criar questão
