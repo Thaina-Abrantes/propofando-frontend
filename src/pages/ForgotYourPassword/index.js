@@ -40,10 +40,6 @@ export function ForgotYourPassword() {
       if (err?.params?.path === 'email') {
         setErroEmail(err.message);
       }
-
-      const { request: { response } } = err;
-
-      setAlert({ open: true, type: 'error', message: response?.message || response });
     }
   }
 
