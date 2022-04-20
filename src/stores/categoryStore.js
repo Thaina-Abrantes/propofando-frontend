@@ -1,13 +1,14 @@
 import { useState } from 'react';
-import api from '../services/api';
 import { useUser } from './userStore';
+import api from '../services/api';
 
 export function useCategory() {
+  const { token } = useUser();
+
   const [errorCategory, setErrorCategory] = useState('');
   const [categoryInEditing, setCategoryInEditing] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPage] = useState(1);
-  const { token } = useUser();
 
   async function handleRegisterCategory(category) {
     const body = {
@@ -43,6 +44,7 @@ export function useCategory() {
       return error.response;
     }
   }
+
   async function handleEditCategory(category) {
     const body = {
       name: category,
@@ -61,6 +63,7 @@ export function useCategory() {
       return error.response;
     }
   }
+
   return {
     handleRegisterCategory,
     handleDeleteCategory,
@@ -73,6 +76,5 @@ export function useCategory() {
     setCurrentPage,
     totalPages,
     setTotalPage,
-
   };
 }

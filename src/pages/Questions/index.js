@@ -1,34 +1,35 @@
 import SearchQuestion from 'components/SearchQuestion';
 import { useEffect, useState } from 'react';
+import { useStores } from 'stores';
+import Paginator from 'components/Paginator';
 import style from './styles.module.scss';
 import pasteIcon from '../../assets/content-paste-icon.svg';
 import editIcon from '../../assets/edit-icon.svg';
 import deleteIcon from '../../assets/delete-icon.svg';
-import api from '../../services/api';
 
 export function Questions() {
+  const {
+    userStore: {
+      token,
+    },
+    modalStore: {
+      openModalDeleteQuestion,
+      setOpenModalDeleteQuestion,
+    },
+    questionStore: {
+      handleListQuestions,
+      listQuestions,
+      currentPage,
+      setCurrentPage,
+      totalPages,
+    },
+  } = useStores();
+
   const [serchQuestion, setSearchQuestion] = useState('');
-  const [allQuestions, setAllQuestions] = useState([]);
 
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUzMTNmNTdhLTJiMzQtNDU0Yi04ZTJlLTEyOGQ2NDllNGJkOSIsImVtYWlsIjoibWFudUBlbWFpbC5jb20iLCJ1c2VyVHlwZSI6InN1cGVyIGFkbWluIiwiaWF0IjoxNjQ5ODUzMTUwLCJleHAiOjE2NDk5Mzk1NTB9.GsJlgvXfrvf1dirj4Hkm6jvhte-Pvqg8h8cPGlIRUOw';
-
-  useEffect(() => {
-    handleFilterQuestion();
-  }, [allQuestions]);
-
-  async function handleFilterQuestion() {
-    try {
-      const response = await api.get('/questions', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const { data } = response;
-      setAllQuestions(data.questions);
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  useEffect(async () => {
+    await handleListQuestions(token);
+  }, [currentPage, totalPages, openModalDeleteQuestion]);
 
   return (
     <main>
@@ -40,7 +41,7 @@ export function Questions() {
           <div className={style['manage-title']}><span>Gerenciar</span></div>
         </div>
         <div className={style['table-body']}>
-          {allQuestions.filter((item) => item.title.toLocaleLowerCase()
+          {listQuestions && listQuestions.filter((item) => item.title.toLocaleLowerCase()
             .replace(/[áàãäâ]/, 'a')
             .replace(/[éèëê]/, 'e')
             .replace(/[íìïî]/, 'i')
@@ -57,11 +58,12 @@ export function Questions() {
                   <button>
                     <img src={editIcon} alt="editar" />
                   </button>
-                  <button><img src={deleteIcon} alt="deletar" /></button>
+                  <button onClick={() => setOpenModalDeleteQuestion(item.id)}><img src={deleteIcon} alt="deletar" /></button>
                 </div>
               </div>
             ))}
         </div>
+        <Paginator setCurrentPage={setCurrentPage} totalPages={totalPages} />
       </div>
     </main>
   );
