@@ -37,20 +37,29 @@ export function AddQuestion() {
   const [alternatives, setAlternatives] = useState(defaultAlternatives);
   const [selectedRadio, setSelectedRadio] = useState('');
   const [categoryId, setCategoryId] = useState('');
+  const [question, setQuestion] = useState('');
   const titleSize = 200 - (form.title.split('').length);
 
   const {
     questionStore: {
       handleRegisterQuestion,
       setErrorQuestion,
+      questionInEditing,
+      setQuestionInEditing,
     },
     categoryStore: {
       dataCategory,
     },
   } = useStores();
 
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUzMTNmNTdhLTJiMzQtNDU0Yi04ZTJlLTEyOGQ2NDllNGJkOSIsImVtYWlsIjoibWFudUBlbWFpbC5jb20iLCJ1c2VyVHlwZSI6InN1cGVyIGFkbWluIiwiaWF0IjoxNjUwMzg4MDMwLCJleHAiOjE2NTA0NzQ0MzB9.r6UNhQLgZLTaPTOT7ztERqcTISUKxpPswxaXpMCiheo';
+  useEffect(() => {
+    if (questionInEditing) {
+      setQuestion(questionInEditing);
+      console.log(questionInEditing);
+    }
+  }, [questionInEditing]);
 
+  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUzMTNmNTdhLTJiMzQtNDU0Yi04ZTJlLTEyOGQ2NDllNGJkOSIsImVtYWlsIjoibWFudUBlbWFpbC5jb20iLCJ1c2VyVHlwZSI6InN1cGVyIGFkbWluIiwiaWF0IjoxNjUwNDc1MDA3LCJleHAiOjE2NTA1NjE0MDd9.zg76Ntx3eoztp5OkEk4de1QbBK-DatpAxx_r9AtZspQ';
   const isRadioSelected = (value) => selectedRadio === value;
 
   const handleRadioClick = (e) => {
@@ -96,6 +105,8 @@ export function AddQuestion() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    console.log(question);
+
     const response = await handleRegisterQuestion({ form, alternatives, categoryId });
     if (response.status > 201) {
       return;
