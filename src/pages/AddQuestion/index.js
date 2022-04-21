@@ -37,7 +37,6 @@ export function AddQuestion() {
   const [alternatives, setAlternatives] = useState(defaultAlternatives);
   const [selectedRadio, setSelectedRadio] = useState('');
   const [categoryId, setCategoryId] = useState('');
-  const [question, setQuestion] = useState('');
   const titleSize = 200 - (form.title.split('').length);
 
   const {
@@ -54,7 +53,6 @@ export function AddQuestion() {
 
   useEffect(() => {
     if (questionInEditing) {
-      setQuestion(questionInEditing);
       console.log(questionInEditing);
     }
   }, [questionInEditing]);
@@ -105,7 +103,7 @@ export function AddQuestion() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log(question);
+    console.log(questionInEditing);
 
     const response = await handleRegisterQuestion({ form, alternatives, categoryId });
     if (response.status > 201) {
