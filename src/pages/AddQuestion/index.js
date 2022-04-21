@@ -1,6 +1,8 @@
+/* eslint-disable no-unused-expressions */
 import { useState, useEffect } from 'react';
 import { useStores } from 'stores';
 import { useNavigate } from 'react-router-dom';
+import api from '../../services/api';
 import clip from '../../assets/annex-icon.svg';
 import arrowBack from '../../assets/arrow-back-icon.svg';
 import arrowDown from '../../assets/arrow-down.svg';
@@ -32,14 +34,8 @@ const defaultAlternatives = [
 ];
 
 export function AddQuestion() {
-  const navigate = useNavigate();
-  const [form, setForm] = useState(defaultValuesForm);
-  const [alternatives, setAlternatives] = useState(defaultAlternatives);
-  const [selectedRadio, setSelectedRadio] = useState('');
-  const [categoryId, setCategoryId] = useState('');
-  const titleSize = 200 - (form.title.split('').length);
-
   const {
+    userStore: { token },
     questionStore: {
       handleRegisterQuestion,
       handleEditQuestion,
@@ -47,10 +43,16 @@ export function AddQuestion() {
       questionInEditing,
       setQuestionInEditing,
     },
-    categoryStore: {
-      dataCategory,
-    },
   } = useStores();
+
+  const navigate = useNavigate();
+
+  const [form, setForm] = useState(defaultValuesForm);
+  const [alternatives, setAlternatives] = useState(defaultAlternatives);
+  const [selectedRadio, setSelectedRadio] = useState('');
+  const [categoryId, setCategoryId] = useState('');
+  const [dataCategory, setDataCategory] = useState([]);
+  const titleSize = 200 - (form.title.split('').length);
 
   useEffect(() => {
     if (questionInEditing) {
@@ -58,7 +60,6 @@ export function AddQuestion() {
     }
   }, [questionInEditing]);
 
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUzMTNmNTdhLTJiMzQtNDU0Yi04ZTJlLTEyOGQ2NDllNGJkOSIsImVtYWlsIjoibWFudUBlbWFpbC5jb20iLCJ1c2VyVHlwZSI6InN1cGVyIGFkbWluIiwiaWF0IjoxNjUwNTQyNzg3LCJleHAiOjE2NTA2MjkxODd9.IyroQR1tRt5MgIkchu3d0kuX0byZDbVv_msXQMQvMGw';
   const isRadioSelected = (value) => selectedRadio === value;
 
   const handleRadioClick = (e) => {
@@ -102,6 +103,22 @@ export function AddQuestion() {
     setCategoryId(e.target.value);
   }
 
+  async function handleListCategory() {
+    try {
+      const response = await api.get('/categories/', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const { data } = response;
+
+      setDataCategory(data);
+      return;
+    } catch (error) {
+      return error;
+    }
+  }
+
   async function handleSubmit(e) {
     e.preventDefault();
 
@@ -119,6 +136,10 @@ export function AddQuestion() {
       setQuestionInEditing(false);
     }
   }
+
+  useEffect(async () => {
+    await handleListCategory();
+  }, []);
 
   return (
     <main className={style.container}>
@@ -162,9 +183,9 @@ export function AddQuestion() {
                 Categoria
                 <select onChange={(e) => handleCategoryId(e)}>
                   <option>
-                    Select
+                    Selecione
                   </option>
-                  {dataCategory.map((data) => (
+                  {dataCategory?.map((data) => (
                     <option
                       key={data.id}
                       value={data.id}
