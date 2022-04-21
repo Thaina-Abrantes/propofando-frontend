@@ -1,14 +1,16 @@
 import { useState } from 'react';
+import { useUser } from './userStore';
 import api from '../services/api';
 
 export function useCategory() {
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFkNmVlNjMzLTU5OWItNDY5MC04ZWU5LWRkNjJkNGQyY2FmNiIsImVtYWlsIjoibWFudUBlbWFpbC5jb20iLCJ1c2VyVHlwZSI6InN1cGVyIGFkbWluIiwiaWF0IjoxNjQ5ODU2MTI3LCJleHAiOjE2NDk5NDI1Mjd9.LXKQ7eJNaHpx1QMnqKV_Hi1zQcNFAfAv6nKsZnH1SGw';
+  const { token } = useUser();
+
   const [errorCategory, setErrorCategory] = useState('');
   const [categoryInEditing, setCategoryInEditing] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPage] = useState(1);
   const [dataCategory, setDataCategory] = useState([]);
-  // TODO @importar o token correto
+
   // TODO @criar a função de listar aqui
 
   async function handleRegisterCategory(category) {
@@ -45,6 +47,7 @@ export function useCategory() {
       return error.response;
     }
   }
+
   async function handleEditCategory(category) {
     const body = {
       name: category,
@@ -63,6 +66,7 @@ export function useCategory() {
       return error.response;
     }
   }
+
   return {
     handleRegisterCategory,
     handleDeleteCategory,

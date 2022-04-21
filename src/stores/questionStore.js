@@ -1,25 +1,28 @@
 import { useState } from 'react';
 import api from '../services/api';
+import { useUser } from './userStore';
 
 export function useQuestion() {
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUzMTNmNTdhLTJiMzQtNDU0Yi04ZTJlLTEyOGQ2NDllNGJkOSIsImVtYWlsIjoibWFudUBlbWFpbC5jb20iLCJ1c2VyVHlwZSI6InN1cGVyIGFkbWluIiwiaWF0IjoxNjUwNDc1MDA3LCJleHAiOjE2NTA1NjE0MDd9.zg76Ntx3eoztp5OkEk4de1QbBK-DatpAxx_r9AtZspQ';
+  const { token } = useUser();
+
   const [errorQuestion, setErrorQuestion] = useState('');
   const [listQuestions, setListQuestions] = useState([]);
   const [idCategory, setIdCategory] = useState('');
   const [questionInEditing, setQuestionInEditing] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
-  async function handleListQuestions() {
+  async function handleListQuestions(token) {
     try {
-      const response = await api.get('/questions', {
+      const response = await api.get(`/questions?page=${currentPage}&&category=${idCategory}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
       const { data } = response;
 
-      const questionsSelected = data.questions
-        .filter((question) => question.categoryId === idCategory);
-      setListQuestions(questionsSelected);
+      setListQuestions(data.questions);
+      setTotalPages(data.totalPages);
     } catch (error) {
       const currentError = error.response.data.message || error.response.data;
       setErrorQuestion(currentError);
@@ -104,5 +107,8 @@ export function useQuestion() {
     setIdCategory,
     questionInEditing,
     setQuestionInEditing,
+    currentPage,
+    setCurrentPage,
+    totalPages,
   };
 }

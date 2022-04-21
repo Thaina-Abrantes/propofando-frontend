@@ -1,12 +1,17 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { newPasswordSchema } from 'validations/redefineValidation';
+import { useStores } from 'stores';
+import { useForm } from 'react-hook-form';
+import api from '../../services/api';
 import style from './styles.module.scss';
 import logo from '../../assets/logo-dark.svg';
 import arrow from '../../assets/arrow-back-icon-white.svg';
 import icon from '../../assets/confirmation-icon.svg';
 
 export function RedefinePassword() {
+  const { utilsStore: { setAlert } } = useStores();
+
   const navigate = useNavigate();
   const [form, setForm] = useState({ newPassword: '', confirmPassword: '' });
 
@@ -14,23 +19,41 @@ export function RedefinePassword() {
   const [erroConfirmPassword, setErroConfirmPassword] = useState('');
   const [erroNewPassword, setErroNewPassword] = useState('');
 
-  async function handleSubmit(e) {
+  const { handleSubmit } = useForm();
+
+  const { token } = useParams();
+
+  async function onSubmit() {
     setErroNewPassword('');
     setErroConfirmPassword('');
-    e.preventDefault();
+
+    const { newPassword: password, confirmPassword: passwordConfirmation } = form;
 
     try {
       newPasswordSchema.validateSync({
-        password: form.newPassword,
-        passwordConfirmation: form.confirmPassword,
+        password,
+        passwordConfirmation,
       });
+
+      const body = { password, passwordConfirmation };
+
+      const result = await api.post(`/users/redefine-password/${token}`, body);
+
+      console.log(result, 'result');
+
+      const { data } = result;
+
+      if (result.status > 204) {
+        setAlert({ open: true, type: 'error', message: data?.message || data });
+        return;
+      }
       setResetSuccessfully(true);
     } catch (err) {
-      if (err.params.path === 'password') {
-        setErroNewPassword(err.message);
+      if (err?.params?.path === 'password') {
+        setErroNewPassword(err?.message);
       }
-      if (err.params.path === 'passwordConfirmation') {
-        setErroConfirmPassword(err.message);
+      if (err?.params?.path === 'passwordConfirmation') {
+        setErroConfirmPassword(err?.message);
       }
     }
   }
@@ -50,7 +73,7 @@ export function RedefinePassword() {
         <img src={logo} alt="Logo" />
       </div>
       {!resetSuccessfully && (
-        <form className={style['container-card']} onSubmit={handleSubmit}>
+        <form className={style['container-card']} onSubmit={handleSubmit(onSubmit)}>
           <h1>Redefinir senha</h1>
           <p>
             Preencha os campos abaixo para definir uma
@@ -75,7 +98,7 @@ export function RedefinePassword() {
             onChange={handleChangeFormValue}
           />
           {erroConfirmPassword && <span className="error-message ">{erroConfirmPassword}</span>}
-          <button className="button" onClick={() => handleSubmit()}>
+          <button className="button" onClick={handleSubmit(onSubmit)}>
             Confirmar
           </button>
         </form>

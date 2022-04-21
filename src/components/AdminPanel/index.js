@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useStores } from 'stores';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import style from './styles.module.scss';
 import UserIcon from '../../assets/identity-icon.svg';
 import listIcon from '../../assets/bullet-list-icon.svg';
@@ -9,9 +9,8 @@ import arrowDown from '../../assets/arrow-down.svg';
 import logOut from '../../assets/login-icon.svg';
 
 function AdminPanel() {
-  const [showUser, setShowUSer] = useState(false);
-  const [showQuestion, setShowQuestion] = useState(false);
   const {
+    userStore: { handleClearUserData },
     modalStore: {
       openModalRegisterUser,
       setOpenModalRegisterUser,
@@ -22,6 +21,16 @@ function AdminPanel() {
       setQuestionInEditing,
     },
   } = useStores();
+
+  const [showUser, setShowUSer] = useState(false);
+  const [showQuestion, setShowQuestion] = useState(false);
+
+  const navigate = useNavigate();
+
+  function handleLogout() {
+    handleClearUserData();
+    navigate('/login');
+  }
 
   return (
     <section className={style.container}>
@@ -86,9 +95,12 @@ function AdminPanel() {
         </div>
       )}
 
-      <div className={style.logout}>
+      <div
+        className={style.logout}
+        onClick={handleLogout}
+      >
         <img src={logOut} alt="sair" />
-        <NavLink className={({ isActive }) => (isActive ? style.active : style.inactive)} to="/">Sair da conta</NavLink>
+        <span>Sair da conta</span>
       </div>
     </section>
   );
