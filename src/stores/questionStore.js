@@ -66,10 +66,36 @@ export function useQuestion() {
     }
   }
 
+  async function handleEditQuestion({ alternatives, categoryId }) {
+    const body = {
+      title: questionInEditing.title,
+      description: questionInEditing.description,
+      categoryId,
+      image: questionInEditing.image,
+      explanationVideo: questionInEditing.explanationVideo,
+      explanationText: questionInEditing.explanation,
+      alternatives,
+    };
+    try {
+      const response = await api.patch(`/questions/${questionInEditing.id}`, body, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log(questionInEditing);
+      return response;
+    } catch (error) {
+      const currentError = error.response.data.message || error.response.data;
+      setErrorQuestion(currentError);
+      return error.response;
+    }
+  }
+
   return {
     handleListQuestions,
     handleDeleteQuestion,
     handleRegisterQuestion,
+    handleEditQuestion,
     errorQuestion,
     setErrorQuestion,
     listQuestions,

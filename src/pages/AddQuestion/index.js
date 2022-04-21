@@ -42,6 +42,7 @@ export function AddQuestion() {
   const {
     questionStore: {
       handleRegisterQuestion,
+      handleEditQuestion,
       setErrorQuestion,
       questionInEditing,
       setQuestionInEditing,
@@ -57,7 +58,7 @@ export function AddQuestion() {
     }
   }, [questionInEditing]);
 
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUzMTNmNTdhLTJiMzQtNDU0Yi04ZTJlLTEyOGQ2NDllNGJkOSIsImVtYWlsIjoibWFudUBlbWFpbC5jb20iLCJ1c2VyVHlwZSI6InN1cGVyIGFkbWluIiwiaWF0IjoxNjUwNDc1MDA3LCJleHAiOjE2NTA1NjE0MDd9.zg76Ntx3eoztp5OkEk4de1QbBK-DatpAxx_r9AtZspQ';
+  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUzMTNmNTdhLTJiMzQtNDU0Yi04ZTJlLTEyOGQ2NDllNGJkOSIsImVtYWlsIjoibWFudUBlbWFpbC5jb20iLCJ1c2VyVHlwZSI6InN1cGVyIGFkbWluIiwiaWF0IjoxNjUwNTQyNzg3LCJleHAiOjE2NTA2MjkxODd9.IyroQR1tRt5MgIkchu3d0kuX0byZDbVv_msXQMQvMGw';
   const isRadioSelected = (value) => selectedRadio === value;
 
   const handleRadioClick = (e) => {
@@ -103,13 +104,20 @@ export function AddQuestion() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log(questionInEditing);
 
-    const response = await handleRegisterQuestion({ form, alternatives, categoryId });
-    if (response.status > 201) {
-      return;
+    if (!questionInEditing) {
+      const response = await handleRegisterQuestion({ form, alternatives, categoryId });
+      if (response.status > 201) {
+        return;
+      }
+      setErrorQuestion('');
+    } else {
+      const responseEdit = await handleEditQuestion({ alternatives, categoryId });
+      if (responseEdit.status > 204) {
+        return;
+      }
+      setQuestionInEditing(false);
     }
-    setErrorQuestion('');
   }
 
   return (
