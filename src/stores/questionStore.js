@@ -2,11 +2,11 @@ import { useState } from 'react';
 import api from '../services/api';
 
 export function useQuestion() {
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUzMTNmNTdhLTJiMzQtNDU0Yi04ZTJlLTEyOGQ2NDllNGJkOSIsImVtYWlsIjoibWFudUBlbWFpbC5jb20iLCJ1c2VyVHlwZSI6InN1cGVyIGFkbWluIiwiaWF0IjoxNjUwMzg4MDMwLCJleHAiOjE2NTA0NzQ0MzB9.r6UNhQLgZLTaPTOT7ztERqcTISUKxpPswxaXpMCiheo';
-
+  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUzMTNmNTdhLTJiMzQtNDU0Yi04ZTJlLTEyOGQ2NDllNGJkOSIsImVtYWlsIjoibWFudUBlbWFpbC5jb20iLCJ1c2VyVHlwZSI6InN1cGVyIGFkbWluIiwiaWF0IjoxNjUwNDc1MDA3LCJleHAiOjE2NTA1NjE0MDd9.zg76Ntx3eoztp5OkEk4de1QbBK-DatpAxx_r9AtZspQ';
   const [errorQuestion, setErrorQuestion] = useState('');
   const [listQuestions, setListQuestions] = useState([]);
   const [idCategory, setIdCategory] = useState('');
+  const [questionInEditing, setQuestionInEditing] = useState(false);
 
   async function handleListQuestions() {
     try {
@@ -76,5 +76,7 @@ export function useQuestion() {
     setListQuestions,
     idCategory,
     setIdCategory,
+    questionInEditing,
+    setQuestionInEditing,
   };
 }
