@@ -3,8 +3,6 @@ import api from '../services/api';
 import { useUser } from './userStore';
 
 export function useQuestion() {
-  const { token } = useUser();
-
   const [errorQuestion, setErrorQuestion] = useState('');
   const [listQuestions, setListQuestions] = useState([]);
   const [idCategory, setIdCategory] = useState('');
@@ -29,6 +27,8 @@ export function useQuestion() {
       return error.response;
     }
   }
+
+  const { token } = useUser();
 
   async function handleDeleteQuestion(id) {
     try {
