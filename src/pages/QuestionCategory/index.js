@@ -11,9 +11,6 @@ import api from '../../services/api';
 
 export function QuestionCategory() {
   const {
-    userStore: {
-      token,
-    },
     modalStore: {
       openModalDeleteCategory,
       setOpenModalDeleteCategory,
@@ -23,11 +20,14 @@ export function QuestionCategory() {
     categoryStore: {
       setCategoryInEditing,
       currentPage,
+      setTotalPage,
       setCurrentPage,
       totalPages,
-      setTotalPage,
       dataCategory,
       setDataCategory,
+    },
+    userStore: {
+      token,
     },
     questionStore: {
       setIdCategory,

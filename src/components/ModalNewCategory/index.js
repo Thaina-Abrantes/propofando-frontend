@@ -73,7 +73,11 @@ function ModalNewCategory() {
           </button>
         </div>
         <form onSubmit={handleSubmit}>
-          <h2>Nova categoria</h2>
+          <h2>
+            {categoryInEditing ? 'Editar' : 'Nova'}
+            {' '}
+            categoria
+          </h2>
 
           <label>
             Título
@@ -92,7 +96,7 @@ function ModalNewCategory() {
           <button
             className="button"
           >
-            Adicionar categoria
+            {categoryInEditing ? 'Salvar alterações' : 'Adicionar categoria'}
           </button>
         </form>
       </div>
