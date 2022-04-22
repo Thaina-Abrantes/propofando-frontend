@@ -61,6 +61,22 @@ export function ConsultQuestions() {
     },
   } = useStores();
 
+  function handleOpenExplanation() {
+    setOpenExplanation(true);
+    setOpenQuestionStatistics(false);
+    setOpenReportProblem(false);
+  }
+  function handleOpenQuestionStatistics() {
+    setOpenExplanation(false);
+    setOpenQuestionStatistics(true);
+    setOpenReportProblem(false);
+  }
+  function handleOpenReportProblem() {
+    setOpenExplanation(false);
+    setOpenQuestionStatistics(false);
+    setOpenReportProblem(true);
+  }
+
   return (
     <main className={style['container-main']}>
       <StudentHeader />
@@ -158,21 +174,21 @@ export function ConsultQuestions() {
           </div>
           <div className={style['container-links']}>
             <div className={style.links}>
-              <button onClick={() => setOpenExplanation(true)}>
+              <button onClick={() => handleOpenExplanation()}>
                 <img src={school} alt="Ícone de erro" />
                 <span>Consultar explicação</span>
               </button>
             </div>
 
             <div className={style.links}>
-              <button onClick={() => setOpenQuestionStatistics(true)}>
+              <button onClick={() => handleOpenQuestionStatistics()}>
                 <img src={analytics} alt="Ícone de erro" />
                 <span>Estatísticas da questão</span>
               </button>
             </div>
 
             <div className={style.links}>
-              <button onClick={() => setOpenReportProblem(true)}>
+              <button onClick={() => handleOpenReportProblem()}>
                 <img src={reportIcon} alt="Ícone de erro" />
                 <span>Reportar problema</span>
               </button>
