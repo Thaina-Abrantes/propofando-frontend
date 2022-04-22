@@ -69,7 +69,7 @@
   width: 100%;
   min-height: 100%;
   gap: 25px;
-  margin-bottom: 60px;
+  margin-bottom: 40px;
   align-items: flex-start;
 
   textarea {
@@ -138,11 +138,13 @@
   display: flex;
   flex-direction: column;
 }
+
 .question {
   display: flex;
   flex-direction: column;
   width: 836px;
   min-height: 360px;
+  margin-bottom: 40px;
 
   textarea {
     border: none;
@@ -191,6 +193,7 @@
     width: 246px;
     height: 48px;
   }
+  margin-top: 40px;
   margin-bottom: 20px;
 }
 
