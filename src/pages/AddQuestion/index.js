@@ -5,6 +5,7 @@ import { useStores } from 'stores';
 import { useNavigate } from 'react-router-dom';
 import InputAlternative from 'components/InputAlternative';
 import { caracterTextArea } from 'utils/caracterTextArea';
+import Upload from 'components/Upload';
 import api from '../../services/api';
 import clip from '../../assets/annex-icon.svg';
 import arrowBack from '../../assets/arrow-back-icon.svg';
@@ -58,6 +59,7 @@ export function AddQuestion() {
   const [alternatives, setAlternatives] = useState(defaultAlternatives);
   const [categoryId, setCategoryId] = useState('');
   const [dataCategory, setDataCategory] = useState([]);
+  const [openUpload, setOpenUpload] = useState(false);
   const titleSize = 200 - (form.title.split('').length);
 
   useEffect(() => {
@@ -195,7 +197,12 @@ export function AddQuestion() {
 
                 />
               </label>
-              <div>
+              <div onClick={() => setOpenUpload(true)}>
+                <Upload
+                  open={openUpload}
+                  setOpen={setOpenUpload}
+                  handleReturnUrl={(url) => setForm({ ...form, image: url })}
+                />
                 <img src={clip} alt="clip" />
                 <span>Anexar mídia</span>
               </div>
@@ -226,7 +233,12 @@ export function AddQuestion() {
                 onChange={(e) => handleChange(e.target)}
               />
             </label>
-            <div>
+            <div onClick={() => setOpenUpload(true)}>
+              <Upload
+                open={openUpload}
+                setOpen={setOpenUpload}
+                handleReturnUrl={(url) => setForm({ ...form, explanationVideo: url })}
+              />
               <img src={clip} alt="clip" />
               <span>Anexar mídia</span>
             </div>
