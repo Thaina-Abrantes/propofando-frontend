@@ -7,6 +7,7 @@ import ModalDeleteUser from 'components/ModalDeleteUser';
 import ModalRegisterUser from 'components/ModalRegisterUser';
 import ModalNewCategory from 'components/ModalNewCategory';
 import ModalDeleteCategory from 'components/ModalDeleteCategory';
+import ModalDeleteQuestion from 'components/ModalDeleteQuestion';
 import style from './styles.module.scss';
 
 export function Main() {
@@ -17,6 +18,7 @@ export function Main() {
       openModalRegisterUser,
       openModalNewCategory,
       openModalDeleteCategory,
+      openModalDeleteQuestion,
     },
   } = useStores();
   return (
@@ -33,6 +35,7 @@ export function Main() {
       {openModalRegisterUser && <ModalRegisterUser />}
       {openModalNewCategory && <ModalNewCategory />}
       {openModalDeleteCategory && <ModalDeleteCategory />}
+      {openModalDeleteQuestion && <ModalDeleteQuestion />}
     </div>
   );
 }

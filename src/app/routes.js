@@ -18,7 +18,6 @@ const AddQuestion = React.lazy(async () => import('../pages/AddQuestion').then((
 const StudentPage = React.lazy(async () => import('../pages/StudentPage').then((m) => ({ default: m.StudentPage })));
 const RecoveryPassword = React.lazy(async () => import('../pages/RecoveryPassword').then((m) => ({ default: m.RecoveryPassword })));
 const RedefinePassword = React.lazy(async () => import('../pages/RedefinePassword').then((m) => ({ default: m.RedefinePassword })));
-const LoginStudent = React.lazy(async () => import('../pages/LoginStudent').then((m) => ({ default: m.LoginStudent })));
 const ConsultQuestions = React.lazy(async () => import('../pages/ConsultQuestions').then((m) => ({ default: m.ConsultQuestions })));
 const Test = React.lazy(async () => import('../pages/Test').then((m) => ({ default: m.Test })));
 const MyTests = React.lazy(async () => import('../pages/MyTests').then((m) => ({ default: m.MyTests })));
@@ -33,9 +32,8 @@ function ProtectedRoutes({ redirectTo }) {
 export function MyRoutes() {
   return (
     <Routes>
-
-      <Route path="/" element={<Login />} />
-      <Route path="/login" element={<LoginStudent />} />
+      <Route path="/" exact element={<Navigate to="/login" />} />
+      <Route path="/login" element={<Login />} />
 
       <Route element={<ProtectedRoutes redirectTo="/" />}>
         <Route path="/main" element={<Main />}>
