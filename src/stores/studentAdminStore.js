@@ -1,57 +1,23 @@
 import { useState } from 'react';
-import { useUser } from './userStore';
 import api from '../services/api';
+import { useUser } from './userStore';
 
-export function useCategory() {
+export function useStudentAdmin() {
+  const [errorUser, setErrorUser] = useState('');
+  const [userInEditing, setUserInEditing] = useState(false);
   const { token } = useUser();
-
-  const [errorCategory, setErrorCategory] = useState('');
-  const [categoryInEditing, setCategoryInEditing] = useState(false);
+  const [dataUsers, setDataUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPage] = useState(1);
 
-  async function handleRegisterCategory(category) {
+  async function handleRegisterUser(user) {
     const body = {
-      name: category,
+      name: user.name,
+      email: user.email,
     };
 
     try {
-      const response = await api.post('/categories', body, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      return response;
-    } catch (error) {
-      const currentError = error.response.data.message || error.response.data;
-      setErrorCategory(currentError);
-      return error.response;
-    }
-  }
-
-  async function handleDeleteCategory(id) {
-    try {
-      await api.delete(`/categories/${id}`, {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      });
-    } catch (error) {
-      const currentError = error.response.data.message || error.response.data;
-      setErrorCategory(currentError);
-      return error.response;
-    }
-  }
-
-  async function handleEditCategory(category) {
-    const body = {
-      name: category,
-    };
-
-    try {
-      const response = await api.patch(`/categories/${categoryInEditing.id}`, body, {
+      const response = await api.post('/users', body, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -59,22 +25,59 @@ export function useCategory() {
       return response;
     } catch (error) {
       const currentError = error.response.data.message || error.response.data;
-      setErrorCategory(currentError);
+      setErrorUser(currentError);
       return error.response;
     }
   }
 
+  async function handleDeleteUser(id) {
+    try {
+      await api.delete(`/users/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+    } catch (error) {
+      const currentError = error.response.data.message || error.response.data;
+      setErrorUser(currentError);
+      return error.response;
+    }
+  }
+
+  async function handleEditUser(user) {
+    const body = {
+      name: user.name,
+      email: user.email,
+      password: user.password,
+    };
+
+    try {
+      const response = await api.patch(`users/${userInEditing.id}`, body, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response;
+    } catch (error) {
+      const currentError = error.response.data.message || error.response.data;
+      setErrorUser(currentError);
+      return error.response;
+    }
+  }
   return {
-    handleRegisterCategory,
-    handleDeleteCategory,
-    errorCategory,
-    setErrorCategory,
-    categoryInEditing,
-    setCategoryInEditing,
-    handleEditCategory,
+    handleRegisterUser,
+    errorUser,
+    setErrorUser,
+    handleDeleteUser,
+    handleEditUser,
+    userInEditing,
+    setUserInEditing,
+    dataUsers,
+    setDataUsers,
     currentPage,
     setCurrentPage,
     totalPages,
     setTotalPage,
+
   };
 }

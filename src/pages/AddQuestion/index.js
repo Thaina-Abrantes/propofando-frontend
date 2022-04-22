@@ -153,26 +153,6 @@ export function AddQuestion() {
                 /1620
               </span>
             </div>
-            <div className={style['question']}>
-              <label>
-                Adicionar explicação
-                <textarea
-                  name="explanation"
-                  value={form.explanation}
-                  maxLength={1620}
-                  onChange={(e) => handleChange(e.target)}
-
-                />
-              </label>
-              <div>
-                <img src={clip} alt="clip" />
-                <span>Anexar mídia</span>
-              </div>
-              <span className={style['counter-span']}>
-                {form.explanation === '' ? 1620 : caracterTextArea(form.explanation)}
-                /1620
-              </span>
-            </div>
           </div>
           <h3>Alternativas</h3>
           <div className={style.option}>
@@ -257,6 +237,25 @@ export function AddQuestion() {
             />
             <span className={style['counter-span']}>
               {alternatives[3].description === '' ? 1620 : caracterTextArea(alternatives[3].description)}
+              /1620
+            </span>
+          </div>
+          <div className={style['question']}>
+            <label>
+              Adicionar explicação
+              <textarea
+                name="explanation"
+                value={form.explanation}
+                maxLength={1620}
+                onChange={(e) => handleChange(e.target)}
+              />
+            </label>
+            <div>
+              <img src={clip} alt="clip" />
+              <span>Anexar mídia</span>
+            </div>
+            <span className={style['counter-span']}>
+              {form.explanation === '' ? 1620 : caracterTextArea(form.explanation)}
               /1620
             </span>
           </div>
