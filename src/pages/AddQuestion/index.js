@@ -1,7 +1,10 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable no-unused-expressions */
 import { useState, useEffect } from 'react';
 import { useStores } from 'stores';
 import { useNavigate } from 'react-router-dom';
+import InputAlternative from 'components/InputAlternative';
+import { caracterTextArea } from 'utils/caracterTextArea';
 import api from '../../services/api';
 import clip from '../../assets/annex-icon.svg';
 import arrowBack from '../../assets/arrow-back-icon.svg';
@@ -16,19 +19,23 @@ const defaultValuesForm = {
 
 const defaultAlternatives = [
   {
-    description: 'teste',
-    correct: true,
-  },
-  {
-    description: 'teste',
+    option: 'A)',
+    description: '',
     correct: false,
   },
   {
-    description: 'teste',
+    option: 'B)',
+    description: '',
     correct: false,
   },
   {
-    description: 'teste',
+    option: 'C)',
+    description: '',
+    correct: false,
+  },
+  {
+    option: 'D)',
+    description: '',
     correct: false,
   },
 ];
@@ -49,7 +56,6 @@ export function AddQuestion() {
 
   const [form, setForm] = useState(defaultValuesForm);
   const [alternatives, setAlternatives] = useState(defaultAlternatives);
-  const [selectedRadio, setSelectedRadio] = useState('');
   const [categoryId, setCategoryId] = useState('');
   const [dataCategory, setDataCategory] = useState([]);
   const titleSize = 200 - (form.title.split('').length);
@@ -60,43 +66,8 @@ export function AddQuestion() {
     }
   }, [questionInEditing]);
 
-  const isRadioSelected = (value) => selectedRadio === value;
-
-  const handleRadioClick = (e) => {
-    const { value } = e.target;
-
-    const localAlternatives = [...alternatives];
-
-    for (const alternative of localAlternatives) {
-      alternative.correct = false;
-    }
-
-    const currentAlternative = localAlternatives.find((item) => item.title === value);
-
-    currentAlternative.correct = true;
-
-    setAlternatives([...localAlternatives]);
-
-    setSelectedRadio(e.target.value);
-  };
-
-  function caracterTextArea(type) {
-    const textSize = 1620 - type.split('').length;
-    return textSize;
-  }
-
   function handleChange(target) {
     setForm({ ...form, [target.name]: target.value });
-  }
-
-  function handleChangeAlternatives({ target }) {
-    const localAlternatives = [...alternatives];
-
-    const currentAlternative = localAlternatives.find((item) => item.title === target.name);
-
-    currentAlternative.description = target.value;
-
-    setAlternatives(localAlternatives);
   }
 
   function handleCategoryId(e) {
@@ -119,8 +90,21 @@ export function AddQuestion() {
     }
   }
 
+  const onInputChange = ({ name, value }, position) => {
+    const clonedAlternatives = [...alternatives];
+    clonedAlternatives.splice(position, 1, {
+      ...alternatives[position],
+      [name]: value,
+    });
+    setAlternatives(clonedAlternatives);
+  };
+
   async function handleSubmit(e) {
     e.preventDefault();
+
+    for (const alternative of alternatives) {
+      delete alternative.option;
+    }
 
     if (!questionInEditing) {
       const response = await handleRegisterQuestion({ form, alternatives, categoryId });
@@ -221,92 +205,17 @@ export function AddQuestion() {
               </span>
             </div>
           </div>
-          <h3>Alternativas</h3>
-          <div className={style.option}>
-            <div>
-              <input
-                type="radio"
-                name="alternative"
-                value="optionA"
-                checked={isRadioSelected('optionA')}
-                onChange={handleRadioClick}
-              />
-              <span>A)</span>
-            </div>
 
-            <textarea
-              name="optionA"
-              value={alternatives[0].description}
-              onChange={handleChangeAlternatives}
+          <h3>Alternativas</h3>
+          {alternatives.map((alternative, index) => (
+            <InputAlternative
+              key={index}
+              alternative={alternative}
+              onInputChange={onInputChange}
+              position={index}
             />
-            <span className={style['counter-span']}>
-              {alternatives[0].description === '' ? 1620 : caracterTextArea(alternatives[0].description)}
-              /1620
-            </span>
-          </div>
-          <div className={style.option}>
-            <div>
-              <input
-                type="radio"
-                name="alternative"
-                value="optionB"
-                checked={isRadioSelected('optionB')}
-                onChange={handleRadioClick}
-              />
-              <span>B)</span>
-            </div>
-            <textarea
-              name="optionB"
-              value={alternatives[1].description}
-              onChange={handleChangeAlternatives}
-            />
-            <span className={style['counter-span']}>
-              {alternatives[1].description === '' ? 1620 : caracterTextArea(alternatives[1].description)}
-              /1620
-            </span>
-          </div>
-          <div className={style.option}>
-            <div>
-              <input
-                type="radio"
-                name="alternative"
-                value="optionC"
-                checked={isRadioSelected('optionC')}
-                onChange={handleRadioClick}
-              />
-              <span>C)</span>
-            </div>
-            <textarea
-              name="optionC"
-              value={alternatives[2].description}
-              onChange={handleChangeAlternatives}
-            />
-            <span className={style['counter-span']}>
-              {alternatives[2].description === '' ? 1620 : caracterTextArea(alternatives[2].description)}
-              /1620
-            </span>
-          </div>
-          <div className={style.option}>
-            <div>
-              <input
-                type="radio"
-                name="alternative"
-                value="optionD"
-                checked={isRadioSelected('optionD')}
-                onChange={handleRadioClick}
-              />
-              <span>D)</span>
-            </div>
-            <textarea
-              name="optionD"
-              value={alternatives[3].description}
-              onChange={handleChangeAlternatives}
-            />
-            <span className={style['counter-span']}>
-              {alternatives[3].description === '' ? 1620 : caracterTextArea(alternatives[3].description)}
-              /1620
-            </span>
-          </div>
+          ))}
+
           <div className={style['question']}>
             <label>
               Adicionar explicação
