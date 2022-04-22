@@ -38,15 +38,7 @@ export function CreateTest() {
                     <label>Insira a Quantidade de Questões</label>
                     <span>(Opcional)</span>
                   </div>
-                  <div className={style.select} onClick={() => setOpenSelect(true)}>
-                    <select>
-                      <option value="" selected disabled>Selecionar</option>
-                      <option value="amount1">5 questões</option>
-                      <option value="amount2">10 questões</option>
-                      <option value="amount3">15 questões</option>
-                    </select>
-                    <img src={openSelect ? arrowUp : arrowDown} alt="Seta" />
-                  </div>
+                  <input className="input" type="number" placeholder="Quantidade" size="3" max="3" />
                 </div>
               </div>
             </div>
