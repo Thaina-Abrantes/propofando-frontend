@@ -5,6 +5,7 @@ import { useModal } from './modalStore';
 import { useLoading } from './useLoading';
 import { useUser } from './userStore';
 import { useUtils } from './utilsStore';
+import { useStudentAdmin } from './studentAdminStore';
 import { useQuestion } from './questionStore';
 
 const storesCtx = createContext(null);
@@ -22,12 +23,15 @@ export function StoresProvider({ children }) {
   const questionStore = useQuestion();
   const loadingStore = useLoading();
 
+  const studentAdminStore = useStudentAdmin();
+
   return (
     <storesCtx.Provider value={{
       userStore,
       counterStore,
       modalStore,
       utilsStore,
+      studentAdminStore,
       categoryStore,
       questionStore,
       loadingStore,

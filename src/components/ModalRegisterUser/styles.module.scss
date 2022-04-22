@@ -9,7 +9,7 @@
 
 .container {
   width: 828px;
-  height: 415px;
+  height: 315px;
   background: var(--white200);
   margin: auto;
   position: absolute;
@@ -74,4 +74,14 @@
   }
 
   cursor: pointer;
+}
+.span-error{
+    width: 100%;
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    color: var(--red300);
+    text-align: left;
+  
 }

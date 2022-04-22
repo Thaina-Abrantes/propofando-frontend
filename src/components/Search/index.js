@@ -11,7 +11,15 @@ function Search() {
       openModalRegisterUser,
       setOpenModalRegisterUser,
     },
+    studentAdminStore: {
+      setErrorUser,
+    },
   } = useStores();
+
+  function handleOpenModalRegister() {
+    setErrorUser('');
+    setOpenModalRegisterUser(true);
+  }
   return (
     <div className={style.search}>
       <div>
@@ -22,7 +30,7 @@ function Search() {
         <img src={searchIcon} alt="Lupa" />
         <input className="input-light" placeholder="Pesquisar usuário" />
         <button
-          onClick={() => setOpenModalRegisterUser(true)}
+          onClick={handleOpenModalRegister}
           className="button"
         >
           Cadastrar usuário

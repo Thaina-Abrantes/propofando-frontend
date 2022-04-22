@@ -62,9 +62,6 @@
   h2 {
     margin-bottom: 40px;
   }
-  h3 {
-    margin-top: 45px;
-  }
 }
 
 .div-title-category {
@@ -137,6 +134,10 @@
   }
 }
 
+.div-body-questions {
+  display: flex;
+  flex-direction: column;
+}
 .question {
   display: flex;
   flex-direction: column;
@@ -242,5 +243,4 @@
     height: 48px;
   }
   margin-bottom: 20px;
-  margin-top: 40px;
 }
