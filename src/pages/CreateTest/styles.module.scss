@@ -105,6 +105,12 @@
   margin-right: 76px;
 }
 
+.container-input {
+  input::-webkit-inner-spin-button { 
+    -webkit-appearance: none;
+  }
+}
+
 .container-filter {
   display: flex;
   flex-direction: column;
