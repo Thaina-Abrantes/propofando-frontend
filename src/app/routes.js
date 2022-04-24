@@ -16,11 +16,11 @@ const QuestionCategory = React.lazy(async () => import('../pages/QuestionCategor
 const Questions = React.lazy(async () => import('../pages/Questions').then((m) => ({ default: m.Questions })));
 const AddQuestion = React.lazy(async () => import('../pages/AddQuestion').then((m) => ({ default: m.AddQuestion })));
 const StudentPage = React.lazy(async () => import('../pages/StudentPage').then((m) => ({ default: m.StudentPage })));
-const ForgotYourPassword = React.lazy(async () => import('../pages/ForgotYourPassword').then((m) => ({ default: m.ForgotYourPassword })));
+const RecoveryPassword = React.lazy(async () => import('../pages/RecoveryPassword').then((m) => ({ default: m.RecoveryPassword })));
 const RedefinePassword = React.lazy(async () => import('../pages/RedefinePassword').then((m) => ({ default: m.RedefinePassword })));
 const ConsultQuestions = React.lazy(async () => import('../pages/ConsultQuestions').then((m) => ({ default: m.ConsultQuestions })));
 const Test = React.lazy(async () => import('../pages/Test').then((m) => ({ default: m.Test })));
-const MySimulated = React.lazy(async () => import('../pages/MySimulated').then((m) => ({ default: m.MySimulated })));
+const MyTests = React.lazy(async () => import('../pages/MyTests').then((m) => ({ default: m.MyTests })));
 const CreateTest = React.lazy(async () => import('../pages/CreateTest').then((m) => ({ default: m.CreateTest })));
 
 function ProtectedRoutes({ redirectTo }) {
@@ -47,14 +47,14 @@ export function MyRoutes() {
       <Route element={<ProtectedRoutes redirectTo="/" />}>
         <Route path="/student/main" element={<StudentMain />}>
           <Route path="" element={<StudentPage />} />
+          <Route path="create-test" element={<CreateTest />} />
+          <Route path="my-tests" element={<MyTests />} />
+          <Route path="consult-questions" element={<ConsultQuestions />} />
         </Route>
         <Route path="/test" element={<Test />} />
-        <Route path="my-tests" element={<MySimulated />} />
-        <Route path="create-test" element={<CreateTest />} />
-        <Route path="/consult-questions" element={<ConsultQuestions />} />
       </Route>
 
-      <Route path="/recovery" element={<ForgotYourPassword />} />
+      <Route path="/recovery" element={<RecoveryPassword />} />
       <Route path="/redefine/:token" element={<RedefinePassword />} />
 
       <Route path="*" element={<Page404 />} />

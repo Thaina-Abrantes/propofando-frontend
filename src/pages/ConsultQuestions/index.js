@@ -62,11 +62,9 @@ export function ConsultQuestions() {
   } = useStores();
 
   return (
-    <main className={style['container-main']}>
-      <StudentHeader />
-
+    <main className={style['container-consult']}>
       <div className={style['container-title']}>
-        <button onClick={() => navigate('/my-tests')}>
+        <button onClick={() => navigate('/student/main/my-tests')}>
           <img src={arrow} alt="Seta" />
         </button>
         <h1>Simulado</h1>
@@ -197,8 +195,8 @@ export function ConsultQuestions() {
         {openReportProblem && (<ReportProblem />)}
 
         <div className={style.buttons}>
-          <button className={page === test.length - 1 ? 'displayNone' : 'button'} onClick={() => setPage(page + 1)}>Próxima</button>
           <button className={page === 0 ? 'displayNone' : 'button'} onClick={() => setPage(page - 1)}>Anterior</button>
+          <button className={page === test.length - 1 ? 'displayNone' : 'button'} onClick={() => setPage(page + 1)}>Próxima</button>
         </div>
       </div>
     </main>

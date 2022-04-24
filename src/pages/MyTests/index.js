@@ -1,30 +1,30 @@
-import StudentHeader from 'components/StudentHeader';
 import { useNavigate } from 'react-router-dom';
 import style from './styles.module.scss';
 import seta from '../../assets/arrow-back-icon.svg';
 import arrow from '../../assets/arrow.svg';
 import factCheck from '../../assets/fact-check-icon.svg';
 
-export function MySimulated() {
+export function MyTests() {
   const navigate = useNavigate();
 
   return (
-    <main className={style['container-main']}>
-      <StudentHeader />
+    <main className={style['container-my-tests']}>
       <div className={style.back} onClick={() => navigate('/student/main')}>
         <img src={seta} alt="Seta" />
         <h1>Meus simulados</h1>
       </div>
-      <div className={style['container-filter']}>
-        <label>
-          Filtrar por
-          <select>
-            <option value="0">Todos</option>
-            <option value="1">Simulado 1</option>
-            <option value="2">Simulado 2</option>
-          </select>
-        </label>
-        <img src={arrow} alt="seta" />
+      <div className={style.border}>
+        <div className={style['container-filter']}>
+          <label>
+            Filtrar por
+            <select>
+              <option value="0">Todos</option>
+              <option value="1">Simulado 1</option>
+              <option value="2">Simulado 2</option>
+            </select>
+          </label>
+          <img src={arrow} alt="seta" />
+        </div>
       </div>
 
       <div className={style['table-body']}>
@@ -37,7 +37,7 @@ export function MySimulated() {
             <span>Simulado 1</span>
           </div>
           <div className={style['third-item']}>
-            <button className="button" onClick={() => navigate('/consult-questions')}>Consultar respostas</button>
+            <button className="button" onClick={() => navigate('/student/main/consult-questions')}>Consultar respostas</button>
           </div>
         </div>
       </div>
