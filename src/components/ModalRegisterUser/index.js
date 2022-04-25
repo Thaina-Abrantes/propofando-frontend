@@ -17,6 +17,7 @@ function ModalRegisterUser() {
       errorUser,
       setErrorUser,
     },
+    utilsStore: { setAlert },
   } = useStores();
 
   function handleChange(e) {
@@ -27,6 +28,8 @@ function ModalRegisterUser() {
     event.preventDefault();
     const response = await handleRegisterUser(form);
     if (response.status > 201) {
+      setAlert({ open: true, type: 'error', message: errorUser });
+      // TODO @mensagem de erro vazia
       return;
     }
     setErrorUser('');

@@ -32,12 +32,13 @@ export function useCategory() {
 
   async function handleDeleteCategory(id) {
     try {
-      await api.delete(`/categories/${id}`, {
+      const response = await api.delete(`/categories/${id}`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
       });
+      return response;
     } catch (error) {
       const currentError = error.response.data.message || error.response.data;
       setErrorCategory(currentError);

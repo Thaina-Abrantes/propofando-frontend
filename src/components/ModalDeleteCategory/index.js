@@ -11,10 +11,15 @@ function ModalDeleteCategory() {
       openModalDeleteCategory,
       setOpenModalDeleteCategory,
     },
+    utilsStore: { setAlert },
   } = useStores();
 
   async function handleDeleteCategoryCloseModal() {
-    await handleDeleteCategory(openModalDeleteCategory);
+    const response = await handleDeleteCategory(openModalDeleteCategory);
+    if (response.status > 204) {
+      setAlert({ open: true, type: 'error', message: response.data.message });
+    }
+    setAlert({ open: true, type: 'success', message: response.data.message });
     setOpenModalDeleteCategory(false);
   }
   return (
