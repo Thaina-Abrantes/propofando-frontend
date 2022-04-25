@@ -1,7 +1,7 @@
 import ReactPaginate from 'react-paginate';
 import styles from './styles.module.scss';
 
-export default function Paginator({ setCurrentPage, totalPages }) {
+export default function Paginator({ setCurrentPage, totalPages, currentPage }) {
   const handlePageClick = (event) => {
     setCurrentPage(event.selected + 1);
   };
@@ -10,9 +10,9 @@ export default function Paginator({ setCurrentPage, totalPages }) {
     <div className={styles.paginator}>
       <ReactPaginate
         breakLabel="..."
-        nextLabel="Próximo"
+        nextLabel={currentPage === totalPages ? '' : 'Próximo'}
         onPageChange={handlePageClick}
-        previousLabel
+        previousLabel={totalPages === 1 || currentPage === 1 ? '' : 'Anterior'}
         pageRangeDisplayed={2}
         pageCount={totalPages || 1}
         renderOnZeroPageCount={null}
