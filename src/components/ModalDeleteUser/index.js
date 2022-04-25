@@ -12,10 +12,16 @@ function ModalDeleteUser() {
       handleDeleteUser,
       errorUser,
     },
+    utilsStore: { setAlert },
   } = useStores();
 
-  function handleModalDelete() {
-    handleDeleteUser(openModalDelete);
+  async function handleModalDelete() {
+    const response = await handleDeleteUser(openModalDelete);
+    if (response.status > 204) {
+      setAlert({ open: true, type: 'error', message: response.data.message });
+      return;
+    }
+    setAlert({ open: true, type: 'success', message: response.data.message });
     setOpenModalDelete(false);
   }
   return (

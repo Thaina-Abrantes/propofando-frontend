@@ -28,10 +28,10 @@ function ModalRegisterUser() {
     event.preventDefault();
     const response = await handleRegisterUser(form);
     if (response.status > 201) {
-      setAlert({ open: true, type: 'error', message: errorUser });
-      // TODO @mensagem de erro vazia
+      setAlert({ open: true, type: 'error', message: response.data.message });
       return;
     }
+    setAlert({ open: true, type: 'success', message: response.data.message });
     setErrorUser('');
     setOpenModalRegisterUser(false);
   }
