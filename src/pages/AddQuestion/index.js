@@ -22,22 +22,18 @@ const defaultAlternatives = [
   {
     option: 'A)',
     description: '',
-    correct: false,
   },
   {
     option: 'B)',
     description: '',
-    correct: false,
   },
   {
     option: 'C)',
     description: '',
-    correct: false,
   },
   {
     option: 'D)',
     description: '',
-    correct: false,
   },
 ];
 
@@ -109,6 +105,16 @@ export function AddQuestion() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+
+    const options = document.getElementsByName('option');
+
+    for (let i = 0; i < options.length; i += 1) {
+      if (options[i].checked) {
+        alternatives[i].correct = true;
+      } else {
+        alternatives[i].correct = false;
+      }
+    }
 
     for (const alternative of alternatives) {
       delete alternative.option;
