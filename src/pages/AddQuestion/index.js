@@ -55,8 +55,10 @@ export function AddQuestion() {
 
   const navigate = useNavigate();
 
-  const [form, setForm] = useState(defaultValuesForm);
-  const [alternatives, setAlternatives] = useState(defaultAlternatives);
+  const [form, setForm] = useState(questionInEditing || defaultValuesForm);
+  const [alternatives, setAlternatives] = useState(
+    questionInEditing.alternatives || defaultAlternatives,
+  );
   const [categoryId, setCategoryId] = useState('');
   const [dataCategory, setDataCategory] = useState([]);
   const [openUpload, setOpenUpload] = useState(false);
