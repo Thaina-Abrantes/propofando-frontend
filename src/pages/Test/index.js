@@ -55,6 +55,21 @@ export function Test() {
     },
   } = useStores();
 
+  function handleClickPrev() {
+    setPage(page - 1);
+    setOpenReportProblem(false);
+  }
+
+  function handleClickNext() {
+    setPage(page + 1);
+    setOpenReportProblem(false);
+  }
+
+  function handleClickEnd() {
+    setOpenReportProblem(false);
+    setOpenModalEndTest(true);
+  }
+
   return (
     <main className={style['container-main']}>
       {
@@ -144,11 +159,11 @@ export function Test() {
           {openReportProblem && (<ReportProblem />)}
 
           <div className={style.buttons}>
-            <button className={page === 0 || page === questions.length - 1 ? 'displayNone' : 'button'} onClick={() => setPage(page - 1)}>Anterior</button>
-            <button className={page === questions.length - 1 ? 'button-dark-secondary' : 'displayNone'} onClick={() => setPage(page - 1)}>Anterior</button>
-            <button className={page < questions.length - 1 ? 'button' : 'displayNone'} onClick={() => setPage(page + 1)}>Próxima</button>
-            <button className={page !== questions.length - 1 ? 'button-dark-secondary' : 'displayNone'}>Pausar simulado</button>
-            <button className={page === questions.length - 1 ? 'button' : 'displayNone'} onClick={() => setOpenModalEndTest(true)}>Finalizar simulado</button>
+            <button className={page === 0 || page === questions.length - 1 ? 'displayNone' : 'button'} onClick={() => handleClickPrev()}>Anterior</button>
+            <button className={page === questions.length - 1 ? 'button-dark-secondary' : 'displayNone'} onClick={() => handleClickPrev()}>Anterior</button>
+            <button className={page < questions.length - 1 ? 'button' : 'displayNone'} onClick={() => handleClickNext()}>Próxima</button>
+            <button className={page !== questions.length - 1 ? 'button-dark-secondary' : 'displayNone'} onClick={() => setOpenReportProblem(false)}>Pausar simulado</button>
+            <button className={page === questions.length - 1 ? 'button' : 'displayNone'} onClick={() => handleClickEnd()}>Finalizar simulado</button>
           </div>
         </div>
       </div>

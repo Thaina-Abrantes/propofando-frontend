@@ -8,6 +8,28 @@ export function useUtils() {
     open: false,
   });
 
+  function handleOpenExplanation() {
+    setOpenExplanation(true);
+    setOpenQuestionStatistics(false);
+    setOpenReportProblem(false);
+  }
+  function handleOpenQuestionStatistics() {
+    setOpenExplanation(false);
+    setOpenQuestionStatistics(true);
+    setOpenReportProblem(false);
+  }
+  function handleOpenReportProblem() {
+    setOpenExplanation(false);
+    setOpenQuestionStatistics(false);
+    setOpenReportProblem(true);
+  }
+
+  function handleCloseBox() {
+    setOpenExplanation(false);
+    setOpenQuestionStatistics(false);
+    setOpenReportProblem(false);
+  }
+
   return (
     {
       openReportProblem,
@@ -18,6 +40,10 @@ export function useUtils() {
       setOpenQuestionStatistics,
       alert,
       setAlert,
+      handleOpenExplanation,
+      handleOpenQuestionStatistics,
+      handleOpenReportProblem,
+      handleCloseBox,
     }
   );
 }
