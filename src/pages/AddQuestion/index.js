@@ -140,12 +140,16 @@ export function AddQuestion() {
           <h2>Categorias e questões</h2>
         </div>
         <div>
-          <span>Categorias e questões / Adicionar questão</span>
+          <span>
+            Categorias e questões /
+            {' '}
+            {(questionInEditing && 'Editar questão') || 'Adicionar questão'}
+          </span>
         </div>
       </div>
 
       <div className={style['page-body']}>
-        <h2>Criar questão</h2>
+        <h2>{(questionInEditing && 'Editar questão') || 'Criar questão'}</h2>
 
         <form onSubmit={handleSubmit}>
           <div className={style['div-title-category']}>
@@ -247,9 +251,17 @@ export function AddQuestion() {
               /1620
             </span>
           </div>
-          <div className={style['btn-add-question']}>
-            <button className="button">Adicionar questão</button>
-          </div>
+          {questionInEditing
+            ? (
+              <div className={style['btn-add-question']}>
+                <button className="button">Salvar alterações</button>
+              </div>
+            )
+            : (
+              <div className={style['btn-add-question']}>
+                <button className="button">Adicionar questão</button>
+              </div>
+            )}
         </form>
       </div>
 
