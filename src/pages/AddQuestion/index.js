@@ -59,9 +59,13 @@ export function AddQuestion() {
   const [alternatives, setAlternatives] = useState(
     questionInEditing.alternatives || defaultAlternatives,
   );
+
   const [categoryId, setCategoryId] = useState('');
   const [dataCategory, setDataCategory] = useState([]);
-  const [openUpload, setOpenUpload] = useState(false);
+
+  const [openUploadDescription, setOpenUploadDescription] = useState(false);
+  const [openUploadExplanation, setOpenUploadExplanation] = useState(false);
+
   const titleSize = 200 - (form.title.split('').length);
 
   useEffect(() => {
@@ -203,10 +207,10 @@ export function AddQuestion() {
 
                 />
               </label>
-              <div onClick={() => setOpenUpload(true)}>
+              <div onClick={() => setOpenUploadDescription(true)}>
                 <Upload
-                  open={openUpload}
-                  setOpen={setOpenUpload}
+                  open={openUploadDescription}
+                  setOpen={setOpenUploadDescription}
                   handleReturnUrl={(url) => setForm({ ...form, image: url })}
                 />
                 <img src={clip} alt="clip" />
@@ -234,15 +238,15 @@ export function AddQuestion() {
               Adicionar explicação
               <textarea
                 name="explanation"
-                value={form.explanation}
+                value={form.explanationText}
                 maxLength={1620}
                 onChange={(e) => handleChange(e.target)}
               />
             </label>
-            <div onClick={() => setOpenUpload(true)}>
+            <div onClick={() => setOpenUploadExplanation(true)}>
               <Upload
-                open={openUpload}
-                setOpen={setOpenUpload}
+                open={openUploadExplanation}
+                setOpen={setOpenUploadExplanation}
                 handleReturnUrl={(url) => setForm({ ...form, explanationVideo: url })}
               />
               <img src={clip} alt="clip" />
