@@ -8,6 +8,7 @@ export function useModal() {
   const [openModalEndTest, setOpenModalEndTest] = useState(false);
   const [openModalDeleteCategory, setOpenModalDeleteCategory] = useState(false);
   const [openModalDeleteQuestion, setOpenModalDeleteQuestion] = useState(false);
+  const [openModalPauseTest, setOpenModalPauseTest] = useState(false);
 
   return (
     {
@@ -25,6 +26,8 @@ export function useModal() {
       setOpenModalDeleteCategory,
       openModalDeleteQuestion,
       setOpenModalDeleteQuestion,
+      openModalPauseTest,
+      setOpenModalPauseTest,
     }
   );
 }
