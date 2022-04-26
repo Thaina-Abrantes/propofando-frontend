@@ -41,8 +41,6 @@ export default function ReportProblem() {
       }
 
       setAlert({ open: true, type: 'success', message: data?.message || data });
-
-      console.log(data);
     } catch (err) {
       const erro = err.response.data.message || err.response.data;
       setErrorReport(erro);
