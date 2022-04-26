@@ -32,13 +32,13 @@ export function useLoading() {
       },
       (error) => {
         setOpenLoading(false);
-        if (error.response.data === 'Auth Error') {
+        if (error.response.data === 'Erro de autenticação!') {
           handleClearUserData();
           window.location.reload();
           return;
         }
 
-        return error.response;
+        return error.response || error;
       },
 
     );
