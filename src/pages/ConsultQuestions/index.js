@@ -53,28 +53,23 @@ export function ConsultQuestions() {
   const {
     utilsStore: {
       openReportProblem,
-      setOpenReportProblem,
       openExplanation,
-      setOpenExplanation,
       openQuestionStatistics,
-      setOpenQuestionStatistics,
+      handleOpenExplanation,
+      handleOpenQuestionStatistics,
+      handleOpenReportProblem,
+      handleCloseBox,
     },
   } = useStores();
 
-  function handleOpenExplanation() {
-    setOpenExplanation(true);
-    setOpenQuestionStatistics(false);
-    setOpenReportProblem(false);
+  function handleClickPrev() {
+    setPage(page - 1);
+    handleCloseBox();
   }
-  function handleOpenQuestionStatistics() {
-    setOpenExplanation(false);
-    setOpenQuestionStatistics(true);
-    setOpenReportProblem(false);
-  }
-  function handleOpenReportProblem() {
-    setOpenExplanation(false);
-    setOpenQuestionStatistics(false);
-    setOpenReportProblem(true);
+
+  function handleClickNext() {
+    setPage(page + 1);
+    handleCloseBox();
   }
 
   return (
@@ -211,8 +206,8 @@ export function ConsultQuestions() {
         {openReportProblem && (<ReportProblem />)}
 
         <div className={style.buttons}>
-          <button className={page === 0 ? 'displayNone' : 'button'} onClick={() => setPage(page - 1)}>Anterior</button>
-          <button className={page === test.length - 1 ? 'displayNone' : 'button'} onClick={() => setPage(page + 1)}>Próxima</button>
+          <button className={page === 0 ? 'displayNone' : 'button'} onClick={() => handleClickPrev()}>Anterior</button>
+          <button className={page === test.length - 1 ? 'displayNone' : 'button'} onClick={() => handleClickNext()}>Próxima</button>
         </div>
       </div>
     </main>

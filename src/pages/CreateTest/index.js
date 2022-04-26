@@ -12,7 +12,7 @@ export function CreateTest() {
   return (
     <main className={style['container-create']}>
       <div className={style['container-title']}>
-        <div className={style['img-back']} onClick={() => navigate('/student/main')}>
+        <div className={style['img-back']}>
           <img src={arrow} alt="Seta voltar" />
         </div>
         <h1>Criar simulado</h1>

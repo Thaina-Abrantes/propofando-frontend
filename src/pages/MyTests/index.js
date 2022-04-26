@@ -9,7 +9,7 @@ export function MyTests() {
 
   return (
     <main className={style['container-my-tests']}>
-      <div className={style.back} onClick={() => navigate('/student/main')}>
+      <div className={style.back}>
         <img src={seta} alt="Seta" />
         <h1>Meus simulados</h1>
       </div>
