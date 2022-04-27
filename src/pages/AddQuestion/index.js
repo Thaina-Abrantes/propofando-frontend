@@ -57,19 +57,13 @@ export function AddQuestion() {
     questionInEditing.alternatives || defaultAlternatives,
   );
 
-  const [categoryId, setCategoryId] = useState('');
+  const [categoryId, setCategoryId] = useState(questionInEditing.categoryId || '');
   const [dataCategory, setDataCategory] = useState([]);
 
   const [openUploadDescription, setOpenUploadDescription] = useState(false);
   const [openUploadExplanation, setOpenUploadExplanation] = useState(false);
 
   const titleSize = 200 - (form.title.split('').length);
-
-  useEffect(() => {
-    if (questionInEditing) {
-      console.log(questionInEditing);
-    }
-  }, [questionInEditing]);
 
   function handleChange(target) {
     setForm({ ...form, [target.name]: target.value });
@@ -106,7 +100,6 @@ export function AddQuestion() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log(form, 'form');
 
     const options = document.getElementsByName('option');
 
@@ -190,8 +183,11 @@ export function AddQuestion() {
             <div className={style['input-select']}>
               <label>
                 Categoria
-                <select onChange={(e) => handleCategoryId(e)}>
-                  <option>
+                <select
+                  value={categoryId || 'selecione'}
+                  onChange={(e) => handleCategoryId(e)}
+                >
+                  <option value="selecione">
                     Selecione
                   </option>
                   {dataCategory?.map((data) => (
