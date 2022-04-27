@@ -52,7 +52,7 @@ export function useQuestion() {
       categoryId,
       image: form.image,
       explanationVideo: form.explanationVideo,
-      explanationText: form.explanation,
+      explanationText: form.explanationText,
       alternatives,
     };
 
@@ -77,7 +77,7 @@ export function useQuestion() {
       categoryId,
       image: questionInEditing.image,
       explanationVideo: questionInEditing.explanationVideo,
-      explanationText: questionInEditing.explanation,
+      explanationText: questionInEditing.explanationText,
       alternatives,
     };
     try {

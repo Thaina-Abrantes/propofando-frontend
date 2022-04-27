@@ -15,7 +15,7 @@ import style from './styles.module.scss';
 const defaultValuesForm = {
   title: '',
   description: '',
-  explanation: '',
+  explanationText: '',
 };
 
 const defaultAlternatives = [
@@ -250,8 +250,8 @@ export function AddQuestion() {
             <label>
               Adicionar explicação
               <textarea
-                name="explanation"
-                value={form.explanation}
+                name="explanationText"
+                value={form.explanationText}
                 maxLength={1620}
                 onChange={(e) => handleChange(e.target)}
               />
@@ -266,7 +266,7 @@ export function AddQuestion() {
               <span>Anexar mídia</span>
             </div>
             <span className={style['counter-span']}>
-              {form.explanation === '' ? 1620 : caracterTextArea(form.explanation)}
+              {form.explanationText === '' ? 1620 : caracterTextArea(form.explanationText)}
               /1620
             </span>
           </div>
