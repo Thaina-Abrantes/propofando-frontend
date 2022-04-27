@@ -18,6 +18,7 @@ function ModalDeleteCategory() {
     const response = await handleDeleteCategory(openModalDeleteCategory);
     if (response.status > 204) {
       setAlert({ open: true, type: 'error', message: response.data.message });
+      return;
     }
     setAlert({ open: true, type: 'success', message: response.data.message });
     setOpenModalDeleteCategory(false);
