@@ -32,7 +32,7 @@ export function useLoading() {
       },
       (error) => {
         setOpenLoading(false);
-        if (error.response.data === 'Erro de autenticação!') {
+        if (error.response.data === 'Erro de autenticação!' || error === 'Erro de autenticação!') {
           handleClearUserData();
           window.location.reload();
           return;

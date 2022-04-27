@@ -47,6 +47,7 @@ export function AddQuestion() {
       questionInEditing,
       setQuestionInEditing,
     },
+    utilsStore: { setAlert },
   } = useStores();
 
   const navigate = useNavigate();
@@ -105,6 +106,7 @@ export function AddQuestion() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    console.log(form, 'form');
 
     const options = document.getElementsByName('option');
 
@@ -116,21 +118,26 @@ export function AddQuestion() {
       }
     }
 
-    for (const alternative of alternatives) {
-      delete alternative.option;
-    }
-
     if (!questionInEditing) {
       const response = await handleRegisterQuestion({ form, alternatives, categoryId });
-      if (response.status > 201) {
+      if (response.status > 204) {
+        setAlert({ open: true, type: 'error', message: response.data.message || response.data });
         return;
       }
+
+      navigate(`/main/list-question?category=${categoryId}`);
+      setAlert({ open: true, type: 'success', message: response.data.message });
+
       setErrorQuestion('');
     } else {
-      const responseEdit = await handleEditQuestion({ alternatives, categoryId });
+      const responseEdit = await handleEditQuestion({ form, alternatives, categoryId });
       if (responseEdit.status > 204) {
+        setAlert({ open: true, type: 'error', message: responseEdit.data.message || responseEdit.data });
         return;
       }
+
+      navigate(`/main/list-question?category=${categoryId}`);
+      setAlert({ open: true, type: 'success', message: responseEdit.data.message });
       setQuestionInEditing(false);
     }
   }
@@ -244,7 +251,7 @@ export function AddQuestion() {
               Adicionar explicação
               <textarea
                 name="explanation"
-                value={form.explanationText}
+                value={form.explanation}
                 maxLength={1620}
                 onChange={(e) => handleChange(e.target)}
               />
