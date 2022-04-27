@@ -70,16 +70,17 @@ export function useQuestion() {
     }
   }
 
-  async function handleEditQuestion({ alternatives, categoryId }) {
+  async function handleEditQuestion({ form, alternatives, categoryId }) {
     const body = {
-      title: questionInEditing.title,
-      description: questionInEditing.description,
+      title: form.title,
+      description: form.description,
       categoryId,
-      image: questionInEditing.image,
-      explanationVideo: questionInEditing.explanationVideo,
-      explanationText: questionInEditing.explanationText,
+      image: form.image,
+      explanationVideo: form.explanationVideo,
+      explanationText: form.explanationText,
       alternatives,
     };
+
     try {
       const response = await api.patch(`/questions/${questionInEditing.id}`, body, {
         headers: {
