@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useLocalStorage } from 'react-use';
 import api from '../services/api';
 import { useUser } from './userStore';
 
@@ -6,7 +7,7 @@ export function useQuestion() {
   const [errorQuestion, setErrorQuestion] = useState('');
   const [listQuestions, setListQuestions] = useState([]);
   const [idCategory, setIdCategory] = useState('');
-  const [questionInEditing, setQuestionInEditing] = useState(false);
+  const [questionInEditing, setQuestionInEditing] = useLocalStorage('questionInEditing');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
