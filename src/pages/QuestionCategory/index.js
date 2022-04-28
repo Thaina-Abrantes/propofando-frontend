@@ -16,6 +16,7 @@ export function QuestionCategory() {
       setOpenModalDeleteCategory,
       openModalNewCategory,
       setOpenModalNewCategory,
+      openModalDeleteQuestion,
     },
     categoryStore: {
       setCategoryInEditing,
@@ -50,7 +51,7 @@ export function QuestionCategory() {
 
   useEffect(() => {
     handleListCategory();
-  }, [currentPage, openModalDeleteCategory, openModalNewCategory]);
+  }, [currentPage, openModalDeleteCategory, openModalNewCategory, openModalDeleteQuestion]);
 
   async function handleListCategory() {
     try {

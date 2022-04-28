@@ -1,4 +1,5 @@
 import { useStores } from 'stores';
+import { useNavigate, useLocation } from 'react-router-dom';
 import style from './styles.module.scss';
 import clear from '../../assets/clear-icon.svg';
 
@@ -11,11 +12,19 @@ function ModalDeleteQuestion() {
       openModalDeleteQuestion,
       setOpenModalDeleteQuestion,
     },
+    utilsStore: { setAlert },
   } = useStores();
+
+  const location = useLocation();
+  const navigate = useNavigate();
 
   function handleCloseModalDeleteQuestion() {
     handleDeleteQuestion(openModalDeleteQuestion);
+    if (location.pathname === '/main/add-question') {
+      navigate('/main/question-category');
+    }
     setOpenModalDeleteQuestion(false);
+    setAlert({ open: true, type: 'success', message: 'Questão removida!' });
   }
 
   return (

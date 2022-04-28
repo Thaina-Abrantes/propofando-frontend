@@ -49,6 +49,7 @@ export function AddQuestion() {
     },
     utilsStore: { setAlert },
     modalStore: {
+      openModalDeleteQuestion,
       setOpenModalDeleteQuestion,
     },
   } = useStores();
@@ -125,6 +126,8 @@ export function AddQuestion() {
       setAlert({ open: true, type: 'success', message: response.data.message });
 
       setErrorQuestion('');
+    } else if (openModalDeleteQuestion) {
+      console.log(openModalDeleteQuestion);
     } else {
       const responseEdit = await handleEditQuestion({ form, alternatives, categoryId });
       if (responseEdit.status > 204) {
@@ -140,6 +143,7 @@ export function AddQuestion() {
 
   useEffect(async () => {
     await handleListCategory();
+    console.log(questionInEditing, 'quest');
   }, []);
 
   return (
