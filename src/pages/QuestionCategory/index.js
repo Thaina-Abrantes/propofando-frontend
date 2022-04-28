@@ -32,8 +32,8 @@ export function QuestionCategory() {
     },
     questionStore: {
       setIdCategory,
+      setCategoryName,
     },
-
   } = useStores();
 
   const navigate = useNavigate();
@@ -45,7 +45,8 @@ export function QuestionCategory() {
   }
 
   function handleOpenQuestions(item) {
-    setIdCategory(item);
+    setIdCategory(item.id);
+    setCategoryName(item.name);
     navigate('/main/list-question');
   }
 
@@ -84,7 +85,7 @@ export function QuestionCategory() {
             .includes(serchItem.toLocaleLowerCase()))
             .map((item) => (
               <div className={style['table-line']} key={item.id}>
-                <div className={style['first-line-item']} onClick={() => handleOpenQuestions(item.id)}>
+                <div className={style['first-line-item']} onClick={() => handleOpenQuestions(item)}>
                   <img src={topicIcon} alt="Categoria" />
                   <span>{item.name}</span>
                 </div>

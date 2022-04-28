@@ -10,6 +10,7 @@ export function useQuestion() {
   const [questionInEditing, setQuestionInEditing] = useLocalStorage('questionInEditing');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [categoryName, setCategoryName] = useState('');
 
   async function handleListQuestions(token) {
     try {
@@ -112,5 +113,7 @@ export function useQuestion() {
     currentPage,
     setCurrentPage,
     totalPages,
+    categoryName,
+    setCategoryName,
   };
 }

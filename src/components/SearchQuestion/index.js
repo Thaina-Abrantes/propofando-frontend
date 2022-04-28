@@ -14,6 +14,7 @@ function SearchQuestion({ setSearchQuestion }) {
     },
     questionStore: {
       setQuestionInEditing,
+      categoryName,
     },
   } = useStores();
 
@@ -28,9 +29,16 @@ function SearchQuestion({ setSearchQuestion }) {
 
   return (
     <div className={style.search}>
-      <div>
-        <img src={arrowBack} alt="Voltar" />
-        <h2>Questões</h2>
+      <div className={style.title}>
+        <div>
+          <img src={arrowBack} alt="Voltar" />
+          <h2>Questões</h2>
+        </div>
+        <span>
+          {categoryName}
+          {' '}
+          / Questões
+        </span>
       </div>
       <div className={style['search-container']}>
         <img src={searchIcon} alt="Lupa" />

@@ -215,7 +215,6 @@ export function AddQuestion() {
               <img src={arrowDown} alt="seta" />
             </div>
           </div>
-
           <div className={style['div-body-questions']}>
             <div className={style['question']}>
               <label>

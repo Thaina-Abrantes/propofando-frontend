@@ -1,5 +1,5 @@
-.container-main {
-  width: 100vw;
+.container-create {
+  width: 100%;
   min-height: 100vh;
   background-color: var(--black);
 }
@@ -10,7 +10,7 @@
   align-items: center;
   width: 100%;
   gap: 37px;
-  padding-left: 53px;
+  padding-left: 26px;
   padding-top: 32px;
 
   h1 {
@@ -33,7 +33,8 @@
   background-color: var(--black);
   display: flex;
   flex-direction: column;
-  padding: 0 145px;
+  padding-left: 80px;
+  padding-right: 40px;
 
   label {
     color: var(--white700);
@@ -71,13 +72,12 @@
   height: 206px;
   margin-top: 22px;
   box-sizing: content-box;
-
 }
 
 .container-custom {
   border-radius: 5px;
   background-color: var(--black200);
-  min-width: 1000px;
+  min-width: 850px;
 
   display: flex;
   flex-direction: column;
@@ -105,10 +105,16 @@
   margin-right: 76px;
 }
 
+.container-input {
+  input::-webkit-inner-spin-button { 
+    -webkit-appearance: none;
+  }
+}
+
 .container-filter {
   display: flex;
   flex-direction: column;
-  min-width: 1000px;
+  min-width: 850px;
 
   background-color: var(--black200);
   border-radius: 5px;

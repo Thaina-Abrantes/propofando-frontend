@@ -4,6 +4,7 @@ import { useStores } from 'stores';
 import { useNavigate } from 'react-router-dom';
 import ModalEndTest from 'components/ModalEndTest';
 import ReportProblem from 'components/ReportProblem';
+import ModalPauseTest from 'components/ModalPauseTest ';
 import style from './styles.module.scss';
 import arrow from '../../assets/arrow-back-icon.svg';
 import graphic from '../../assets/question.svg';
@@ -45,6 +46,8 @@ export function Test() {
     modalStore: {
       openModalEndTest,
       setOpenModalEndTest,
+      openModalPauseTest,
+      setOpenModalPauseTest,
     },
   } = useStores();
 
@@ -55,8 +58,32 @@ export function Test() {
     },
   } = useStores();
 
+  function handleClickPrev() {
+    setPage(page - 1);
+    setOpenReportProblem(false);
+  }
+
+  function handleClickNext() {
+    setPage(page + 1);
+    setOpenReportProblem(false);
+  }
+
+  function handleClickEnd() {
+    setOpenReportProblem(false);
+    setOpenModalEndTest(true);
+  }
+
+  function handleClickPause() {
+    setOpenReportProblem(false);
+    setOpenModalPauseTest(true);
+  }
+
   return (
     <main className={style['container-main']}>
+      {
+        openModalPauseTest
+        && <ModalPauseTest />
+      }
       {
         openModalEndTest
         && <ModalEndTest />
@@ -65,7 +92,7 @@ export function Test() {
       <StudentHeader />
 
       <div className={style['container-title']}>
-        <button onClick={() => navigate('/createtest')}>
+        <button onClick={() => handleClickPause()}>
           <img src={arrow} alt="Seta" />
         </button>
         <h1>Simulado</h1>
@@ -144,11 +171,11 @@ export function Test() {
           {openReportProblem && (<ReportProblem />)}
 
           <div className={style.buttons}>
-            <button className={page === 0 || page === questions.length - 1 ? 'displayNone' : 'button'} onClick={() => setPage(page - 1)}>Anterior</button>
-            <button className={page === questions.length - 1 ? 'button-dark-secondary' : 'displayNone'} onClick={() => setPage(page - 1)}>Anterior</button>
-            <button className={page < questions.length - 1 ? 'button' : 'displayNone'} onClick={() => setPage(page + 1)}>Próxima</button>
-            <button className={page !== questions.length - 1 ? 'button-dark-secondary' : 'displayNone'}>Pausar simulado</button>
-            <button className={page === questions.length - 1 ? 'button' : 'displayNone'} onClick={() => setOpenModalEndTest(true)}>Finalizar simulado</button>
+            <button className={page === 0 || page === questions.length - 1 ? 'displayNone' : 'button'} onClick={() => handleClickPrev()}>Anterior</button>
+            <button className={page === questions.length - 1 ? 'button-dark-secondary' : 'displayNone'} onClick={() => handleClickPrev()}>Anterior</button>
+            <button className={page < questions.length - 1 ? 'button' : 'displayNone'} onClick={() => handleClickNext()}>Próxima</button>
+            <button className={page !== questions.length - 1 ? 'button-dark-secondary' : 'displayNone'} onClick={() => handleClickPause()}>Pausar simulado</button>
+            <button className={page === questions.length - 1 ? 'button' : 'displayNone'} onClick={() => handleClickEnd()}>Finalizar simulado</button>
           </div>
         </div>
       </div>

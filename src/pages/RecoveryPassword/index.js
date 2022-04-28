@@ -8,9 +8,8 @@ import style from './styles.module.scss';
 import logo from '../../assets/logo-dark.svg';
 import arrow from '../../assets/arrow-back-icon-white.svg';
 
-export function ForgotYourPassword() {
+export function RecoveryPassword() {
   const { utilsStore: { setAlert } } = useStores();
-
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [erroEmail, setErroEmail] = useState('');

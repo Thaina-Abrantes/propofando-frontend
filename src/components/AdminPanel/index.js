@@ -11,18 +11,11 @@ import logOut from '../../assets/login-icon.svg';
 function AdminPanel() {
   const {
     userStore: { handleClearUserData },
-    modalStore: {
-      openModalRegisterUser,
-      setOpenModalRegisterUser,
-      openModalNewCategory,
-      setOpenModalNewCategory,
-    },
     questionStore: {
       setQuestionInEditing,
     },
   } = useStores();
 
-  const [showUser, setShowUSer] = useState(false);
   const [showQuestion, setShowQuestion] = useState(false);
 
   const navigate = useNavigate();
@@ -37,28 +30,10 @@ function AdminPanel() {
       <h2>Painel</h2>
       <div>
         <img src={UserIcon} alt="Icone de usuário" />
-        <div
-          onClick={() => setShowUSer(!showUser)}
-          className={style.click}
-        >
+        <div className={style.click}>
           <NavLink className={({ isActive }) => (isActive ? style.active : style.inactive)} to="/main">Usuários</NavLink>
-          <img
-            src={showUser ? arrowUp : arrowDown}
-            alt="Flecha para baixo"
-          />
         </div>
       </div>
-      {showUser && (
-        <div className={style.links}>
-          <NavLink
-            className={({ isActive }) => (isActive ? style.activeLink : style.inactiveLink)}
-            to="/main"
-            onClick={() => setOpenModalRegisterUser(true)}
-          >
-            Cadastrar usuário
-          </NavLink>
-        </div>
-      )}
 
       <div>
         <img src={listIcon} alt="Icone de usuário" />
@@ -83,14 +58,6 @@ function AdminPanel() {
             {' '}
             Criar questão
 
-          </NavLink>
-          <NavLink
-            className={({ isActive }) => (isActive ? style.activeLink : style.inactiveLink)}
-            to="/main/question-category"
-            onClick={() => setOpenModalNewCategory(true)}
-          >
-            {' '}
-            Criar categoria
           </NavLink>
         </div>
       )}
