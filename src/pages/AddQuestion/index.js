@@ -273,9 +273,15 @@ export function AddQuestion() {
               </div>
             )
             : (
-              <div className={style['btn-add-question']}>
-                <button className="button">Adicionar questão</button>
+              <div className={style['btns-edit-question']}>
+                <div className={style['btn-question']}>
+                  <button className="button">Adicionar questão</button>
+                </div>
+                <div className={style['btn-question']}>
+                  <button className="button-ligth-secondary">Remover questão</button>
+                </div>
               </div>
+
             )}
         </form>
       </div>
