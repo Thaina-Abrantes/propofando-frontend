@@ -126,7 +126,7 @@ export function AddQuestion() {
       setAlert({ open: true, type: 'success', message: response.data.message });
 
       setErrorQuestion('');
-    } else if (questionInEditing) {
+    } else if (questionInEditing && !openModalDeleteQuestion) {
       const responseEdit = await handleEditQuestion({ form, alternatives, categoryId });
       if (responseEdit.status > 204) {
         setAlert({ open: true, type: 'error', message: responseEdit.data.message || responseEdit.data });
