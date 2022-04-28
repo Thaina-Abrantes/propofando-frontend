@@ -122,20 +122,18 @@ export function AddQuestion() {
         return;
       }
 
-      navigate(`/main/list-question?category=${categoryId}`);
+      navigate('/main/list-question');
       setAlert({ open: true, type: 'success', message: response.data.message });
 
       setErrorQuestion('');
-    } else if (openModalDeleteQuestion) {
-      console.log(openModalDeleteQuestion);
-    } else {
+    } else if (questionInEditing) {
       const responseEdit = await handleEditQuestion({ form, alternatives, categoryId });
       if (responseEdit.status > 204) {
         setAlert({ open: true, type: 'error', message: responseEdit.data.message || responseEdit.data });
         return;
       }
 
-      navigate(`/main/list-question?category=${categoryId}`);
+      navigate('/main/list-question');
       setAlert({ open: true, type: 'success', message: responseEdit.data.message });
       setQuestionInEditing(false);
     }
@@ -143,8 +141,15 @@ export function AddQuestion() {
 
   useEffect(async () => {
     await handleListCategory();
-    console.log(questionInEditing, 'quest');
   }, []);
+
+  useEffect(() => {
+    if (!questionInEditing) {
+      setForm(defaultValuesForm);
+      setAlternatives(defaultAlternatives);
+      setCategoryId('selecione');
+    }
+  }, [questionInEditing]);
 
   return (
     <main className={style.container}>

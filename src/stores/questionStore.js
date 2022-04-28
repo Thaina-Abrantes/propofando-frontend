@@ -88,7 +88,6 @@ export function useQuestion() {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log(questionInEditing);
       return response;
     } catch (error) {
       const currentError = error.response.data.message || error.response.data;

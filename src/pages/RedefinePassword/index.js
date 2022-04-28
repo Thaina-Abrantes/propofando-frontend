@@ -39,8 +39,6 @@ export function RedefinePassword() {
 
       const result = await api.post(`/users/redefine-password/${token}`, body);
 
-      console.log(result, 'result');
-
       const { data } = result;
 
       if (result.status > 204) {
