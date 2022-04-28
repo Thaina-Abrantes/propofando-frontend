@@ -48,6 +48,9 @@ export function AddQuestion() {
       setQuestionInEditing,
     },
     utilsStore: { setAlert },
+    modalStore: {
+      setOpenModalDeleteQuestion,
+    },
   } = useStores();
 
   const navigate = useNavigate();
@@ -268,18 +271,25 @@ export function AddQuestion() {
           </div>
           {questionInEditing
             ? (
-              <div className={style['btn-add-question']}>
-                <button className="button">Salvar alterações</button>
-              </div>
-            )
-            : (
               <div className={style['btns-edit-question']}>
                 <div className={style['btn-question']}>
-                  <button className="button">Adicionar questão</button>
+                  <button className="button">Salvar alterações</button>
                 </div>
                 <div className={style['btn-question']}>
-                  <button className="button-ligth-secondary">Remover questão</button>
+                  <button
+                    className="button-ligth-secondary"
+                    onClick={() => setOpenModalDeleteQuestion(form.id)}
+                  >
+                    Remover questão
+
+                  </button>
                 </div>
+              </div>
+
+            )
+            : (
+              <div className={style['btn-question']}>
+                <button className="button">Adicionar questão</button>
               </div>
 
             )}
