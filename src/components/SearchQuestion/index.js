@@ -13,12 +13,18 @@ function SearchQuestion({ setSearchQuestion }) {
       setOpenModalNewCategory,
     },
     questionStore: {
+      setQuestionInEditing,
       categoryName,
     },
   } = useStores();
 
   function handleChange(e) {
     setSearchQuestion(e.target.value);
+  }
+
+  function handleClick() {
+    navigate('/main/add-question');
+    setQuestionInEditing(false);
   }
 
   return (
@@ -43,7 +49,7 @@ function SearchQuestion({ setSearchQuestion }) {
         />
         <button
           className="button"
-          onClick={() => navigate('/main/add-question')}
+          onClick={() => handleClick()}
         >
           Criar questão
 

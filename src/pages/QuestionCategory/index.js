@@ -16,6 +16,7 @@ export function QuestionCategory() {
       setOpenModalDeleteCategory,
       openModalNewCategory,
       setOpenModalNewCategory,
+      openModalDeleteQuestion,
     },
     categoryStore: {
       setCategoryInEditing,
@@ -23,6 +24,8 @@ export function QuestionCategory() {
       setTotalPage,
       setCurrentPage,
       totalPages,
+      dataCategory,
+      setDataCategory,
     },
     userStore: {
       token,
@@ -33,7 +36,6 @@ export function QuestionCategory() {
     },
   } = useStores();
 
-  const [dataCategory, setDataCategory] = useState([]);
   const navigate = useNavigate();
   const [serchItem, setSearchItem] = useState('');
 
@@ -50,7 +52,7 @@ export function QuestionCategory() {
 
   useEffect(() => {
     handleListCategory();
-  }, [currentPage, openModalDeleteCategory, openModalNewCategory]);
+  }, [currentPage, openModalDeleteCategory, openModalNewCategory, openModalDeleteQuestion]);
 
   async function handleListCategory() {
     try {

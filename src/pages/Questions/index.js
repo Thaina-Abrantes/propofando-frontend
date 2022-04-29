@@ -1,6 +1,7 @@
 import SearchQuestion from 'components/SearchQuestion';
 import { useEffect, useState } from 'react';
 import { useStores } from 'stores';
+import { useNavigate } from 'react-router-dom';
 import Paginator from 'components/Paginator';
 import style from './styles.module.scss';
 import pasteIcon from '../../assets/content-paste-icon.svg';
@@ -19,17 +20,24 @@ export function Questions() {
     questionStore: {
       handleListQuestions,
       listQuestions,
+      setQuestionInEditing,
       currentPage,
       setCurrentPage,
       totalPages,
     },
   } = useStores();
 
+  const navigate = useNavigate();
   const [serchQuestion, setSearchQuestion] = useState('');
 
   useEffect(async () => {
     await handleListQuestions(token);
   }, [currentPage, totalPages, openModalDeleteQuestion]);
+
+  function handleOpenEditQuestion(item) {
+    setQuestionInEditing(item);
+    navigate('/main/add-question');
+  }
 
   return (
     <main>
@@ -55,10 +63,16 @@ export function Questions() {
                   <span>{item.title}</span>
                 </div>
                 <div className={style['second-line-item']}>
-                  <button>
+                  <button
+                    onClick={() => handleOpenEditQuestion(item)}
+                  >
                     <img src={editIcon} alt="editar" />
                   </button>
-                  <button onClick={() => setOpenModalDeleteQuestion(item.id)}><img src={deleteIcon} alt="deletar" /></button>
+                  <button
+                    onClick={() => setOpenModalDeleteQuestion(item.id)}
+                  >
+                    <img src={deleteIcon} alt="deletar" />
+                  </button>
                 </div>
               </div>
             ))}

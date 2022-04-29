@@ -1,5 +1,12 @@
-import { useState } from 'react';
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable no-unused-expressions */
+import { useState, useEffect } from 'react';
+import { useStores } from 'stores';
 import { useNavigate } from 'react-router-dom';
+import InputAlternative from 'components/InputAlternative';
+import { caracterTextArea } from 'utils/caracterTextArea';
+import Upload from 'components/Upload';
+import api from '../../services/api';
 import clip from '../../assets/annex-icon.svg';
 import arrowBack from '../../assets/arrow-back-icon.svg';
 import arrowDown from '../../assets/arrow-down.svg';
@@ -8,81 +15,141 @@ import style from './styles.module.scss';
 const defaultValuesForm = {
   title: '',
   description: '',
-  explanation: '',
+  explanationText: '',
 };
 
 const defaultAlternatives = [
   {
-    title: 'optionA',
+    option: 'A)',
     description: '',
-    correct: false,
   },
   {
-    title: 'optionB',
+    option: 'B)',
     description: '',
-    correct: false,
   },
   {
-    title: 'optionC',
+    option: 'C)',
     description: '',
-    correct: false,
   },
   {
-    title: 'optionD',
+    option: 'D)',
     description: '',
-    correct: false,
   },
 ];
 
 export function AddQuestion() {
+  const {
+    userStore: { token },
+    questionStore: {
+      handleRegisterQuestion,
+      handleEditQuestion,
+      setErrorQuestion,
+      questionInEditing,
+      setQuestionInEditing,
+    },
+    utilsStore: { setAlert },
+    modalStore: {
+      openModalDeleteQuestion,
+      setOpenModalDeleteQuestion,
+    },
+  } = useStores();
+
   const navigate = useNavigate();
-  const [form, setForm] = useState(defaultValuesForm);
-  const [alternatives, setAlternatives] = useState(defaultAlternatives);
-  const [selectedRadio, setSelectedRadio] = useState('');
+
+  const [form, setForm] = useState(questionInEditing || defaultValuesForm);
+  const [alternatives, setAlternatives] = useState(
+    questionInEditing.alternatives || defaultAlternatives,
+  );
+
+  const [categoryId, setCategoryId] = useState(questionInEditing.categoryId || '');
+  const [dataCategory, setDataCategory] = useState([]);
+
+  const [openUploadDescription, setOpenUploadDescription] = useState(false);
+  const [openUploadExplanation, setOpenUploadExplanation] = useState(false);
+
   const titleSize = 200 - (form.title.split('').length);
-
-  const isRadioSelected = (value) => selectedRadio === value;
-
-  const handleRadioClick = (e) => {
-    const { value } = e.target;
-
-    const localAlternatives = [...alternatives];
-
-    for (const alternative of localAlternatives) {
-      alternative.correct = false;
-    }
-
-    const currentAlternative = localAlternatives.find((item) => item.title === value);
-
-    currentAlternative.correct = true;
-
-    setAlternatives([...localAlternatives]);
-
-    setSelectedRadio(e.target.value);
-  };
-
-  function caracterTextArea(type) {
-    const textSize = 1620 - type.split('').length;
-    return textSize;
-  }
 
   function handleChange(target) {
     setForm({ ...form, [target.name]: target.value });
   }
 
-  function handleChangeAlternatives({ target }) {
-    const localAlternatives = [...alternatives];
-
-    const currentAlternative = localAlternatives.find((item) => item.title === target.name);
-
-    currentAlternative.description = target.value;
-
-    setAlternatives(localAlternatives);
+  function handleCategoryId(e) {
+    setCategoryId(e.target.value);
   }
 
-  function handleSubmit(e) {
+  async function handleListCategory() {
+    try {
+      const response = await api.get('/categories/', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const { data } = response;
+
+      setDataCategory(data);
+      return;
+    } catch (error) {
+      return error;
+    }
+  }
+
+  const onInputChange = ({ name, value }, position) => {
+    const clonedAlternatives = [...alternatives];
+    clonedAlternatives.splice(position, 1, {
+      ...alternatives[position],
+      [name]: value,
+    });
+    setAlternatives(clonedAlternatives);
+  };
+
+  async function handleSubmit(e) {
     e.preventDefault();
+
+    const options = document.getElementsByName('option');
+
+    for (let i = 0; i < options.length; i += 1) {
+      if (options[i].checked) {
+        alternatives[i].correct = true;
+      } else {
+        alternatives[i].correct = false;
+      }
+    }
+
+    if (!questionInEditing) {
+      const response = await handleRegisterQuestion({ form, alternatives, categoryId });
+      if (response.status > 204) {
+        setAlert({ open: true, type: 'error', message: response.data.message || response.data });
+        return;
+      }
+
+      navigate('/main/list-question');
+      setAlert({ open: true, type: 'success', message: response.data.message });
+
+      setErrorQuestion('');
+    } else if (questionInEditing && !openModalDeleteQuestion) {
+      const responseEdit = await handleEditQuestion({ form, alternatives, categoryId });
+      if (responseEdit.status > 204) {
+        setAlert({ open: true, type: 'error', message: responseEdit.data.message || responseEdit.data });
+        return;
+      }
+
+      navigate('/main/list-question');
+      setAlert({ open: true, type: 'success', message: responseEdit.data.message });
+      setQuestionInEditing(false);
+    }
   }
+
+  useEffect(async () => {
+    await handleListCategory();
+  }, []);
+
+  useEffect(() => {
+    if (!questionInEditing) {
+      setForm(defaultValuesForm);
+      setAlternatives(defaultAlternatives);
+      setCategoryId('selecione');
+    }
+  }, [questionInEditing]);
 
   return (
     <main className={style.container}>
@@ -97,12 +164,16 @@ export function AddQuestion() {
           <h2>Categorias e questões</h2>
         </div>
         <div>
-          <span>Categorias e questões / Adicionar questão</span>
+          <span>
+            Categorias e questões /
+            {' '}
+            {(questionInEditing && 'Editar questão') || 'Adicionar questão'}
+          </span>
         </div>
       </div>
 
       <div className={style['page-body']}>
-        <h2>Criar questão</h2>
+        <h2>{(questionInEditing && 'Editar questão') || 'Criar questão'}</h2>
 
         <form onSubmit={handleSubmit}>
           <div className={style['div-title-category']}>
@@ -124,8 +195,21 @@ export function AddQuestion() {
             <div className={style['input-select']}>
               <label>
                 Categoria
-                <select>
-                  <option value="0">Select</option>
+                <select
+                  value={categoryId || 'selecione'}
+                  onChange={(e) => handleCategoryId(e)}
+                >
+                  <option value="selecione">
+                    Selecione
+                  </option>
+                  {dataCategory?.map((data) => (
+                    <option
+                      key={data.id}
+                      value={data.id}
+                    >
+                      {data.name}
+                    </option>
+                  ))}
                 </select>
               </label>
               <img src={arrowDown} alt="seta" />
@@ -143,7 +227,12 @@ export function AddQuestion() {
 
                 />
               </label>
-              <div>
+              <div onClick={() => setOpenUploadDescription(true)}>
+                <Upload
+                  open={openUploadDescription}
+                  setOpen={setOpenUploadDescription}
+                  handleReturnUrl={(url) => setForm({ ...form, image: url })}
+                />
                 <img src={clip} alt="clip" />
                 <span>Anexar mídia</span>
               </div>
@@ -153,114 +242,65 @@ export function AddQuestion() {
               </span>
             </div>
           </div>
-          <h3>Alternativas</h3>
-          <div className={style.option}>
-            <div>
-              <input
-                type="radio"
-                name="alternative"
-                value="optionA"
-                checked={isRadioSelected('optionA')}
-                onChange={handleRadioClick}
-              />
-              <span>A)</span>
-            </div>
 
-            <textarea
-              name="optionA"
-              value={alternatives[0].description}
-              onChange={handleChangeAlternatives}
+          <h3>Alternativas</h3>
+          {alternatives.map((alternative, index) => (
+            <InputAlternative
+              key={index}
+              alternative={alternative}
+              onInputChange={onInputChange}
+              position={index}
             />
-            <span className={style['counter-span']}>
-              {alternatives[0].description === '' ? 1620 : caracterTextArea(alternatives[0].description)}
-              /1620
-            </span>
-          </div>
-          <div className={style.option}>
-            <div>
-              <input
-                type="radio"
-                name="alternative"
-                value="optionB"
-                checked={isRadioSelected('optionB')}
-                onChange={handleRadioClick}
-              />
-              <span>B)</span>
-            </div>
-            <textarea
-              name="optionB"
-              value={alternatives[1].description}
-              onChange={handleChangeAlternatives}
-            />
-            <span className={style['counter-span']}>
-              {alternatives[1].description === '' ? 1620 : caracterTextArea(alternatives[1].description)}
-              /1620
-            </span>
-          </div>
-          <div className={style.option}>
-            <div>
-              <input
-                type="radio"
-                name="alternative"
-                value="optionC"
-                checked={isRadioSelected('optionC')}
-                onChange={handleRadioClick}
-              />
-              <span>C)</span>
-            </div>
-            <textarea
-              name="optionC"
-              value={alternatives[2].description}
-              onChange={handleChangeAlternatives}
-            />
-            <span className={style['counter-span']}>
-              {alternatives[2].description === '' ? 1620 : caracterTextArea(alternatives[2].description)}
-              /1620
-            </span>
-          </div>
-          <div className={style.option}>
-            <div>
-              <input
-                type="radio"
-                name="alternative"
-                value="optionD"
-                checked={isRadioSelected('optionD')}
-                onChange={handleRadioClick}
-              />
-              <span>D)</span>
-            </div>
-            <textarea
-              name="optionD"
-              value={alternatives[3].description}
-              onChange={handleChangeAlternatives}
-            />
-            <span className={style['counter-span']}>
-              {alternatives[3].description === '' ? 1620 : caracterTextArea(alternatives[3].description)}
-              /1620
-            </span>
-          </div>
+          ))}
+
           <div className={style['question']}>
             <label>
               Adicionar explicação
               <textarea
-                name="explanation"
-                value={form.explanation}
+                name="explanationText"
+                value={form.explanationText}
                 maxLength={1620}
                 onChange={(e) => handleChange(e.target)}
               />
             </label>
-            <div>
+            <div onClick={() => setOpenUploadExplanation(true)}>
+              <Upload
+                open={openUploadExplanation}
+                setOpen={setOpenUploadExplanation}
+                handleReturnUrl={(url) => setForm({ ...form, explanationVideo: url })}
+              />
               <img src={clip} alt="clip" />
               <span>Anexar mídia</span>
             </div>
             <span className={style['counter-span']}>
-              {form.explanation === '' ? 1620 : caracterTextArea(form.explanation)}
+              {form.explanationText === '' ? 1620 : caracterTextArea(form.explanationText)}
               /1620
             </span>
           </div>
-          <div className={style['btn-add-question']}>
-            <button className="button">Adicionar questão</button>
-          </div>
+          {questionInEditing
+            ? (
+              <div className={style['btns-edit-question']}>
+                <div className={style['btn-question']}>
+                  <button className="button">Salvar alterações</button>
+                </div>
+                <div className={style['btn-question']}>
+                  <button
+                    className="button-ligth-secondary"
+                    onClick={() => setOpenModalDeleteQuestion(form.id)}
+                  >
+                    Remover questão
+
+                  </button>
+                </div>
+              </div>
+
+            )
+            : (
+              <div className={style['btn-question']}>
+                <button className="button">Adicionar questão</button>
+              </div>
+
+            )}
         </form>
       </div>
 

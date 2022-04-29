@@ -9,7 +9,12 @@ import arrowDown from '../../assets/arrow-down.svg';
 import logOut from '../../assets/login-icon.svg';
 
 function AdminPanel() {
-  const { userStore: { handleClearUserData } } = useStores();
+  const {
+    userStore: { handleClearUserData },
+    questionStore: {
+      setQuestionInEditing,
+    },
+  } = useStores();
 
   const [showQuestion, setShowQuestion] = useState(false);
 
@@ -48,6 +53,7 @@ function AdminPanel() {
           <NavLink
             to="/main/add-question"
             className={({ isActive }) => (isActive ? style.activeLink : style.inactiveLink)}
+            onClick={() => setQuestionInEditing(false)}
           >
             {' '}
             Criar questão
