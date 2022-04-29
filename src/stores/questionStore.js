@@ -32,12 +32,13 @@ export function useQuestion() {
 
   async function handleDeleteQuestion(id) {
     try {
-      await api.delete(`/questions/${id}`, {
+      const response = await api.delete(`/questions/${id}`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
       });
+      return response;
     } catch (error) {
       const currentError = error.response.data.message || error.response.data;
       setErrorQuestion(currentError);

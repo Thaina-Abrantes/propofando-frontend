@@ -7,6 +7,7 @@ export default function PaginatorUsers() {
     studentAdminStore: {
       setCurrentPage,
       totalPages,
+      currentPage,
     },
 
   } = useStores();
@@ -19,9 +20,9 @@ export default function PaginatorUsers() {
     <div className={styles.paginator}>
       <ReactPaginate
         breakLabel="..."
-        nextLabel="Próximo"
+        nextLabel={currentPage === totalPages ? '' : 'Próximo'}
         onPageChange={handlePageClick}
-        previousLabel
+        previousLabel={totalPages === 1 || currentPage === 1 ? '' : 'Anterior'}
         pageRangeDisplayed={2}
         pageCount={totalPages}
         renderOnZeroPageCount={null}

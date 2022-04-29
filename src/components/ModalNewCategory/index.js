@@ -19,6 +19,7 @@ function ModalNewCategory() {
       setCategoryInEditing,
       handleEditCategory,
     },
+    utilsStore: { setAlert },
   } = useStores();
 
   useEffect(() => {
@@ -38,15 +39,21 @@ function ModalNewCategory() {
 
     if (categoryInEditing && categoryInEditing.name !== category) {
       const response = await handleEditCategory(category);
-      if (response.status === 200) { handleCloseModal(); }
+      if (response.status === 200) {
+        setAlert({ open: true, type: 'success', message: response.data.message });
+        handleCloseModal();
+      }
       return;
     }
 
     const response = await handleRegisterCategory(category);
 
     if (response.status > 204) {
+      setAlert({ open: true, type: 'error', message: response.data.message });
+      // TODO @salvar com o campo vazio não fecha o modal e apresenta erro
       return;
     }
+    setAlert({ open: true, type: 'success', message: response.data.message });
     setCategory('');
     setOpenModalNewCategory(false);
   }
