@@ -32,11 +32,12 @@ export function useStudentAdmin() {
 
   async function handleDeleteUser(id) {
     try {
-      await api.delete(`/users/${id}`, {
+      const response = await api.delete(`/users/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
+      return response;
     } catch (error) {
       const currentError = error.response.data.message || error.response.data;
       setErrorUser(currentError);

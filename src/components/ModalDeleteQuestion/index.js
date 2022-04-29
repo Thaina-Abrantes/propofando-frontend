@@ -18,13 +18,18 @@ function ModalDeleteQuestion() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  function handleCloseModalDeleteQuestion() {
-    handleDeleteQuestion(openModalDeleteQuestion);
+  async function handleCloseModalDeleteQuestion() {
+    const response = await handleDeleteQuestion(openModalDeleteQuestion);
+    if (response.status > 204) {
+      setAlert({ open: true, type: 'error', message: response.data.message });
+      return;
+    }
+
     if (location.pathname === '/main/add-question') {
       navigate('/main/question-category');
     }
     setOpenModalDeleteQuestion(false);
-    setAlert({ open: true, type: 'success', message: 'Questão removida!' });
+    setAlert({ open: true, type: 'success', message: response.data.message });
   }
 
   return (

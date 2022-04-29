@@ -105,7 +105,11 @@ export function QuestionCategory() {
             ))}
         </div>
       </div>
-      <Paginator setCurrentPage={setCurrentPage} totalPages={totalPages} />
+      <Paginator
+        setCurrentPage={setCurrentPage}
+        totalPages={totalPages}
+        currentPage={currentPage}
+      />
     </main>
   );
 }
