@@ -47,3 +47,102 @@
   border-radius: 5px;
   padding: 18px;
 }
+
+.input-select-ligth {
+  position: relative;
+  width: 310px;
+  height: 60px;
+  select {
+    all: unset;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    color: var(--gray);
+    border: 1.5px solid var(--gray700);
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    background-color: var(--white);
+  }
+  select::-webkit-scrollbar {
+    width: 10px;
+    height: 0px;
+  }
+  select::-webkit-scrollbar-track {
+    background: var(--black300);
+    }
+    select::-webkit-scrollbar-thumb {
+      background: #888;
+    }
+    select::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+  option {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    color: var(--black300);
+    background-color: var(--white);
+    cursor: pointer;
+  }
+  img {
+    position: absolute;
+    right: 16px;
+    bottom: 10px;
+    cursor: pointer;
+    pointer-events: none
+  }
+}
+
+.input-select-dark {
+  position: relative;
+  width: 310px;
+  height: 60px;
+  select {
+    all: unset;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    color: var(--gray);
+    border: 1.5px solid var(--gray700);
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    background-color: var(--black200);
+  }
+  select::-webkit-scrollbar {
+    width: 10px;
+    height: 0px;
+  }
+  select::-webkit-scrollbar-track {
+    background: #C6C6C6;
+    }
+    select::-webkit-scrollbar-thumb {
+      background: #888;
+    }
+    select::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+   
+  option {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    color: var(--white);
+    background-color:#313131;
+    cursor: pointer;
+  }
+  img {
+    position: absolute;
+    right: 16px;
+    bottom: 10px;
+    cursor: pointer;
+    pointer-events: none
+  }
+}
