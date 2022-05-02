@@ -114,13 +114,14 @@
 .container-filter {
   display: flex;
   flex-direction: column;
-  min-width: 850px;
-
+  box-sizing: content-box;
+  
   background-color: var(--black200);
   border-radius: 5px;
-
+  
   padding: 24px 42px;
-  height: 206px;
+  min-height: 206px;
+  min-width: 850px;
 
   margin-top: 58px;
 
@@ -141,32 +142,7 @@
   gap: 6px;
 }
 
-.select {
-  display: flex;
-  position: relative;
-  cursor: pointer;
-  background: var(--gray900);
-  border-radius: 5px;
-  border: 1.5px solid var(--textDarkHover);
-  width: 354px;
-  height: 60px;
-
-  select {
-    all: unset;
-    color: var(--white);
-    padding: 18px;
-  }
-
-  img {
-    position: absolute;
-    top: 26px;
-    right: 26px;
-    pointer-events:none;
-  }
-}
-
 .container form {
-
   input,
   select {
     width: 354px;
