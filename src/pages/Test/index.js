@@ -4,7 +4,7 @@ import { useStores } from 'stores';
 import { useNavigate } from 'react-router-dom';
 import ModalEndTest from 'components/ModalEndTest';
 import ReportProblem from 'components/ReportProblem';
-import ModalPauseTest from 'components/ModalPauseTest ';
+import ModalPauseTest from 'components/ModalPauseTest';
 import style from './styles.module.scss';
 import arrow from '../../assets/arrow-back-icon.svg';
 import graphic from '../../assets/question.svg';
