@@ -14,7 +14,7 @@ function ModalEndTest() {
 
   function closeTest() {
     setOpenModalEndTest(false);
-    navigate('/consult-questions');
+    navigate('/student/main/consult-questions');
   }
 
   return (

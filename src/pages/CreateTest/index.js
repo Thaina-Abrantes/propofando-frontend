@@ -1,21 +1,45 @@
-import StudentHeader from 'components/StudentHeader';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useUser } from '../../stores/userStore';
 import style from './styles.module.scss';
 import arrow from '../../assets/arrow-back-icon.svg';
 import arrowDown from '../../assets/arrow-down.svg';
 import arrowUp from '../../assets/arrow-up.svg';
+import api from '../../services/api';
 
 export function CreateTest() {
+  const { token } = useUser();
+
   const navigate = useNavigate();
   const [openSelect, setOpenSelect] = useState(false);
+  const [categorysList, setCategorysList] = useState([]);
+  const [errorCategorysList, setErrorCategorysList] = useState('');
+
+  useEffect(() => {
+    handleListNamesCategorys();
+  }, []);
+
+  async function handleListNamesCategorys() {
+    try {
+      const response = await api.get('/categories', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const { data } = response;
+      setCategorysList(data);
+      return;
+    } catch (error) {
+      const currentError = error.response.data.message || error.response.data;
+      setErrorCategorysList(currentError);
+      return error.response;
+    }
+  }
 
   return (
-    <main className={style['container-main']}>
-      <StudentHeader />
-
+    <main className={style['container-create']}>
       <div className={style['container-title']}>
-        <div className={style['img-back']} onClick={() => navigate('/student/main')}>
+        <div className={style['img-back']}>
           <img src={arrow} alt="Seta voltar" />
         </div>
         <h1>Criar simulado</h1>
@@ -38,15 +62,7 @@ export function CreateTest() {
                     <label>Insira a Quantidade de Questões</label>
                     <span>(Opcional)</span>
                   </div>
-                  <div className={style.select} onClick={() => setOpenSelect(true)}>
-                    <select>
-                      <option value="" selected disabled>Selecionar</option>
-                      <option value="amount1">5 questões</option>
-                      <option value="amount2">10 questões</option>
-                      <option value="amount3">15 questões</option>
-                    </select>
-                    <img src={openSelect ? arrowUp : arrowDown} alt="Seta" />
-                  </div>
+                  <input className="input" type="number" placeholder="Quantidade" size="3" max="3" />
                 </div>
               </div>
             </div>
@@ -58,9 +74,9 @@ export function CreateTest() {
             <div className={style.select} onClick={() => setOpenSelect(true)}>
               <select name="select">
                 <option value="" selected disabled>Selecionar</option>
-                <option value="category1">Categoria A</option>
-                <option value="category2">Categoria B</option>
-                <option value="category3">Categoria C</option>
+                {categorysList.map((item) => (
+                  <option key={item.id} value={item.name}>{item.name}</option>
+                ))}
               </select>
               <img src={openSelect ? arrowUp : arrowDown} alt="Seta" />
             </div>

@@ -33,6 +33,21 @@
   }
 }
 
+.title {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  span {
+    position: absolute;
+    bottom: -6px;
+    left: -5px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
+  }
+}
+
 .search-container {
   position: relative;
 

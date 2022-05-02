@@ -8,7 +8,22 @@ function ModalDeleteUser() {
       openModalDelete,
       setOpenModalDelete,
     },
+    studentAdminStore: {
+      handleDeleteUser,
+      errorUser,
+    },
+    utilsStore: { setAlert },
   } = useStores();
+
+  async function handleModalDelete() {
+    const response = await handleDeleteUser(openModalDelete);
+    if (response.status > 204) {
+      setAlert({ open: true, type: 'error', message: response.data.message });
+      return;
+    }
+    setAlert({ open: true, type: 'success', message: response.data.message });
+    setOpenModalDelete(false);
+  }
   return (
     <div className={style.background}>
       <div className={style.container}>
@@ -27,7 +42,13 @@ function ModalDeleteUser() {
           <p>
             Tem certeza que deseja excluir esse cadastro? Essa ação não poderá ser desfeita.
           </p>
-          <button className="button">Excluir</button>
+          <button
+            className="button"
+            onClick={handleModalDelete}
+          >
+            Excluir
+
+          </button>
         </div>
       </div>
     </div>

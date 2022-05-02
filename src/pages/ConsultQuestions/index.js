@@ -53,20 +53,29 @@ export function ConsultQuestions() {
   const {
     utilsStore: {
       openReportProblem,
-      setOpenReportProblem,
       openExplanation,
-      setOpenExplanation,
       openQuestionStatistics,
-      setOpenQuestionStatistics,
+      handleOpenExplanation,
+      handleOpenQuestionStatistics,
+      handleOpenReportProblem,
+      handleCloseBox,
     },
   } = useStores();
 
-  return (
-    <main className={style['container-main']}>
-      <StudentHeader />
+  function handleClickPrev() {
+    setPage(page - 1);
+    handleCloseBox();
+  }
 
+  function handleClickNext() {
+    setPage(page + 1);
+    handleCloseBox();
+  }
+
+  return (
+    <main className={style['container-consult']}>
       <div className={style['container-title']}>
-        <button onClick={() => navigate('/my-tests')}>
+        <button onClick={() => navigate('/student/main/my-tests')}>
           <img src={arrow} alt="Seta" />
         </button>
         <h1>Simulado</h1>
@@ -158,21 +167,21 @@ export function ConsultQuestions() {
           </div>
           <div className={style['container-links']}>
             <div className={style.links}>
-              <button onClick={() => setOpenExplanation(true)}>
+              <button onClick={() => handleOpenExplanation()}>
                 <img src={school} alt="Ícone de erro" />
                 <span>Consultar explicação</span>
               </button>
             </div>
 
             <div className={style.links}>
-              <button onClick={() => setOpenQuestionStatistics(true)}>
+              <button onClick={() => handleOpenQuestionStatistics()}>
                 <img src={analytics} alt="Ícone de erro" />
                 <span>Estatísticas da questão</span>
               </button>
             </div>
 
             <div className={style.links}>
-              <button onClick={() => setOpenReportProblem(true)}>
+              <button onClick={() => handleOpenReportProblem()}>
                 <img src={reportIcon} alt="Ícone de erro" />
                 <span>Reportar problema</span>
               </button>
@@ -197,8 +206,8 @@ export function ConsultQuestions() {
         {openReportProblem && (<ReportProblem />)}
 
         <div className={style.buttons}>
-          <button className={page === test.length - 1 ? 'displayNone' : 'button'} onClick={() => setPage(page + 1)}>Próxima</button>
-          <button className={page === 0 ? 'displayNone' : 'button'} onClick={() => setPage(page - 1)}>Anterior</button>
+          <button className={page === 0 ? 'displayNone' : 'button'} onClick={() => handleClickPrev()}>Anterior</button>
+          <button className={page === test.length - 1 ? 'displayNone' : 'button'} onClick={() => handleClickNext()}>Próxima</button>
         </div>
       </div>
     </main>

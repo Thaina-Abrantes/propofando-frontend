@@ -1,14 +1,40 @@
+import { useState } from 'react';
 import { useStores } from 'stores';
 import clear from '../../assets/clear-icon.svg';
 import style from './styles.module.scss';
 
+const defaultValues = { name: '', email: '' };
+
 function ModalRegisterUser() {
+  const [form, setForm] = useState(defaultValues);
   const {
     modalStore: {
       openModalRegisterUser,
       setOpenModalRegisterUser,
     },
+    studentAdminStore: {
+      handleRegisterUser,
+      errorUser,
+      setErrorUser,
+    },
+    utilsStore: { setAlert },
   } = useStores();
+
+  function handleChange(e) {
+    setForm({ ...form, [e.target.name]: e.target.value });
+    setErrorUser('');
+  }
+  async function handleSubmit(event) {
+    event.preventDefault();
+    const response = await handleRegisterUser(form);
+    if (response.status > 201) {
+      setAlert({ open: true, type: 'error', message: response.data.message });
+      return;
+    }
+    setAlert({ open: true, type: 'success', message: response.data.message });
+    setErrorUser('');
+    setOpenModalRegisterUser(false);
+  }
 
   return (
     <div className={style['background-modal']}>
@@ -22,22 +48,32 @@ function ModalRegisterUser() {
         </div>
         <h2>Cadastrar usuário</h2>
 
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className={style.wrapInputs}>
             <div className={style.containerInputs}>
               <label>Nome</label>
-              <input className="input-light" placeholder="Nome" />
+              <input
+                className="input-light"
+                placeholder="Nome"
+                name="name"
+                value={form.name}
+                onChange={(e) => handleChange(e)}
+              />
             </div>
             <div className={style.containerInputs}>
               <label>Email</label>
-              <input className="input-light" placeholder="Email" />
+              <input
+                className="input-light"
+                placeholder="Email"
+                name="email"
+                value={form.email}
+                onChange={(e) => handleChange(e)}
+              />
+              {errorUser && <span className={style['span-error']}>{errorUser}</span>}
+
             </div>
           </div>
           <div className={style.wrapInputBtn}>
-            <div className={style.containerInputs}>
-              <label>Senha</label>
-              <input className="input-light" placeholder="Senha" type="password" />
-            </div>
             <button className="button">Adicionar cadastro</button>
           </div>
         </form>
