@@ -99,6 +99,11 @@
 
 .content-custom {
   display: flex;
+
+  input {
+    width: 354px;
+    height: 60px;
+  }
 }
 
 .container-input:first-child {
@@ -140,12 +145,4 @@
   display: flex;
   flex-direction: row;
   gap: 6px;
-}
-
-.container form {
-  input,
-  select {
-    width: 354px;
-    height: 60px;
-  }
 }

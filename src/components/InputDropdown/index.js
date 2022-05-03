@@ -22,56 +22,25 @@ export function InputDropdown({ categorysList }) {
         </div>
         {openDropdown && (
           <div className={style['dropdown-options']}>
-            <div
-              className={style['dropdown-option-select']}
-              onClick={() => {
-                setSelectedOption(['Selecionar']);
-                setOpenDropdown(false);
-              }}
-            >
-              <img src={squareDisabled} alt="Input branco" />
-              <span>Selecionar</span>
-            </div>
-            <div
-              className={style['dropdown-option']}
-              onClick={() => {
-                setSelectedOption(['Todas']);
-                setOpenDropdown(false);
-              }}
-            >
-              {selectedOption.includes('Todas')
-                ? (
-                  <div className={style['img-selected']}>
-                    <img src={squareSelected} alt="Input selecionado" />
-                    <img className={style.success} src={success} alt="Ícone selecionado" />
-                  </div>
-                )
-                : (
-                  <img src={squareUnselected} alt="Input branco" />
-                )}
-              <span>Todas</span>
-            </div>
+            <label className={style['dropdown-option']} key="Todas">
+              <input
+                type="checkbox"
+                id="Todas"
+                name="Todas"
+              />
+              <span className={style.checkmark} />
+              Todas
+            </label>
             {categorysList.map((item) => (
-              <div
-                key={item.id}
-                className={style['dropdown-option']}
-                onClick={() => {
-                  setSelectedOption([item.name]);
-                  setOpenDropdown(false);
-                }}
-              >
-                {selectedOption.includes(item.name) || selectedOption.includes('Todas')
-                  ? (
-                    <div className={style['img-selected']}>
-                      <img src={squareSelected} alt="Input selecionado" />
-                      <img className={style.success} src={success} alt="Ícone selecionado" />
-                    </div>
-                  )
-                  : (
-                    <img src={squareUnselected} alt="Input branco" />
-                  )}
-                <span>{item.name}</span>
-              </div>
+              <label className={style['dropdown-option']} key={item.id}>
+                <input
+                  type="checkbox"
+                  id={item.id}
+                  name={item.name}
+                />
+                <span className={style.checkmark} />
+                {item.name}
+              </label>
             ))}
           </div>
         )}
