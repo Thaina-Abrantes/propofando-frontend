@@ -6,25 +6,29 @@ import arrowUp from '../../assets/arrow-up.svg';
 export function InputDropdown({ list }) {
   const [openDropdown, setOpenDropdown] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState([]);
+  const [allSelected, setAllSelected] = useState(false);
 
   function handleChange(target) {
-    if (target.checked) {
+    if (target.checked && target.name === 'Todas') {
+      setAllSelected(true);
+      const everything = list.map((i) => i.name);
+      setSelectedOptions(everything);
+    } else if (!target.checked && target.name === 'Todas') {
+      setAllSelected(false);
+      setSelectedOptions([]);
+    } else if (target.checked && target.name !== 'Todas') {
+      if (selectedOptions.includes(target.name)) {
+        return;
+      }
       setSelectedOptions([...selectedOptions, target.name]);
     } else {
+      if (allSelected) {
+        return;
+      }
       const filtered = selectedOptions.filter((i) => i !== target.name);
       setSelectedOptions(filtered);
     }
   }
-
-  function handleChangeAll(target) {
-    if (target.checked) {
-      const everything = list.map((i) => i.name);
-      setSelectedOptions(everything);
-    } else {
-      setSelectedOptions([]);
-    }
-  }
-  console.log(selectedOptions);
 
   return (
     <div className={style['container-input']}>
@@ -43,7 +47,7 @@ export function InputDropdown({ list }) {
                   type="checkbox"
                   id="Todas"
                   name="Todas"
-                  onChange={(e) => handleChangeAll(e.target)}
+                  onChange={(e) => handleChange(e.target)}
                 />
                 <span className={style.checkmark} />
                 Todas
