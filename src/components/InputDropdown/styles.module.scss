@@ -105,3 +105,14 @@
   display: block;
 }
 
+.selected-items {
+  overflow-x: scroll;
+  width: 260px;
+  height: 20px;
+  white-space: nowrap;
+}
+
+.selected-items::-webkit-scrollbar {
+  display: none;
+}
+

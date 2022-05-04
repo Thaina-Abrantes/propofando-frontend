@@ -72,7 +72,7 @@ export function CreateTest() {
             <h1>Filtros</h1>
             <label>Filtrar por categoria</label>
             <InputDropdown
-              categorysList={categorysList}
+              list={categorysList}
             />
           </div>
 

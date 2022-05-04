@@ -3,12 +3,15 @@ import style from './styles.module.scss';
 import arrowDown from '../../assets/arrow-down.svg';
 import arrowUp from '../../assets/arrow-up.svg';
 
-export function InputDropdown({ categorysList }) {
+export function InputDropdown({ list }) {
   const [openDropdown, setOpenDropdown] = useState(false);
   const [selectedOption, setSelectedOption] = useState([]);
 
   function handleSelect(item) {
-    setSelectedOption([item.name]);
+    if (selectedOption.includes(item.name)) {
+      return;
+    }
+    setSelectedOption([...selectedOption, item.name]);
     console.log(selectedOption);
   }
 
@@ -17,7 +20,7 @@ export function InputDropdown({ categorysList }) {
       <div className={style.dropdown}>
         <div className={openDropdown ? style['dropdown-select'] : style['dropdown-select-closed']} onClick={() => setOpenDropdown(!openDropdown)}>
           {selectedOption.length > 0
-            ? <span>{selectedOption}</span>
+            ? <div className={style['selected-items']}><span>{[...selectedOption.join(', ')]}</span></div>
             : <span>Selecionar</span>}
           <img src={openDropdown ? arrowUp : arrowDown} alt="Seta" />
         </div>
@@ -34,7 +37,7 @@ export function InputDropdown({ categorysList }) {
                 Todas
               </label>
             </div>
-            {categorysList.map((item) => (
+            {list.map((item) => (
               <div key={item.id} onClick={() => handleSelect(item)}>
                 <label className={style['dropdown-option']}>
                   <input
