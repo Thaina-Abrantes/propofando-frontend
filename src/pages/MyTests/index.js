@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { InputDropdown } from 'components/InputDropdown';
 import style from './styles.module.scss';
 import seta from '../../assets/arrow-back-icon.svg';
 import arrow from '../../assets/arrow.svg';
@@ -6,6 +7,12 @@ import factCheck from '../../assets/fact-check-icon.svg';
 
 export function MyTests() {
   const navigate = useNavigate();
+
+  const lista = [
+    { name: 'Item a', id: 1 },
+    { name: 'Item b', id: 2 },
+    { name: 'Item c', id: 3 },
+  ];
 
   return (
     <main className={style['container-my-tests']}>
@@ -15,15 +22,10 @@ export function MyTests() {
       </div>
       <div className={style.border}>
         <div className={style['container-filter']}>
-          <label>
+          <span>
             Filtrar por
-            <select>
-              <option value="0">Todos</option>
-              <option value="1">Simulado 1</option>
-              <option value="2">Simulado 2</option>
-            </select>
-          </label>
-          <img src={arrow} alt="seta" />
+            <InputDropdown list={lista} />
+          </span>
         </div>
       </div>
 

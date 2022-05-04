@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { InputDropdown } from 'components/InputDropdown';
 import { useUser } from '../../stores/userStore';
 import style from './styles.module.scss';
 import arrow from '../../assets/arrow-back-icon.svg';
@@ -11,7 +12,6 @@ export function CreateTest() {
   const { token } = useUser();
 
   const navigate = useNavigate();
-  const [openSelect, setOpenSelect] = useState(false);
   const [categorysList, setCategorysList] = useState([]);
   const [errorCategorysList, setErrorCategorysList] = useState('');
 
@@ -71,15 +71,9 @@ export function CreateTest() {
           <div className={style['container-filter']}>
             <h1>Filtros</h1>
             <label>Filtrar por categoria</label>
-            <div className={style.select} onClick={() => setOpenSelect(true)}>
-              <select name="select">
-                <option value="" selected disabled>Selecionar</option>
-                {categorysList.map((item) => (
-                  <option key={item.id} value={item.name}>{item.name}</option>
-                ))}
-              </select>
-              <img src={openSelect ? arrowUp : arrowDown} alt="Seta" />
-            </div>
+            <InputDropdown
+              list={categorysList}
+            />
           </div>
 
           <button className="button" onClick={() => navigate('/test')}>Criar simulado</button>
