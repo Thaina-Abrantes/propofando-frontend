@@ -7,13 +7,6 @@ export function InputDropdown({ list }) {
   const [openDropdown, setOpenDropdown] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState([]);
 
-  // function handleSelect() {
-  //   if (selectedOptions.includes(item.name)) {
-  //     return;
-  //   }
-  //   setSelectedOptions([...selectedOptions, item.name]);
-  // }
-
   function handleChange(target) {
     if (target.checked) {
       setSelectedOptions([...selectedOptions, target.name]);
