@@ -31,7 +31,7 @@ function SearchQuestion({ setSearchQuestion }) {
     <div className={style.search}>
       <div className={style.title}>
         <div>
-          <img src={arrowBack} alt="Voltar" />
+          <button onClick={() => navigate('/main/question-category')}><img src={arrowBack} alt="Voltar" /></button>
           <h2>Questões</h2>
         </div>
         <span>
