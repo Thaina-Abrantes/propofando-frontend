@@ -76,7 +76,10 @@ export function Users() {
                 <span>{item.email}</span>
               </div>
               <div className={style['third-line-item']}>
-                <span>86%</span>
+                <span>
+                  {item.corrects}
+                  %
+                </span>
               </div>
               <div className={style['fourth-line-item']}>
                 <button
