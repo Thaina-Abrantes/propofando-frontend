@@ -25,7 +25,6 @@ function SearchCategory({ setSearchItem }) {
   return (
     <div className={style.search}>
       <div>
-        <img src={arrowBack} alt="Voltar" />
         <h2>Categorias e questões</h2>
       </div>
       <div className={style['search-container']}>

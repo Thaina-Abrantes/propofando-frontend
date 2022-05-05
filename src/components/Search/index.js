@@ -23,7 +23,6 @@ function Search() {
   return (
     <div className={style.search}>
       <div>
-        <img src={arrowBack} alt="Voltar" />
         <h2>Dados de usuários</h2>
       </div>
       <div className={style['search-container']}>
