@@ -37,7 +37,7 @@ export function QuestionCategory() {
   } = useStores();
 
   const navigate = useNavigate();
-  const [serchItem, setSearchItem] = useState('');
+  const [searchItem, setSearchItem] = useState('');
 
   function handleOpenEdit(item) {
     setCategoryInEditing(item);
@@ -73,7 +73,7 @@ export function QuestionCategory() {
 
   return (
     <main>
-      <SearchCategory setSearchTerm={setSearchItem} />
+      <SearchCategory setSearchItem={setSearchItem} />
       <div className={style['table']}>
         <div className={style['table-header']}>
           <div className={style['name-title']}><span>Nome</span></div>
@@ -81,8 +81,9 @@ export function QuestionCategory() {
           <div className={style['manage-title']}><span>Gerenciar</span></div>
         </div>
         <div className={style['table-body']}>
-          {dataCategory.filter((item) => item.name.toLocaleLowerCase()
-            .includes(serchItem.toLocaleLowerCase()))
+          {dataCategory && dataCategory.filter((item) => item.name.toLocaleLowerCase()
+            .normalize('NFD').replace(/[\u0300-\u036f]/gi, '')
+            .includes(searchItem.toLocaleLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/gi, '')))
             .map((item) => (
               <div className={style['table-line']} key={item.id}>
                 <div className={style['first-line-item']} onClick={() => handleOpenQuestions(item)}>
