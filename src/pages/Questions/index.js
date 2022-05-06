@@ -42,20 +42,14 @@ export function Questions() {
   return (
     <main>
       <SearchQuestion setSearchQuestion={setSearchQuestion} />
-
       <div className={style.table}>
         <div className={style['table-header']}>
           <div className={style['name-title']}><span>Nome</span></div>
           <div className={style['manage-title']}><span>Gerenciar</span></div>
         </div>
         <div className={style['table-body']}>
-          {listQuestions && listQuestions.filter((item) => item.title.toLocaleLowerCase()
-            .replace(/[áàãäâ]/, 'a')
-            .replace(/[éèëê]/, 'e')
-            .replace(/[íìïî]/, 'i')
-            .replace(/[óòõöô]/, 'o')
-            .replace(/[úùüû]/, 'u')
-            .includes(serchQuestion.toLocaleLowerCase()))
+          {listQuestions && listQuestions.filter((item) => item.title.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/gi, '')
+            .includes(serchQuestion.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/gi, '')))
             .map((item) => (
               <div className={style['table-line']} key={item.id}>
                 <div className={style['first-line-item']}>
