@@ -1,7 +1,7 @@
 import TableTop3 from 'components/TableTop3';
 import TableInfoCategories from 'components/TableInfoCategories';
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useStores } from 'stores';
 import style from './styles.module.scss';
 import lamp from '../../assets/lamp-icon.svg';
@@ -12,15 +12,22 @@ export function StudentPage() {
   const {
     simulatedStore: {
       handlePerformance,
+      handleTop3CategoriesHits,
+      handleTop3CategoriesErrors,
       performance,
+      top3AnsweredCorrectly,
+      top3AnsweredIncorrectly,
     },
     userStore: {
       userData,
     },
   } = useStores();
 
-  useEffect(() => {
-    handlePerformance(userData.id);
+  useEffect(async () => {
+    await handlePerformance(userData.id);
+    await handleTop3CategoriesHits(userData.id);
+    await handleTop3CategoriesErrors(userData.id);
+    console.log(top3AnsweredCorrectly, 'categ');
   }, []);
 
   return (
@@ -43,21 +50,11 @@ export function StudentPage() {
       <div className={style['container-tabletop3']}>
         <TableTop3
           label="Categorias que mais acertou"
-          category1="Categoria A"
-          category2="Categoria F"
-          category3="Categoria G"
-          amount1="65 questões"
-          amount2="57 questões"
-          amount3="44 questões"
+          top3Categories={top3AnsweredCorrectly}
         />
         <TableTop3
           label="Categorias que mais errou"
-          category1="Categoria B"
-          category2="Categoria D"
-          category3="Categoria C"
-          amount1="30 questões"
-          amount2="24 questões"
-          amount3="19 questões"
+          top3Categories={top3AnsweredIncorrectly}
         />
       </div>
       {performance
