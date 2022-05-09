@@ -17,7 +17,7 @@ export function ConsultQuestions() {
   const navigate = useNavigate();
   const [page, setPage] = useState(0);
   const [dataAnswers, setDataAnswers] = useState([]);
-  const [testId, setTestId] = useState('6cc787a8-0b2c-4a1f-b526-1050b166445b');
+  const [testId, setTestId] = useState('455adc85-578c-4f22-9595-9de1720261d3');
 
   const { token } = useUser();
 
@@ -37,7 +37,6 @@ export function ConsultQuestions() {
   useEffect(async () => {
     const data = await handleConsultAnswers(testId);
     setDataAnswers(data);
-    console.log(data.length);
   }, []);
 
   function handleClickPrev() {
