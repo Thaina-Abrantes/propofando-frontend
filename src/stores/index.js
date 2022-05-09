@@ -7,6 +7,7 @@ import { useUser } from './userStore';
 import { useUtils } from './utilsStore';
 import { useStudentAdmin } from './studentAdminStore';
 import { useQuestion } from './questionStore';
+import { useSimulated } from './simulatedStore';
 
 const storesCtx = createContext(null);
 
@@ -22,6 +23,7 @@ export function StoresProvider({ children }) {
   const utilsStore = useUtils();
   const questionStore = useQuestion();
   const loadingStore = useLoading();
+  const simulatedStore = useSimulated();
 
   const studentAdminStore = useStudentAdmin();
 
@@ -35,6 +37,7 @@ export function StoresProvider({ children }) {
       categoryStore,
       questionStore,
       loadingStore,
+      simulatedStore,
     }}
     >
       {children}
