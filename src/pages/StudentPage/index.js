@@ -27,7 +27,6 @@ export function StudentPage() {
     await handlePerformance(userData.id);
     await handleTop3CategoriesHits(userData.id);
     await handleTop3CategoriesErrors(userData.id);
-    console.log(top3AnsweredCorrectly, 'categ');
   }, []);
 
   return (

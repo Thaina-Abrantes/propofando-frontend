@@ -6,7 +6,7 @@ export default function TableTop3({ label, top3Categories }) {
     <div className={['table']}>
       <div className={style['table-header']}>{label}</div>
       <div className={style['table-body']}>
-        {!top3Categories
+        {!top3Categories.length
           ? (
             <div className={style['container-no-data']}>
               <p>Ainda não há dados de desempenho disponíveis</p>
