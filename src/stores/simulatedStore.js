@@ -6,8 +6,11 @@ export function useSimulated() {
   const [errorListUserSimulated, setErrorListUserSimulated] = useState('');
   const [errorCreateUserSimulated, setErrorCreateUserSimulated] = useState('');
   const [listUserSimulated, setListUserSimulated] = useState([]);
+  const [performance, setPerformance] = useState();
+  const [idForPerformance, setIdForPerformance] = useState('30611e30-d02c-4189-8324-ffc39a2a37cb');
 
   const { token } = useUser();
+
   async function handleListUserSimulated(userId) {
     try {
       const response = await api.get(`/simulated/${userId}`, {
@@ -46,6 +49,21 @@ export function useSimulated() {
     }
   }
 
+  async function handlePerformance(userId) {
+    try {
+      const response = await api.get(`/users/${userId}/performance`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const { data } = response;
+      setPerformance(data);
+      return data;
+    } catch (error) {
+      return error.response;
+    }
+  }
+
   return {
     handleListUserSimulated,
     handleCreateUserSimulated,
@@ -55,5 +73,8 @@ export function useSimulated() {
     setListUserSimulated,
     setErrorCreateUserSimulated,
     errorCreateUserSimulated,
+    handlePerformance,
+    performance,
+    setPerformance,
   };
 }
