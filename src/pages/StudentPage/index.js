@@ -1,13 +1,27 @@
 import TableTop3 from 'components/TableTop3';
 import TableInfoCategories from 'components/TableInfoCategories';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useStores } from 'stores';
 import style from './styles.module.scss';
 import lamp from '../../assets/lamp-icon.svg';
 
 export function StudentPage() {
   const navigate = useNavigate();
-  const [noData, setNoData] = useState(true);
+
+  const {
+    simulatedStore: {
+      handlePerformance,
+      performance,
+    },
+    userStore: {
+      userData,
+    },
+  } = useStores();
+
+  useEffect(() => {
+    handlePerformance(userData.id);
+  }, []);
 
   return (
     <div className={style['container-page']}>
@@ -19,11 +33,11 @@ export function StudentPage() {
       <div className={style['container-cards']}>
         <div className={style['card']}>
           <h3>Simulados feitos</h3>
-          <h1>{noData ? 0 : 5}</h1>
+          <h1>{!performance ? 0 : performance.totalSimulateds}</h1>
         </div>
         <div className={style['card']}>
           <h3>Questões respondidas</h3>
-          <h1>{noData ? 0 : '20%'}</h1>
+          <h1>{!performance ? 0 : performance.percentageAnswered}</h1>
         </div>
       </div>
       <div className={style['container-tabletop3']}>
@@ -46,13 +60,16 @@ export function StudentPage() {
           amount3="19 questões"
         />
       </div>
-      {!noData
+      {performance
          && (
          <div className={style['info']}>
            <img src={lamp} alt="Lampada" />
            <p>
              Você sabia? Com base nos resultados dos simulados,
-             sua média de acertos geral é de 77%.
+             sua média de acertos geral é de
+             {' '}
+             {performance.percentageHits}
+             .
            </p>
          </div>
          )}
