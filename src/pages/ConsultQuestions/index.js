@@ -11,18 +11,18 @@ import errorIcon from '../../assets/alert-error-close.svg';
 import success from '../../assets/success-icon.svg';
 import analytics from '../../assets/analytics-icon.svg';
 import school from '../../assets/school-icon.svg';
-import api from '../../services/api';
 import { useUser } from '../../stores/userStore';
 
 export function ConsultQuestions() {
   const navigate = useNavigate();
   const [page, setPage] = useState(0);
   const [dataAnswers, setDataAnswers] = useState([]);
-  const [testId, setTestId] = useState('455adc85-578c-4f22-9595-9de1720261d3');
+  const [testId, setTestId] = useState('6cc787a8-0b2c-4a1f-b526-1050b166445b');
 
   const { token } = useUser();
 
   const {
+    simulatedStore: { handleConsultAnswers },
     utilsStore: {
       openReportProblem,
       openExplanation,
@@ -34,26 +34,18 @@ export function ConsultQuestions() {
     },
   } = useStores();
 
-  useEffect(() => {
-    handleConsultAnswers();
+  useEffect(async () => {
+    const data = await handleConsultAnswers(testId);
+    setDataAnswers(data);
+    console.log(data.length);
   }, []);
 
-  async function handleConsultAnswers() {
-    try {
-      const response = await api.get(`/simulated/${testId}/answers`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const { data } = response;
-      setDataAnswers(data);
-    } catch (error) {
-      return error.response;
-    }
-  }
-
   function handleClickPrev() {
-    setPage(page - 1);
+    if (page === 0) {
+      setPage(page);
+    } else {
+      setPage(page - 1);
+    }
     handleCloseBox();
   }
 
@@ -62,7 +54,7 @@ export function ConsultQuestions() {
     handleCloseBox();
   }
 
-  if (dataAnswers) {
+  if (dataAnswers.length >= 1) {
     return (
       <main className={style['container-consult']}>
         <div className={style['container-title']}>

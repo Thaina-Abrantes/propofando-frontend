@@ -64,9 +64,26 @@ export function useSimulated() {
     }
   }
 
+  async function handleConsultAnswers(simulatedId) {
+    try {
+      const response = await api.get(`/simulated/${simulatedId}/answers`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const { data } = response;
+      return data;
+    } catch (error) {
+      const currentError = error.response.data.message || error.response.data;
+      setErrorListUserSimulated(currentError);
+      return error.response;
+    }
+  }
+
   return {
     handleListUserSimulated,
     handleCreateUserSimulated,
+    handleConsultAnswers,
     errorListUserSimulated,
     setErrorListUserSimulated,
     listUserSimulated,
