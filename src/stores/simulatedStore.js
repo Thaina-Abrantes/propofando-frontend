@@ -8,6 +8,8 @@ export function useSimulated() {
   const [listUserSimulated, setListUserSimulated] = useState([]);
   const [performance, setPerformance] = useState();
   const [idForPerformance, setIdForPerformance] = useState('30611e30-d02c-4189-8324-ffc39a2a37cb');
+  const [top3AnsweredCorrectly, setTop3AnsweredCorrectly] = useState([]);
+  const [top3AnsweredIncorrectly, setTop3AnsweredIncorrectly] = useState([]);
 
   const { token } = useUser();
 
@@ -76,6 +78,34 @@ export function useSimulated() {
     } catch (error) {
       const currentError = error.response.data.message || error.response.data;
       setErrorListUserSimulated(currentError);
+    }
+  }
+  async function handleTop3CategoriesHits(userId) {
+    try {
+      const response = await api.get(`/users/${userId}/top-3-hits`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const { data } = response;
+      setTop3AnsweredCorrectly(data);
+      return data;
+    } catch (error) {
+      return error.response;
+    }
+  }
+
+  async function handleTop3CategoriesErrors(userId) {
+    try {
+      const response = await api.get(`/users/${userId}/top-3-errors`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const { data } = response;
+      setTop3AnsweredIncorrectly(data);
+      return data;
+    } catch (error) {
       return error.response;
     }
   }
@@ -93,5 +123,11 @@ export function useSimulated() {
     handlePerformance,
     performance,
     setPerformance,
+    handleTop3CategoriesHits,
+    top3AnsweredCorrectly,
+    setTop3AnsweredCorrectly,
+    handleTop3CategoriesErrors,
+    top3AnsweredIncorrectly,
+    setTop3AnsweredIncorrectly,
   };
 }

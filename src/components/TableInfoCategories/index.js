@@ -1,17 +1,38 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useStores } from 'stores';
 import style from './styles.module.scss';
+import api from '../../services/api';
 
 export default function TableInfoCategories() {
-  const [noData, setNoData] = useState(true);
+  const {
+    userStore: {
+      userData,
+      token,
+    },
 
-  const performanceData = [
-    { category: 'A', answered: '70/100', average: '65%' },
-    { category: 'B', answered: '35/100', average: '35%' },
-    { category: 'C', answered: '80/100', average: '80%' },
-    { category: 'D', answered: '62/100', average: '62%' },
-    { category: 'E', answered: '94/100', average: '94%' },
-    { category: 'F', answered: '55/100', average: '55%' },
-  ];
+  } = useStores();
+
+  const [statistics, setStatistics] = useState([]);
+  const [noData, setNoData] = useState([]);
+  useEffect(() => {
+    statisticsTableInfoCategory();
+  }, []);
+  async function statisticsTableInfoCategory() {
+    try {
+      const response = await api.get(`/categories/statistics/${userData.id}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const { data } = response;
+      setNoData(data);
+      setStatistics(data);
+      return response;
+    } catch (error) {
+      return error.response;
+    }
+  }
   return (
     <div className={['table']}>
       <div className={style['table-header']}>
@@ -20,17 +41,25 @@ export default function TableInfoCategories() {
         <div className={style['title-colum3']}>Média de acertos</div>
       </div>
       <div className={style['table-body']}>
-        {noData
+        {(noData.length === 1 && !noData[0].name)
           ? (
             <div className={style['container-no-data']}>
               <p>Ainda não há dados de desempenho disponíveis</p>
             </div>
           )
-          : performanceData.map((data) => (
-            <div className={style['line']}>
-              <span className={style['colum-data1']}>{data.category}</span>
-              <span className={style['colum-data2']}>{data.answered}</span>
-              <span className={style['colum-data3']}>{data.average}</span>
+          : statistics.map((data) => (
+            <div key={data.name} className={style['line']}>
+              <span className={style['colum-data1']}>{data.name}</span>
+              <span className={style['colum-data2']}>
+                { data.answeredpercategory}
+                /
+                {data.numberOfQuestionOfCategory}
+              </span>
+              <span className={style['colum-data3']}>
+                {Number((data.answeredcorretlypercategory) / data.numberOfQuestionOfCategory) * 100}
+                {' '}
+                %
+              </span>
             </div>
           ))}
       </div>
