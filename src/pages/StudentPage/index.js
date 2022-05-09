@@ -56,7 +56,7 @@ export function StudentPage() {
           top3Categories={top3AnsweredIncorrectly}
         />
       </div>
-      {performance
+      {performance?.percentageHits !== '0%'
          && (
          <div className={style['info']}>
            <img src={lamp} alt="Lampada" />
@@ -64,7 +64,7 @@ export function StudentPage() {
              Você sabia? Com base nos resultados dos simulados,
              sua média de acertos geral é de
              {' '}
-             {performance.percentageHits}
+             {performance?.percentageHits}
              .
            </p>
          </div>

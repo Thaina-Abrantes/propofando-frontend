@@ -13,7 +13,7 @@ export default function TableTop3({ label, top3Categories }) {
             </div>
           )
           : top3Categories.map((category) => (
-            <div className={style['line']}>
+            <div className={style['line']} key={category.id}>
               <div className={style['container-img']}>
                 <img src={bullet} alt="Lista" />
                 <span>{category.name}</span>
