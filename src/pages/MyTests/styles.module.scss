@@ -36,14 +36,8 @@
   padding-left: 80px;
   margin-top: 11px;
   margin-bottom: 50px;
-  img{
-    position: absolute;
-    top: 55px;
-    right: 15px;
-    cursor: pointer;
-    pointer-events: none;
-  }
-  label{
+
+  span{
     display: flex;
     flex-direction: column;
     font-style: normal;
@@ -51,31 +45,6 @@
     font-size: 16px;
     line-height: 22px;
     color: var(--white500);
-  }
-
-  select{
-    all: unset;
-    box-sizing: border-box;
-    width: 100%;
-    margin-top: 12px;
-    
-    border-radius: 5px;
-    padding: 16px 18px;
-    border: 1.5px solid var(--gray900);
-    background: var(--gray900);
-    color: var(--white);
-    cursor: pointer;
-    appearance: none;
-
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 19px;
-    font-family: 'Open Sans';
-  }
-  
-  option{
-    background-color: var(--black200);
   }
 }
 

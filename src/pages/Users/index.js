@@ -28,6 +28,7 @@ export function Users() {
       setTotalPage,
       currentPage,
       setErrorUser,
+      searchUser,
     },
   } = useStores();
 
@@ -66,32 +67,48 @@ export function Users() {
         </div>
 
         <div className={style['table-body']}>
-          {dataUsers.map((item) => (
-            <div className={style['table-line']} key={item.id}>
-              <div className={style['first-line-item']}>
-                <img src={userIcon} alt="Icone de usuário" />
-                <span>{item.name}</span>
+          {dataUsers && dataUsers.filter((item) => item.name.toLocaleLowerCase()
+            .replace(/[áàãäâ]/, 'a')
+            .replace(/[éèëê]/, 'e')
+            .replace(/[íìïî]/, 'i')
+            .replace(/[óòõöô]/, 'o')
+            .replace(/[úùüû]/, 'u')
+            .includes(searchUser.toLocaleLowerCase()) || item.email.toLocaleLowerCase()
+            .replace(/[áàãäâ]/, 'a')
+            .replace(/[éèëê]/, 'e')
+            .replace(/[íìïî]/, 'i')
+            .replace(/[óòõöô]/, 'o')
+            .replace(/[úùüû]/, 'u')
+            .includes(searchUser.toLocaleLowerCase()))
+            .map((item) => (
+              <div className={style['table-line']} key={item.id}>
+                <div className={style['first-line-item']}>
+                  <img src={userIcon} alt="Icone de usuário" />
+                  <span>{item.name}</span>
+                </div>
+                <div className={style['second-line-item']}>
+                  <span>{item.email}</span>
+                </div>
+                <div className={style['third-line-item']}>
+                  <span>
+                    {item.corrects}
+                    %
+                  </span>
+                </div>
+                <div className={style['fourth-line-item']}>
+                  <button
+                    onClick={() => handleOpenEditUser(item)}
+                  >
+                    <img src={editIcon} alt="editar" />
+                  </button>
+                  <button
+                    onClick={() => setOpenModalDelete(item.id)}
+                  >
+                    <img src={deleteIcon} alt="deletar" />
+                  </button>
+                </div>
               </div>
-              <div className={style['second-line-item']}>
-                <span>{item.email}</span>
-              </div>
-              <div className={style['third-line-item']}>
-                <span>86%</span>
-              </div>
-              <div className={style['fourth-line-item']}>
-                <button
-                  onClick={() => handleOpenEditUser(item)}
-                >
-                  <img src={editIcon} alt="editar" />
-                </button>
-                <button
-                  onClick={() => setOpenModalDelete(item.id)}
-                >
-                  <img src={deleteIcon} alt="deletar" />
-                </button>
-              </div>
-            </div>
-          ))}
+            ))}
           <PaginatorUsers />
         </div>
       </div>
