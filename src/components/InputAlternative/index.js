@@ -12,6 +12,7 @@ function InputAlternative({ alternative, onInputChange, position }) {
           type="radio"
           name="option"
           value={`option${option}`}
+          defaultChecked={alternative.correct}
         />
         <span>{option}</span>
       </div>
