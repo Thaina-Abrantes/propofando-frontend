@@ -66,6 +66,20 @@ export function useSimulated() {
     }
   }
 
+  async function handleConsultAnswers(simulatedId) {
+    try {
+      const response = await api.get(`/simulated/${simulatedId}/answers`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const { data } = response;
+      return data;
+    } catch (error) {
+      const currentError = error.response.data.message || error.response.data;
+      setErrorListUserSimulated(currentError);
+    }
+  }
   async function handleTop3CategoriesHits(userId) {
     try {
       const response = await api.get(`/users/${userId}/top-3-hits`, {
@@ -99,6 +113,7 @@ export function useSimulated() {
   return {
     handleListUserSimulated,
     handleCreateUserSimulated,
+    handleConsultAnswers,
     errorListUserSimulated,
     setErrorListUserSimulated,
     listUserSimulated,
