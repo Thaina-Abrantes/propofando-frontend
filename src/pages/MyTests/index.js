@@ -28,7 +28,6 @@ export function MyTests() {
   useEffect(async () => {
     const data = await handleListUserSimulated(userData.id);
     setListUserSimulated(data);
-    console.log(data);
   }, []);
   return (
     <main className={style['container-my-tests']}>
