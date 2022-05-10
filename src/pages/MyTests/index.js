@@ -57,7 +57,7 @@ export function MyTests() {
               <span>{simulated.name}</span>
             </div>
             <div className={style['third-item']}>
-              {simulated?.active
+              {!simulated?.active
                 ? (
                   <button
                     className="button"
