@@ -11,6 +11,7 @@ export function useQuestion() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [categoryName, setCategoryName] = useState('');
+  const [randomQuestions, setRandomQuestions] = useState([]);
 
   async function handleListQuestions(token) {
     try {
@@ -98,6 +99,39 @@ export function useQuestion() {
     }
   }
 
+  async function handleAnswereSimulated({ id, alternativeId }) {
+    const body = {
+      id,
+      alternativeId,
+    };
+
+    try {
+      const response = await api.patch('/simulated', body, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response;
+    } catch (error) {
+      return error;
+    }
+  }
+
+  async function handleListRandomQuestions(simulatedId, userId) {
+    try {
+      const response = await api.get(`/simulated/${simulatedId}/user/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const { data } = response;
+      setRandomQuestions(data);
+      return data;
+    } catch (error) {
+      return error;
+    }
+  }
+
   return {
     handleListQuestions,
     handleDeleteQuestion,
@@ -116,5 +150,9 @@ export function useQuestion() {
     totalPages,
     categoryName,
     setCategoryName,
+    handleAnswereSimulated,
+    randomQuestions,
+    setRandomQuestions,
+    handleListRandomQuestions,
   };
 }
