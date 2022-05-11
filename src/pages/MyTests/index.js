@@ -56,7 +56,23 @@ export function MyTests() {
               <span>{simulated.name}</span>
             </div>
             <div className={style['third-item']}>
-              <button className="button" onClick={() => navigate('/student/main/consult-questions')}>Consultar respostas</button>
+              {!simulated?.active
+                ? (
+                  <button
+                    className="button"
+                    onClick={() => navigate('/student/main/consult-questions')}
+                  >
+                    Consultar respostas
+                  </button>
+                )
+                : (
+                  <button
+                    className="button"
+                    onClick={() => navigate('/test')}
+                  >
+                    Continuar simulado
+                  </button>
+                )}
             </div>
           </div>
         ))}
