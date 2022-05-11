@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/media-has-caption */
 import { useStores } from 'stores';
 import { useEffect } from 'react';
 import close from '../../assets/clear-icon.svg';
@@ -24,9 +25,11 @@ export default function Explanation() {
       {dataAnswers[page]?.explanationVideo
       && (
       <div className={style.midia}>
-        <img className={style.play} src={play} alt="Midia" />
-        <img className={style.square} src={square} alt="Midia" />
-        <img src={dataAnswers[page].explanationVideo} alt="Midia" />
+        <video width="600" controls>
+          <source src={dataAnswers[page].explanationVideo} type="video/mp4" />
+          Seu navegador não suporta esse formato de vídeo.
+        </video>
+
       </div>
       )}
       <p>
