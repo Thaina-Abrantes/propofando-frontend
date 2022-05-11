@@ -15,11 +15,14 @@ import school from '../../assets/school-icon.svg';
 export function ConsultQuestions() {
   const navigate = useNavigate();
   const [page, setPage] = useState(0);
-  const [dataAnswers, setDataAnswers] = useState([]);
-  const [testId, setTestId] = useState('155c44d1-fb2e-48b7-872a-1db30e31004c');
 
   const {
-    simulatedStore: { handleConsultAnswers },
+    simulatedStore: {
+      handleConsultAnswers,
+      consultingSimulated,
+      dataAnswers,
+      setDataAnswers,
+    },
     utilsStore: {
       openReportProblem,
       openExplanation,
@@ -32,7 +35,7 @@ export function ConsultQuestions() {
   } = useStores();
 
   useEffect(async () => {
-    const data = await handleConsultAnswers(testId);
+    const data = await handleConsultAnswers(consultingSimulated.id);
     setDataAnswers(data);
   }, []);
 
@@ -74,26 +77,26 @@ export function ConsultQuestions() {
                 : <div />
             }
             <div className={style['alternatives']}>
-              {dataAnswers[page].alternatives.map((option) => (
+              {dataAnswers[page].alternatives.map((alternative) => (
                 <div
-                  key={option.id}
-                  className={option.correct
+                  key={alternative.id}
+                  className={alternative.correct
                     ? style.background : style.alternative}
                 >
                   {
-                    option.correct
+                    alternative.correct
                       ? <img src={success} alt="Certo" />
                       : <img src={errorIcon} alt="Erro" />
                   }
                   {
-                    option.isUserAnswer
+                    alternative.isUserAnswer
                       ? <div className={style.inputCorrect} />
                       : <div className={style.inputError} />
                   }
-                  <span className={!option.correct && style.errorSpan}>
-                    A)
+                  <span className={!alternative.correct && style.errorSpan}>
+                    {alternative.option}
                     {' '}
-                    {option.description}
+                    {alternative.description}
                   </span>
                 </div>
               ))}

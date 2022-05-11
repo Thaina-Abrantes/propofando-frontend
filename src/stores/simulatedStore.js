@@ -12,6 +12,7 @@ export function useSimulated() {
   const [top3AnsweredIncorrectly, setTop3AnsweredIncorrectly] = useState([]);
   const [idSimulated, setIdSimulated] = useState('');
   const [consultingSimulated, setConsultingSimulated] = useLocalStorage('consulting-simulated');
+  const [dataAnswers, setDataAnswers] = useState([]);
 
   const { token } = useUser();
 
@@ -136,5 +137,7 @@ export function useSimulated() {
     setIdSimulated,
     consultingSimulated,
     setConsultingSimulated,
+    dataAnswers,
+    setDataAnswers,
   };
 }

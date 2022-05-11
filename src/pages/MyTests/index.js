@@ -13,7 +13,6 @@ export function MyTests() {
   const {
     simulatedStore: {
       handleListUserSimulated,
-      consultingSimulated,
       setConsultingSimulated,
     },
     userStore: {
@@ -41,6 +40,7 @@ export function MyTests() {
     const data = await handleListUserSimulated(userData.id);
     setListUserSimulated(data);
   }, []);
+
   return (
     <main className={style['container-my-tests']}>
       <div className={style.back}>
