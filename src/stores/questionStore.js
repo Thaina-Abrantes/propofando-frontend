@@ -131,6 +131,23 @@ export function useQuestion() {
     }
   }
 
+  async function handleQuestionStatistic(questionId) {
+    try {
+      const response = await api.get(`/questions/${questionId}/statistics`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const { data } = response;
+
+      return data;
+    } catch (error) {
+      const currentError = error.response.data.message || error.response.data;
+      setErrorQuestion(currentError);
+      return error.response;
+    }
+  }
+
   return {
     handleListQuestions,
     handleDeleteQuestion,
@@ -153,5 +170,6 @@ export function useQuestion() {
     randomQuestions,
     setRandomQuestions,
     handleListRandomQuestions,
+    handleQuestionStatistic,
   };
 }

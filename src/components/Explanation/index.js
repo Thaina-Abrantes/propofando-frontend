@@ -1,9 +1,6 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 import { useStores } from 'stores';
-import { useEffect } from 'react';
 import close from '../../assets/clear-icon.svg';
-import square from '../../assets/square.svg';
-import play from '../../assets/play.svg';
 import style from './styles.module.scss';
 
 export default function Explanation() {
@@ -11,10 +8,6 @@ export default function Explanation() {
     utilsStore: { setOpenExplanation },
     simulatedStore: { dataAnswers, page },
   } = useStores();
-
-  useEffect(() => {
-    console.log(dataAnswers, 'data', page, 'page');
-  }, []);
 
   return (
     <div className={style['container-explanation']}>
