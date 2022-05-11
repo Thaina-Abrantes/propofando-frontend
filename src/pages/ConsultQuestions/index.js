@@ -11,15 +11,12 @@ import errorIcon from '../../assets/alert-error-close.svg';
 import success from '../../assets/success-icon.svg';
 import analytics from '../../assets/analytics-icon.svg';
 import school from '../../assets/school-icon.svg';
-import { useUser } from '../../stores/userStore';
 
 export function ConsultQuestions() {
   const navigate = useNavigate();
   const [page, setPage] = useState(0);
   const [dataAnswers, setDataAnswers] = useState([]);
-  const [testId, setTestId] = useState('455adc85-578c-4f22-9595-9de1720261d3');
-
-  const { token } = useUser();
+  const [testId, setTestId] = useState('155c44d1-fb2e-48b7-872a-1db30e31004c');
 
   const {
     simulatedStore: { handleConsultAnswers },

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useLocalStorage } from 'react-use';
 import api from '../services/api';
 import { useUser } from './userStore';
 
@@ -7,9 +8,9 @@ export function useSimulated() {
   const [errorCreateUserSimulated, setErrorCreateUserSimulated] = useState('');
   const [listUserSimulated, setListUserSimulated] = useState([]);
   const [performance, setPerformance] = useState();
-  const [idForPerformance, setIdForPerformance] = useState('30611e30-d02c-4189-8324-ffc39a2a37cb');
   const [top3AnsweredCorrectly, setTop3AnsweredCorrectly] = useState([]);
   const [top3AnsweredIncorrectly, setTop3AnsweredIncorrectly] = useState([]);
+  const [consultingSimulated, setConsultingSimulated] = useLocalStorage('consulting-simulated');
 
   const { token } = useUser();
 
@@ -129,5 +130,7 @@ export function useSimulated() {
     handleTop3CategoriesErrors,
     top3AnsweredIncorrectly,
     setTop3AnsweredIncorrectly,
+    consultingSimulated,
+    setConsultingSimulated,
   };
 }
