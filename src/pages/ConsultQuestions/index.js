@@ -14,7 +14,6 @@ import school from '../../assets/school-icon.svg';
 
 export function ConsultQuestions() {
   const navigate = useNavigate();
-  const [page, setPage] = useState(0);
 
   const {
     simulatedStore: {
@@ -22,6 +21,8 @@ export function ConsultQuestions() {
       consultingSimulated,
       dataAnswers,
       setDataAnswers,
+      page,
+      setPage,
     },
     utilsStore: {
       openReportProblem,

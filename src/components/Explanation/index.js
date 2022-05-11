@@ -8,11 +8,11 @@ import style from './styles.module.scss';
 export default function Explanation() {
   const {
     utilsStore: { setOpenExplanation },
-    simulatedStore: { dataAnswers },
+    simulatedStore: { dataAnswers, page },
   } = useStores();
 
   useEffect(() => {
-    console.log(dataAnswers, 'data');
+    console.log(dataAnswers, 'data', page, 'page');
   }, []);
 
   return (
@@ -21,16 +21,16 @@ export default function Explanation() {
         <img className={style.close} src={close} alt="Fechar" />
       </div>
       <h1>Explicação</h1>
-      {dataAnswers[1].explanationVideo
+      {dataAnswers[page]?.explanationVideo
       && (
       <div className={style.midia}>
         <img className={style.play} src={play} alt="Midia" />
         <img className={style.square} src={square} alt="Midia" />
-        <img src={dataAnswers[1].explanationVideo} alt="Midia" />
+        <img src={dataAnswers[page].explanationVideo} alt="Midia" />
       </div>
       )}
       <p>
-        {dataAnswers[1].explanationText}
+        {dataAnswers[page].explanationText}
       </p>
     </div>
   );
