@@ -14,7 +14,7 @@ function SearchQuestion({ setSearchQuestion }) {
     },
     questionStore: {
       setQuestionInEditing,
-      categoryName,
+      categoryQuestions,
     },
   } = useStores();
 
@@ -35,7 +35,7 @@ function SearchQuestion({ setSearchQuestion }) {
           <h2>Questões</h2>
         </div>
         <span>
-          {categoryName}
+          {categoryQuestions?.name}
           {' '}
           / Questões
         </span>
