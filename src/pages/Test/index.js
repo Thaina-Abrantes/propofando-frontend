@@ -9,6 +9,7 @@ import style from './styles.module.scss';
 import arrow from '../../assets/arrow-back-icon.svg';
 import graphic from '../../assets/question.svg';
 import reportIcon from '../../assets/error-icon.svg';
+import api from '../../services/api';
 
 export function Test() {
   const navigate = useNavigate();
@@ -36,12 +37,13 @@ export function Test() {
       token,
       userData,
     },
+    simulatedStore: { idSimulated },
   } = useStores();
 
-  const simulateId = '36cad1a2-85bf-49c8-8f97-68ea762e3424';
   useEffect(async () => {
     await handleListRandomQuestions(
-      simulateId,
+
+      idSimulated.id,
       userData.id,
     );
   }, []);
@@ -63,9 +65,23 @@ export function Test() {
     setOpenReportProblem(false);
   }
 
-  function handleClickEnd() {
+  async function handleClickEnd() {
     setOpenReportProblem(false);
+    await handleAnswereSimulated(randomQuestions[page].id, selectedRadio);
     setOpenModalEndTest(true);
+    try {
+      const body = {
+        simulatedId: idSimulated.id,
+      };
+      const response = await api.patch('/simulated/finish', body, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response;
+    } catch (error) {
+      return error;
+    }
   }
 
   function handleClickPause() {
@@ -76,8 +92,7 @@ export function Test() {
   if (randomQuestions.length < 1) {
     return null;
   }
-  console.log(selectedRadio);
-  console.log(randomQuestions[page].id);
+
   return (
     <main className={style['container-main']}>
       {

@@ -99,12 +99,11 @@ export function useQuestion() {
     }
   }
 
-  async function handleAnswereSimulated(id, alternativeId) {
+  async function handleAnswereSimulated(id, altenativeId) {
     const body = {
       id,
-      alternativeId,
+      altenativeId,
     };
-
     try {
       const response = await api.patch('/simulated', body, {
         headers: {
