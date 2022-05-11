@@ -99,7 +99,7 @@ export function useQuestion() {
     }
   }
 
-  async function handleAnswereSimulated({ id, alternativeId }) {
+  async function handleAnswereSimulated(id, alternativeId) {
     const body = {
       id,
       alternativeId,

@@ -13,6 +13,8 @@ import reportIcon from '../../assets/error-icon.svg';
 export function Test() {
   const navigate = useNavigate();
   const [page, setPage] = useState(0);
+  const [form, setForm] = useState({ questionId: '', alternativeId: '' });
+  const [selectedRadio, setSelectedRadio] = useState('');
 
   const {
     modalStore: {
@@ -24,6 +26,7 @@ export function Test() {
     questionStore: {
       randomQuestions,
       handleListRandomQuestions,
+      handleAnswereSimulated,
     },
     utilsStore: {
       openReportProblem,
@@ -34,6 +37,7 @@ export function Test() {
       userData,
     },
   } = useStores();
+
   const simulateId = '36cad1a2-85bf-49c8-8f97-68ea762e3424';
   useEffect(async () => {
     await handleListRandomQuestions(
@@ -42,12 +46,19 @@ export function Test() {
     );
   }, []);
 
+  function handleRadioClick(e) {
+    setSelectedRadio(e.target.value);
+  }
+  function isRadioSelected(value) {
+    return selectedRadio === value;
+  }
   function handleClickPrev() {
     setPage(page - 1);
     setOpenReportProblem(false);
   }
 
-  function handleClickNext() {
+  async function handleClickNext() {
+    await handleAnswereSimulated(randomQuestions[page].id, selectedRadio);
     setPage(page + 1);
     setOpenReportProblem(false);
   }
@@ -65,7 +76,8 @@ export function Test() {
   if (randomQuestions.length < 1) {
     return null;
   }
-
+  console.log(selectedRadio);
+  console.log(randomQuestions[page].id);
   return (
     <main className={style['container-main']}>
       {
@@ -103,7 +115,14 @@ export function Test() {
             }
             <div className={style['alternatives']}>
               <div className={style['container-alternative']}>
-                <input type="radio" id="optionA" name="alternative" value={randomQuestions[page].alternatives[0].id} />
+                <input
+                  type="radio"
+                  id="optionA"
+                  name="alternative"
+                  value={randomQuestions[page].alternatives[0].id}
+                  checked={isRadioSelected((randomQuestions[page].alternatives[0].id))}
+                  onChange={handleRadioClick}
+                />
                 <label htmlFor="optionA">
                   A)
                   {' '}
@@ -111,7 +130,14 @@ export function Test() {
                 </label>
               </div>
               <div className={style['container-alternative']}>
-                <input type="radio" id="optionB" name="alternative" value={randomQuestions[page].alternatives[1].id} />
+                <input
+                  type="radio"
+                  id="optionB"
+                  name="alternative"
+                  value={randomQuestions[page].alternatives[1].id}
+                  checked={isRadioSelected((randomQuestions[page].alternatives[1].id))}
+                  onChange={handleRadioClick}
+                />
                 <label htmlFor="optionB">
                   B)
                   {' '}
@@ -119,7 +145,14 @@ export function Test() {
                 </label>
               </div>
               <div className={style['container-alternative']}>
-                <input type="radio" id="optionC" name="alternative" value={randomQuestions[page].alternatives[2].id} />
+                <input
+                  type="radio"
+                  id="optionC"
+                  name="alternative"
+                  value={randomQuestions[page].alternatives[2].id}
+                  checked={isRadioSelected((randomQuestions[page].alternatives[2].id))}
+                  onChange={handleRadioClick}
+                />
                 <label htmlFor="optionC">
                   C)
                   {' '}
@@ -127,7 +160,14 @@ export function Test() {
                 </label>
               </div>
               <div className={style['container-alternative']}>
-                <input type="radio" id="optionD" name="alternative" value={randomQuestions[page].alternatives[3].id} />
+                <input
+                  type="radio"
+                  id="optionD"
+                  name="alternative"
+                  value={randomQuestions[page].alternatives[3].id}
+                  checked={isRadioSelected((randomQuestions[page].alternatives[3].id))}
+                  onChange={handleRadioClick}
+                />
                 <label htmlFor="optionD">
                   D)
                   {' '}
