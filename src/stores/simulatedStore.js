@@ -10,6 +10,7 @@ export function useSimulated() {
   const [performance, setPerformance] = useState();
   const [top3AnsweredCorrectly, setTop3AnsweredCorrectly] = useState([]);
   const [top3AnsweredIncorrectly, setTop3AnsweredIncorrectly] = useState([]);
+  const [idSimulated, setIdSimulated] = useState('');
   const [consultingSimulated, setConsultingSimulated] = useLocalStorage('consulting-simulated');
 
   const { token } = useUser();
@@ -33,7 +34,7 @@ export function useSimulated() {
   async function handleCreateUserSimulated(form, id) {
     const body = {
       userId: id,
-      quantityQuestions: form.quantity,
+      quantityQuestions: Number(form.quantity),
       name: form.name,
     };
 
@@ -44,7 +45,8 @@ export function useSimulated() {
         },
       });
       const { data } = response;
-      return data;
+      setIdSimulated(data);
+      return response;
     } catch (error) {
       const currentError = error.response.data.message || error.response.data;
       setErrorCreateUserSimulated(currentError);
@@ -130,6 +132,8 @@ export function useSimulated() {
     handleTop3CategoriesErrors,
     top3AnsweredIncorrectly,
     setTop3AnsweredIncorrectly,
+    idSimulated,
+    setIdSimulated,
     consultingSimulated,
     setConsultingSimulated,
   };
