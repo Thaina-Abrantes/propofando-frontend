@@ -1,11 +1,22 @@
 import { useNavigate } from 'react-router-dom';
 import { InputDropdown } from 'components/InputDropdown';
+import { useStores } from 'stores';
+import { useEffect, useState } from 'react';
+import formatDate from 'utils/formatData';
 import style from './styles.module.scss';
 import seta from '../../assets/arrow-back-icon.svg';
-import arrow from '../../assets/arrow.svg';
 import factCheck from '../../assets/fact-check-icon.svg';
 
 export function MyTests() {
+  const [listUserSimulated, setListUserSimulated] = useState([]);
+
+  const {
+    simulatedStore: { handleListUserSimulated },
+    userStore: {
+      userData,
+    },
+  } = useStores();
+
   const navigate = useNavigate();
 
   const lista = [
@@ -14,6 +25,10 @@ export function MyTests() {
     { name: 'Item c', id: 3 },
   ];
 
+  useEffect(async () => {
+    const data = await handleListUserSimulated(userData.id);
+    setListUserSimulated(data);
+  }, []);
   return (
     <main className={style['container-my-tests']}>
       <div className={style.back}>
@@ -30,18 +45,22 @@ export function MyTests() {
       </div>
 
       <div className={style['table-body']}>
-        <div className={style['table-line']}>
-          <div className={style['first-item']}>
-            <img src={factCheck} alt="listar" />
-            <span>05/03/2022</span>
+
+        {listUserSimulated.map((simulated) => (
+          <div className={style['table-line']} key={simulated.id}>
+            <div className={style['first-item']}>
+              <img src={factCheck} alt="listar" />
+              <span>{formatDate(simulated.createdAt)}</span>
+            </div>
+            <div className={style['second-item']}>
+              <span>{simulated.name}</span>
+            </div>
+            <div className={style['third-item']}>
+              <button className="button" onClick={() => navigate('/student/main/consult-questions')}>Consultar respostas</button>
+            </div>
           </div>
-          <div className={style['second-item']}>
-            <span>Simulado 1</span>
-          </div>
-          <div className={style['third-item']}>
-            <button className="button" onClick={() => navigate('/student/main/consult-questions')}>Consultar respostas</button>
-          </div>
-        </div>
+        ))}
+
       </div>
     </main>
   );

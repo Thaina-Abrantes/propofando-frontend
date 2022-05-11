@@ -6,7 +6,7 @@ import { useUser } from './userStore';
 export function useQuestion() {
   const [errorQuestion, setErrorQuestion] = useState('');
   const [listQuestions, setListQuestions] = useState([]);
-  const [idCategory, setIdCategory] = useState('');
+  const [categoryQuestions, setCategoryQuestions] = useLocalStorage('listQuestionsOfCategory');
   const [questionInEditing, setQuestionInEditing] = useLocalStorage('questionInEditing');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -15,7 +15,7 @@ export function useQuestion() {
 
   async function handleListQuestions(token) {
     try {
-      const response = await api.get(`/questions?page=${currentPage}&&category=${idCategory}`, {
+      const response = await api.get(`/questions?page=${currentPage}&&category=${categoryQuestions.id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -141,8 +141,8 @@ export function useQuestion() {
     setErrorQuestion,
     listQuestions,
     setListQuestions,
-    idCategory,
-    setIdCategory,
+    categoryQuestions,
+    setCategoryQuestions,
     questionInEditing,
     setQuestionInEditing,
     currentPage,
