@@ -32,6 +32,7 @@ export function Test() {
     utilsStore: {
       openReportProblem,
       setOpenReportProblem,
+      setAlert,
     },
     userStore: {
       token,
@@ -60,15 +61,25 @@ export function Test() {
   }
 
   async function handleClickNext() {
-    await handleAnswereSimulated(randomQuestions[page].id, selectedRadio);
+    const response = await handleAnswereSimulated(randomQuestions[page].id, selectedRadio);
+    if (response.status > 204) {
+      setAlert({ open: true, type: 'error', message: response.data.message });
+      return;
+    }
+    setAlert({ open: true, type: 'success', message: response.data.message });
     setPage(page + 1);
     setOpenReportProblem(false);
   }
 
   async function handleClickEnd() {
     setOpenReportProblem(false);
-    await handleAnswereSimulated(randomQuestions[page].id, selectedRadio);
+    const res = await handleAnswereSimulated(randomQuestions[page].id, selectedRadio);
+    if (res.status > 204) {
+      setAlert({ open: true, type: 'error', message: res.data.message });
+      return;
+    }
     setOpenModalEndTest(true);
+
     try {
       const body = {
         simulatedId: idSimulated.id,
@@ -78,6 +89,10 @@ export function Test() {
           Authorization: `Bearer ${token}`,
         },
       });
+      if (response.status > 204) {
+        setAlert({ open: true, type: 'error', message: response.data.message });
+        return;
+      }
       return response;
     } catch (error) {
       return error;
