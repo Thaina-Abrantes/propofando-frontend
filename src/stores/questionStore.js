@@ -12,6 +12,7 @@ export function useQuestion() {
   const [totalPages, setTotalPages] = useState(1);
   const [categoryName, setCategoryName] = useState('');
   const [randomQuestions, setRandomQuestions] = useState([]);
+  const [statistic, setStatistic] = useState({});
 
   async function handleListQuestions(token) {
     try {
@@ -171,5 +172,7 @@ export function useQuestion() {
     setRandomQuestions,
     handleListRandomQuestions,
     handleQuestionStatistic,
+    statistic,
+    setStatistic,
   };
 }
