@@ -46,6 +46,7 @@ export function AddQuestion() {
       setErrorQuestion,
       questionInEditing,
       setQuestionInEditing,
+      setCategoryQuestions,
     },
     utilsStore: { setAlert },
     modalStore: {
@@ -124,6 +125,10 @@ export function AddQuestion() {
 
       navigate('/main/list-question');
       setAlert({ open: true, type: 'success', message: response.data.message });
+
+      const currentCategory = dataCategory.find((categ) => categ.id === categoryId);
+
+      setCategoryQuestions(currentCategory);
 
       setErrorQuestion('');
     } else if (questionInEditing && !openModalDeleteQuestion) {
