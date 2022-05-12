@@ -1,9 +1,28 @@
+import { useEffect, useState } from 'react';
 import { useStores } from 'stores';
 import close from '../../assets/clear-icon.svg';
 import style from './styles.module.scss';
 
 export default function QuestionStatistics() {
-  const { utilsStore: { setOpenQuestionStatistics } } = useStores();
+  const {
+    utilsStore: { setOpenQuestionStatistics },
+    simulatedStore: { dataAnswers, page },
+    questionStore: {
+      handleQuestionStatistic,
+      statistic,
+      setStatistic,
+    },
+  } = useStores();
+
+  useEffect(async () => {
+    const data = await handleQuestionStatistic(dataAnswers[page].id);
+    setStatistic(data);
+  }, []);
+
+  useEffect(() => {
+    console.log(dataAnswers, 'data', page, 'page');
+    console.log(statistic, 'statistic');
+  }, []);
 
   return (
     <div className={style['container-statistics']}>
@@ -18,7 +37,7 @@ export default function QuestionStatistics() {
           <div className={style.header}>
             <h3>Percentual total de acertos</h3>
           </div>
-          <h1>72%</h1>
+          <h1>{statistic.percentageGeneralHits}</h1>
         </div>
 
         <div className={style.card}>
@@ -27,16 +46,18 @@ export default function QuestionStatistics() {
           </div>
           <div className={style.row}>
             <div className={style.column}>
-              <span>A</span>
-              <span>B</span>
-              <span>C</span>
-              <span>D</span>
+              {statistic.alternativesOfQuestion
+            && statistic.alternativesOfQuestion.map((alternative) => (
+
+              <span>{alternative.option}</span>
+            ))}
             </div>
             <div className={style.column}>
-              <span>72%</span>
-              <span>20%</span>
-              <span>5%</span>
-              <span>3%</span>
+              {statistic.alternativesOfQuestion
+            && statistic.alternativesOfQuestion.map((alternative) => (
+
+              <span>{alternative.percentageSelectedThis}</span>
+            ))}
             </div>
           </div>
         </div>
