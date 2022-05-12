@@ -28,6 +28,7 @@
 .line {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   width: 426px;
   max-height: 179px;
   gap: 148px;

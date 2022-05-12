@@ -18,7 +18,11 @@ export default function TableTop3({ label, top3Categories }) {
                 <img src={bullet} alt="Lista" />
                 <span>{category.name}</span>
               </div>
-              <span>{category.totalhits || category.totalincorrects}</span>
+              <span>
+                {category.totalhits || category.totalincorrects}
+                {' '}
+                Questões
+              </span>
             </div>
           ))}
       </div>
