@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useLocalStorage } from 'react-use';
 import api from '../services/api';
 import { useUser } from './userStore';
 
@@ -7,9 +8,12 @@ export function useSimulated() {
   const [errorCreateUserSimulated, setErrorCreateUserSimulated] = useState('');
   const [listUserSimulated, setListUserSimulated] = useState([]);
   const [performance, setPerformance] = useState();
-  const [idForPerformance, setIdForPerformance] = useState('30611e30-d02c-4189-8324-ffc39a2a37cb');
   const [top3AnsweredCorrectly, setTop3AnsweredCorrectly] = useState([]);
   const [top3AnsweredIncorrectly, setTop3AnsweredIncorrectly] = useState([]);
+  const [idSimulated, setIdSimulated] = useState('');
+  const [consultingSimulated, setConsultingSimulated] = useLocalStorage('consulting-simulated');
+  const [page, setPage] = useState(0);
+  const [dataAnswers, setDataAnswers] = useState([]);
 
   const { token } = useUser();
 
@@ -32,7 +36,7 @@ export function useSimulated() {
   async function handleCreateUserSimulated(form, id) {
     const body = {
       userId: id,
-      quantityQuestions: form.quantity,
+      quantityQuestions: Number(form.quantity),
       name: form.name,
     };
 
@@ -43,7 +47,8 @@ export function useSimulated() {
         },
       });
       const { data } = response;
-      return data;
+      setIdSimulated(data);
+      return response;
     } catch (error) {
       const currentError = error.response.data.message || error.response.data;
       setErrorCreateUserSimulated(currentError);
@@ -66,6 +71,20 @@ export function useSimulated() {
     }
   }
 
+  async function handleConsultAnswers(simulatedId) {
+    try {
+      const response = await api.get(`/simulated/${simulatedId}/answers`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const { data } = response;
+      return data;
+    } catch (error) {
+      const currentError = error.response.data.message || error.response.data;
+      setErrorListUserSimulated(currentError);
+    }
+  }
   async function handleTop3CategoriesHits(userId) {
     try {
       const response = await api.get(`/users/${userId}/top-3-hits`, {
@@ -99,6 +118,7 @@ export function useSimulated() {
   return {
     handleListUserSimulated,
     handleCreateUserSimulated,
+    handleConsultAnswers,
     errorListUserSimulated,
     setErrorListUserSimulated,
     listUserSimulated,
@@ -114,5 +134,13 @@ export function useSimulated() {
     handleTop3CategoriesErrors,
     top3AnsweredIncorrectly,
     setTop3AnsweredIncorrectly,
+    idSimulated,
+    setIdSimulated,
+    consultingSimulated,
+    setConsultingSimulated,
+    page,
+    setPage,
+    dataAnswers,
+    setDataAnswers,
   };
 }

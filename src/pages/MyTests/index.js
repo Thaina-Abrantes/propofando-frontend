@@ -11,7 +11,10 @@ export function MyTests() {
   const [listUserSimulated, setListUserSimulated] = useState([]);
 
   const {
-    simulatedStore: { handleListUserSimulated },
+    simulatedStore: {
+      handleListUserSimulated,
+      setConsultingSimulated,
+    },
     userStore: {
       userData,
     },
@@ -25,10 +28,19 @@ export function MyTests() {
     { name: 'Item c', id: 3 },
   ];
 
+  function handleRedirect(simulated) {
+    setConsultingSimulated(simulated);
+    if (!simulated?.active) {
+      return navigate('/student/main/consult-questions');
+    }
+    return navigate('/test');
+  }
+
   useEffect(async () => {
     const data = await handleListUserSimulated(userData.id);
     setListUserSimulated(data);
   }, []);
+
   return (
     <main className={style['container-my-tests']}>
       <div className={style.back}>
@@ -60,7 +72,7 @@ export function MyTests() {
                 ? (
                   <button
                     className="button"
-                    onClick={() => navigate('/student/main/consult-questions')}
+                    onClick={() => handleRedirect(simulated)}
                   >
                     Consultar respostas
                   </button>
@@ -68,7 +80,7 @@ export function MyTests() {
                 : (
                   <button
                     className="button"
-                    onClick={() => navigate('/test')}
+                    onClick={() => handleRedirect(simulated)}
                   >
                     Continuar simulado
                   </button>

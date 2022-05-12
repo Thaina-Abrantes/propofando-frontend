@@ -6,15 +6,17 @@ import { useUser } from './userStore';
 export function useQuestion() {
   const [errorQuestion, setErrorQuestion] = useState('');
   const [listQuestions, setListQuestions] = useState([]);
-  const [idCategory, setIdCategory] = useState('');
+  const [categoryQuestions, setCategoryQuestions] = useLocalStorage('listQuestionsOfCategory');
   const [questionInEditing, setQuestionInEditing] = useLocalStorage('questionInEditing');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [categoryName, setCategoryName] = useState('');
+  const [randomQuestions, setRandomQuestions] = useState([]);
+  const [statistic, setStatistic] = useState({});
 
   async function handleListQuestions(token) {
     try {
-      const response = await api.get(`/questions?page=${currentPage}&&category=${idCategory}`, {
+      const response = await api.get(`/questions?page=${currentPage}&&category=${categoryQuestions.id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -98,6 +100,55 @@ export function useQuestion() {
     }
   }
 
+  async function handleAnswereSimulated(id, altenativeId) {
+    const body = {
+      id,
+      altenativeId,
+    };
+    try {
+      const response = await api.patch('/simulated', body, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response;
+    } catch (error) {
+      return error;
+    }
+  }
+
+  async function handleListRandomQuestions(simulatedId, userId) {
+    try {
+      const response = await api.get(`/simulated/${simulatedId}/user/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const { data } = response;
+      setRandomQuestions(data);
+      return data;
+    } catch (error) {
+      return error;
+    }
+  }
+
+  async function handleQuestionStatistic(questionId) {
+    try {
+      const response = await api.get(`/questions/${questionId}/statistics`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const { data } = response;
+
+      return data;
+    } catch (error) {
+      const currentError = error.response.data.message || error.response.data;
+      setErrorQuestion(currentError);
+      return error.response;
+    }
+  }
+
   return {
     handleListQuestions,
     handleDeleteQuestion,
@@ -107,8 +158,8 @@ export function useQuestion() {
     setErrorQuestion,
     listQuestions,
     setListQuestions,
-    idCategory,
-    setIdCategory,
+    categoryQuestions,
+    setCategoryQuestions,
     questionInEditing,
     setQuestionInEditing,
     currentPage,
@@ -116,5 +167,12 @@ export function useQuestion() {
     totalPages,
     categoryName,
     setCategoryName,
+    handleAnswereSimulated,
+    randomQuestions,
+    setRandomQuestions,
+    handleListRandomQuestions,
+    handleQuestionStatistic,
+    statistic,
+    setStatistic,
   };
 }

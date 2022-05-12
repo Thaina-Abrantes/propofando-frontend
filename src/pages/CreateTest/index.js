@@ -50,9 +50,12 @@ export function CreateTest() {
     }
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    handleCreateUserSimulated(form, userData.id);
+    const response = await handleCreateUserSimulated(form, userData.id);
+    if (response.status <= 204) {
+      navigate('/test');
+    }
   };
 
   return (

@@ -31,8 +31,7 @@ export function QuestionCategory() {
       token,
     },
     questionStore: {
-      setIdCategory,
-      setCategoryName,
+      setCategoryQuestions,
     },
   } = useStores();
 
@@ -45,8 +44,7 @@ export function QuestionCategory() {
   }
 
   function handleOpenQuestions(item) {
-    setIdCategory(item.id);
-    setCategoryName(item.name);
+    setCategoryQuestions(item);
     navigate('/main/list-question');
   }
 
