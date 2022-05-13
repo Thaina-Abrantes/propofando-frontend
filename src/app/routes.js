@@ -22,6 +22,7 @@ const ConsultQuestions = React.lazy(async () => import('../pages/ConsultQuestion
 const Test = React.lazy(async () => import('../pages/Test').then((m) => ({ default: m.Test })));
 const MyTests = React.lazy(async () => import('../pages/MyTests').then((m) => ({ default: m.MyTests })));
 const CreateTest = React.lazy(async () => import('../pages/CreateTest').then((m) => ({ default: m.CreateTest })));
+const StudentPageToAdmin = React.lazy(async () => import('../pages/StudentPageToAdmin').then((m) => ({ default: m.StudentPageToAdmin })));
 
 function ProtectedRoutes({ redirectTo }) {
   const { userStore: { token } } = useStores();
@@ -41,6 +42,7 @@ export function MyRoutes() {
           <Route path="question-category" element={<QuestionCategory />} />
           <Route path="list-question" element={<Questions />} />
           <Route path="add-question" element={<AddQuestion />} />
+          <Route path="student-statistics" element={<StudentPageToAdmin />} />
         </Route>
       </Route>
 
