@@ -43,7 +43,7 @@ export default function TableInfo() {
         <div className={style['title-third-column']}>Média de acertos</div>
       </div>
       <div className={style['table-body']}>
-        {(noData.length === 1 && !noData[0].name)
+        {(statistics.length === 1 && !statistics[0].name)
           ? (
             <div className={style['container-no-data']}>
               <p>Ainda não há dados de desempenho disponíveis</p>

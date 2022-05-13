@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useLocalStorage } from 'react-use';
 import api from '../services/api';
 import { useUser } from './userStore';
 
@@ -11,6 +12,7 @@ export function useStudentAdmin() {
   const [totalPages, setTotalPage] = useState(1);
   const [searchUser, setSearchUser] = useState('');
   const [openUserStatistics, setOpenUserStatistics] = useState({});
+  // const [casheSearch, setCasheSearch, removeCasheSearch] = useLocalStorage({});
 
   async function handleRegisterUser(user) {
     const body = {

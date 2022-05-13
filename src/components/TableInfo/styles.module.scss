@@ -93,12 +93,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 916px;
+  width: 100%;
   min-height: 75px;
   color: var(--black200);
 
   p {
-    color: var(--white500);
+    color: var(--black200);
     font-weight: 400;
     font-size: 16px;
     line-height: 22px;

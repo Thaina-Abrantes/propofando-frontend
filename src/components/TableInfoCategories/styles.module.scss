@@ -51,11 +51,22 @@
     line-height: 22px;
   }
 }
+.table-body::-webkit-scrollbar {
+  width: 5px;  
+}
+.table-body::-webkit-scrollbar-track {
+  background: var(--black400);        
+}
+.table-body::-webkit-scrollbar-thumb {
+  background-color: var(--gray1100);    
+  border-radius: 5px;       
+  height: 120px;
+}
 
 .line {
   display: flex;
   flex-direction: row;
-  min-width: 916px;
+  width: 100%;
   min-height: 75px;
   border-bottom: 1px solid var(--black400);
   position: relative;
