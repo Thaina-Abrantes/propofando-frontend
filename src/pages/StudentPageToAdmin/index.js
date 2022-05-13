@@ -1,5 +1,5 @@
 import TableTopPerformance from 'components/TableTopPerformance';
-import TableInfoCategories from 'components/TableInfoCategories';
+import TableInfo from 'components/TableInfo';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useStores } from 'stores';
@@ -17,21 +17,22 @@ export function StudentPageToAdmin() {
       top3AnsweredCorrectly,
       top3AnsweredIncorrectly,
     },
-    userStore: {
-      userData,
-    },
+    studentAdminStore: { openUserStatistics },
   } = useStores();
 
   useEffect(async () => {
-    await handlePerformance(userData.id);
-    await handleTop3CategoriesHits(userData.id);
-    await handleTop3CategoriesErrors(userData.id);
+    await handlePerformance(openUserStatistics.id);
+    await handleTop3CategoriesHits(openUserStatistics.id);
+    await handleTop3CategoriesErrors(openUserStatistics.id);
   }, []);
 
   return (
     <div className={style['container-page']}>
       <div className={style['container-name']}>
-        <h2>Ísis Nunes Martins Santos </h2>
+        <h2>
+          {openUserStatistics.name}
+          {' '}
+        </h2>
         <h3>Desempenho</h3>
       </div>
       <div className={style['container-cards']}>
@@ -54,7 +55,7 @@ export function StudentPageToAdmin() {
           top3Categories={top3AnsweredIncorrectly}
         />
       </div>
-      <TableInfoCategories />
+      <TableInfo />
     </div>
   );
 }

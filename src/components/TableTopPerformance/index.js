@@ -18,7 +18,11 @@ export default function TableTopPerformance({ label, top3Categories }) {
                 <img src={bullet} alt="Lista" />
                 <span>{category.name}</span>
               </div>
-              <span>{category.totalhits || category.totalincorrects}</span>
+              <span className={style.span}>
+                {category.totalhits || category.totalincorrects}
+                {' '}
+                {category.totalhits <= 1 || category.totalincorrects <= 1 ? 'questão' : 'questões'}
+              </span>
             </div>
           ))}
       </div>

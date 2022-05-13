@@ -10,6 +10,7 @@ export function useStudentAdmin() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPage] = useState(1);
   const [searchUser, setSearchUser] = useState('');
+  const [openUserStatistics, setOpenUserStatistics] = useState({});
 
   async function handleRegisterUser(user) {
     const body = {
@@ -66,6 +67,7 @@ export function useStudentAdmin() {
       return error.response;
     }
   }
+
   return {
     handleRegisterUser,
     errorUser,
@@ -82,6 +84,8 @@ export function useStudentAdmin() {
     setTotalPage,
     searchUser,
     setSearchUser,
+    openUserStatistics,
+    setOpenUserStatistics,
 
   };
 }
