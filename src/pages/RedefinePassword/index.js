@@ -78,14 +78,17 @@ export function RedefinePassword() {
             <br />
             nova senha
           </p>
-          <input
-            className={erroNewPassword ? 'error-dark' : 'input'}
-            name="newPassword"
-            type="password"
-            placeholder="Nova senha"
-            value={form.newPassword}
-            onChange={handleChangeFormValue}
-          />
+          <div className={style['input-label']}>
+            <label>A senha deve conter no mínimo 8 caracteres.</label>
+            <input
+              className={erroNewPassword ? 'error-dark' : 'input'}
+              name="newPassword"
+              type="password"
+              placeholder="Nova senha"
+              value={form.newPassword}
+              onChange={handleChangeFormValue}
+            />
+          </div>
           {erroNewPassword && <span className="error-message ">{erroNewPassword}</span>}
           <input
             className={erroConfirmPassword ? 'error-dark' : 'input'}
