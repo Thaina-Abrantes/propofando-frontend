@@ -3,7 +3,10 @@ import api from '../../services/api';
 import { useStores } from '../../stores';
 
 function Upload({ open, setOpen, handleReturnUrl }) {
-  const { userStore: { token } } = useStores();
+  const {
+    userStore: { token },
+    utilsStore: { setAlert },
+  } = useStores();
 
   const inputFileRef = useRef(null);
 
@@ -27,7 +30,11 @@ function Upload({ open, setOpen, handleReturnUrl }) {
         Authorization: `Bearer ${token}`,
       },
     });
-
+    if (response.status > 204) {
+      setAlert({ open: true, type: 'error', message: response.data.message || response.data });
+      return;
+    }
+    setAlert({ open: true, type: 'success', message: 'Mídia anexada com sucesso.' });
     const { url } = response.data;
     handleReturnUrl(url);
   }
