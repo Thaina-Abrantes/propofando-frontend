@@ -65,6 +65,14 @@
   }
 }
 
+.input-label {
+  label {
+    color: var(--white1000);
+    font-size: 15px;
+    margin-bottom: 30px;
+  }
+}
+
 .container-successfully {
   display: flex;
   flex-direction: column;
