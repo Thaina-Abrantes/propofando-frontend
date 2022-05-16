@@ -17,6 +17,10 @@ export default function ReportProblem() {
       setOpenReportProblem,
       setAlert,
     },
+    simulatedStore: {
+      dataAnswers,
+      page,
+    },
   } = useStores();
 
   const { handleSubmit } = useForm();
@@ -25,7 +29,9 @@ export default function ReportProblem() {
     try {
       const body = { description: problem };
 
-      const response = await api.post('/users/report-problem', body, {
+      const questionId = dataAnswers[page].id;
+
+      const response = await api.post(`/users/report-problem/question/${questionId}`, body, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
