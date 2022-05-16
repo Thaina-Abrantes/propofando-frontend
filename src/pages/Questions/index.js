@@ -7,6 +7,7 @@ import style from './styles.module.scss';
 import pasteIcon from '../../assets/content-paste-icon.svg';
 import editIcon from '../../assets/edit-icon.svg';
 import deleteIcon from '../../assets/delete-icon.svg';
+import attachmentIcon from '../../assets/annex-icon.svg';
 
 export function Questions() {
   const {
@@ -45,6 +46,7 @@ export function Questions() {
       <div className={style.table}>
         <div className={style['table-header']}>
           <div className={style['name-title']}><span>Nome</span></div>
+          <div className={style['attachment-title']}><span>Anexo</span></div>
           <div className={style['manage-title']}><span>Gerenciar</span></div>
         </div>
         <div className={style['table-body']}>
@@ -57,6 +59,9 @@ export function Questions() {
                   <span>{item.title}</span>
                 </div>
                 <div className={style['second-line-item']}>
+                  {item.image || item.explanationVideo ? <img src={attachmentIcon} alt="Clips" /> : null}
+                </div>
+                <div className={style['third-line-item']}>
                   <button
                     onClick={() => handleOpenEditQuestion(item)}
                   >
