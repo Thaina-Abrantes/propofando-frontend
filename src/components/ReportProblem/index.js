@@ -18,7 +18,7 @@ export default function ReportProblem() {
       setAlert,
     },
     simulatedStore: {
-      dataAnswers,
+      questionsSimulated,
       page,
     },
   } = useStores();
@@ -29,7 +29,7 @@ export default function ReportProblem() {
     try {
       const body = { description: problem };
 
-      const questionId = dataAnswers[page].id;
+      const questionId = questionsSimulated[page].id;
 
       const response = await api.post(`/users/report-problem/question/${questionId}`, body, {
         headers: {

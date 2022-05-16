@@ -19,8 +19,8 @@ export function ConsultQuestions() {
     simulatedStore: {
       handleConsultAnswers,
       consultingSimulated,
-      dataAnswers,
-      setDataAnswers,
+      questionsSimulated,
+      setQuestionsSimulated,
       page,
       setPage,
     },
@@ -40,7 +40,7 @@ export function ConsultQuestions() {
 
   useEffect(async () => {
     const data = await handleConsultAnswers(consultingSimulated.id);
-    setDataAnswers(data);
+    setQuestionsSimulated(data);
   }, []);
 
   function handleClickPrev() {
@@ -64,7 +64,7 @@ export function ConsultQuestions() {
     return navigate('/student/main/my-tests');
   }
 
-  if (dataAnswers.length >= 1) {
+  if (questionsSimulated.length >= 1) {
     return (
       <main className={style['container-consult']}>
         <div className={style['container-title']}>
@@ -76,19 +76,19 @@ export function ConsultQuestions() {
         <div className={style.container}>
           <div className={style['container-question']}>
             <h1 className={style['question-title']}>
-              {dataAnswers[page].title}
+              {questionsSimulated[page].title}
             </h1>
 
             <p className={style['question-statment']}>
-              {dataAnswers[page].description}
+              {questionsSimulated[page].description}
             </p>
             {
-              dataAnswers[page].image !== null
-                ? <img className={style.questionImg} src={dataAnswers[page].image} alt="Imagem" />
+              questionsSimulated[page].image !== null
+                ? <img className={style.questionImg} src={questionsSimulated[page].image} alt="Imagem" />
                 : <div />
             }
             <div className={style['alternatives']}>
-              {dataAnswers[page].alternatives.map((alternative) => (
+              {questionsSimulated[page].alternatives.map((alternative) => (
                 <div
                   key={alternative.id}
                   className={alternative.correct
@@ -139,11 +139,11 @@ export function ConsultQuestions() {
               <span>
                 Respondidas
                 {' '}
-                {dataAnswers.length}
+                {questionsSimulated.length}
                 {' '}
                 de
                 {' '}
-                {dataAnswers.length}
+                {questionsSimulated.length}
               </span>
             </div>
           </div>
@@ -154,7 +154,7 @@ export function ConsultQuestions() {
 
           <div className={style.buttons}>
             <button className={page === 0 ? 'displayNone' : 'button'} onClick={() => handleClickPrev()}>Anterior</button>
-            <button className={page === dataAnswers.length - 1 ? 'displayNone' : 'button'} onClick={() => handleClickNext()}>Próxima</button>
+            <button className={page === questionsSimulated.length - 1 ? 'displayNone' : 'button'} onClick={() => handleClickNext()}>Próxima</button>
           </div>
         </div>
       </main>
