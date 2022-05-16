@@ -1,0 +1,65 @@
+.container-page {
+  padding-top: 34px;
+  padding-left: 26px;
+
+  button {
+    width: 250px;
+    height: 48px;
+  }
+
+  h2 {
+    color: var(--black300);
+    font-style: normal;
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 33px;
+  }
+  h3{
+    font-size: 24px;
+    line-height: 33px;
+  }
+}
+
+.container-name {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 59px;
+}
+
+.container-cards {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  margin-bottom: 30px;
+}
+
+.card {
+  width: 280px;
+  height: 160px;
+  padding: 22px;
+
+  color: var(--black300);
+  background-color: var(--white);
+
+  h3 {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  h1 {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 78px;
+    line-height: 106px;
+  }
+}
+
+.container-tabletop-perfomance {
+  display: flex;
+  gap: 64px;
+  margin-bottom: 30px;
+}
+
