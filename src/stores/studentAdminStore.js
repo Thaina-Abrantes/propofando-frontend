@@ -12,7 +12,7 @@ export function useStudentAdmin() {
   const [totalPages, setTotalPage] = useState(1);
   const [searchUser, setSearchUser] = useState('');
   const [openUserStatistics, setOpenUserStatistics] = useState({});
-  // const [casheSearch, setCasheSearch, removeCasheSearch] = useLocalStorage({});
+  const [userInfo, setUserInfo, removeUserInfo] = useLocalStorage('userId');
 
   async function handleRegisterUser(user) {
     const body = {
@@ -88,6 +88,9 @@ export function useStudentAdmin() {
     setSearchUser,
     openUserStatistics,
     setOpenUserStatistics,
+    userInfo,
+    setUserInfo,
+    removeUserInfo,
 
   };
 }

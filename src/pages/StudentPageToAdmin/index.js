@@ -17,20 +17,18 @@ export function StudentPageToAdmin() {
       top3AnsweredCorrectly,
       top3AnsweredIncorrectly,
     },
-    studentAdminStore: { openUserStatistics },
+    studentAdminStore: { openUserStatistics, userInfo },
   } = useStores();
-
   useEffect(async () => {
-    await handlePerformance(openUserStatistics.id);
-    await handleTop3CategoriesHits(openUserStatistics.id);
-    await handleTop3CategoriesErrors(openUserStatistics.id);
+    await handlePerformance(openUserStatistics.id || userInfo.id);
+    await handleTop3CategoriesHits(openUserStatistics.id || userInfo.id);
+    await handleTop3CategoriesErrors(openUserStatistics.id || userInfo.id);
   }, []);
-
   return (
     <div className={style['container-page']}>
       <div className={style['container-name']}>
         <h2>
-          {openUserStatistics.name}
+          {openUserStatistics.name || userInfo.name}
           {' '}
         </h2>
         <h3>Desempenho</h3>

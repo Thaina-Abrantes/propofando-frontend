@@ -31,6 +31,7 @@ export function Users() {
       setErrorUser,
       searchUser,
       setOpenUserStatistics,
+      setUserInfo,
     },
   } = useStores();
   const navigate = useNavigate();
@@ -60,6 +61,7 @@ export function Users() {
 
   const handleOpenUser = (item) => {
     setOpenUserStatistics(item);
+    setUserInfo({ ...item });
     navigate('/main/student-statistics');
   };
   return (

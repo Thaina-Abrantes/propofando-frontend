@@ -8,7 +8,7 @@ export default function TableInfo() {
     userStore: {
       token,
     },
-    studentAdminStore: { openUserStatistics },
+    studentAdminStore: { openUserStatistics, userInfo },
 
   } = useStores();
 
@@ -20,7 +20,7 @@ export default function TableInfo() {
   }, []);
   async function statisticsTableInfo() {
     try {
-      const response = await api.get(`/categories/statistics/${openUserStatistics.id}`, {
+      const response = await api.get(`/categories/statistics/${openUserStatistics.id || userInfo.id}`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
