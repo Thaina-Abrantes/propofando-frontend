@@ -64,7 +64,7 @@ export function useSimulated() {
         },
       });
       const { data } = response;
-      setPerformance(data);
+      setPerformance([...data]);
       return data;
     } catch (error) {
       return error.response;
@@ -93,7 +93,7 @@ export function useSimulated() {
         },
       });
       const { data } = response;
-      setTop3AnsweredCorrectly(data);
+      setTop3AnsweredCorrectly([...data]);
       return data;
     } catch (error) {
       return error.response;
@@ -108,7 +108,7 @@ export function useSimulated() {
         },
       });
       const { data } = response;
-      setTop3AnsweredIncorrectly(data);
+      setTop3AnsweredIncorrectly([...data]);
       return data;
     } catch (error) {
       return error.response;

@@ -2,6 +2,7 @@ import { useStores } from 'stores';
 import Search from 'components/Search';
 import { useEffect, useState } from 'react';
 import PaginatorUsers from 'components/PaginatorUsers';
+import { useNavigate } from 'react-router-dom';
 import style from './styles.module.scss';
 import userIcon from '../../assets/identity-icon.svg';
 import editIcon from '../../assets/edit-icon.svg';
@@ -29,9 +30,11 @@ export function Users() {
       currentPage,
       setErrorUser,
       searchUser,
+      setOpenUserStatistics,
+      setUserInfo,
     },
   } = useStores();
-
+  const navigate = useNavigate();
   useEffect(() => {
     handleListUsers();
   }, [currentPage, openModalRegisterUser, openModalDelete, openModalEdit, userInEditing]);
@@ -55,6 +58,12 @@ export function Users() {
       return error;
     }
   }
+
+  const handleOpenUser = (item) => {
+    setOpenUserStatistics(item);
+    setUserInfo({ ...item });
+    navigate('/main/student-statistics');
+  };
   return (
     <main>
       <Search />
@@ -82,7 +91,10 @@ export function Users() {
             .includes(searchUser.toLocaleLowerCase()))
             .map((item) => (
               <div className={style['table-line']} key={item.id}>
-                <div className={style['first-line-item']}>
+                <div
+                  className={style['first-line-item']}
+                  onClick={() => handleOpenUser(item)}
+                >
                   <img src={userIcon} alt="Icone de usuário" />
                   <span>{item.name}</span>
                 </div>

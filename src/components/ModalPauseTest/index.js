@@ -10,9 +10,11 @@ function ModalPauseTest() {
     modalStore: {
       setOpenModalPauseTest,
     },
+    utilsStore: { setAlert },
   } = useStores();
 
   function handlePauseTest() {
+    setAlert({ open: true, type: 'success', message: 'Simulado pausado!' });
     setOpenModalPauseTest(false);
     navigate('/student/main');
   }

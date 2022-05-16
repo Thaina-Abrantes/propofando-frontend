@@ -51,8 +51,8 @@ export function MyTests() {
         <div className={style['container-filter']}>
           <span>
             Filtrar por
-            <InputDropdown list={lista} />
           </span>
+          <InputDropdown list={lista} />
         </div>
       </div>
 

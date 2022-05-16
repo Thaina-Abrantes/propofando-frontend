@@ -1,6 +1,5 @@
 .table-header {
   display: flex;
-  flex-direction: row;
   width: 916px;
   height: 45px;
   padding: 11px 22px 11px 28px;
@@ -11,24 +10,24 @@
   font-size: 16px;
   line-height: 22px;
 
-  background-color: var(--gray1200);
+  background-color: var(--pink200);
   border-radius: 5px 5px 0px 0px;
   position: relative;
 }
 
-.title-colum1 {
+.title-first-column {
   position: absolute;
   top: 11px;
   left: 28px;
 }
 
-.title-colum2 {
+.title-second-column {
   position: absolute;
   top: 11px;
   left: 483px;
 }
 
-.title-colum3 {
+.title-third-column{
   position: absolute;
   top: 11px;
   left: 707px;
@@ -37,14 +36,14 @@
 .table-body {
   display: flex;
   flex-direction: column;
-  background: var(--black200);
+  background: var(--white);
   margin-bottom: 180px;
   height: 270px;
   width: 916px;
   overflow-y: scroll;
 
   span {
-    color: var(--white);
+    color: var(--black200);
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
@@ -55,7 +54,7 @@
   width: 5px;  
 }
 .table-body::-webkit-scrollbar-track {
-  background: var(--black400);        
+  background: var(--white);        
 }
 .table-body::-webkit-scrollbar-thumb {
   background-color: var(--gray1100);    
@@ -72,19 +71,19 @@
   position: relative;
 }
 
-.colum-data1 {
+.first-column-data {
   position: absolute;
   top: 30px;
   left: 27px;
 }
 
-.colum-data2 {
+.second-column-data {
   position: absolute;
   top: 30px;
   left: 484px;
 }
 
-.colum-data3 {
+.third-column-data {
   position: absolute;
   top: 30px;
   left: 709px;
@@ -94,11 +93,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 916px;
+  width: 100%;
   min-height: 75px;
+  color: var(--black200);
 
   p {
-    color: var(--white500);
+    color: var(--black200);
     font-weight: 400;
     font-size: 16px;
     line-height: 22px;

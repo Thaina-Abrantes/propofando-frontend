@@ -9,15 +9,15 @@
   font-size: 16px;
   line-height: 22px;
 
-  background-color: var(--gray1200);
+  background-color: var(--pink200);
   border-radius: 5px 5px 0px 0px;
 }
 
 .table-body {
-  background: var(--black200);
+  background: var(--white);
 
   span {
-    color: var(--white500);
+    color: var(--black200);
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
@@ -27,22 +27,17 @@
 
 .line {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
   width: 426px;
   max-height: 179px;
-  gap: 148px;
+  justify-content: space-between;
   padding: 17px 26px;
   border-bottom: 1px solid var(--black400);
 }
 
-.line3 {
+.span{
   display: flex;
-  flex-direction: row;
-  width: 426px;
-  max-height: 179px;
-  gap: 148px;
-  padding: 17px 26px;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .container-img {
@@ -58,7 +53,7 @@
   padding: 22px 42px 22px 24px;
 
   p {
-    color: var(--white500);
+    color: var(--black200);
     font-weight: 400;
     font-size: 16px;
     line-height: 22px;

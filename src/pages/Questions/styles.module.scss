@@ -21,6 +21,11 @@
   padding-left: 40px;
 }
 
+.attachment-title {
+  display: flex;
+  margin-right: 180px;
+}
+
 .manage-title {
   width: 10%;
   display: flex;
@@ -38,6 +43,10 @@
     font-weight: 400;
     font-size: 16px;
     line-height: 22px;
+    max-width: 50ch;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }
 
@@ -59,6 +68,10 @@
 }
 
 .second-line-item {
+  margin-right: 180px;
+}
+
+.third-line-item {
   display: flex;
   width: 10%;
   flex-grow: 1;

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useLocalStorage } from 'react-use';
 import api from '../services/api';
 import { useUser } from './userStore';
 
@@ -10,6 +11,8 @@ export function useStudentAdmin() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPage] = useState(1);
   const [searchUser, setSearchUser] = useState('');
+  const [openUserStatistics, setOpenUserStatistics] = useState({});
+  const [userInfo, setUserInfo, removeUserInfo] = useLocalStorage('userId');
 
   async function handleRegisterUser(user) {
     const body = {
@@ -66,6 +69,7 @@ export function useStudentAdmin() {
       return error.response;
     }
   }
+
   return {
     handleRegisterUser,
     errorUser,
@@ -82,6 +86,11 @@ export function useStudentAdmin() {
     setTotalPage,
     searchUser,
     setSearchUser,
+    openUserStatistics,
+    setOpenUserStatistics,
+    userInfo,
+    setUserInfo,
+    removeUserInfo,
 
   };
 }

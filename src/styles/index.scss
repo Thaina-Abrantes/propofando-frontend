@@ -68,6 +68,20 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+body::-webkit-scrollbar {
+  width: 5px;  
+}
+body::-webkit-scrollbar-track {
+  background: var(--white);        
+}
+body::-webkit-scrollbar-thumb {
+  background-color: var(--gray1100);    
+  border-radius: 5px;       
+  height: 120px;
+}
+body {
+  overflow-x: hidden;
+}
 
 #root {
   min-height: 100vh;

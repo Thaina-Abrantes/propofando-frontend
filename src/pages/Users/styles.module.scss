@@ -61,13 +61,10 @@
 .first-line-item {
   display: flex;
   width: 35%;
-  // justify-content: center;
   align-items: center;
   text-align: left;
   gap: 8px;
-  // span {
-  //   min-width: 200px;
-  // }
+  cursor: pointer;  
   flex-grow: 1;
 }
 

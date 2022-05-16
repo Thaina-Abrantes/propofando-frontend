@@ -1,7 +1,7 @@
 import style from './styles.module.scss';
 import bullet from '../../assets/bullet-list-icon.svg';
 
-export default function TableTop3({ label, top3Categories }) {
+export default function TableTopPerformance({ label, top3Categories }) {
   return (
     <div className={['table']}>
       <div className={style['table-header']}>{label}</div>
@@ -18,10 +18,10 @@ export default function TableTop3({ label, top3Categories }) {
                 <img src={bullet} alt="Lista" />
                 <span>{category.name}</span>
               </div>
-              <span>
+              <span className={style.span}>
                 {category.totalhits || category.totalincorrects}
                 {' '}
-                Questões
+                {category.totalhits <= 1 || category.totalincorrects <= 1 ? 'questão' : 'questões'}
               </span>
             </div>
           ))}
