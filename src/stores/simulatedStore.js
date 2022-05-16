@@ -10,7 +10,6 @@ export function useSimulated() {
   const [performance, setPerformance] = useState();
   const [top3AnsweredCorrectly, setTop3AnsweredCorrectly] = useState([]);
   const [top3AnsweredIncorrectly, setTop3AnsweredIncorrectly] = useState([]);
-  const [idSimulated, setIdSimulated] = useState('');
   const [consultingSimulated, setConsultingSimulated] = useLocalStorage('consulting-simulated');
   const [page, setPage] = useState(0);
   const [dataAnswers, setDataAnswers] = useState([]);
@@ -47,7 +46,7 @@ export function useSimulated() {
         },
       });
       const { data } = response;
-      setIdSimulated(data);
+      setConsultingSimulated(data);
       return response;
     } catch (error) {
       const currentError = error.response.data.message || error.response.data;
@@ -134,8 +133,6 @@ export function useSimulated() {
     handleTop3CategoriesErrors,
     top3AnsweredIncorrectly,
     setTop3AnsweredIncorrectly,
-    idSimulated,
-    setIdSimulated,
     consultingSimulated,
     setConsultingSimulated,
     page,

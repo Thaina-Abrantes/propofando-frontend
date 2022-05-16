@@ -7,7 +7,6 @@ import ReportProblem from 'components/ReportProblem';
 import ModalPauseTest from 'components/ModalPauseTest';
 import style from './styles.module.scss';
 import arrow from '../../assets/arrow-back-icon.svg';
-import graphic from '../../assets/question.svg';
 import reportIcon from '../../assets/error-icon.svg';
 import api from '../../services/api';
 
@@ -37,13 +36,12 @@ export function Test() {
       token,
       userData,
     },
-    simulatedStore: { idSimulated },
+    simulatedStore: { consultingSimulated },
   } = useStores();
 
   useEffect(async () => {
     await handleListRandomQuestions(
-
-      idSimulated.id,
+      consultingSimulated.id,
       userData.id,
     );
   }, []);
@@ -71,7 +69,7 @@ export function Test() {
     setOpenModalEndTest(true);
     try {
       const body = {
-        simulatedId: idSimulated.id,
+        simulatedId: consultingSimulated.id,
       };
       const response = await api.patch('/simulated/finish', body, {
         headers: {
