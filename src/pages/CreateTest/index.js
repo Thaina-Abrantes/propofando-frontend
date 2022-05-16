@@ -16,6 +16,7 @@ export function CreateTest() {
     userStore: {
       userData,
     },
+    utilsStore: { setAlert },
   } = useStores();
 
   const { token } = useUser();
@@ -53,9 +54,12 @@ export function CreateTest() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const response = await handleCreateUserSimulated(form, userData.id);
-    if (response.status <= 204) {
-      navigate('/test');
+    if (response.status >= 204) {
+      setAlert({ open: true, type: 'error', message: response.data.message });
+      return;
     }
+    setAlert({ open: true, type: 'success', message: 'Simulado criado com sucesso!' });
+    navigate('/test');
   };
 
   return (

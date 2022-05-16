@@ -10,9 +10,11 @@ function ModalEndTest() {
     modalStore: {
       setOpenModalEndTest,
     },
+    utilsStore: { setAlert },
   } = useStores();
 
   function closeTest() {
+    setAlert({ open: true, type: 'success', message: 'Simulado finalizado!' });
     setOpenModalEndTest(false);
     navigate('/student/main/consult-questions');
   }
