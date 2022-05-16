@@ -12,7 +12,6 @@ import api from '../../services/api';
 
 export function Test() {
   const navigate = useNavigate();
-  const [page, setPage] = useState(0);
   const [form, setForm] = useState({ questionId: '', alternativeId: '' });
   const [selectedRadio, setSelectedRadio] = useState('');
 
@@ -24,7 +23,6 @@ export function Test() {
       setOpenModalPauseTest,
     },
     questionStore: {
-      randomQuestions,
       handleListRandomQuestions,
       handleAnswereSimulated,
     },
@@ -36,14 +34,21 @@ export function Test() {
       token,
       userData,
     },
-    simulatedStore: { consultingSimulated },
+    simulatedStore: {
+      consultingSimulated,
+      questionsSimulated: randomQuestions,
+      setQuestionsSimulated,
+      page,
+      setPage,
+    },
   } = useStores();
 
   useEffect(async () => {
-    await handleListRandomQuestions(
+    const data = await handleListRandomQuestions(
       consultingSimulated.id,
       userData.id,
     );
+    setQuestionsSimulated(data);
   }, []);
 
   function handleRadioClick(e) {
@@ -113,6 +118,8 @@ export function Test() {
 
       <div className={style.container}>
         <div>
+          {randomQuestions.length
+          && (
           <div className={style['container-question']}>
             <h1 className={style['question-title']}>
               {randomQuestions[page].title}
@@ -122,10 +129,10 @@ export function Test() {
               {randomQuestions[page].description}
             </p>
             {
-              randomQuestions[page].img !== undefined
-                ? <img className={style.questionImg} src={randomQuestions[page].img} alt="Gráfico" />
-                : <div />
-            }
+            randomQuestions[page].img !== undefined
+              ? <img className={style.questionImg} src={randomQuestions[page].img} alt="Gráfico" />
+              : <div />
+          }
             <div className={style['alternatives']}>
               <div className={style['container-alternative']}>
                 <input
@@ -208,6 +215,7 @@ export function Test() {
               </span>
             </div>
           </div>
+          )}
 
           {openReportProblem && (<ReportProblem />)}
 

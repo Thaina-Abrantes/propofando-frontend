@@ -30,7 +30,6 @@ export default function ReportProblem() {
       const body = { description: problem };
 
       const questionId = questionsSimulated[page].id;
-
       const response = await api.post(`/users/report-problem/question/${questionId}`, body, {
         headers: {
           Authorization: `Bearer ${token}`,
