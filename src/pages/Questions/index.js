@@ -7,7 +7,7 @@ import style from './styles.module.scss';
 import pasteIcon from '../../assets/content-paste-icon.svg';
 import editIcon from '../../assets/edit-icon.svg';
 import deleteIcon from '../../assets/delete-icon.svg';
-import attachmentIcon from '../../assets/annex-icon.svg';
+import attachmentIcon from '../../assets/attachment.svg';
 
 export function Questions() {
   const {
