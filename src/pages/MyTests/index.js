@@ -9,6 +9,7 @@ import factCheck from '../../assets/fact-check-icon.svg';
 
 export function MyTests() {
   const [listUserSimulated, setListUserSimulated] = useState([]);
+  const [typeOfTests, setTypeOfTests] = useState('');
 
   const {
     simulatedStore: {
@@ -22,10 +23,9 @@ export function MyTests() {
 
   const navigate = useNavigate();
 
-  const lista = [
-    { name: 'Item a', id: 1 },
-    { name: 'Item b', id: 2 },
-    { name: 'Item c', id: 3 },
+  const list = [
+    { name: 'Simulados finalizados', id: 1 },
+    { name: 'Simulados pausados', id: 2 },
   ];
 
   function handleRedirect(simulated) {
@@ -38,8 +38,19 @@ export function MyTests() {
 
   useEffect(async () => {
     const data = await handleListUserSimulated(userData.id);
+
+    const testsCompleted = data.filter((test) => !test.active);
+    const testsPaused = data.filter((test) => test.active);
+
+    if (typeOfTests === 'Simulados finalizados') {
+      setListUserSimulated(testsCompleted);
+      console.log(testsCompleted);
+    } else if (typeOfTests === 'Simulados pausados') {
+      setListUserSimulated(testsPaused);
+      console.log(testsPaused);
+    }
     setListUserSimulated(data);
-  }, []);
+  }, [typeOfTests]);
 
   return (
     <main className={style['container-my-tests']}>
@@ -52,7 +63,10 @@ export function MyTests() {
           <span>
             Filtrar por
           </span>
-          <InputDropdown list={lista} />
+          <InputDropdown
+            list={list}
+            setTypeOfTests={setTypeOfTests}
+          />
         </div>
       </div>
 

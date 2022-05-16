@@ -1,12 +1,17 @@
 import { useState } from 'react';
+import { useStores } from 'stores';
 import style from './styles.module.scss';
 import arrowDown from '../../assets/arrow-down.svg';
 import arrowUp from '../../assets/arrow-up.svg';
 
-export function InputDropdown({ list }) {
+export function InputDropdown({ list, setTypeOfTests }) {
   const [openDropdown, setOpenDropdown] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [allSelected, setAllSelected] = useState(false);
+
+  const {
+    utilsStore: { pagesTests },
+  } = useStores();
 
   function handleChange(target) {
     if (target.checked && target.name === 'Todas') {
@@ -42,16 +47,32 @@ export function InputDropdown({ list }) {
         {openDropdown && (
           <div className={style['dropdown-options']}>
             <div>
-              <label className={style['dropdown-option']}>
-                <input
-                  type="checkbox"
-                  id="Todas"
-                  name="Todas"
-                  onChange={(e) => handleChange(e.target)}
-                />
-                <span className={style.checkmark} />
-                Todas
-              </label>
+              {pagesTests === 'createTest'
+                && (
+                <label className={style['dropdown-option']}>
+                  <input
+                    type="checkbox"
+                    id="Todas"
+                    name="Todas"
+                    onChange={(e) => handleChange(e.target)}
+                  />
+                  <span className={style.checkmark} />
+                  Todas
+                </label>
+                )}
+              {pagesTests === 'myTests'
+                && (
+                <label className={style['dropdown-option']}>
+                  <input
+                    type="checkbox"
+                    id="Todos"
+                    name="Todos"
+                    onClick={(e) => setTypeOfTests(e.target.name)}
+                  />
+                  <span className={style.checkmark} />
+                  Todos
+                </label>
+                )}
             </div>
             {list.map((item) => (
               <div key={item.id}>
@@ -61,6 +82,7 @@ export function InputDropdown({ list }) {
                     id={item.id}
                     name={item.name}
                     onChange={(e) => handleChange(e.target)}
+                    onClick={(e) => setTypeOfTests(e.target.name)}
                   />
                   <span className={style.checkmark} />
                   {item.name}
