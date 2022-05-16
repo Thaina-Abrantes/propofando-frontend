@@ -26,8 +26,11 @@ export function ConsultQuestions() {
     },
     utilsStore: {
       openReportProblem,
+      setOpenReportProblem,
       openExplanation,
+      setOpenExplanation,
       openQuestionStatistics,
+      setOpenQuestionStatistics,
       handleOpenExplanation,
       handleOpenQuestionStatistics,
       handleOpenReportProblem,
@@ -54,11 +57,18 @@ export function ConsultQuestions() {
     handleCloseBox();
   }
 
+  function handleRedirect() {
+    setOpenReportProblem(false);
+    setOpenExplanation(false);
+    setOpenQuestionStatistics(false);
+    return navigate('/student/main/my-tests');
+  }
+
   if (dataAnswers.length >= 1) {
     return (
       <main className={style['container-consult']}>
         <div className={style['container-title']}>
-          <button onClick={() => navigate('/student/main/my-tests')}>
+          <button onClick={() => handleRedirect()}>
             <img src={arrow} alt="Seta" />
           </button>
           <h1>Simulado</h1>

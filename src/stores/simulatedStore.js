@@ -84,6 +84,7 @@ export function useSimulated() {
       setErrorListUserSimulated(currentError);
     }
   }
+
   async function handleTop3CategoriesHits(userId) {
     try {
       const response = await api.get(`/users/${userId}/top-3-hits`, {
