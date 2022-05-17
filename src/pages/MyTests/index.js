@@ -38,18 +38,18 @@ export function MyTests() {
 
   useEffect(async () => {
     const data = await handleListUserSimulated(userData.id);
+    setListUserSimulated(data);
 
     const testsCompleted = data.filter((test) => !test.active);
     const testsPaused = data.filter((test) => test.active);
 
     if (typeOfTests === 'Simulados finalizados') {
       setListUserSimulated(testsCompleted);
-      console.log(testsCompleted);
     } else if (typeOfTests === 'Simulados pausados') {
       setListUserSimulated(testsPaused);
-      console.log(testsPaused);
+    } else if (typeOfTests === 'Todos') {
+      setListUserSimulated(data);
     }
-    setListUserSimulated(data);
   }, [typeOfTests]);
 
   return (
