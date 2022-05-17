@@ -1,17 +1,13 @@
 import { useState } from 'react';
 import { useStores } from 'stores';
 import style from './styles.module.scss';
-import arrowDown from '../../assets/arrow-down.svg';
-import arrowUp from '../../assets/arrow-up.svg';
+import triangleDown from '../../assets/triangle-down.svg';
+import triangleUp from '../../assets/triangle-up.svg';
 
-export function InputDropdown({ list, setTypeOfTests, typeOfTests }) {
+export function InputDropdown({ list }) {
   const [openDropdown, setOpenDropdown] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [allSelected, setAllSelected] = useState(false);
-
-  const {
-    utilsStore: { pagesTests },
-  } = useStores();
 
   function handleChange(target) {
     if (target.checked && target.name === 'Todas') {
@@ -38,52 +34,25 @@ export function InputDropdown({ list, setTypeOfTests, typeOfTests }) {
   return (
     <div className={style['container-input']}>
       <div className={style.dropdown}>
-        {pagesTests === 'createTest'
-          ? (
-            <div className={openDropdown ? style['dropdown-select'] : style['dropdown-select-closed']} onClick={() => setOpenDropdown(!openDropdown)}>
-              {selectedOptions.length > 0
-                ? <div className={style['selected-items']}><span>{[...selectedOptions.join(', ')]}</span></div>
-                : <span>Selecionar</span>}
-              <img src={openDropdown ? arrowUp : arrowDown} alt="Seta" />
-            </div>
-          )
-          : (
-            <div className={openDropdown ? style['dropdown-select'] : style['dropdown-select-closed']} onClick={() => setOpenDropdown(!openDropdown)}>
-              {typeOfTests
-                ? <div className={style['selected-items']}><span>{typeOfTests}</span></div>
-                : <span>Selecionar</span>}
-              <img src={openDropdown ? arrowUp : arrowDown} alt="Seta" />
-            </div>
-          )}
+        <div className={openDropdown ? style['dropdown-select'] : style['dropdown-select-closed']} onClick={() => setOpenDropdown(!openDropdown)}>
+          {selectedOptions.length > 0
+            ? <div className={style['selected-items']}><span>{[...selectedOptions.join(', ')]}</span></div>
+            : <span>Selecionar</span>}
+          <img src={openDropdown ? triangleUp : triangleDown} alt="Seta" />
+        </div>
         {openDropdown && (
           <div className={style['dropdown-options']}>
             <div>
-              {pagesTests === 'createTest'
-                && (
-                <label className={style['dropdown-option']}>
-                  <input
-                    type="checkbox"
-                    id="Todas"
-                    name="Todas"
-                    onChange={(e) => handleChange(e.target)}
-                  />
-                  <span className={style.checkmark} />
-                  Todas
-                </label>
-                )}
-              {pagesTests === 'myTests'
-                && (
-                <label className={style['dropdown-option']}>
-                  <input
-                    type="checkbox"
-                    id="Todos"
-                    name="Todos"
-                    onClick={(e) => setTypeOfTests(e.target.name)}
-                  />
-                  <span className={style.checkmark} />
-                  Todos
-                </label>
-                )}
+              <label className={style['dropdown-option']}>
+                <input
+                  type="checkbox"
+                  id="Todas"
+                  name="Todas"
+                  onChange={(e) => handleChange(e.target)}
+                />
+                <span className={style.checkmark} />
+                Todas
+              </label>
             </div>
             {list.map((item) => (
               <div key={item.id}>
@@ -93,7 +62,6 @@ export function InputDropdown({ list, setTypeOfTests, typeOfTests }) {
                     id={item.id}
                     name={item.name}
                     onChange={(e) => handleChange(e.target)}
-                    onClick={(e) => setTypeOfTests(e.target.name)}
                   />
                   <span className={style.checkmark} />
                   {item.name}

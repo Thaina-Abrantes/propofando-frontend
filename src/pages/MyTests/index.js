@@ -1,15 +1,17 @@
 import { useNavigate } from 'react-router-dom';
-import { InputDropdown } from 'components/InputDropdown';
 import { useStores } from 'stores';
 import { useEffect, useState } from 'react';
 import formatDate from 'utils/formatData';
 import style from './styles.module.scss';
 import seta from '../../assets/arrow-back-icon.svg';
 import factCheck from '../../assets/fact-check-icon.svg';
+import triangleDown from '../../assets/triangle-down.svg';
+import triangleUp from '../../assets/triangle-up.svg';
 
 export function MyTests() {
   const [listUserSimulated, setListUserSimulated] = useState([]);
-  const [typeOfTests, setTypeOfTests] = useState('');
+  const [openSelect, setOpenSelect] = useState(false);
+  const [selectedRadio, setSelectedRadio] = useState('');
 
   const {
     simulatedStore: {
@@ -24,8 +26,9 @@ export function MyTests() {
   const navigate = useNavigate();
 
   const list = [
-    { name: 'Simulados finalizados', id: 1 },
-    { name: 'Simulados pausados', id: 2 },
+    { name: 'Todos', id: 1 },
+    { name: 'Simulados finalizados', id: 2 },
+    { name: 'Simulados pausados', id: 3 },
   ];
 
   function handleRedirect(simulated) {
@@ -43,14 +46,21 @@ export function MyTests() {
     const testsCompleted = data.filter((test) => !test.active);
     const testsPaused = data.filter((test) => test.active);
 
-    if (typeOfTests === 'Simulados finalizados') {
+    if (selectedRadio === 'Simulados finalizados') {
       setListUserSimulated(testsCompleted);
-    } else if (typeOfTests === 'Simulados pausados') {
+    } else if (selectedRadio === 'Simulados pausados') {
       setListUserSimulated(testsPaused);
-    } else if (typeOfTests === 'Todos') {
+    } else if (selectedRadio === 'Todos') {
       setListUserSimulated(data);
     }
-  }, [typeOfTests]);
+  }, [selectedRadio]);
+
+  function handleRadioClick(e) {
+    setSelectedRadio(e.target.value);
+  }
+  function isRadioSelected(value) {
+    return selectedRadio === value;
+  }
 
   return (
     <main className={style['container-my-tests']}>
@@ -60,14 +70,39 @@ export function MyTests() {
       </div>
       <div className={style.border}>
         <div className={style['container-filter']}>
-          <span>
+          <span className={style['filter-span']}>
             Filtrar por
           </span>
-          <InputDropdown
-            list={list}
-            setTypeOfTests={setTypeOfTests}
-            typeOfTests={typeOfTests}
-          />
+          <div className={style['container-input']}>
+            <div className={style.select}>
+              <div className={openSelect ? style['open-select'] : style['open-select-closed']} onClick={() => setOpenSelect(!openSelect)}>
+                {selectedRadio
+                  ? <div className={style['selected-items']}><span>{selectedRadio}</span></div>
+                  : <span>Selecionar</span>}
+                <img src={openSelect ? triangleUp : triangleDown} alt="Seta" />
+              </div>
+              {openSelect && (
+                <div className={style.options}>
+                  {list.map((item) => (
+                    <div key={item.id}>
+                      <label className={style.option}>
+                        <input
+                          type="radio"
+                          id={item.id}
+                          name={item.name}
+                          value={item.name}
+                          checked={isRadioSelected(item.name)}
+                          onChange={handleRadioClick}
+                        />
+                        <span className={style.checkmark} />
+                        {item.name}
+                      </label>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
         </div>
       </div>
 
