@@ -21,20 +21,7 @@ export function StudentPage() {
     userStore: {
       userData,
     },
-    utilsStore: {
-      setPagesTests,
-    },
   } = useStores();
-
-  function handleClickCreateTest() {
-    setPagesTests('createTest');
-    navigate('/student/main/create-test');
-  }
-
-  function handleClickMyTests() {
-    setPagesTests('myTests');
-    navigate('/student/main/my-tests');
-  }
 
   useEffect(async () => {
     await handlePerformance(userData.id);
@@ -45,8 +32,8 @@ export function StudentPage() {
   return (
     <div className={style['container-page']}>
       <div className={style['container-buttons']}>
-        <button className="button" onClick={handleClickCreateTest}>Criar um simulado</button>
-        <button className="button" onClick={handleClickMyTests}>Meus simulados</button>
+        <button className="button" onClick={() => navigate('/student/main/create-test')}>Criar um simulado</button>
+        <button className="button" onClick={() => navigate('/student/main/my-tests')}>Meus simulados</button>
       </div>
       <h2>Desempenho</h2>
       <div className={style['container-cards']}>

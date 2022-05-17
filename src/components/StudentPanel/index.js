@@ -11,7 +11,6 @@ import style from './styles.module.scss';
 export default function StudentPanel() {
   const {
     userStore: { handleClearUserData },
-    utilsStore: { setPagesTests },
   } = useStores();
 
   const navigate = useNavigate();
@@ -20,16 +19,6 @@ export default function StudentPanel() {
   function handleLogout() {
     handleClearUserData();
     navigate('/login');
-  }
-
-  function handleClickCreateTest() {
-    setPagesTests('createTest');
-    navigate('/student/main/create-test');
-  }
-
-  function handleClickMyTests() {
-    setPagesTests('myTests');
-    navigate('/student/main/my-tests');
   }
 
   return (
@@ -54,8 +43,8 @@ export default function StudentPanel() {
       </div>
       {showSimulated && (
         <div className={style.links}>
-          <a onClick={handleClickCreateTest}>Criar simulado personalizado</a>
-          <a onClick={handleClickMyTests}>Meus simulados</a>
+          <a onClick={() => navigate('/student/main/create-test')}>Criar simulado personalizado</a>
+          <a onClick={() => navigate('/student/main/my-tests')}>Meus simulados</a>
         </div>
       )}
       <div
