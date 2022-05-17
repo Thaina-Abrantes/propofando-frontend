@@ -1,6 +1,7 @@
-.dropdown {
+.container-input {
   display: flex;
   flex-direction: column;
+  margin-top: 13px;
 }
 
 .dropdown-select {
@@ -69,6 +70,10 @@
 
   span {
     margin: 16px 19px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
   }
 }
 
