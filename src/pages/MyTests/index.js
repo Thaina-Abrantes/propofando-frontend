@@ -66,6 +66,7 @@ export function MyTests() {
           <InputDropdown
             list={list}
             setTypeOfTests={setTypeOfTests}
+            typeOfTests={typeOfTests}
           />
         </div>
       </div>

@@ -4,7 +4,7 @@ import style from './styles.module.scss';
 import arrowDown from '../../assets/arrow-down.svg';
 import arrowUp from '../../assets/arrow-up.svg';
 
-export function InputDropdown({ list, setTypeOfTests }) {
+export function InputDropdown({ list, setTypeOfTests, typeOfTests }) {
   const [openDropdown, setOpenDropdown] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [allSelected, setAllSelected] = useState(false);
@@ -38,12 +38,23 @@ export function InputDropdown({ list, setTypeOfTests }) {
   return (
     <div className={style['container-input']}>
       <div className={style.dropdown}>
-        <div className={openDropdown ? style['dropdown-select'] : style['dropdown-select-closed']} onClick={() => setOpenDropdown(!openDropdown)}>
-          {selectedOptions.length > 0
-            ? <div className={style['selected-items']}><span>{[...selectedOptions.join(', ')]}</span></div>
-            : <span>Selecionar</span>}
-          <img src={openDropdown ? arrowUp : arrowDown} alt="Seta" />
-        </div>
+        {pagesTests === 'createTest'
+          ? (
+            <div className={openDropdown ? style['dropdown-select'] : style['dropdown-select-closed']} onClick={() => setOpenDropdown(!openDropdown)}>
+              {selectedOptions.length > 0
+                ? <div className={style['selected-items']}><span>{[...selectedOptions.join(', ')]}</span></div>
+                : <span>Selecionar</span>}
+              <img src={openDropdown ? arrowUp : arrowDown} alt="Seta" />
+            </div>
+          )
+          : (
+            <div className={openDropdown ? style['dropdown-select'] : style['dropdown-select-closed']} onClick={() => setOpenDropdown(!openDropdown)}>
+              {typeOfTests
+                ? <div className={style['selected-items']}><span>{typeOfTests}</span></div>
+                : <span>Selecionar</span>}
+              <img src={openDropdown ? arrowUp : arrowDown} alt="Seta" />
+            </div>
+          )}
         {openDropdown && (
           <div className={style['dropdown-options']}>
             <div>
