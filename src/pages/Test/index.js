@@ -43,14 +43,19 @@ export function Test() {
 
   useEffect(async () => {
     await handleListRandomQuestions(
-
       idSimulated.id,
       userData.id,
     );
   }, []);
 
-  function handleRadioClick(e) {
+  async function handleRadioClick(e) {
     setSelectedRadio(e.target.value);
+    const response = await handleAnswereSimulated(randomQuestions[page].id, e.target.value);
+    if (response.status > 204) {
+      setAlert({ open: true, type: 'error', message: response.data.message });
+      return;
+    }
+    setAlert({ open: true, type: 'success', message: response.data.message });
   }
   function isRadioSelected(value) {
     return selectedRadio === value;
@@ -61,23 +66,23 @@ export function Test() {
   }
 
   async function handleClickNext() {
-    const response = await handleAnswereSimulated(randomQuestions[page].id, selectedRadio);
-    if (response.status > 204) {
-      setAlert({ open: true, type: 'error', message: response.data.message });
-      return;
-    }
-    setAlert({ open: true, type: 'success', message: response.data.message });
+    // const response = await handleAnswereSimulated(randomQuestions[page].id, selectedRadio);
+    // if (response.status > 204) {
+    //   setAlert({ open: true, type: 'error', message: response.data.message });
+    //   return;
+    // }
+    // setAlert({ open: true, type: 'success', message: response.data.message });
     setPage(page + 1);
     setOpenReportProblem(false);
   }
 
   async function handleClickEnd() {
     setOpenReportProblem(false);
-    const res = await handleAnswereSimulated(randomQuestions[page].id, selectedRadio);
-    if (res.status > 204) {
-      setAlert({ open: true, type: 'error', message: res.data.message });
-      return;
-    }
+    // // const res = await handleAnswereSimulated(randomQuestions[page].id, selectedRadio);
+    // if (res.status > 204) {
+    //   setAlert({ open: true, type: 'error', message: res.data.message });
+    //   return;
+    // }
     setOpenModalEndTest(true);
 
     try {

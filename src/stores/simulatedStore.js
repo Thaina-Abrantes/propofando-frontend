@@ -7,7 +7,7 @@ export function useSimulated() {
   const [errorListUserSimulated, setErrorListUserSimulated] = useState('');
   const [errorCreateUserSimulated, setErrorCreateUserSimulated] = useState('');
   const [listUserSimulated, setListUserSimulated] = useState([]);
-  const [performance, setPerformance] = useState();
+  const [performance, setPerformance] = useState({});
   const [top3AnsweredCorrectly, setTop3AnsweredCorrectly] = useState([]);
   const [top3AnsweredIncorrectly, setTop3AnsweredIncorrectly] = useState([]);
   const [idSimulated, setIdSimulated] = useState('');
@@ -64,7 +64,7 @@ export function useSimulated() {
         },
       });
       const { data } = response;
-      setPerformance([...data]);
+      setPerformance({ ...data });
       return data;
     } catch (error) {
       return error.response;
