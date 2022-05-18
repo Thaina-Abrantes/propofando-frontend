@@ -67,6 +67,8 @@ export function AddQuestion() {
 
   const [openUploadDescription, setOpenUploadDescription] = useState(false);
   const [openUploadExplanation, setOpenUploadExplanation] = useState(false);
+  const [imgMedia, setImgMedia] = useState(false);
+  const [videoMedia, setVideoMedia] = useState(false);
 
   const titleSize = 200 - (form.title.split('').length);
 
@@ -237,9 +239,13 @@ export function AddQuestion() {
                   open={openUploadDescription}
                   setOpen={setOpenUploadDescription}
                   handleReturnUrl={(url) => setForm({ ...form, image: url })}
+                  setImgMedia={setImgMedia}
+                  openUploadDescription={openUploadDescription}
                 />
                 <img src={clip} alt="clip" />
-                <span>Anexar mídia</span>
+                {imgMedia
+                  ? <span>{imgMedia}</span>
+                  : <span>Anexar mídia</span>}
               </div>
               <span className={style['counter-span']}>
                 {form.description === '' ? 1620 : caracterTextArea(form.description)}
@@ -273,9 +279,13 @@ export function AddQuestion() {
                 open={openUploadExplanation}
                 setOpen={setOpenUploadExplanation}
                 handleReturnUrl={(url) => setForm({ ...form, explanationVideo: url })}
+                setVideoMedia={setVideoMedia}
+                openUploadExplanation={openUploadExplanation}
               />
               <img src={clip} alt="clip" />
-              <span>Anexar mídia</span>
+              {videoMedia
+                ? <span>{videoMedia}</span>
+                : <span>Anexar mídia</span>}
             </div>
             <span className={style['counter-span']}>
               {form.explanationText === '' ? 1620 : caracterTextArea(form.explanationText)}
