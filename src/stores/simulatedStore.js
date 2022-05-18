@@ -10,7 +10,7 @@ export function useSimulated() {
   const [performance, setPerformance] = useState({});
   const [top3AnsweredCorrectly, setTop3AnsweredCorrectly] = useState([]);
   const [top3AnsweredIncorrectly, setTop3AnsweredIncorrectly] = useState([]);
-  const [idSimulated, setIdSimulated] = useState('');
+  const [idSimulated, setIdSimulated] = useState({});
   const [consultingSimulated, setConsultingSimulated] = useLocalStorage('consulting-simulated');
   const [page, setPage] = useState(0);
   const [dataAnswers, setDataAnswers] = useState([]);

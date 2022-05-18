@@ -14,7 +14,6 @@ import api from '../../services/api';
 export function Test() {
   const navigate = useNavigate();
   const [page, setPage] = useState(0);
-  const [form, setForm] = useState({ questionId: '', alternativeId: '' });
   const [selectedRadio, setSelectedRadio] = useState('');
 
   const {
@@ -66,23 +65,12 @@ export function Test() {
   }
 
   async function handleClickNext() {
-    // const response = await handleAnswereSimulated(randomQuestions[page].id, selectedRadio);
-    // if (response.status > 204) {
-    //   setAlert({ open: true, type: 'error', message: response.data.message });
-    //   return;
-    // }
-    // setAlert({ open: true, type: 'success', message: response.data.message });
     setPage(page + 1);
     setOpenReportProblem(false);
   }
 
   async function handleClickEnd() {
     setOpenReportProblem(false);
-    // // const res = await handleAnswereSimulated(randomQuestions[page].id, selectedRadio);
-    // if (res.status > 204) {
-    //   setAlert({ open: true, type: 'error', message: res.data.message });
-    //   return;
-    // }
     setOpenModalEndTest(true);
 
     try {
