@@ -13,7 +13,7 @@ export function useSimulated() {
   const [idSimulated, setIdSimulated] = useState({});
   const [consultingSimulated, setConsultingSimulated] = useLocalStorage('consulting-simulated');
   const [page, setPage] = useState(0);
-  const [dataAnswers, setDataAnswers] = useState([]);
+  const [questionsSimulated, setQuestionsSimulated] = useState([]);
 
   const { token } = useUser();
 
@@ -47,7 +47,7 @@ export function useSimulated() {
         },
       });
       const { data } = response;
-      setIdSimulated(data);
+      setConsultingSimulated(data);
       return response;
     } catch (error) {
       const currentError = error.response.data.message || error.response.data;
@@ -85,6 +85,7 @@ export function useSimulated() {
       setErrorListUserSimulated(currentError);
     }
   }
+
   async function handleTop3CategoriesHits(userId) {
     try {
       const response = await api.get(`/users/${userId}/top-3-hits`, {
@@ -134,13 +135,11 @@ export function useSimulated() {
     handleTop3CategoriesErrors,
     top3AnsweredIncorrectly,
     setTop3AnsweredIncorrectly,
-    idSimulated,
-    setIdSimulated,
     consultingSimulated,
     setConsultingSimulated,
     page,
     setPage,
-    dataAnswers,
-    setDataAnswers,
+    questionsSimulated,
+    setQuestionsSimulated,
   };
 }

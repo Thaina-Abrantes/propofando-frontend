@@ -6,7 +6,7 @@ import style from './styles.module.scss';
 export default function Explanation() {
   const {
     utilsStore: { setOpenExplanation },
-    simulatedStore: { dataAnswers, page },
+    simulatedStore: { questionsSimulated, page },
   } = useStores();
 
   return (
@@ -15,18 +15,18 @@ export default function Explanation() {
         <img className={style.close} src={close} alt="Fechar" />
       </div>
       <h1>Explicação</h1>
-      {dataAnswers[page]?.explanationVideo
+      {questionsSimulated[page]?.explanationVideo
       && (
       <div className={style.midia}>
         <video width="600" controls>
-          <source src={dataAnswers[page].explanationVideo} type="video/mp4" />
+          <source src={questionsSimulated[page].explanationVideo} type="video/mp4" />
           Seu navegador não suporta esse formato de vídeo.
         </video>
 
       </div>
       )}
       <p>
-        {dataAnswers[page].explanationText}
+        {questionsSimulated[page].explanationText}
       </p>
     </div>
   );

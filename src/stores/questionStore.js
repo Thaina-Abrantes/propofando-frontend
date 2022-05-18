@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useLocalStorage } from 'react-use';
 import api from '../services/api';
+import { useSimulated } from './simulatedStore';
 import { useUser } from './userStore';
 
 export function useQuestion() {
@@ -11,8 +12,12 @@ export function useQuestion() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [categoryName, setCategoryName] = useState('');
-  const [randomQuestions, setRandomQuestions] = useState([]);
   const [statistic, setStatistic] = useState({});
+
+  const {
+    questionsSimulated: randomQuestions,
+    setQuestionsSimulated: setRandomQuestions,
+  } = useSimulated();
 
   async function handleListQuestions(token) {
     try {

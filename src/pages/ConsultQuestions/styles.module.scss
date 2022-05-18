@@ -44,7 +44,7 @@
 
   display: flex;
   flex-direction: column;
-
+  justify-items: space-between;
   position: relative;
 
   h1 {
@@ -134,10 +134,7 @@
 
 .container-links {
   display: flex;
-  align-self: flex-end;
-  position: absolute;
-  right: 30px;
-  bottom: 15px;
+  margin: auto 26px 16px auto;
   gap: 26px;
 }
 
