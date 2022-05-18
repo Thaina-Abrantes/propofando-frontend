@@ -30,6 +30,7 @@ export function MyTests() {
 
   function handleRedirect(simulated) {
     setConsultingSimulated(simulated);
+    console.log(simulated);
     if (!simulated?.active) {
       return navigate('/student/main/consult-questions');
     }

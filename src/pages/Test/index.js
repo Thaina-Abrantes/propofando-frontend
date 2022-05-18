@@ -37,26 +37,28 @@ export function Test() {
       token,
       userData,
     },
-    simulatedStore: { idSimulated, setConsultingSimulated },
+    simulatedStore: {
+      idSimulated, consultingSimulated, handleConsultAnswers, setDataAnswers,
+    },
   } = useStores();
   useEffect(async () => {
     await handleListRandomQuestions(
-      idSimulated.id,
+      consultingSimulated.id,
       userData.id,
     );
-  }, []);
+  }, [selectedRadio]);
 
   async function handleRadioClick(e) {
-    setSelectedRadio(e.target.value);
     const response = await handleAnswereSimulated(randomQuestions[page].id, e.target.value);
     if (response.status > 204) {
       setAlert({ open: true, type: 'error', message: response.data.message });
       return;
     }
     setAlert({ open: true, type: 'success', message: response.data.message });
+    setSelectedRadio(e.target.value);
   }
   function isRadioSelected(value) {
-    return selectedRadio === value;
+    return randomQuestions[page].altenativeId === value;
   }
   function handleClickPrev() {
     setPage(page - 1);
@@ -74,7 +76,7 @@ export function Test() {
 
     try {
       const body = {
-        simulatedId: idSimulated.id,
+        simulatedId: consultingSimulated.id,
       };
       const response = await api.patch('/simulated/finish', body, {
         headers: {
@@ -99,6 +101,8 @@ export function Test() {
   if (randomQuestions.length < 1) {
     return null;
   }
+
+  console.log(randomQuestions[page].altenativeId);
 
   return (
     <main className={style['container-main']}>
