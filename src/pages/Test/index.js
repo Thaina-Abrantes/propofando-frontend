@@ -37,9 +37,8 @@ export function Test() {
       token,
       userData,
     },
-    simulatedStore: { idSimulated },
+    simulatedStore: { idSimulated, setConsultingSimulated },
   } = useStores();
-
   useEffect(async () => {
     await handleListRandomQuestions(
       idSimulated.id,
