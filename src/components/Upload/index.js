@@ -42,10 +42,10 @@ function Upload({
     const { url } = response.data;
 
     if (openUploadDescription) {
-      const arrayImgUrl = url.split('propofando/');
+      const arrayImgUrl = url.split('/');
       setImgMedia(arrayImgUrl[arrayImgUrl.length - 1]);
     } else if (openUploadExplanation) {
-      const arrayVideoUrl = url.split('propofando/');
+      const arrayVideoUrl = url.split('/');
       setVideoMedia(arrayVideoUrl[arrayVideoUrl.length - 1]);
     }
 
