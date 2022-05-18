@@ -21,7 +21,7 @@ export default function TableTop3({ label, top3Categories }) {
               <span>
                 {category.totalhits || category.totalincorrects}
                 {' '}
-                Questões
+                {category.totalhits <= 1 || category.totalincorrects <= 1 ? 'Questão' : 'Questões'}
               </span>
             </div>
           ))}

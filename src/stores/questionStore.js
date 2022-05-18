@@ -130,7 +130,7 @@ export function useQuestion() {
         },
       });
       const { data } = response;
-      setRandomQuestions(data);
+      setRandomQuestions([...data]);
       return data;
     } catch (error) {
       return error;

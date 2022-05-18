@@ -12,7 +12,7 @@ import api from '../../services/api';
 
 export function Test() {
   const navigate = useNavigate();
-  const [form, setForm] = useState({ questionId: '', alternativeId: '' });
+  const [page, setPage] = useState(0);
   const [selectedRadio, setSelectedRadio] = useState('');
 
   const {
@@ -36,27 +36,27 @@ export function Test() {
       userData,
     },
     simulatedStore: {
-      consultingSimulated,
-      questionsSimulated: randomQuestions,
-      setQuestionsSimulated,
-      page,
-      setPage,
+      idSimulated, consultingSimulated, handleConsultAnswers, setDataAnswers,
     },
   } = useStores();
-
   useEffect(async () => {
-    const data = await handleListRandomQuestions(
+    await handleListRandomQuestions(
       consultingSimulated.id,
       userData.id,
     );
-    setQuestionsSimulated(data);
-  }, []);
+  }, [selectedRadio]);
 
-  function handleRadioClick(e) {
+  async function handleRadioClick(e) {
+    const response = await handleAnswereSimulated(randomQuestions[page].id, e.target.value);
+    if (response.status > 204) {
+      setAlert({ open: true, type: 'error', message: response.data.message });
+      return;
+    }
+    setAlert({ open: true, type: 'success', message: response.data.message });
     setSelectedRadio(e.target.value);
   }
   function isRadioSelected(value) {
-    return selectedRadio === value;
+    return randomQuestions[page].altenativeId === value;
   }
   function handleClickPrev() {
     setPage(page - 1);
@@ -64,23 +64,12 @@ export function Test() {
   }
 
   async function handleClickNext() {
-    const response = await handleAnswereSimulated(randomQuestions[page].id, selectedRadio);
-    if (response.status > 204) {
-      setAlert({ open: true, type: 'error', message: response.data.message });
-      return;
-    }
-    setAlert({ open: true, type: 'success', message: response.data.message });
     setPage(page + 1);
     setOpenReportProblem(false);
   }
 
   async function handleClickEnd() {
     setOpenReportProblem(false);
-    const res = await handleAnswereSimulated(randomQuestions[page].id, selectedRadio);
-    if (res.status > 204) {
-      setAlert({ open: true, type: 'error', message: res.data.message });
-      return;
-    }
     setOpenModalEndTest(true);
 
     try {
@@ -110,6 +99,8 @@ export function Test() {
   if (randomQuestions.length < 1) {
     return null;
   }
+
+  console.log(randomQuestions[page].altenativeId);
 
   return (
     <main className={style['container-main']}>
