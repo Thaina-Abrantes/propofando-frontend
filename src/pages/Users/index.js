@@ -1,7 +1,7 @@
 import { useStores } from 'stores';
 import Search from 'components/Search';
+import ReactPaginate from 'react-paginate';
 import { useEffect, useState } from 'react';
-import PaginatorUsers from 'components/PaginatorUsers';
 import { useNavigate } from 'react-router-dom';
 import style from './styles.module.scss';
 import userIcon from '../../assets/identity-icon.svg';
@@ -35,6 +35,14 @@ export function Users() {
     },
   } = useStores();
   const navigate = useNavigate();
+  const [pageNumber, setPageNumber] = useState(0);
+  const itemsPerPage = 6;
+  const pagesVisited = pageNumber * itemsPerPage;
+  const pageCount = Math.ceil(dataUsers.length / itemsPerPage);
+  const handlePageClick = ({ selected }) => {
+    setPageNumber(selected);
+  };
+
   useEffect(() => {
     handleListUsers();
   }, [currentPage, openModalRegisterUser, openModalDelete, openModalEdit, userInEditing]);
@@ -46,13 +54,13 @@ export function Users() {
   }
   async function handleListUsers() {
     try {
-      const response = await api.get(`/users/paginated?page=${currentPage}`, {
+      const response = await api.get('/users', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
       const { data } = response;
-      setDataUsers(data.users);
+      setDataUsers(data);
       setTotalPage(data.totalPages);
     } catch (error) {
       return error;
@@ -64,6 +72,7 @@ export function Users() {
     setUserInfo({ ...item });
     navigate('/main/student-statistics');
   };
+
   return (
     <main>
       <Search />
@@ -89,6 +98,7 @@ export function Users() {
             .replace(/[óòõöô]/, 'o')
             .replace(/[úùüû]/, 'u')
             .includes(searchUser.toLocaleLowerCase()))
+            .slice(pagesVisited, pagesVisited + itemsPerPage)
             .map((item) => (
               <div className={style['table-line']} key={item.id}>
                 <div
@@ -121,7 +131,25 @@ export function Users() {
                 </div>
               </div>
             ))}
-          <PaginatorUsers />
+          <div className={style.paginator}>
+            <ReactPaginate
+              breakLabel="..."
+              nextLabel={pageNumber + 1 === dataUsers.length ? '' : 'Próximo'}
+              onPageChange={handlePageClick}
+              previousLabel={dataUsers.length === 1 || pageNumber + 1 === 1 ? '' : 'Anterior'}
+              pageRangeDisplayed={2}
+              pageCount={pageCount}
+              renderOnZeroPageCount={null}
+              marginPagesDisplayed={1}
+              containerClassName={style['container-class-name']}
+              pageClassName={style['page-class-name']}
+              pageLinkClassName={style['page-link-class-name']}
+              activeLinkClassName={style['active-link-class-name']}
+              previousClassName={style['previous-class-name']}
+              nextClassName={style['next-class-name']}
+              breakClassName={style['break-class-name']}
+            />
+          </div>
         </div>
       </div>
     </main>
