@@ -97,6 +97,7 @@ export function CreateTest() {
                     name="quantity"
                     placeholder="Quantidade"
                     size="3"
+                    min={0}
                     maxLength="3"
                     onChange={(e) => handleChange(e)}
 
