@@ -22,7 +22,7 @@ export function CreateTest() {
   const navigate = useNavigate();
   const [categorysList, setCategorysList] = useState([]);
   const [errorCategorysList, setErrorCategorysList] = useState('');
-  const [categories, setCategories] = useState();
+  const [categories, setCategories] = useState([]);
   const [form, setForm] = useState(defultValuesModal);
 
   useEffect(() => {
