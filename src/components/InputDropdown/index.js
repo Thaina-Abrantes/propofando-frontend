@@ -6,36 +6,36 @@ import triangleUp from '../../assets/triangle-up.svg';
 export function InputDropdown({ list, categoriesIds, setCategoriesIds }) {
   const [openDropdown, setOpenDropdown] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState([]);
-  const [allSelected, setAllSelected] = useState(false);
 
-  function handleChange({ name, id, checked }) {
-    if (checked && name === 'Todas') {
-      setAllSelected(true);
+  function clearSelectedOptions() {
+    setSelectedOptions([]);
+    setCategoriesIds([]);
+  }
 
+  function handleSelectALL({ checked }) {
+    if (checked) {
       const everything = list.map((i) => i.name);
       setSelectedOptions(everything);
 
       const everythingIds = list.map((i) => i.id);
-      setCategoriesIds(everythingIds);
-    } else if (!checked && name === 'Todas') {
-      setAllSelected(false);
-      setSelectedOptions([]);
-      setCategoriesIds([]);
-    } else if (checked && name !== 'Todas') {
+      return setCategoriesIds(everythingIds);
+    }
+    clearSelectedOptions();
+  }
+
+  function handleChange({ name, id, checked }) {
+    if (document.getElementById('Todas').checked !== false) {
+      document.getElementById('Todas').checked = false;
+      clearSelectedOptions();
+      setSelectedOptions([name]);
+      return setCategoriesIds([id]);
+    }
+    if (checked) {
       if (selectedOptions.includes(name)) {
         return;
       }
       setSelectedOptions([...selectedOptions, name]);
-      setCategoriesIds([...categoriesIds, id]);
-    } else {
-      if (allSelected) {
-        return;
-      }
-      const filtered = selectedOptions.filter((i) => i !== name);
-      setSelectedOptions(filtered);
-
-      const filteredIds = categoriesIds.filter((i) => i !== id);
-      setCategoriesIds(filteredIds);
+      return setCategoriesIds([...categoriesIds, id]);
     }
   }
 
@@ -69,7 +69,7 @@ export function InputDropdown({ list, categoriesIds, setCategoriesIds }) {
                 type="checkbox"
                 id="Todas"
                 name="Todas"
-                onChange={(e) => handleChange(e.target)}
+                onChange={(e) => handleSelectALL(e.target)}
               />
               <span className={style.checkmark} />
               <span>Todas</span>
