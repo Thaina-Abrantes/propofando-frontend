@@ -33,11 +33,12 @@ export function useSimulated() {
     }
   }
 
-  async function handleCreateUserSimulated(form, id) {
+  async function handleCreateUserSimulated(form, userId, categories) {
     const body = {
-      userId: id,
-      quantityQuestions: Number(form.quantity),
       name: form.name,
+      userId,
+      quantityQuestions: Number(form.quantity),
+      categories,
     };
 
     try {
