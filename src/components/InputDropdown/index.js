@@ -50,6 +50,11 @@ export function InputDropdown({ list, categoriesIds, setCategoriesIds }) {
       setSelectedOptions([...selectedOptions, name]);
       return setCategoriesIds([...categoriesIds, id]);
     }
+    const filtered = selectedOptions.filter((i) => i !== name);
+    setSelectedOptions(filtered);
+
+    const filteredIds = categoriesIds.filter((i) => i !== id);
+    setCategoriesIds(filteredIds);
   }
 
   return (
