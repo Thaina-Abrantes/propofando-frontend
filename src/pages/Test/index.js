@@ -25,6 +25,7 @@ export function Test() {
     questionStore: {
       handleListRandomQuestions,
       handleAnswereSimulated,
+      randomQuestions,
     },
     utilsStore: {
       openReportProblem,
@@ -100,8 +101,6 @@ export function Test() {
     return null;
   }
 
-  console.log(randomQuestions[page].altenativeId);
-
   return (
     <main className={style['container-main']}>
       {
@@ -135,8 +134,8 @@ export function Test() {
               {randomQuestions[page].description}
             </p>
             {
-            randomQuestions[page].img !== undefined
-              ? <img className={style.questionImg} src={randomQuestions[page].img} alt="Gráfico" />
+            randomQuestions[page].image !== null
+              ? <img className={style.questionImg} src={randomQuestions[page].image} alt="Imagem" />
               : <div />
           }
             <div className={style['alternatives']}>
