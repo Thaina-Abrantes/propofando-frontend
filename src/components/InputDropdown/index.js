@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import style from './styles.module.scss';
 import triangleDown from '../../assets/triangle-down.svg';
 import triangleUp from '../../assets/triangle-up.svg';
@@ -7,7 +7,20 @@ export function InputDropdown({ list, categoriesIds, setCategoriesIds }) {
   const [openDropdown, setOpenDropdown] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState([]);
 
-  function clearSelectedOptions() {
+  function clearSelectedALL() {
+    const checkados = document.querySelectorAll('input:checked');
+
+    const selectedName = [];
+    const selectedId = [];
+    if (checkados.length) {
+      for (const { id, name } of checkados) {
+        selectedName.push(name);
+        selectedId.push(id);
+      }
+      setSelectedOptions(selectedName);
+      setCategoriesIds(selectedId);
+      return;
+    }
     setSelectedOptions([]);
     setCategoriesIds([]);
   }
@@ -20,13 +33,13 @@ export function InputDropdown({ list, categoriesIds, setCategoriesIds }) {
       const everythingIds = list.map((i) => i.id);
       return setCategoriesIds(everythingIds);
     }
-    clearSelectedOptions();
+    clearSelectedALL();
   }
 
   function handleChange({ name, id, checked }) {
     if (document.getElementById('Todas').checked !== false) {
       document.getElementById('Todas').checked = false;
-      clearSelectedOptions();
+      clearSelectedALL();
       setSelectedOptions([name]);
       return setCategoriesIds([id]);
     }
