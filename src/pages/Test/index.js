@@ -7,14 +7,12 @@ import ReportProblem from 'components/ReportProblem';
 import ModalPauseTest from 'components/ModalPauseTest';
 import style from './styles.module.scss';
 import arrow from '../../assets/arrow-back-icon.svg';
-import graphic from '../../assets/question.svg';
 import reportIcon from '../../assets/error-icon.svg';
 import api from '../../services/api';
 
 export function Test() {
   const navigate = useNavigate();
   const [page, setPage] = useState(0);
-  const [form, setForm] = useState({ questionId: '', alternativeId: '' });
   const [selectedRadio, setSelectedRadio] = useState('');
 
   const {
@@ -25,9 +23,9 @@ export function Test() {
       setOpenModalPauseTest,
     },
     questionStore: {
-      randomQuestions,
       handleListRandomQuestions,
       handleAnswereSimulated,
+      randomQuestions,
     },
     utilsStore: {
       openReportProblem,
@@ -38,22 +36,28 @@ export function Test() {
       token,
       userData,
     },
-    simulatedStore: { idSimulated },
+    simulatedStore: {
+      idSimulated, consultingSimulated, handleConsultAnswers, setDataAnswers,
+    },
   } = useStores();
-
   useEffect(async () => {
     await handleListRandomQuestions(
-
-      idSimulated.id,
+      consultingSimulated.id,
       userData.id,
     );
-  }, []);
+  }, [selectedRadio]);
 
-  function handleRadioClick(e) {
+  async function handleRadioClick(e) {
+    const response = await handleAnswereSimulated(randomQuestions[page].id, e.target.value);
+    if (response.status > 204) {
+      setAlert({ open: true, type: 'error', message: response.data.message });
+      return;
+    }
+    setAlert({ open: true, type: 'success', message: response.data.message });
     setSelectedRadio(e.target.value);
   }
   function isRadioSelected(value) {
-    return selectedRadio === value;
+    return randomQuestions[page].altenativeId === value;
   }
   function handleClickPrev() {
     setPage(page - 1);
@@ -61,28 +65,17 @@ export function Test() {
   }
 
   async function handleClickNext() {
-    const response = await handleAnswereSimulated(randomQuestions[page].id, selectedRadio);
-    if (response.status > 204) {
-      setAlert({ open: true, type: 'error', message: response.data.message });
-      return;
-    }
-    setAlert({ open: true, type: 'success', message: response.data.message });
     setPage(page + 1);
     setOpenReportProblem(false);
   }
 
   async function handleClickEnd() {
     setOpenReportProblem(false);
-    const res = await handleAnswereSimulated(randomQuestions[page].id, selectedRadio);
-    if (res.status > 204) {
-      setAlert({ open: true, type: 'error', message: res.data.message });
-      return;
-    }
     setOpenModalEndTest(true);
 
     try {
       const body = {
-        simulatedId: idSimulated.id,
+        simulatedId: consultingSimulated.id,
       };
       const response = await api.patch('/simulated/finish', body, {
         headers: {
@@ -130,6 +123,8 @@ export function Test() {
 
       <div className={style.container}>
         <div>
+          {randomQuestions.length
+          && (
           <div className={style['container-question']}>
             <h1 className={style['question-title']}>
               {randomQuestions[page].title}
@@ -139,10 +134,10 @@ export function Test() {
               {randomQuestions[page].description}
             </p>
             {
-              randomQuestions[page].img !== undefined
-                ? <img className={style.questionImg} src={randomQuestions[page].img} alt="Gráfico" />
-                : <div />
-            }
+            randomQuestions[page].image !== null
+              ? <img className={style.questionImg} src={randomQuestions[page].image} alt="Imagem" />
+              : <div />
+          }
             <div className={style['alternatives']}>
               <div className={style['container-alternative']}>
                 <input
@@ -225,6 +220,7 @@ export function Test() {
               </span>
             </div>
           </div>
+          )}
 
           {openReportProblem && (<ReportProblem />)}
 

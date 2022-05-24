@@ -6,7 +6,7 @@ import style from './styles.module.scss';
 export default function QuestionStatistics() {
   const {
     utilsStore: { setOpenQuestionStatistics },
-    simulatedStore: { dataAnswers, page },
+    simulatedStore: { questionsSimulated, page },
     questionStore: {
       handleQuestionStatistic,
       statistic,
@@ -15,13 +15,8 @@ export default function QuestionStatistics() {
   } = useStores();
 
   useEffect(async () => {
-    const data = await handleQuestionStatistic(dataAnswers[page].id);
+    const data = await handleQuestionStatistic(questionsSimulated[page].id);
     setStatistic(data);
-  }, []);
-
-  useEffect(() => {
-    console.log(dataAnswers, 'data', page, 'page');
-    console.log(statistic, 'statistic');
   }, []);
 
   return (

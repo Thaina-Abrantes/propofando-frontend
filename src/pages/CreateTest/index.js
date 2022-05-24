@@ -5,11 +5,9 @@ import { useStores } from 'stores';
 import { useUser } from '../../stores/userStore';
 import style from './styles.module.scss';
 import arrow from '../../assets/arrow-back-icon.svg';
-import arrowDown from '../../assets/arrow-down.svg';
-import arrowUp from '../../assets/arrow-up.svg';
 import api from '../../services/api';
 
-const defultValuesModal = { name: '', quantity: 0, categories: [] };
+const defultValuesModal = { name: '', quantity: 0 };
 export function CreateTest() {
   const {
     simulatedStore: { handleCreateUserSimulated },
@@ -24,6 +22,7 @@ export function CreateTest() {
   const navigate = useNavigate();
   const [categorysList, setCategorysList] = useState([]);
   const [errorCategorysList, setErrorCategorysList] = useState('');
+  const [categories, setCategories] = useState([]);
   const [form, setForm] = useState(defultValuesModal);
 
   useEffect(() => {
@@ -53,9 +52,10 @@ export function CreateTest() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const response = await handleCreateUserSimulated(form, userData.id);
+
+    const response = await handleCreateUserSimulated(form, userData.id, categories);
     if (response.status >= 204) {
-      setAlert({ open: true, type: 'error', message: response.data.message });
+      setAlert({ open: true, type: 'error', message: response.data.message || response.data });
       return;
     }
     setAlert({ open: true, type: 'success', message: 'Simulado criado com sucesso!' });
@@ -66,7 +66,9 @@ export function CreateTest() {
     <main className={style['container-create']}>
       <div className={style['container-title']}>
         <div className={style['img-back']}>
-          <img src={arrow} alt="Seta voltar" />
+          <button onClick={() => navigate('/student/main')}>
+            <img src={arrow} alt="Seta voltar" />
+          </button>
         </div>
         <h1>Criar simulado</h1>
       </div>
@@ -79,7 +81,6 @@ export function CreateTest() {
                 <div className={style['container-input']}>
                   <div className={style.row}>
                     <label>Nome do Simulado</label>
-                    <span>(Opcional)</span>
                   </div>
                   <input
                     className="input"
@@ -91,7 +92,6 @@ export function CreateTest() {
                 <div className={style['container-input']}>
                   <div className={style.row}>
                     <label>Insira a Quantidade de Questões</label>
-                    <span>(Opcional)</span>
                   </div>
                   <input
                     className="input"
@@ -99,6 +99,7 @@ export function CreateTest() {
                     name="quantity"
                     placeholder="Quantidade"
                     size="3"
+                    min={0}
                     maxLength="3"
                     onChange={(e) => handleChange(e)}
 
@@ -113,6 +114,8 @@ export function CreateTest() {
             <label>Filtrar por categoria</label>
             <InputDropdown
               list={categorysList}
+              categoriesIds={categories}
+              setCategoriesIds={setCategories}
             />
           </div>
 

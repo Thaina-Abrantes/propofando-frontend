@@ -2,7 +2,10 @@ import { useEffect, useRef } from 'react';
 import api from '../../services/api';
 import { useStores } from '../../stores';
 
-function Upload({ open, setOpen, handleReturnUrl }) {
+function Upload({
+  open, setOpen, handleReturnUrl, setImgMedia,
+  setVideoMedia, openUploadDescription, openUploadExplanation,
+}) {
   const {
     userStore: { token },
     utilsStore: { setAlert },
@@ -35,7 +38,17 @@ function Upload({ open, setOpen, handleReturnUrl }) {
       return;
     }
     setAlert({ open: true, type: 'success', message: 'Mídia anexada com sucesso.' });
+
     const { url } = response.data;
+
+    if (openUploadDescription) {
+      const arrayImgUrl = url.split('/');
+      setImgMedia(arrayImgUrl[arrayImgUrl.length - 1]);
+    } else if (openUploadExplanation) {
+      const arrayVideoUrl = url.split('/');
+      setVideoMedia(arrayVideoUrl[arrayVideoUrl.length - 1]);
+    }
+
     handleReturnUrl(url);
   }
 

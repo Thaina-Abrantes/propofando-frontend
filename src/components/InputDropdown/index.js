@@ -1,75 +1,114 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import style from './styles.module.scss';
-import arrowDown from '../../assets/arrow-down.svg';
-import arrowUp from '../../assets/arrow-up.svg';
+import triangleDown from '../../assets/triangle-down.svg';
+import triangleUp from '../../assets/triangle-up.svg';
 
-export function InputDropdown({ list }) {
+export function InputDropdown({ list, categoriesIds, setCategoriesIds }) {
   const [openDropdown, setOpenDropdown] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState([]);
-  const [allSelected, setAllSelected] = useState(false);
 
-  function handleChange(target) {
-    if (target.checked && target.name === 'Todas') {
-      setAllSelected(true);
+  function clearSelectedALL() {
+    const checkados = document.querySelectorAll('input:checked');
+
+    const selectedName = [];
+    const selectedId = [];
+    if (checkados.length) {
+      for (const { id, name } of checkados) {
+        selectedName.push(name);
+        selectedId.push(id);
+      }
+      setSelectedOptions(selectedName);
+      setCategoriesIds(selectedId);
+      return;
+    }
+    setSelectedOptions([]);
+    setCategoriesIds([]);
+  }
+
+  function handleSelectALL({ checked }) {
+    if (checked) {
       const everything = list.map((i) => i.name);
       setSelectedOptions(everything);
-    } else if (!target.checked && target.name === 'Todas') {
-      setAllSelected(false);
-      setSelectedOptions([]);
-    } else if (target.checked && target.name !== 'Todas') {
-      if (selectedOptions.includes(target.name)) {
-        return;
-      }
-      setSelectedOptions([...selectedOptions, target.name]);
-    } else {
-      if (allSelected) {
-        return;
-      }
-      const filtered = selectedOptions.filter((i) => i !== target.name);
-      setSelectedOptions(filtered);
+
+      const everythingIds = list.map((i) => i.id);
+      return setCategoriesIds(everythingIds);
     }
+    clearSelectedALL();
+  }
+
+  function handleChange({ name, id, checked }) {
+    if (document.getElementById('Todas').checked !== false) {
+      document.getElementById('Todas').checked = false;
+      clearSelectedALL();
+      setSelectedOptions([name]);
+      return setCategoriesIds([id]);
+    }
+    if (checked) {
+      if (selectedOptions.includes(name)) {
+        return;
+      }
+      setSelectedOptions([...selectedOptions, name]);
+      return setCategoriesIds([...categoriesIds, id]);
+    }
+    const filtered = selectedOptions.filter((i) => i !== name);
+    setSelectedOptions(filtered);
+
+    const filteredIds = categoriesIds.filter((i) => i !== id);
+    setCategoriesIds(filteredIds);
   }
 
   return (
     <div className={style['container-input']}>
-      <div className={style.dropdown}>
-        <div className={openDropdown ? style['dropdown-select'] : style['dropdown-select-closed']} onClick={() => setOpenDropdown(!openDropdown)}>
-          {selectedOptions.length > 0
-            ? <div className={style['selected-items']}><span>{[...selectedOptions.join(', ')]}</span></div>
-            : <span>Selecionar</span>}
-          <img src={openDropdown ? arrowUp : arrowDown} alt="Seta" />
-        </div>
-        {openDropdown && (
-          <div className={style['dropdown-options']}>
-            <div>
+      <div
+        className={openDropdown
+          ? style['dropdown-select']
+          : style['dropdown-select-closed']}
+        onClick={() => setOpenDropdown(!openDropdown)}
+      >
+        {selectedOptions.length > 0
+          ? (
+            <div className={style['selected-items']}>
+              <span>{[...selectedOptions.join(', ')]}</span>
+            </div>
+          )
+          : <span>Selecionar</span>}
+        <img
+          src={openDropdown
+            ? triangleUp
+            : triangleDown}
+          alt="Seta"
+        />
+      </div>
+      {openDropdown && (
+        <div className={style['dropdown-options']}>
+          <div>
+            <label className={style['dropdown-option']}>
+              <input
+                type="checkbox"
+                id="Todas"
+                name="Todas"
+                onChange={(e) => handleSelectALL(e.target)}
+              />
+              <span className={style.checkmark} />
+              <span>Todas</span>
+            </label>
+          </div>
+          {list.map((item) => (
+            <div key={item.id}>
               <label className={style['dropdown-option']}>
                 <input
                   type="checkbox"
-                  id="Todas"
-                  name="Todas"
+                  id={item.id}
+                  name={item.name}
                   onChange={(e) => handleChange(e.target)}
                 />
                 <span className={style.checkmark} />
-                Todas
+                <span>{item.name}</span>
               </label>
             </div>
-            {list.map((item) => (
-              <div key={item.id}>
-                <label className={style['dropdown-option']}>
-                  <input
-                    type="checkbox"
-                    id={item.id}
-                    name={item.name}
-                    onChange={(e) => handleChange(e.target)}
-                  />
-                  <span className={style.checkmark} />
-                  {item.name}
-                </label>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

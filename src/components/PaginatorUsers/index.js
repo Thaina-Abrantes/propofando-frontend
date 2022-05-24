@@ -1,30 +1,46 @@
 import ReactPaginate from 'react-paginate';
 import { useStores } from 'stores';
+import { useState, useEffect } from 'react';
 import styles from './styles.module.scss';
 
-export default function PaginatorUsers() {
-  const {
-    studentAdminStore: {
-      setCurrentPage,
-      totalPages,
-      currentPage,
-    },
-
-  } = useStores();
+export default function PaginatorUsers({ dataUsers, itemsPerPage }) {
+  const [pageCount, setPageCount] = useState(0);
+  const [itemOffset, setItemOffset] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
+  console.log(dataUsers);
+  useEffect(() => {
+    const endOffset = itemOffset + itemsPerPage;
+    dataUsers.slice(itemOffset, endOffset);
+    setPageCount(Math.ceil(dataUsers.length / itemsPerPage));
+  }, [itemOffset, itemsPerPage]);
 
   const handlePageClick = (event) => {
+    const newOffset = ((event.selected + 1) * itemsPerPage) % dataUsers.length;
     setCurrentPage(event.selected + 1);
+    setItemOffset(newOffset);
   };
+  // const {
+  //   studentAdminStore: {
+  //     setCurrentPage,
+  //     totalPages,
+  //     currentPage,
+  //   },
+
+  // } = useStores();
+
+  // const handlePageClick = (event) => {
+  //   setCurrentPage(event.selected + 1);
+  // };
 
   return (
     <div className={styles.paginator}>
       <ReactPaginate
         breakLabel="..."
-        nextLabel={currentPage === totalPages ? '' : 'Próximo'}
+        nextLabel={currentPage === dataUsers.length ? '' : 'Próximo'}
         onPageChange={handlePageClick}
-        previousLabel={totalPages === 1 || currentPage === 1 ? '' : 'Anterior'}
+        previousLabel={dataUsers.length === 1 || currentPage === 1 ? '' : 'Anterior'}
         pageRangeDisplayed={2}
-        pageCount={totalPages}
+        pageCount={pageCount}
         renderOnZeroPageCount={null}
         marginPagesDisplayed={1}
         containerClassName={styles['container-class-name']}
