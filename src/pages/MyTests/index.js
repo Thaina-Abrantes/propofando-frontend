@@ -23,6 +23,7 @@ export function MyTests() {
     },
     userStore: {
       userData,
+      token,
     },
   } = useStores();
 
@@ -44,7 +45,7 @@ export function MyTests() {
   }
 
   useEffect(async () => {
-    const data = await handleListUserSimulated(userData.id);
+    const data = await handleListUserSimulated(userData.id, token);
     setListUserSimulated(data);
 
     const testsCompleted = data.filter((test) => !test.active);
@@ -57,7 +58,7 @@ export function MyTests() {
     } else if (selectedRadio === 'Todos') {
       setListUserSimulated(data);
     }
-  }, [selectedRadio]);
+  }, [selectedRadio, token]);
 
   function handleRadioClick(e) {
     setSelectedRadio(e.target.value);
@@ -93,24 +94,24 @@ export function MyTests() {
                       <img src={openSelect ? triangleUp : triangleDown} alt="Seta" />
                     </div>
                     {openSelect && (
-                    <div className={style.options}>
-                      {list.map((item) => (
-                        <div key={item.id}>
-                          <label className={style.option}>
-                            <input
-                              type="radio"
-                              id={item.id}
-                              name={item.name}
-                              value={item.name}
-                              checked={isRadioSelected(item.name)}
-                              onChange={handleRadioClick}
-                            />
-                            <span className={style.checkmark} />
-                            {item.name}
-                          </label>
-                        </div>
-                      ))}
-                    </div>
+                      <div className={style.options}>
+                        {list.map((item) => (
+                          <div key={item.id}>
+                            <label className={style.option}>
+                              <input
+                                type="radio"
+                                id={item.id}
+                                name={item.name}
+                                value={item.name}
+                                checked={isRadioSelected(item.name)}
+                                onChange={handleRadioClick}
+                              />
+                              <span className={style.checkmark} />
+                              {item.name}
+                            </label>
+                          </div>
+                        ))}
+                      </div>
                     )}
                   </div>
                 </div>

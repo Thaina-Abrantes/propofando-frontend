@@ -37,9 +37,7 @@ export function useQuestion() {
     }
   }
 
-  const { token } = useUser();
-
-  async function handleDeleteQuestion(id) {
+  async function handleDeleteQuestion(id, token) {
     try {
       const response = await api.delete(`/questions/${id}`, {
         headers: {
@@ -55,7 +53,7 @@ export function useQuestion() {
     }
   }
 
-  async function handleRegisterQuestion({ form, alternatives, categoryId }) {
+  async function handleRegisterQuestion({ form, alternatives, categoryId }, token) {
     const body = {
       title: form.title,
       description: form.description,
@@ -80,7 +78,7 @@ export function useQuestion() {
     }
   }
 
-  async function handleEditQuestion({ form, alternatives, categoryId }) {
+  async function handleEditQuestion({ form, alternatives, categoryId }, token) {
     const body = {
       title: form.title,
       description: form.description,
@@ -105,7 +103,7 @@ export function useQuestion() {
     }
   }
 
-  async function handleAnswereSimulated(id, altenativeId) {
+  async function handleAnswereSimulated(id, altenativeId, token) {
     const body = {
       id,
       altenativeId,
@@ -122,7 +120,7 @@ export function useQuestion() {
     }
   }
 
-  async function handleListRandomQuestions(simulatedId, userId) {
+  async function handleListRandomQuestions(simulatedId, userId, token) {
     try {
       const response = await api.get(`/simulated/${simulatedId}/user/${userId}`, {
         headers: {
@@ -137,7 +135,7 @@ export function useQuestion() {
     }
   }
 
-  async function handleQuestionStatistic(questionId) {
+  async function handleQuestionStatistic(questionId, token) {
     try {
       const response = await api.get(`/questions/${questionId}/statistics`, {
         headers: {

@@ -6,7 +6,6 @@ import { useUser } from './userStore';
 export function useStudentAdmin() {
   const [errorUser, setErrorUser] = useState('');
   const [userInEditing, setUserInEditing] = useState(false);
-  const { token } = useUser();
   const [dataUsers, setDataUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPage] = useState(1);
@@ -14,7 +13,7 @@ export function useStudentAdmin() {
   const [openUserStatistics, setOpenUserStatistics] = useState({});
   const [userInfo, setUserInfo, removeUserInfo] = useLocalStorage('userId');
 
-  async function handleRegisterUser(user) {
+  async function handleRegisterUser(user, token) {
     const body = {
       name: user.name,
       email: user.email,
@@ -34,7 +33,7 @@ export function useStudentAdmin() {
     }
   }
 
-  async function handleDeleteUser(id) {
+  async function handleDeleteUser(id, token) {
     try {
       const response = await api.delete(`/users/${id}`, {
         headers: {
@@ -49,7 +48,7 @@ export function useStudentAdmin() {
     }
   }
 
-  async function handleEditUser(user) {
+  async function handleEditUser(user, token) {
     const body = {
       name: user.name,
       email: user.email,

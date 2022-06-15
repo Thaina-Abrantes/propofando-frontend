@@ -7,6 +7,9 @@ export default function QuestionStatistics() {
   const {
     utilsStore: { setOpenQuestionStatistics },
     simulatedStore: { questionsSimulated, page },
+    userStore: {
+      token,
+    },
     questionStore: {
       handleQuestionStatistic,
       statistic,
@@ -15,7 +18,7 @@ export default function QuestionStatistics() {
   } = useStores();
 
   useEffect(async () => {
-    const data = await handleQuestionStatistic(questionsSimulated[page].id);
+    const data = await handleQuestionStatistic(questionsSimulated[page].id, token);
     setStatistic(data);
   }, []);
 
@@ -42,17 +45,17 @@ export default function QuestionStatistics() {
           <div className={style.row}>
             <div className={style.column}>
               {statistic.alternativesOfQuestion
-            && statistic.alternativesOfQuestion.map((alternative) => (
+                && statistic.alternativesOfQuestion.map((alternative) => (
 
-              <span>{alternative.option}</span>
-            ))}
+                  <span>{alternative.option}</span>
+                ))}
             </div>
             <div className={style.column}>
               {statistic.alternativesOfQuestion
-            && statistic.alternativesOfQuestion.map((alternative) => (
+                && statistic.alternativesOfQuestion.map((alternative) => (
 
-              <span>{alternative.percentageSelectedThis}</span>
-            ))}
+                  <span>{alternative.percentageSelectedThis}</span>
+                ))}
             </div>
           </div>
         </div>

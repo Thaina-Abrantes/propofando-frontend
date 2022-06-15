@@ -20,14 +20,15 @@ export function StudentPage() {
     },
     userStore: {
       userData,
+      token,
     },
   } = useStores();
 
   useEffect(async () => {
-    await handlePerformance(userData.id);
-    await handleTop3CategoriesHits(userData.id);
-    await handleTop3CategoriesErrors(userData.id);
-  }, []);
+    await handlePerformance(userData.id, token);
+    await handleTop3CategoriesHits(userData.id, token);
+    await handleTop3CategoriesErrors(userData.id, token);
+  }, [token]);
 
   return (
     <div className={style['container-page']}>
@@ -57,18 +58,18 @@ export function StudentPage() {
         />
       </div>
       {performance?.percentageHits !== '0%'
-         && (
-         <div className={style['info']}>
-           <img src={lamp} alt="Lampada" />
-           <p>
-             Você sabia? Com base nos resultados dos simulados,
-             sua média de acertos geral é de
-             {' '}
-             {performance?.percentageHits}
-             .
-           </p>
-         </div>
-         )}
+        && (
+          <div className={style['info']}>
+            <img src={lamp} alt="Lampada" />
+            <p>
+              Você sabia? Com base nos resultados dos simulados,
+              sua média de acertos geral é de
+              {' '}
+              {performance?.percentageHits}
+              .
+            </p>
+          </div>
+        )}
       <TableInfoCategories />
     </div>
   );

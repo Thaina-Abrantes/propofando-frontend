@@ -17,12 +17,15 @@ export function StudentPageToAdmin() {
       top3AnsweredCorrectly,
       top3AnsweredIncorrectly,
     },
+    userStore: {
+      token,
+    },
     studentAdminStore: { openUserStatistics, userInfo },
   } = useStores();
   useEffect(async () => {
-    await handlePerformance(openUserStatistics.id || userInfo.id);
-    await handleTop3CategoriesHits(openUserStatistics.id || userInfo.id);
-    await handleTop3CategoriesErrors(openUserStatistics.id || userInfo.id);
+    await handlePerformance(openUserStatistics.id || userInfo.id, token);
+    await handleTop3CategoriesHits(openUserStatistics.id || userInfo.id, token);
+    await handleTop3CategoriesErrors(openUserStatistics.id || userInfo.id, token);
   }, []);
   return (
     <div className={style['container-page']}>

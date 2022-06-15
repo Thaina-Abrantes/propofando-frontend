@@ -8,6 +8,9 @@ function ModalDeleteQuestion() {
     questionStore: {
       handleDeleteQuestion,
     },
+    userStore: {
+      token,
+    },
     modalStore: {
       openModalDeleteQuestion,
       setOpenModalDeleteQuestion,
@@ -19,7 +22,7 @@ function ModalDeleteQuestion() {
   const navigate = useNavigate();
 
   async function handleCloseModalDeleteQuestion() {
-    const response = await handleDeleteQuestion(openModalDeleteQuestion);
+    const response = await handleDeleteQuestion(openModalDeleteQuestion, token);
     if (response.status > 204) {
       setAlert({ open: true, type: 'error', message: response.data.message });
       return;

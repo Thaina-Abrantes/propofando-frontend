@@ -3,8 +3,6 @@ import { useUser } from './userStore';
 import api from '../services/api';
 
 export function useCategory() {
-  const { token } = useUser();
-
   const [errorCategory, setErrorCategory] = useState('');
   const [categoryInEditing, setCategoryInEditing] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -13,7 +11,7 @@ export function useCategory() {
 
   // TODO @criar a função de listar aqui
 
-  async function handleRegisterCategory(category) {
+  async function handleRegisterCategory(category, token) {
     const body = {
       name: category,
     };
@@ -33,7 +31,7 @@ export function useCategory() {
     }
   }
 
-  async function handleDeleteCategory(id) {
+  async function handleDeleteCategory(id, token) {
     try {
       const response = await api.delete(`/categories/${id}`, {
         headers: {
@@ -49,7 +47,7 @@ export function useCategory() {
     }
   }
 
-  async function handleEditCategory(category) {
+  async function handleEditCategory(category, token) {
     const body = {
       name: category,
     };

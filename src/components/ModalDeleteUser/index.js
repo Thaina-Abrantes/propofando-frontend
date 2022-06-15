@@ -8,6 +8,9 @@ function ModalDeleteUser() {
       openModalDelete,
       setOpenModalDelete,
     },
+    userStore: {
+      token,
+    },
     studentAdminStore: {
       handleDeleteUser,
       errorUser,
@@ -16,7 +19,7 @@ function ModalDeleteUser() {
   } = useStores();
 
   async function handleModalDelete() {
-    const response = await handleDeleteUser(openModalDelete);
+    const response = await handleDeleteUser(openModalDelete, token);
     if (response.status > 204) {
       setAlert({ open: true, type: 'error', message: response.data.message });
       return;
