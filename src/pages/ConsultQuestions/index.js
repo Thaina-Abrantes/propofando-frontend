@@ -24,6 +24,9 @@ export function ConsultQuestions() {
       page,
       setPage,
     },
+    userStore: {
+      token,
+    },
     utilsStore: {
       openReportProblem,
       setOpenReportProblem,
@@ -39,9 +42,9 @@ export function ConsultQuestions() {
   } = useStores();
 
   useEffect(async () => {
-    const data = await handleConsultAnswers(consultingSimulated.id);
+    const data = await handleConsultAnswers(consultingSimulated.id, token);
     setQuestionsSimulated(data);
-  }, []);
+  }, [token]);
 
   function handleClickPrev() {
     if (page === 0) {

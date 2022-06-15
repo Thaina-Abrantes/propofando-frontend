@@ -12,6 +12,9 @@ function ModalEdit() {
       openModalEdit,
       setOpenModalEdit,
     },
+    userStore: {
+      token,
+    },
     studentAdminStore: {
       handleEditUser,
       userInEditing,
@@ -46,7 +49,7 @@ function ModalEdit() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    const response = await handleEditUser(form);
+    const response = await handleEditUser(form, token);
     if (response.status > 204) {
       setAlert({ open: true, type: 'error', message: response.data.message });
       return;

@@ -119,7 +119,7 @@ export function AddQuestion() {
     }
 
     if (!questionInEditing) {
-      const response = await handleRegisterQuestion({ form, alternatives, categoryId });
+      const response = await handleRegisterQuestion({ form, alternatives, categoryId }, token);
       if (response.status > 204) {
         setAlert({ open: true, type: 'error', message: response.data.message || response.data });
         return;
@@ -134,7 +134,7 @@ export function AddQuestion() {
 
       setErrorQuestion('');
     } else if (questionInEditing && !openModalDeleteQuestion) {
-      const responseEdit = await handleEditQuestion({ form, alternatives, categoryId });
+      const responseEdit = await handleEditQuestion({ form, alternatives, categoryId }, token);
       if (responseEdit.status > 204) {
         setAlert({ open: true, type: 'error', message: responseEdit.data.message || responseEdit.data });
         return;

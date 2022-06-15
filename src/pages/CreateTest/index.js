@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { InputDropdown } from 'components/InputDropdown';
 import { useStores } from 'stores';
 import { useUser } from '../../stores/userStore';
@@ -13,11 +13,10 @@ export function CreateTest() {
     simulatedStore: { handleCreateUserSimulated },
     userStore: {
       userData,
+      token,
     },
     utilsStore: { setAlert },
   } = useStores();
-
-  const { token } = useUser();
 
   const navigate = useNavigate();
   const [categorysList, setCategorysList] = useState([]);
@@ -50,17 +49,17 @@ export function CreateTest() {
     }
   }
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = useCallback(async (event) => {
     event.preventDefault();
 
-    const response = await handleCreateUserSimulated(form, userData.id, categories);
+    const response = await handleCreateUserSimulated(form, userData.id, categories, token);
     if (response.status >= 204) {
       setAlert({ open: true, type: 'error', message: response.data.message || response.data });
       return;
     }
     setAlert({ open: true, type: 'success', message: 'Simulado criado com sucesso!' });
     navigate('/test');
-  };
+  }, [token]);
 
   return (
     <main className={style['container-create']}>

@@ -12,6 +12,9 @@ function ModalRegisterUser() {
       openModalRegisterUser,
       setOpenModalRegisterUser,
     },
+    userStore: {
+      token,
+    },
     studentAdminStore: {
       handleRegisterUser,
       errorUser,
@@ -26,7 +29,7 @@ function ModalRegisterUser() {
   }
   async function handleSubmit(event) {
     event.preventDefault();
-    const response = await handleRegisterUser(form);
+    const response = await handleRegisterUser(form, token);
     if (response.status > 201) {
       setAlert({ open: true, type: 'error', message: response.data.message });
       return;

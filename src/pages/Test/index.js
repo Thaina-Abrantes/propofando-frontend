@@ -44,11 +44,12 @@ export function Test() {
     await handleListRandomQuestions(
       consultingSimulated.id,
       userData.id,
+      token,
     );
-  }, [selectedRadio]);
+  }, [selectedRadio, token]);
 
   async function handleRadioClick(e) {
-    const response = await handleAnswereSimulated(randomQuestions[page].id, e.target.value);
+    const response = await handleAnswereSimulated(randomQuestions[page].id, e.target.value, token);
     if (response.status > 204) {
       setAlert({ open: true, type: 'error', message: response.data.message });
       return;
@@ -124,103 +125,103 @@ export function Test() {
       <div className={style.container}>
         <div>
           {randomQuestions.length
-          && (
-          <div className={style['container-question']}>
-            <h1 className={style['question-title']}>
-              {randomQuestions[page].title}
-            </h1>
+            && (
+              <div className={style['container-question']}>
+                <h1 className={style['question-title']}>
+                  {randomQuestions[page].title}
+                </h1>
 
-            <p className={style['question-statment']}>
-              {randomQuestions[page].description}
-            </p>
-            {
-            randomQuestions[page].image !== null
-              ? <img className={style.questionImg} src={randomQuestions[page].image} alt="Imagem" />
-              : <div />
-          }
-            <div className={style['alternatives']}>
-              <div className={style['container-alternative']}>
-                <input
-                  type="radio"
-                  id="optionA"
-                  name="alternative"
-                  value={randomQuestions[page].alternatives[0].id}
-                  checked={isRadioSelected((randomQuestions[page].alternatives[0].id))}
-                  onChange={handleRadioClick}
-                />
-                <label htmlFor="optionA">
-                  A)
-                  {' '}
-                  {randomQuestions[page].alternatives[0].description}
-                </label>
-              </div>
-              <div className={style['container-alternative']}>
-                <input
-                  type="radio"
-                  id="optionB"
-                  name="alternative"
-                  value={randomQuestions[page].alternatives[1].id}
-                  checked={isRadioSelected((randomQuestions[page].alternatives[1].id))}
-                  onChange={handleRadioClick}
-                />
-                <label htmlFor="optionB">
-                  B)
-                  {' '}
-                  {randomQuestions[page].alternatives[1].description}
-                </label>
-              </div>
-              <div className={style['container-alternative']}>
-                <input
-                  type="radio"
-                  id="optionC"
-                  name="alternative"
-                  value={randomQuestions[page].alternatives[2].id}
-                  checked={isRadioSelected((randomQuestions[page].alternatives[2].id))}
-                  onChange={handleRadioClick}
-                />
-                <label htmlFor="optionC">
-                  C)
-                  {' '}
-                  {randomQuestions[page].alternatives[2].description}
-                </label>
-              </div>
-              <div className={style['container-alternative']}>
-                <input
-                  type="radio"
-                  id="optionD"
-                  name="alternative"
-                  value={randomQuestions[page].alternatives[3].id}
-                  checked={isRadioSelected((randomQuestions[page].alternatives[3].id))}
-                  onChange={handleRadioClick}
-                />
-                <label htmlFor="optionD">
-                  D)
-                  {' '}
-                  {randomQuestions[page].alternatives[3].description}
-                </label>
-              </div>
-            </div>
+                <p className={style['question-statment']}>
+                  {randomQuestions[page].description}
+                </p>
+                {
+                  randomQuestions[page].image !== null
+                    ? <img className={style.questionImg} src={randomQuestions[page].image} alt="Imagem" />
+                    : <div />
+                }
+                <div className={style['alternatives']}>
+                  <div className={style['container-alternative']}>
+                    <input
+                      type="radio"
+                      id="optionA"
+                      name="alternative"
+                      value={randomQuestions[page].alternatives[0].id}
+                      checked={isRadioSelected((randomQuestions[page].alternatives[0].id))}
+                      onChange={handleRadioClick}
+                    />
+                    <label htmlFor="optionA">
+                      A)
+                      {' '}
+                      {randomQuestions[page].alternatives[0].description}
+                    </label>
+                  </div>
+                  <div className={style['container-alternative']}>
+                    <input
+                      type="radio"
+                      id="optionB"
+                      name="alternative"
+                      value={randomQuestions[page].alternatives[1].id}
+                      checked={isRadioSelected((randomQuestions[page].alternatives[1].id))}
+                      onChange={handleRadioClick}
+                    />
+                    <label htmlFor="optionB">
+                      B)
+                      {' '}
+                      {randomQuestions[page].alternatives[1].description}
+                    </label>
+                  </div>
+                  <div className={style['container-alternative']}>
+                    <input
+                      type="radio"
+                      id="optionC"
+                      name="alternative"
+                      value={randomQuestions[page].alternatives[2].id}
+                      checked={isRadioSelected((randomQuestions[page].alternatives[2].id))}
+                      onChange={handleRadioClick}
+                    />
+                    <label htmlFor="optionC">
+                      C)
+                      {' '}
+                      {randomQuestions[page].alternatives[2].description}
+                    </label>
+                  </div>
+                  <div className={style['container-alternative']}>
+                    <input
+                      type="radio"
+                      id="optionD"
+                      name="alternative"
+                      value={randomQuestions[page].alternatives[3].id}
+                      checked={isRadioSelected((randomQuestions[page].alternatives[3].id))}
+                      onChange={handleRadioClick}
+                    />
+                    <label htmlFor="optionD">
+                      D)
+                      {' '}
+                      {randomQuestions[page].alternatives[3].description}
+                    </label>
+                  </div>
+                </div>
 
-            <div className={style.reportProblem}>
-              <button onClick={() => setOpenReportProblem(true)}>
-                <img src={reportIcon} alt="Ícone de erro" />
-                <span>Reportar problema</span>
-              </button>
-            </div>
+                <div className={style.reportProblem}>
+                  <button onClick={() => setOpenReportProblem(true)}>
+                    <img src={reportIcon} alt="Ícone de erro" />
+                    <span>Reportar problema</span>
+                  </button>
+                </div>
 
-            <div className={style.progress}>
-              <span>
-                Respondidas
-                {' '}
-                {page + 1}
-                {' '}
-                de
-                {' '}
-                {randomQuestions.length}
-              </span>
-            </div>
-          </div>
-          )}
+                <div className={style.progress}>
+                  <span>
+                    Respondidas
+                    {' '}
+                    {page + 1}
+                    {' '}
+                    de
+                    {' '}
+                    {randomQuestions.length}
+                  </span>
+                </div>
+              </div>
+            )}
 
           {openReportProblem && (<ReportProblem />)}
 

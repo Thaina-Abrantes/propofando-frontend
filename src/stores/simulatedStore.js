@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useLocalStorage } from 'react-use';
 import api from '../services/api';
-import { useUser } from './userStore';
 
 export function useSimulated() {
   const [errorListUserSimulated, setErrorListUserSimulated] = useState('');
@@ -15,9 +14,7 @@ export function useSimulated() {
   const [page, setPage] = useState(0);
   const [questionsSimulated, setQuestionsSimulated] = useState([]);
 
-  const { token } = useUser();
-
-  async function handleListUserSimulated(userId) {
+  async function handleListUserSimulated(userId, token) {
     try {
       const response = await api.get(`/simulated/${userId}`, {
         headers: {
@@ -33,7 +30,7 @@ export function useSimulated() {
     }
   }
 
-  async function handleCreateUserSimulated(form, userId, categories) {
+  async function handleCreateUserSimulated(form, userId, categories, token) {
     const body = {
       name: form.name,
       userId,
@@ -57,7 +54,7 @@ export function useSimulated() {
     }
   }
 
-  async function handlePerformance(userId) {
+  async function handlePerformance(userId, token) {
     try {
       const response = await api.get(`/users/${userId}/performance`, {
         headers: {
@@ -72,7 +69,7 @@ export function useSimulated() {
     }
   }
 
-  async function handleConsultAnswers(simulatedId) {
+  async function handleConsultAnswers(simulatedId, token) {
     try {
       const response = await api.get(`/simulated/${simulatedId}/answers`, {
         headers: {
@@ -87,7 +84,7 @@ export function useSimulated() {
     }
   }
 
-  async function handleTop3CategoriesHits(userId) {
+  async function handleTop3CategoriesHits(userId, token) {
     try {
       const response = await api.get(`/users/${userId}/top-3-hits`, {
         headers: {
@@ -102,7 +99,7 @@ export function useSimulated() {
     }
   }
 
-  async function handleTop3CategoriesErrors(userId) {
+  async function handleTop3CategoriesErrors(userId, token) {
     try {
       const response = await api.get(`/users/${userId}/top-3-errors`, {
         headers: {

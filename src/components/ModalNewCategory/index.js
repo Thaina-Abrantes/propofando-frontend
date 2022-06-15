@@ -1,5 +1,5 @@
 import { useStores } from 'stores';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import style from './styles.module.scss';
 import clear from '../../assets/clear-icon.svg';
 
@@ -10,6 +10,9 @@ function ModalNewCategory() {
     modalStore: {
       openModalNewCategory,
       setOpenModalNewCategory,
+    },
+    userStore: {
+      token,
     },
     categoryStore: {
       handleRegisterCategory,
@@ -28,7 +31,7 @@ function ModalNewCategory() {
     }
   }, [categoryInEditing, openModalNewCategory]);
 
-  async function handleSubmit(e) {
+  const handleSubmit = useCallback(async (e) => {
     e.preventDefault();
 
     if (categoryInEditing.name === category) {
@@ -38,7 +41,7 @@ function ModalNewCategory() {
     }
 
     if (categoryInEditing && categoryInEditing.name !== category) {
-      const response = await handleEditCategory(category);
+      const response = await handleEditCategory(category, token);
       if (response.status === 200) {
         setAlert({ open: true, type: 'success', message: response.data.message });
         handleCloseModal();
@@ -46,7 +49,7 @@ function ModalNewCategory() {
       return;
     }
 
-    const response = await handleRegisterCategory(category);
+    const response = await handleRegisterCategory(category, token);
 
     if (response.status > 204) {
       setAlert({ open: true, type: 'error', message: response.data.message });
@@ -56,7 +59,7 @@ function ModalNewCategory() {
     setAlert({ open: true, type: 'success', message: response.data.message });
     setCategory('');
     setOpenModalNewCategory(false);
-  }
+  }, [token]);
 
   function handleCloseModal() {
     setErrorCategory('');
