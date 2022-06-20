@@ -26,7 +26,7 @@ export function CreateTest() {
 
   useEffect(() => {
     handleListNamesCategorys();
-  }, []);
+  }, [token]);
 
   function handleChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -49,17 +49,18 @@ export function CreateTest() {
     }
   }
 
-  const handleSubmit = useCallback(async (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     const response = await handleCreateUserSimulated(form, userData.id, categories, token);
+
     if (response.status >= 204) {
       setAlert({ open: true, type: 'error', message: response.data.message || response.data });
       return;
     }
     setAlert({ open: true, type: 'success', message: 'Simulado criado com sucesso!' });
     navigate('/test');
-  }, [token]);
+  };
 
   return (
     <main className={style['container-create']}>
